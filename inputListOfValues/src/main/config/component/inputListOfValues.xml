@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputListOfValues</name>
+		<family>org.omidbiz.InputListOfValues</family>
+		<classname>org.omidbiz.component.html.HtmlInputListOfValues</classname>
+		<superclass>org.omidbiz.component.UIInputListOfValues</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputListOfValuesRenderer</name>
+			<template>org/omidbiz/htmlInputListOfValues.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputListOfValues</name>
+			<classname>org.omidbiz.taglib.InputListOfValuesTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		<!--
+		<property>
+			<name>param</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+        -->
+        <property>
+			<name>view</name>
+			<classname>java.lang.String</classname>
+			<description>
+				used when type is dialog to define which page should load in iframe
+			</description>			
+		</property>
+		<property>
+			<name>type</name>
+			<classname>java.lang.String</classname>
+			<description>
+				define how comonent being rendered 
+				dialog
+				link
+			</description>			
+			<required>true</required>
+		</property>
+		<property>
+			<name>objectName</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the most important attribute use for setting and retrieving value via javascript				
+			</description>			
+			<required>true</required>
+		</property>
+		<property>
+			<name>pid</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				it is used for filling hidden field
+			</description>			
+		</property>
+		<property>
+			<name>pValueText</name>
+			<classname>java.lang.String</classname>
+			<description>
+				it is used to show in textbox
+			</description>			
+		</property>
+		<property>
+			<name>selectedText</name>
+			<classname>java.lang.String</classname>
+			<description>
+				text value is used for text link
+			</description>			
+		</property>
+	</component>
+</components>

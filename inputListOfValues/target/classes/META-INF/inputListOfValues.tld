@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+ <tlib-version>1.0</tlib-version>
+ <short-name>inputListOfValues</short-name>
+ <uri>http://omidbiz.com/inputListOfValues</uri>
+
+
+
+					 <tag>
+	  	  <description></description>
+	  	  	  		  <name>inputListOfValues</name>
+	  	  <tag-class>org.omidbiz.taglib.InputListOfValuesTag</tag-class>
+	  <body-content>JSP</body-content>
+	  
+	    		  <attribute>
+	   <description>The attribute takes a value-binding expression for a component property of
+a backing bean</description>
+	   <name>binding</name>
+	   	   	   					   	<deferred-value>
+					<type>javax.faces.component.UIComponent</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>Every component may have a unique id that is automatically created if omitted</description>
+	   <name>id</name>
+	   	   	   		<rtexprvalue>false</rtexprvalue>
+	   		<type>java.lang.String</type>
+	   	  </attribute>
+		  		  <attribute>
+	   <description>the most important attribute use for setting and retrieving value via javascript</description>
+	   <name>objectName</name>
+	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>it is used to show in textbox</description>
+	   <name>pValueText</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>it is used for filling hidden field</description>
+	   <name>pid</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "false", this component is not rendered</description>
+	   <name>rendered</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>text value is used for text link</description>
+	   <name>selectedText</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>define how comonent being rendered 
+				dialog
+				link</description>
+	   <name>type</name>
+	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>used when type is dialog to define which page should load in iframe</description>
+	   <name>view</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  
+	</tag>
+	
+				
+  
+</taglib>
