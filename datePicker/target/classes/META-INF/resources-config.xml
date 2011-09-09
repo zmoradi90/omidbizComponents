@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-config>
+<!-- Include manual created resource -->
+
+
+
+	<resource>
+		<name>css/aqua/today-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/today-bg.gif</path>
+	</resource>
+	<resource>
+		<name>css/aqua/theme.css</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/theme.css</path>
+	</resource>
+	<resource>
+		<name>css/aqua/active-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/active-bg.gif</path>
+	</resource>
+	<resource>
+		<name>script/calendar-setup.js</name>
+		<path>org/omidbiz/renderkit/html/script/calendar-setup.js</path>
+	</resource>
+	<resource>
+		<name>css/aqua/normal-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/normal-bg.gif</path>
+	</resource>
+	<resource>
+		<name>css/aqua/status-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/status-bg.gif</path>
+	</resource>
+	<resource>
+		<name>script/jalali.js</name>
+		<path>org/omidbiz/renderkit/html/script/jalali.js</path>
+	</resource>
+	<resource>
+		<name>script/calendar.js</name>
+		<path>org/omidbiz/renderkit/html/script/calendar.js</path>
+	</resource>
+	<resource>
+		<name>images/inputDate.png</name>
+		<path>org/omidbiz/renderkit/html/images/inputDate.png</path>
+	</resource>
+	<resource>
+		<name>css/aqua/title-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/title-bg.gif</path>
+	</resource>
+	<resource>
+		<name>css/aqua/hover-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/hover-bg.gif</path>
+	</resource>
+	<resource>
+		<name>script/calendar-fa.js</name>
+		<path>org/omidbiz/renderkit/html/script/calendar-fa.js</path>
+	</resource>
+	<resource>
+		<name>css/aqua/rowhover-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/rowhover-bg.gif</path>
+	</resource>
+	<resource>
+		<name>css/aqua/menuarrow.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/menuarrow.gif</path>
+	</resource>
+	<resource>
+		<name>css/aqua/dark-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/dark-bg.gif</path>
+	</resource>
+</resource-config>

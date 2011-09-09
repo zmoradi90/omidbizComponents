@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
+	xmlns:c=" http://java.sun.com/jsf/core"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"	
+	class="org.omidbiz.renderkit.html.DatePickerRenderer"
+	baseclass="org.omidbiz.renderkit.DatePickerRendererBase"
+	component="org.omidbiz.component.UIDatePicker">
+	
+	<f:clientid var="clientId" />
+	
+	<h:scripts>
+		script/jalali.js
+		script/calendar.js
+		script/calendar-setup.js
+		script/calendar-fa.js
+	</h:scripts>
+	
+	<h:styles>
+		css/aqua/theme.css		
+	</h:styles>
+	
+	<f:resource name="images/inputDate.png" var="icon" />
+	<f:resource name="css/aqua/active-bg.gif" var="active" />
+	<f:resource name="css/aqua/hover-bg.gif" var="hover" />
+	<f:resource name="css/aqua/menuarrow.gif" var="menu" />
+	<f:resource name="css/aqua/normal-bg.gif" var="norm" />
+	<f:resource name="css/aqua/rowhover-bg.gif" var="row" />
+	<f:resource name="css/aqua/status-bg.gif" var="status" />
+	<f:resource name="css/aqua/title-bg.gif" var="title" />
+	<f:resource name="css/aqua/today-bg.gif" var="today" />
+	<f:resource name="css/aqua/dark-bg.gif" var="dark" />
+	
+	<c:set var="datePattern" value="#{component.attributes['datePattern']}" />
+	<c:set var="weekNumbers" value="#{component.attributes['weekNumbers']}" />
+	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
+	<c:set var="dateType" value="#{component.attributes['dateType']}" />
+	
+	<!-- <input type="hidden" name="#{clientId}_dateval" id="#{clientId}_dateval" value="#{this:getGregorianValueAsString(context, component)}" />
+	 --> 
+	<input type="text" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
+	<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
+	<script type="text/javascript">
+	Calendar.setup({
+					inputField  : "#{clientId}",   // id of the input field
+					button      : "#{clientId}_btn",   // trigger for the calendar (button ID)
+		       		ifFormat    : "#{datePattern}",       // format of the input field
+        			dateType	: '#{dateType}',
+        			showOthers	: #{showOthers},
+					weekNumbers : #{weekNumbers}
+				});
+	</script>
+</f:root>

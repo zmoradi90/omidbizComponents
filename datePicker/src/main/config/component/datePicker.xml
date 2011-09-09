@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.DatePicker</name>
+		<family>org.omidbiz.DatePicker</family>
+		<classname>org.omidbiz.component.html.HtmlDatePicker</classname>
+		<superclass>org.omidbiz.component.UIDatePicker</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.DatePickerRenderer</name>
+			<template>org/omidbiz/htmlDatePicker.jspx</template>
+		</renderer>
+		<tag>
+			<name>datePicker</name>
+			<classname>org.omidbiz.taglib.DatePickerTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		<!--
+		<property>
+			<name>param</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+        -->
+                <property>
+			<name>datePattern</name>
+			<classname>java.lang.String</classname>
+			<description>
+			Default is : %Y/%m/%d
+			other options : 
+			%Y-%m-%d
+			%Y-%m-%d %I:%M %P
+			%Y-%m-%d %H:%M
+			%A, %e %B %Y
+			%A, %e %B %Y  %H:%M
+			</description>
+			<defaultvalue>"%Y/%m/%d"</defaultvalue>
+			<required>true</required>
+		</property>
+		<property>
+			<name>weekNumbers</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+			true or false
+			Default is : false
+			show weeknumbers 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		<property>
+			<name>showOthers</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+			true or false
+			Default is : false			
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		<property>
+			<name>dateType</name>
+			<classname>java.lang.String</classname>
+			<description>
+					defines date type including : 
+					jalali
+					gregorian
+					default is jalali
+			</description>
+			<defaultvalue>"jalali"</defaultvalue>
+		</property>
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+					The value of the component
+			</description>
+			
+		</property>
+	</component>
+</components>
