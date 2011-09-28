@@ -25,12 +25,40 @@ a backing bean</description>
 					<type>javax.faces.component.UIComponent</type>
 				</deferred-value>
 				   	  </attribute>
+		  		  <attribute>
+	   <description>converter</description>
+	   <name>converter</name>
+	   	   	   					   	<deferred-value>
+					<type>javax.faces.convert.Converter</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>converterMessage</description>
+	   <name>converterMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
 		  	  		  <attribute>
 	   <description>Every component may have a unique id that is automatically created if omitted</description>
 	   <name>id</name>
 	   	   	   		<rtexprvalue>false</rtexprvalue>
 	   		<type>java.lang.String</type>
 	   	  </attribute>
+		  		  <attribute>
+	   <description>immediate</description>
+	   <name>immediate</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>localValueSet</description>
+	   <name>localValueSet</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
 		  		  <attribute>
 	   <description>the most important attribute use for setting and retrieving value via javascript</description>
 	   <name>objectName</name>
@@ -61,10 +89,31 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description>required</description>
+	   <name>required</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>requiredMessage</description>
+	   <name>requiredMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>text value is used for text link</description>
 	   <name>selectedText</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>send request to url view when close popup modal</description>
+	   <name>sendRequestToServer</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Boolean</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
@@ -75,6 +124,48 @@ a backing bean</description>
 	   			<required>true</required>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>valid</description>
+	   <name>valid</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>validator</description>
+	   <name>validator</name>
+	   	   	   						<deferred-method>
+					<method-signature>void validator(${prop.methodargs})</method-signature>
+				</deferred-method>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>validatorMessage</description>
+	   <name>validatorMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>The value of the component</description>
+	   <name>value</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>valueChangeListener</description>
+	   <name>valueChangeListener</name>
+	   	   	   						<deferred-method>
+					<method-signature>void valueChangeListener(${prop.methodargs})</method-signature>
+				</deferred-method>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>The value of the component show in textbox</description>
+	   <name>valueName</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

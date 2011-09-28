@@ -25,3 +25,17 @@ Richfaces.colorboxControl.extendedClose = function extendedClose(id, value, obj)
 	parent.jQuery.fn.colorbox.close();
 	
 }
+
+Richfaces.colorboxControl.extendedRequestClose = function extendedClose(id, value, obj, url){		
+	parent.document.getElementById(obj+"Id").value = id
+	parent.document.getElementById(obj+"Name").value = value;
+    jQuery.ajax({
+        type: "POST",
+        url: url,
+        data: obj+"Id="+id,
+        success: function(msg){
+    		parent.jQuery.fn.colorbox.close();
+        }
+       });
+	
+}

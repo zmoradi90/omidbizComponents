@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputListOfValues;
 
 public class HtmlInputListOfValues extends UIInputListOfValues{
 
-public final static  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
+final static public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-public final static  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
+final static public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
 
 /*
 * the most important attribute use for setting and retrieving value via javascript
@@ -33,11 +33,21 @@ private  Object _pid = null;
 private  String _selectedText = null;
 
 /*
+* send request to url view when close popup modal
+*/
+private  Boolean _sendRequestToServer = null;
+
+/*
 * define how comonent being rendered 
 				dialog
 				link
 */
 private  String _type = null;
+
+/*
+* The value of the component show in textbox
+*/
+private  Object _valueName = null;
 
 /*
 * used when type is dialog to define which page should load in iframe
@@ -153,6 +163,32 @@ public void setSelectedText(String _selectedText){
 this._selectedText = _selectedText;
 }
 
+public Boolean getSendRequestToServer(){
+	if (this._sendRequestToServer != null) {
+		return this._sendRequestToServer;
+	}
+	ValueExpression ve = getValueExpression("sendRequestToServer");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return false;
+	
+
+}
+
+public void setSendRequestToServer(Boolean _sendRequestToServer){
+this._sendRequestToServer = _sendRequestToServer;
+}
+
 public String getType(){
 	if (this._type != null) {
 		return this._type;
@@ -177,6 +213,32 @@ public String getType(){
 
 public void setType(String _type){
 this._type = _type;
+}
+
+public Object getValueName(){
+	if (this._valueName != null) {
+		return this._valueName;
+	}
+	ValueExpression ve = getValueExpression("valueName");
+	if (ve != null) {
+	    Object value = null;
+	    
+	    try {
+			value = (Object) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setValueName(Object _valueName){
+this._valueName = _valueName;
 }
 
 public String getView(){
@@ -211,14 +273,16 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[7];
+Object [] state = new Object[9];
 state[0] = super.saveState(context);
 state[1] = _objectName;
 state[2] = _pValueText;
 state[3] = saveAttachedState(context, _pid);
 state[4] = _selectedText;
-state[5] = _type;
-state[6] = _view;
+state[5] = _sendRequestToServer;
+state[6] = _type;
+state[7] = saveAttachedState(context, _valueName);
+state[8] = _view;
 return state;
 }
 
@@ -230,8 +294,10 @@ super.restoreState(context, states[0]);
 		_pValueText = (String)states[2];;
 		_pid = (Object)restoreAttachedState(context, states[3]);
 		_selectedText = (String)states[4];;
-		_type = (String)states[5];;
-		_view = (String)states[6];;
+		_sendRequestToServer = (Boolean)states[5];;
+		_type = (String)states[6];;
+		_valueName = (Object)restoreAttachedState(context, states[7]);
+		_view = (String)states[8];;
 	
 }
 

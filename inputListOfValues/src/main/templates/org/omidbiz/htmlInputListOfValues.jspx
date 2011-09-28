@@ -6,7 +6,7 @@
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
 	xmlns:h=" http://ajax4jsf.org/cdk/h"
 	class="org.omidbiz.renderkit.html.InputListOfValuesRenderer"
-	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
+	baseclass="org.omidbiz.renderkit.InputListOfValuesRendererBase"
 	component="org.omidbiz.component.UIInputListOfValues">
 	
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
@@ -21,13 +21,17 @@
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/border.png" var="border" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/lovicon.png" var="icon" />
 	
-	<c:set var="view" value="#{component.attributes['view']}"/>
+	<c:set var="view" value="#{component.attributes['view']}"/>	
+	<c:set var="valueName" value="#{component.attributes['valueName']}"/>
 	<c:set var="type" value="#{component.attributes['type']}"/>
 	<c:set var="objectName" value="#{component.attributes['objectName']}"/>
+	<c:set var="sendRequestToServer" value="#{component.attributes['sendRequestToServer']}"/>
+	
 
 		<jsp:scriptlet>
 <![CDATA[ 
 			String type = (String) variables.getVariable("type");
+			Boolean sendRequestToServer = (Boolean) variables.getVariable("sendRequestToServer");
 ]]>
 </jsp:scriptlet>
 	
@@ -42,14 +46,18 @@ jQuery(document).ready(function(){
 
 </script>
 
-	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id"/>
-	<input type="text" name="#{objectName}Name" id="#{objectName}Name"/>
+	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueAsInt(context, component)}"/>
+	<input type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueAsString(context, component)}"/>
 	<a rel="rel#{objectName}" class="#{objectName}lovClass" href="#{view}">
 		<img alt="Open Colorbox" src="#{icon}" style="border: 0;"/>
 	</a>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 <jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("link") ) { ]]></jsp:scriptlet>
-<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}');">#{component.attributes['selectedText']}</a>
+	<jsp:scriptlet><![CDATA[ if (sendRequestToServer) { ]]></jsp:scriptlet>
+		<a href="#" onclick="Richfaces.colorboxControl.extendedRequestClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{view}');">#{component.attributes['selectedText']}</a>
+	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+		<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}');">#{component.attributes['selectedText']}</a>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 </f:root>

@@ -41,14 +41,14 @@ import org.ajax4jsf.resource.InternetResource;
 //
 
 
-import org.ajax4jsf.renderkit.AjaxComponentRendererBase;
+import org.omidbiz.renderkit.InputListOfValuesRendererBase;
 
 
 
 /**
  * Renderer for component class org.omidbiz.renderkit.html.InputListOfValuesRenderer
  */
-public class InputListOfValuesRenderer extends AjaxComponentRendererBase {
+public class InputListOfValuesRenderer extends InputListOfValuesRendererBase {
 
 	public InputListOfValuesRenderer () {
 		super();
@@ -202,11 +202,14 @@ variables.setVariable("border", getResource( "/org/omidbiz/renderkit/html/css/im
 variables.setVariable("icon", getResource( "/org/omidbiz/renderkit/html/css/images/lovicon.png" ).getUri(context, component) );
 
 variables.setVariable("view", component.getAttributes().get("view") );
+variables.setVariable("valueName", component.getAttributes().get("valueName") );
 variables.setVariable("type", component.getAttributes().get("type") );
 variables.setVariable("objectName", component.getAttributes().get("objectName") );
+variables.setVariable("sendRequestToServer", component.getAttributes().get("sendRequestToServer") );
 
  
 			String type = (String) variables.getVariable("type");
+			Boolean sendRequestToServer = (Boolean) variables.getVariable("sendRequestToServer");
 
 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { 
@@ -220,12 +223,14 @@ writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "type", "hidden" );
+						getUtils().writeAttribute(writer, "value", getValueAsInt(context,component) );
 			
 writer.endElement("input");
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Name" );
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
 						getUtils().writeAttribute(writer, "type", "text" );
+						getUtils().writeAttribute(writer, "value", getValueAsString(context,component) );
 			
 writer.endElement("input");
 writer.startElement("a", component);
@@ -242,6 +247,15 @@ writer.endElement("img");
 writer.endElement("a");
  } 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("link") ) { 
+ if (sendRequestToServer) { 
+writer.startElement("a", component);
+			getUtils().writeAttribute(writer, "href", "#" );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.colorboxControl.extendedRequestClose(" + convertToString(component.getAttributes().get("pid")) + ",'" + convertToString(component.getAttributes().get("pValueText")) + "','" + convertToString(variables.getVariable("objectName")) + "', '" + convertToString(variables.getVariable("view")) + "');" );
+			
+writer.writeText(convertToString(component.getAttributes().get("selectedText")),null);
+
+writer.endElement("a");
+ } else { 
 writer.startElement("a", component);
 			getUtils().writeAttribute(writer, "href", "#" );
 						getUtils().writeAttribute(writer, "onclick", "Richfaces.colorboxControl.extendedClose(" + convertToString(component.getAttributes().get("pid")) + ",'" + convertToString(component.getAttributes().get("pValueText")) + "','" + convertToString(variables.getVariable("objectName")) + "');" );
@@ -249,6 +263,7 @@ writer.startElement("a", component);
 writer.writeText(convertToString(component.getAttributes().get("selectedText")),null);
 
 writer.endElement("a");
+ } 
  } 
 
 	}		

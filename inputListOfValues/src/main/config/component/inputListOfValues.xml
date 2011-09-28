@@ -45,6 +45,14 @@
 			</description>			
 		</property>
 		<property>
+			<name>sendRequestToServer</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+				send request to url view when close popup modal
+			</description>
+			<defaultvalue>false</defaultvalue>			
+		</property>
+		<property>
 			<name>type</name>
 			<classname>java.lang.String</classname>
 			<description>
@@ -82,6 +90,22 @@
 			<description>
 				text value is used for text link
 			</description>			
+		</property>		
+		<property>
+			<name>valueName</name>
+			<classname>java.lang.Object</classname>
+			<description>
+					The value of the component show in textbox
+			</description>
+			
+		</property>
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+					The value of the component
+			</description>
+			
 		</property>
 	</component>
 </components>
