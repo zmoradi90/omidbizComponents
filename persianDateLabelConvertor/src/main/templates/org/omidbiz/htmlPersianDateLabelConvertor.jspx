@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.PersianDateLabelConvertorRenderer"
+	baseclass="org.omidbiz.renderkit.PersianDateLabelRendererBase"
+	component="org.omidbiz.component.UIPersianDateLabelConvertor" 
+	>
+	<f:clientid var="clientId"/>
+	<div id="#{clientId}"
+		x:passThruWithExclusions="value,name,type,id"
+		>
+		<span>#{this:getSolarValueAsString(context, component)}</span>
+	</div>
+</f:root>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.PersianDateLabelConvertor</name>
+		<family>org.omidbiz.PersianDateLabelConvertor</family>
+		<classname>org.omidbiz.component.html.HtmlPersianDateLabelConvertor</classname>
+		<superclass>org.omidbiz.component.UIPersianDateLabelConvertor</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.PersianDateLabelConvertorRenderer</name>
+			<template>org/omidbiz/htmlPersianDateLabelConvertor.jspx</template>
+		</renderer>
+		<tag>
+			<name>persianDateLabelConvertor</name>
+			<classname>org.omidbiz.taglib.PersianDateLabelConvertorTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		<!--
+		<property>
+			<name>param</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+        -->
+        <property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+</components>
