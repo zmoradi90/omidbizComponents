@@ -217,8 +217,6 @@ variables.setVariable("datePattern", component.getAttributes().get("datePattern"
 variables.setVariable("weekNumbers", component.getAttributes().get("weekNumbers") );
 variables.setVariable("showOthers", component.getAttributes().get("showOthers") );
 variables.setVariable("dateType", component.getAttributes().get("dateType") );
-writer.writeComment(convertToString(" <input type=\"hidden\" name=\"" + convertToString(clientId) + "_dateval\" id=\"" + convertToString(clientId) + "_dateval\" value=\"" + convertToString(getGregorianValueAsString(context,component)) + "\" />\n	 "));
-
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", clientId );
 						getUtils().writeAttribute(writer, "name", clientId );

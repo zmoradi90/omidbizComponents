@@ -34,13 +34,14 @@ public abstract class DatePickerRendererBase extends HeaderResourcesRendererBase
 		if (submittedValue != null) {
 			//1390/6/30
 			//inputDate.setSubmittedValue(submittedValue);
-			//change submitted value to date
+			//change submitted value to date			
+			
 			String gregorianDate = pc.SolarToGregorian(submittedValue);			
 			try {
-				inputDate.setSubmittedValue(sdf.parse(gregorianDate));
+				inputDate.setSubmittedValue(dateFormat.parse(gregorianDate));				
 			} catch (ParseException e) {
 				try {
-					inputDate.setSubmittedValue(dateFormat.parse(gregorianDate));
+					inputDate.setSubmittedValue(sdf.parse(gregorianDate));
 				} catch (ParseException e1) {
 					try {
 						inputDate.setSubmittedValue(dateTimeFormat.parse(gregorianDate));
@@ -63,13 +64,13 @@ public abstract class DatePickerRendererBase extends HeaderResourcesRendererBase
 			if (value != null) {				
 				String gDate = value.toString();				
 				try {
-					valueString = pc.GregorianToSolar(sdf.format(sdf.parse(gDate)));
+					valueString = pc.GregorianToSolar(sdf.format(dateFormat.parse(gDate)));
 				} catch (ParseException e) {
 					try {
-						valueString = pc.GregorianToSolar(dateFormat.format(dateFormat.parse(gDate)));
+						valueString = pc.GregorianToSolar(sdf.format(sdf.parse(gDate)));
 					} catch (ParseException e1) {
 						try {
-							valueString = pc.GregorianToSolar(dateTimeFormat.format(dateTimeFormat.parse(gDate)));
+							valueString = pc.GregorianToSolar(sdf.format(dateTimeFormat.parse(gDate)));
 						} catch (ParseException e2) {
 							e2.printStackTrace();
 						}

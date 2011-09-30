@@ -38,8 +38,7 @@
 	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
 	<c:set var="dateType" value="#{component.attributes['dateType']}" />
 	
-	<!-- <input type="hidden" name="#{clientId}_dateval" id="#{clientId}_dateval" value="#{this:getGregorianValueAsString(context, component)}" />
-	 --> 
+	 
 	<input type="text" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
 	<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
 	<script type="text/javascript">
