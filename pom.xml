@@ -123,5 +123,7 @@
     <module>datePicker</module>
     <module>inputListOfValues</module>
     <module>persianDateLabelConvertor</module>
+    <module>pager</module>
+    <module>checkbox</module>
   </modules>
 </project>

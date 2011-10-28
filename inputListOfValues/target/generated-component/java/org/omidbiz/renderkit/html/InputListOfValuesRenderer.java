@@ -60,6 +60,10 @@ public class InputListOfValuesRenderer extends InputListOfValuesRendererBase {
 	private final InternetResource[] scripts = {
 						getResource("/org/richfaces/renderkit/html/scripts/jquery/jquery.js")
 						,
+				new org.ajax4jsf.javascript.PrototypeScript()
+						,
+				new org.ajax4jsf.javascript.AjaxScript()
+						,
 				getResource("/org/omidbiz/renderkit/html/script/colorboxUtil.js")
 						,
 				getResource("/org/omidbiz/renderkit/html/script/colorbox.js")
@@ -190,7 +194,13 @@ protected InternetResource[] getStyles() {
 
 
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UIInputListOfValues component, ComponentVariables variables) throws IOException {
-	  java.lang.String clientId = component.getClientId(context);
+	  writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery.noConflict();"),null);
+
+writer.endElement("script");
+java.lang.String clientId = component.getClientId(context);
 variables.setVariable("bg", getResource( "/org/omidbiz/renderkit/html/css/images/loading_background.png" ).getUri(context, component) );
 
 variables.setVariable("loader", getResource( "/org/omidbiz/renderkit/html/css/images/loading.gif" ).getUri(context, component) );

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.CheckboxRenderer"
+	baseclass="org.omidbiz.renderkit.CheckboxRenderBase"
+	component="org.omidbiz.component.UICheckbox" 
+	>
+	<f:clientid var="clientId"/>
+	<c:set var="value" value="#{component.attributes['value']}"/>
+			<jsp:scriptlet>
+<![CDATA[ 
+			String value = (String) variables.getVariable("value");
+]]>
+</jsp:scriptlet>
+	
+	<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") ) { ]]></jsp:scriptlet>
+		<input type="checkbox" name="#{clientId}-chk" value="Y" id="#{clientId}-chk" checked="checked"/>
+	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+		<input type="checkbox" value="N" onclick="setYvalue();" name="#{clientId}-chk" id="#{clientId}-chk" />
+		<script type="text/javascript">
+			function setYvalue(){
+				var chkCmp = document.getElementById("#{clientId}-chk");
+				var chkVal = chkCmp.value;
+				if(chkVal == 'N'){
+					chkCmp.value = 'Y' 
+				}
+			}
+		</script>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+</f:root>

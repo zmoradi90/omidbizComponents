@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputListOfValues;
 
 public class HtmlInputListOfValues extends UIInputListOfValues{
 
-final static public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-final static public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
+static final public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
 
 /*
 * the most important attribute use for setting and retrieving value via javascript
