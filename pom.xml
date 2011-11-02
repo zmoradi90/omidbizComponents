@@ -125,5 +125,6 @@
     <module>persianDateLabelConvertor</module>
     <module>pager</module>
     <module>checkbox</module>
+    <module>inputExtra</module>
   </modules>
 </project>

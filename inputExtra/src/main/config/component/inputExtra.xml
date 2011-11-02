@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputExtra</name>
+		<family>org.omidbiz.InputExtra</family>
+		<classname>org.omidbiz.component.html.HtmlInputExtra</classname>
+		<superclass>org.omidbiz.component.UIInputExtra</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputExtraRenderer</name>
+			<template>org/omidbiz/htmlInputExtra.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputExtra</name>
+			<classname>org.omidbiz.taglib.InputExtraTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		
+		<property>
+			<name>maskPattern</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+</components>
