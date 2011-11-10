@@ -126,5 +126,6 @@
     <module>pager</module>
     <module>checkbox</module>
     <module>inputExtra</module>
+    <module>windowPopup</module>
   </modules>
 </project>

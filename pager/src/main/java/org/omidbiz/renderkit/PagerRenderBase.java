@@ -14,7 +14,7 @@ import org.omidbiz.component.UIPager;
 public class PagerRenderBase extends HeaderResourcesRendererBase {
 
 	private void generateLinkTag(ResponseWriter writer, UIComponent component,
-			String formId, String id, String value, String view)
+			 String id, String value, String view)
 			throws IOException {
 
 		writer.startElement("a", component);
@@ -29,13 +29,12 @@ public class PagerRenderBase extends HeaderResourcesRendererBase {
 
 		ResponseWriter writer = context.getResponseWriter();
 		String id = component.getClientId(context);
-		UIComponent parent = component;
-		while(!(parent instanceof UIForm)) parent = parent.getParent();
-		 
-		String formId = parent.getClientId(context);
-
-		String dataTableId = (String) component.getAttributes().get(
-				"dataTableId");
+		
+		UIComponent parent = component.getParent();
+		
+		
+		
+		String dataTableId = (String) component.getAttributes().get("dataTableId");
 
 		Integer pageattr = (Integer) component.getAttributes().get("pages");
 
@@ -44,12 +43,12 @@ public class PagerRenderBase extends HeaderResourcesRendererBase {
 		// find component
 		UIData data = (UIData) component.findComponent(dataTableId);
 
-		if (data == null)
-			System.out.println("uidata is null");
+		
 
 		int first = data.getFirst();
 		int itemcount = data.getRowCount();
-		int pagesize = data.getRows();
+//		int pagesize = data.getRows();
+		int pagesize = showpages;
 		if (pagesize <= 0)
 			pagesize = itemcount;
 
@@ -73,24 +72,31 @@ public class PagerRenderBase extends HeaderResourcesRendererBase {
 		}
 
 		if (currentPage > 0) {
-			generateLinkTag(writer, component, formId, id, "<", view);
+			generateLinkTag(writer, component, id, "<", view);
 		}
 
 		if (startPage > 0) {
-			generateLinkTag(writer, component, formId, id, "<<", view);
+			generateLinkTag(writer, component, id, "<<", view);
 		}
+		
+		System.out.println("startPage : "+startPage);
+		System.out.println("endPage : "+endPage);
+		System.out.println("first : "+first);
+		System.out.println("itemCnt : "+itemcount);
+		System.out.println("pagesize : "+pagesize);
+		System.out.println("showpages : "+showpages);
 
 		for (int i = startPage; i < endPage; i++) {
-			generateLinkTag(writer, component, formId, id, "" + (i + 1), view);
+			generateLinkTag(writer, component, id, "" + (i + 1), view);
 
 		}
 		//
 		if (endPage < pages) {
-			generateLinkTag(writer, component, formId, id, ">>", view);
+			generateLinkTag(writer, component, id, ">>", view);
 		}
 
 		if (first < itemcount - pagesize) {
-			generateLinkTag(writer, component, formId, id, ">", view);
+			generateLinkTag(writer, component, id, ">", view);
 		}
 	}
 
@@ -99,3 +105,4 @@ public class PagerRenderBase extends HeaderResourcesRendererBase {
 	}
 
 }
+
