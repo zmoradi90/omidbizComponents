@@ -18,6 +18,7 @@
 		script/calendar.js
 		script/calendar-setup.js
 		script/calendar-fa.js
+		script/calendarUtil.js
 	</h:scripts>
 	
 	<h:styles>
@@ -25,6 +26,7 @@
 	</h:styles>
 	
 	<f:resource name="images/inputDate.png" var="icon" />
+	<f:resource name="images/remove.png" var="removeIcon" />
 	<f:resource name="css/aqua/active-bg.gif" var="active" />
 	<f:resource name="css/aqua/hover-bg.gif" var="hover" />
 	<f:resource name="css/aqua/menuarrow.gif" var="menu" />
@@ -44,6 +46,7 @@
 	 
 		<input type="text" readonly="readonly" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
 		<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
+		<img style="border: 0;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}');"/>
 		<script type="text/javascript">
 		Calendar.setup({
 						inputField  : "#{clientId}",   // id of the input field

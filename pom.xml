@@ -127,5 +127,6 @@
     <module>checkbox</module>
     <module>inputExtra</module>
     <module>windowPopup</module>
+    <module>inputNumeric</module>
   </modules>
 </project>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	class="org.omidbiz.renderkit.html.InputNumericRenderer"
+	baseclass="org.omidbiz.renderkit.InputNumericRendererBase"
+	component="org.omidbiz.component.UIInputNumeric" 
+	>
+	<f:clientid var="clientId"/>
+	
+	
+	
+			   	<input  id="#{clientId}" 
+				name="#{clientId}"
+				type="text" 
+				value="#{this:getValueAsString(context, component)}" 
+				class="my-inputDate-input #{component.attributes['inputClass']}" 
+				style="#{component.attributes['inputStyle']}"/>
+		
+	
+</f:root>

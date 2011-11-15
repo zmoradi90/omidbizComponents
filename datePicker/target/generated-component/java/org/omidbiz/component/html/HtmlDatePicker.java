@@ -8,26 +8,26 @@ import org.omidbiz.component.UIDatePicker;
 
 public class HtmlDatePicker extends UIDatePicker{
 
-public final static  String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
+static public final  String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
 
-public final static  String COMPONENT_TYPE = "org.omidbiz.DatePicker";
+static public final  String COMPONENT_TYPE = "org.omidbiz.DatePicker";
 
 /*
 * Default is : %Y/%m/%d
-			other options : 
-			%Y-%m-%d
-			%Y-%m-%d %I:%M %P
-			%Y-%m-%d %H:%M
-			%A, %e %B %Y
-			%A, %e %B %Y  %H:%M
+				other options :
+				%Y-%m-%d
+				%Y-%m-%d %I:%M %P
+				%Y-%m-%d %H:%M
+				%A, %e %B %Y
+				%A, %e %B %Y %H:%M
 */
 private  String _datePattern = null;
 
 /*
-* defines date type including : 
-					jalali
-					gregorian
-					default is jalali
+* defines date type including :
+				jalali
+				gregorian
+				default is jalali
 */
 private  String _dateType = null;
 
@@ -83,14 +83,14 @@ private  String _onmouseup = null;
 
 /*
 * true or false
-			Default is : false
+				Default is : false
 */
 private  Boolean _showOthers = null;
 
 /*
 * true or false
-			Default is : false
-			show weeknumbers
+				Default is : false
+				show weeknumbers
 */
 private  Boolean _weekNumbers = null;
 

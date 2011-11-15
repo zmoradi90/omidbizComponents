@@ -21,12 +21,16 @@
 		<path>org/omidbiz/renderkit/html/script/calendar-setup.js</path>
 	</resource>
 	<resource>
-		<name>css/aqua/normal-bg.gif</name>
-		<path>org/omidbiz/renderkit/html/css/aqua/normal-bg.gif</path>
-	</resource>
-	<resource>
 		<name>css/aqua/status-bg.gif</name>
 		<path>org/omidbiz/renderkit/html/css/aqua/status-bg.gif</path>
+	</resource>
+	<resource>
+		<name>images/remove.png</name>
+		<path>org/omidbiz/renderkit/html/images/remove.png</path>
+	</resource>
+	<resource>
+		<name>css/aqua/normal-bg.gif</name>
+		<path>org/omidbiz/renderkit/html/css/aqua/normal-bg.gif</path>
 	</resource>
 	<resource>
 		<name>script/jalali.js</name>
@@ -35,6 +39,10 @@
 	<resource>
 		<name>script/calendar.js</name>
 		<path>org/omidbiz/renderkit/html/script/calendar.js</path>
+	</resource>
+	<resource>
+		<name>script/calendarUtil.js</name>
+		<path>org/omidbiz/renderkit/html/script/calendarUtil.js</path>
 	</resource>
 	<resource>
 		<name>images/inputDate.png</name>

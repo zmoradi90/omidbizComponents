@@ -11,6 +11,7 @@
 						<script>org/omidbiz/renderkit/html/script/calendar.js</script>
 						<script>org/omidbiz/renderkit/html/script/calendar-setup.js</script>
 						<script>org/omidbiz/renderkit/html/script/calendar-fa.js</script>
+						<script>org/omidbiz/renderkit/html/script/calendarUtil.js</script>
 					</scripts>
 		
 				<styles>

@@ -43,12 +43,12 @@ a backing bean</description>
 				   	  </attribute>
 		  		  <attribute>
 	   <description>Default is : %Y/%m/%d
-			other options : 
-			%Y-%m-%d
-			%Y-%m-%d %I:%M %P
-			%Y-%m-%d %H:%M
-			%A, %e %B %Y
-			%A, %e %B %Y  %H:%M</description>
+				other options :
+				%Y-%m-%d
+				%Y-%m-%d %I:%M %P
+				%Y-%m-%d %H:%M
+				%A, %e %B %Y
+				%A, %e %B %Y %H:%M</description>
 	   <name>datePattern</name>
 	   			<required>true</required>
 	   	   	   					   	<deferred-value>
@@ -56,10 +56,10 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>defines date type including : 
-					jalali
-					gregorian
-					default is jalali</description>
+	   <description>defines date type including :
+				jalali
+				gregorian
+				default is jalali</description>
 	   <name>dateType</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
@@ -183,7 +183,7 @@ a backing bean</description>
 				   	  </attribute>
 		  		  <attribute>
 	   <description>true or false
-			Default is : false</description>
+				Default is : false</description>
 	   <name>showOthers</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.Boolean</type>
@@ -230,8 +230,8 @@ a backing bean</description>
 				   	  </attribute>
 		  	  		  <attribute>
 	   <description>true or false
-			Default is : false
-			show weeknumbers</description>
+				Default is : false
+				show weeknumbers</description>
 	   <name>weekNumbers</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.Boolean</type>

@@ -64,22 +64,22 @@ public class DatePickerTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBa
 		/*
 		 * datePattern
 		 * Default is : %Y/%m/%d
-			other options : 
-			%Y-%m-%d
-			%Y-%m-%d %I:%M %P
-			%Y-%m-%d %H:%M
-			%A, %e %B %Y
-			%A, %e %B %Y  %H:%M
+				other options :
+				%Y-%m-%d
+				%Y-%m-%d %I:%M %P
+				%Y-%m-%d %H:%M
+				%A, %e %B %Y
+				%A, %e %B %Y %H:%M
 		 */
 		private ValueExpression _datePattern;
 		/**
 		 * Default is : %Y/%m/%d
-			other options : 
-			%Y-%m-%d
-			%Y-%m-%d %I:%M %P
-			%Y-%m-%d %H:%M
-			%A, %e %B %Y
-			%A, %e %B %Y  %H:%M
+				other options :
+				%Y-%m-%d
+				%Y-%m-%d %I:%M %P
+				%Y-%m-%d %H:%M
+				%A, %e %B %Y
+				%A, %e %B %Y %H:%M
 		 * Setter for datePattern
 		 * @param datePattern - new value
 		 */
@@ -90,17 +90,17 @@ public class DatePickerTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBa
 	 	 		 	  			  		  	  
 		/*
 		 * dateType
-		 * defines date type including : 
-					jalali
-					gregorian
-					default is jalali
+		 * defines date type including :
+				jalali
+				gregorian
+				default is jalali
 		 */
 		private ValueExpression _dateType;
 		/**
-		 * defines date type including : 
-					jalali
-					gregorian
-					default is jalali
+		 * defines date type including :
+				jalali
+				gregorian
+				default is jalali
 		 * Setter for dateType
 		 * @param dateType - new value
 		 */
@@ -182,12 +182,12 @@ public class DatePickerTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBa
 		/*
 		 * showOthers
 		 * true or false
-			Default is : false
+				Default is : false
 		 */
 		private ValueExpression _showOthers;
 		/**
 		 * true or false
-			Default is : false
+				Default is : false
 		 * Setter for showOthers
 		 * @param showOthers - new value
 		 */
@@ -282,14 +282,14 @@ public class DatePickerTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBa
 		/*
 		 * weekNumbers
 		 * true or false
-			Default is : false
-			show weeknumbers
+				Default is : false
+				show weeknumbers
 		 */
 		private ValueExpression _weekNumbers;
 		/**
 		 * true or false
-			Default is : false
-			show weeknumbers
+				Default is : false
+				show weeknumbers
 		 * Setter for weekNumbers
 		 * @param weekNumbers - new value
 		 */

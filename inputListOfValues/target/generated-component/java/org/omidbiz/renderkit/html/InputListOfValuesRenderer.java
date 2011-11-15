@@ -235,7 +235,7 @@ writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "type", "hidden" );
-						getUtils().writeAttribute(writer, "value", getValueAsInt(context,component) );
+						getUtils().writeAttribute(writer, "value", getValueForId(context,component) );
 			
 writer.endElement("input");
 writer.startElement("input", component);
@@ -243,7 +243,7 @@ writer.startElement("input", component);
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
 						getUtils().writeAttribute(writer, "readonly", "readonly" );
 						getUtils().writeAttribute(writer, "type", "text" );
-						getUtils().writeAttribute(writer, "value", getValueAsString(context,component) );
+						getUtils().writeAttribute(writer, "value", getValueForName(context,component) );
 			
 writer.endElement("input");
 writer.startElement("a", component);

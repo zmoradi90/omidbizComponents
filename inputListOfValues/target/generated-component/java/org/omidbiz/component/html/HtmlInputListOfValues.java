@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputListOfValues;
 
 public class HtmlInputListOfValues extends UIInputListOfValues{
 
-static final public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
+public static final  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-static final public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
+public static final  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
 
 /*
 * the most important attribute use for setting and retrieving value via javascript
@@ -43,11 +43,6 @@ private  Boolean _sendRequestToServer = null;
 				link
 */
 private  String _type = null;
-
-/*
-* The value of the component show in textbox
-*/
-private  Object _valueName = null;
 
 /*
 * used when type is dialog to define which page should load in iframe
@@ -215,32 +210,6 @@ public void setType(String _type){
 this._type = _type;
 }
 
-public Object getValueName(){
-	if (this._valueName != null) {
-		return this._valueName;
-	}
-	ValueExpression ve = getValueExpression("valueName");
-	if (ve != null) {
-	    Object value = null;
-	    
-	    try {
-			value = (Object) ve.getValue(getFacesContext().getELContext());
-	    } catch (ELException e) {
-			throw new FacesException(e);
-	    }
-	    
-	    return value;
-	} 
-
-    return null;
-	
-
-}
-
-public void setValueName(Object _valueName){
-this._valueName = _valueName;
-}
-
 public String getView(){
 	if (this._view != null) {
 		return this._view;
@@ -273,7 +242,7 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[9];
+Object [] state = new Object[8];
 state[0] = super.saveState(context);
 state[1] = _objectName;
 state[2] = _pValueText;
@@ -281,8 +250,7 @@ state[3] = saveAttachedState(context, _pid);
 state[4] = _selectedText;
 state[5] = _sendRequestToServer;
 state[6] = _type;
-state[7] = saveAttachedState(context, _valueName);
-state[8] = _view;
+state[7] = _view;
 return state;
 }
 
@@ -296,8 +264,7 @@ super.restoreState(context, states[0]);
 		_selectedText = (String)states[4];;
 		_sendRequestToServer = (Boolean)states[5];;
 		_type = (String)states[6];;
-		_valueName = (Object)restoreAttachedState(context, states[7]);
-		_view = (String)states[8];;
+		_view = (String)states[7];;
 	
 }
 

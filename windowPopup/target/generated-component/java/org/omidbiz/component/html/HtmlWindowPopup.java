@@ -9,9 +9,9 @@ import org.omidbiz.component.UIWindowPopup;
 
 public class HtmlWindowPopup extends UIWindowPopup{
 
-final public static  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+public static final  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
 
-final public static  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
+public static final  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey

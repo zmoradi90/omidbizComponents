@@ -65,6 +65,8 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 				getResource("script/calendar-setup.js")
 						,
 				getResource("script/calendar-fa.js")
+						,
+				getResource("script/calendarUtil.js")
 	};
 
 private InternetResource[] scriptsAll = null;
@@ -195,6 +197,8 @@ protected InternetResource[] getStyles() {
 	  java.lang.String clientId = component.getClientId(context);
 variables.setVariable("icon", getResource( "images/inputDate.png" ).getUri(context, component) );
 
+variables.setVariable("removeIcon", getResource( "images/remove.png" ).getUri(context, component) );
+
 variables.setVariable("active", getResource( "css/aqua/active-bg.gif" ).getUri(context, component) );
 
 variables.setVariable("hover", getResource( "css/aqua/hover-bg.gif" ).getUri(context, component) );
@@ -230,6 +234,13 @@ writer.startElement("img", component);
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "_btn" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("icon") );
 						getUtils().writeAttribute(writer, "style", "vertical-align: top;" );
+			
+writer.endElement("img");
+writer.startElement("img", component);
+			getUtils().writeAttribute(writer, "alt", "clear" );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.calendarControl.removeValue('" + convertToString(clientId) + "');" );
+						getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon") );
+						getUtils().writeAttribute(writer, "style", "border: 0;" );
 			
 writer.endElement("img");
 writer.startElement("script", component);

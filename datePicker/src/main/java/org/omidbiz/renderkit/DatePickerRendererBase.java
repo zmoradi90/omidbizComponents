@@ -55,6 +55,8 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase {
 					}
 				}
 			}
+		}else{
+			inputDate.setSubmittedValue(submittedValue);
 		}
 	}
 

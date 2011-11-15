@@ -8,9 +8,9 @@ import org.omidbiz.component.UIPersianDateLabelConvertor;
 
 public class HtmlPersianDateLabelConvertor extends UIPersianDateLabelConvertor{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
+static public final  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
+static public final  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
 
 /*
 * 

@@ -50,8 +50,8 @@ jQuery(document).ready(function(){
 
 </script>
 
-	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueAsInt(context, component)}"/>
-	<input readonly="readonly" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueAsString(context, component)}"/>
+	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueForId(context, component)}"/>
+	<input readonly="readonly" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
 	<a rel="rel#{objectName}" class="#{objectName}lovClass" href="#{view}">
 		<img alt="Open Colorbox" src="#{icon}" style="border: 0;"/>
 	</a>
