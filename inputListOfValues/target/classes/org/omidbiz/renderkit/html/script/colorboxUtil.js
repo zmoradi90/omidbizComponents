@@ -39,3 +39,9 @@ Richfaces.colorboxControl.extendedRequestClose = function extendedClose(id, valu
        });
 	
 }
+
+Richfaces.colorboxControl.removeValue = function removeValue(obj){		
+	document.getElementById(obj+"Id").value = "";
+	document.getElementById(obj+"Name").value = "";	
+	
+}

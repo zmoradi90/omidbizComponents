@@ -211,6 +211,8 @@ variables.setVariable("border", getResource( "/org/omidbiz/renderkit/html/css/im
 
 variables.setVariable("icon", getResource( "/org/omidbiz/renderkit/html/css/images/lovicon.png" ).getUri(context, component) );
 
+variables.setVariable("removeIcon", getResource( "/org/omidbiz/renderkit/html/css/images/remove.png" ).getUri(context, component) );
+
 variables.setVariable("view", component.getAttributes().get("view") );
 variables.setVariable("valueName", component.getAttributes().get("valueName") );
 variables.setVariable("type", component.getAttributes().get("type") );
@@ -239,6 +241,7 @@ writer.endElement("input");
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Name" );
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "readonly", "readonly" );
 						getUtils().writeAttribute(writer, "type", "text" );
 						getUtils().writeAttribute(writer, "value", getValueAsString(context,component) );
 			
@@ -255,6 +258,13 @@ writer.startElement("img", component);
 			
 writer.endElement("img");
 writer.endElement("a");
+writer.startElement("img", component);
+			getUtils().writeAttribute(writer, "alt", "clear" );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.colorboxControl.removeValue('" + convertToString(variables.getVariable("objectName")) + "');" );
+						getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon") );
+						getUtils().writeAttribute(writer, "style", "border: 0;" );
+			
+writer.endElement("img");
  } 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("link") ) { 
  if (sendRequestToServer) { 

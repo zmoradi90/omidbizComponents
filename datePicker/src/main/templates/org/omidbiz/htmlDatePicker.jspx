@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
-	xmlns:c=" http://java.sun.com/jsf/core"
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
-	xmlns:h=" http://ajax4jsf.org/cdk/h"	
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"	
 	class="org.omidbiz.renderkit.html.DatePickerRenderer"
 	baseclass="org.omidbiz.renderkit.DatePickerRendererBase"
 	component="org.omidbiz.component.UIDatePicker">
@@ -38,17 +40,19 @@
 	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
 	<c:set var="dateType" value="#{component.attributes['dateType']}" />
 	
+	
 	 
-	<input type="text" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
-	<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
-	<script type="text/javascript">
-	Calendar.setup({
-					inputField  : "#{clientId}",   // id of the input field
-					button      : "#{clientId}_btn",   // trigger for the calendar (button ID)
-		       		ifFormat    : "#{datePattern}",       // format of the input field
-        			dateType	: '#{dateType}',
-        			showOthers	: #{showOthers},
-					weekNumbers : #{weekNumbers}
-				});
-	</script>
+		<input type="text" readonly="readonly" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
+		<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
+		<script type="text/javascript">
+		Calendar.setup({
+						inputField  : "#{clientId}",   // id of the input field
+						button      : "#{clientId}_btn",   // trigger for the calendar (button ID)
+			       		ifFormat    : "#{datePattern}",       // format of the input field
+	        			dateType	: '#{dateType}',
+	        			showOthers	: #{showOthers},
+						weekNumbers : #{weekNumbers}
+					});
+		</script>
+	
 </f:root>

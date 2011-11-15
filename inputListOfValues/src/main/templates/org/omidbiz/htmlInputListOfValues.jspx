@@ -23,6 +23,7 @@
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/controls.png" var="controls" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/border.png" var="border" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/lovicon.png" var="icon" />
+	<f:resource name="/org/omidbiz/renderkit/html/css/images/remove.png" var="removeIcon" />
 	
 	<c:set var="view" value="#{component.attributes['view']}"/>	
 	<c:set var="valueName" value="#{component.attributes['valueName']}"/>
@@ -50,10 +51,11 @@ jQuery(document).ready(function(){
 </script>
 
 	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueAsInt(context, component)}"/>
-	<input type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueAsString(context, component)}"/>
+	<input readonly="readonly" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueAsString(context, component)}"/>
 	<a rel="rel#{objectName}" class="#{objectName}lovClass" href="#{view}">
 		<img alt="Open Colorbox" src="#{icon}" style="border: 0;"/>
 	</a>
+	<img style="border: 0;" alt="clear" src="#{removeIcon}" onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"/>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 <jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("link") ) { ]]></jsp:scriptlet>

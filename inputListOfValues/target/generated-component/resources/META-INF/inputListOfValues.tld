@@ -26,14 +26,16 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>converter</description>
+	   <description>Id of Converter to be used or reference to a Converter</description>
 	   <name>converter</name>
 	   	   	   					   	<deferred-value>
 					<type>javax.faces.convert.Converter</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>converterMessage</description>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the converter message,
+			replacing any message that comes from the converter</description>
 	   <name>converterMessage</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
@@ -46,7 +48,9 @@ a backing bean</description>
 	   		<type>java.lang.String</type>
 	   	  </attribute>
 		  		  <attribute>
-	   <description>immediate</description>
+	   <description>A flag indicating that this component value must be converted
+            and validated immediately (that is, during Apply Request Values
+            phase), rather than waiting until a Process Validations phase</description>
 	   <name>immediate</name>
 	   	   	   					   	<deferred-value>
 					<type>boolean</type>
@@ -89,14 +93,17 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>required</description>
+	   <description>If "true", this component is checked for non-empty input</description>
 	   <name>required</name>
 	   	   	   					   	<deferred-value>
 					<type>boolean</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>requiredMessage</description>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validation message for
+			the "required" facility, if the "required" facility is
+			used</description>
 	   <name>requiredMessage</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
@@ -134,14 +141,18 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>validator</description>
+	   <description>MethodBinding pointing at a method that is called during
+            Process Validations phase of the request processing lifecycle,
+            to validate the current value of this component</description>
 	   <name>validator</name>
 	   	   	   						<deferred-method>
-					<method-signature>void validator(${prop.methodargs})</method-signature>
+					<method-signature>void validator(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)</method-signature>
 				</deferred-method>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>validatorMessage</description>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validator message,
+			replacing any message that comes from the validator</description>
 	   <name>validatorMessage</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
@@ -155,10 +166,10 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description>valueChangeListener</description>
+	   <description>Listener for value changes</description>
 	   <name>valueChangeListener</name>
 	   	   	   						<deferred-method>
-					<method-signature>void valueChangeListener(${prop.methodargs})</method-signature>
+					<method-signature>void valueChangeListener(javax.faces.event.ValueChangeEvent)</method-signature>
 				</deferred-method>
 				   	  </attribute>
 		  	  		  <attribute>

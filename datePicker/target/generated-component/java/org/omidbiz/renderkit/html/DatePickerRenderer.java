@@ -220,6 +220,7 @@ variables.setVariable("dateType", component.getAttributes().get("dateType") );
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", clientId );
 						getUtils().writeAttribute(writer, "name", clientId );
+						getUtils().writeAttribute(writer, "readonly", "readonly" );
 						getUtils().writeAttribute(writer, "type", "text" );
 						getUtils().writeAttribute(writer, "value", getSolarValueAsString(context,component) );
 			
@@ -234,7 +235,7 @@ writer.endElement("img");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("Calendar.setup({\n					inputField  : \"" + convertToString(clientId) + "\",   // id of the input field\n					button      : \"" + convertToString(clientId) + "_btn\",   // trigger for the calendar (button ID)\n		       		ifFormat    : \"" + convertToString(variables.getVariable("datePattern")) + "\",       // format of the input field\n        			dateType	: '" + convertToString(variables.getVariable("dateType")) + "',\n        			showOthers	: " + convertToString(variables.getVariable("showOthers")) + ",\n					weekNumbers : " + convertToString(variables.getVariable("weekNumbers")) + "\n				});"),null);
+writer.writeText(convertToString("Calendar.setup({\n						inputField  : \"" + convertToString(clientId) + "\",   // id of the input field\n						button      : \"" + convertToString(clientId) + "_btn\",   // trigger for the calendar (button ID)\n			       		ifFormat    : \"" + convertToString(variables.getVariable("datePattern")) + "\",       // format of the input field\n	        			dateType	: '" + convertToString(variables.getVariable("dateType")) + "',\n	        			showOthers	: " + convertToString(variables.getVariable("showOthers")) + ",\n						weekNumbers : " + convertToString(variables.getVariable("weekNumbers")) + "\n					});"),null);
 
 writer.endElement("script");
 

@@ -4,7 +4,6 @@
 
 package org.omidbiz.component;
 
-import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIInput;
 
 /**
@@ -16,5 +15,7 @@ public abstract class UIWindowPopup extends UIInput {
 	public static final String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 	
 	public static final String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+	
+	
 	
 }

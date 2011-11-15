@@ -12,7 +12,7 @@
     <component>
 	  <component-type>org.omidbiz.WindowPopup</component-type>
     	  <renderer-type>org.omidbiz.WindowPopupRenderer</renderer-type>
-              <handler-class>org.omidbiz.handler.TagHandler</handler-class>
+              <handler-class>org.omidbiz.handler.WindowPopupTagHandler</handler-class>
         </component>
   </tag>
   

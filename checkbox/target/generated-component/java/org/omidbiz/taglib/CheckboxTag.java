@@ -26,6 +26,21 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 		// Fields
 		 		 	  			  		  	  
 		/*
+		 * checked
+		 * 
+		 */
+		private ValueExpression _checked;
+		/**
+		 * 
+		 * Setter for checked
+		 * @param checked - new value
+		 */
+		 public void setChecked( ValueExpression  __checked ){
+			this._checked = __checked;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * converter
 		 * converter
 		 */
@@ -195,7 +210,8 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
     {
         // TODO Auto-generated method stub
         super.release();
-        		 		 		    this._converter = null;
+        		 		 		    this._checked = null;
+	 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
 	 		 		 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
@@ -216,7 +232,26 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
         // TODO Auto-generated method stub
         super.setProperties(component);
 		HtmlCheckbox comp = (HtmlCheckbox) component;
-  		 			setConverterProperty(comp, this._converter);
+  		 			 
+						if (this._checked != null) {
+				if (this._checked.isLiteralText()) {
+					try {
+												
+						Boolean __checked = (Boolean) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._checked.getExpressionString(), 
+											Boolean.class);
+					
+												comp.setChecked(__checked.booleanValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("checked", this._checked);
+				}
+			}
+					   		 			setConverterProperty(comp, this._converter);
 		   		 			 
 						if (this._converterMessage != null) {
 				if (this._converterMessage.isLiteralText()) {

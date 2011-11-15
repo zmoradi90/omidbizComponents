@@ -22,32 +22,22 @@
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
 		</tag>
-		<!--
-		<taghandler>
-			<classname>org.ajax4jsf.tag.TestHandler</classname>
-		</taghandler>
-		-->
+	
 		&ui_component_attributes;
-		<!--
+		&html_events;
+		&ui_input_attributes;
+
 		<property>
-			<name>param</name>
-			<classname>java.lang.String</classname>
-			<description>
-			</description>
-			<defaultvalue>"default"</defaultvalue>
-		</property>
-        -->
-                <property>
 			<name>datePattern</name>
 			<classname>java.lang.String</classname>
 			<description>
-			Default is : %Y/%m/%d
-			other options : 
-			%Y-%m-%d
-			%Y-%m-%d %I:%M %P
-			%Y-%m-%d %H:%M
-			%A, %e %B %Y
-			%A, %e %B %Y  %H:%M
+				Default is : %Y/%m/%d
+				other options :
+				%Y-%m-%d
+				%Y-%m-%d %I:%M %P
+				%Y-%m-%d %H:%M
+				%A, %e %B %Y
+				%A, %e %B %Y %H:%M
 			</description>
 			<defaultvalue>"%Y/%m/%d"</defaultvalue>
 			<required>true</required>
@@ -56,9 +46,9 @@
 			<name>weekNumbers</name>
 			<classname>java.lang.Boolean</classname>
 			<description>
-			true or false
-			Default is : false
-			show weeknumbers 
+				true or false
+				Default is : false
+				show weeknumbers 
 			</description>
 			<defaultvalue>false</defaultvalue>
 		</property>
@@ -66,8 +56,8 @@
 			<name>showOthers</name>
 			<classname>java.lang.Boolean</classname>
 			<description>
-			true or false
-			Default is : false			
+				true or false
+				Default is : false			
 			</description>
 			<defaultvalue>false</defaultvalue>
 		</property>
@@ -75,10 +65,10 @@
 			<name>dateType</name>
 			<classname>java.lang.String</classname>
 			<description>
-					defines date type including : 
-					jalali
-					gregorian
-					default is jalali
+				defines date type including :
+				jalali
+				gregorian
+				default is jalali
 			</description>
 			<defaultvalue>"jalali"</defaultvalue>
 		</property>
@@ -86,9 +76,9 @@
 			<name>value</name>
 			<classname>java.lang.Object</classname>
 			<description>
-					The value of the component
+				The value of the component
 			</description>
-			
+
 		</property>
 	</component>
 </components>

@@ -43,5 +43,11 @@
 			<description>
 			</description>					
 		</property>
+		<property>
+			<name>checked</name>
+			<classname>boolean</classname>
+			<description>
+			</description>					
+		</property>
 	</component>
 </components>

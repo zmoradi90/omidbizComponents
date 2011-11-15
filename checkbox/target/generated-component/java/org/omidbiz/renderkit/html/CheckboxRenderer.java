@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.ComponentVariables;
+import org.ajax4jsf.resource.InternetResource;
 //
 //
 //
@@ -55,6 +56,53 @@ public class CheckboxRenderer extends CheckboxRenderBase {
 	// 
 	// Declarations
 	//
+	private final InternetResource[] scripts = {
+						getResource("/org/richfaces/renderkit/html/scripts/jquery/jquery.js")
+						,
+				new org.ajax4jsf.javascript.PrototypeScript()
+						,
+				new org.ajax4jsf.javascript.AjaxScript()
+						,
+				getResource("/org/omidbiz/renderkit/html/script/checkBox.js")
+	};
+
+private InternetResource[] scriptsAll = null;
+
+protected InternetResource[] getScripts() {
+	synchronized (this) {
+		if (scriptsAll == null) {
+			InternetResource[] rsrcs = super.getScripts();
+			boolean ignoreSuper = rsrcs == null || rsrcs.length == 0;
+			boolean ignoreThis = scripts == null || scripts.length == 0;
+			
+			if (ignoreSuper) {
+				if (ignoreThis) {
+					scriptsAll = new InternetResource[0];	
+				} else {
+					scriptsAll = scripts;
+				}
+			} else {
+				if (ignoreThis) {
+					scriptsAll = rsrcs;
+				} else {
+					java.util.Set rsrcsSet = new java.util.LinkedHashSet();
+
+					for (int i = 0; i < rsrcs.length; i++ ) {
+						rsrcsSet.add(rsrcs[i]);
+					}
+
+					for (int i = 0; i < scripts.length; i++ ) {
+						rsrcsSet.add(scripts[i]);
+					}
+
+					scriptsAll = (InternetResource[]) rsrcsSet.toArray(new InternetResource[rsrcsSet.size()]);
+				}
+			}
+		}
+	}
+	
+	return scriptsAll;
+}
 	// 
 	// 
 	//
@@ -104,12 +152,14 @@ public class CheckboxRenderer extends CheckboxRenderBase {
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UICheckbox component, ComponentVariables variables) throws IOException {
 	  java.lang.String clientId = component.getClientId(context);
 variables.setVariable("value", component.getAttributes().get("value") );
+variables.setVariable("checked", component.getAttributes().get("checked") );
 
  
 			String value = (String) variables.getVariable("value");
+			Boolean checked = (Boolean) variables.getVariable("checked");
 
 
- if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") ) { 
+ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { 
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "checked", "checked" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
@@ -122,17 +172,11 @@ writer.endElement("input");
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
-						getUtils().writeAttribute(writer, "onclick", "setYvalue();" );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.checkboxControl.setYvalue('" + convertToString(clientId) + "');" );
 						getUtils().writeAttribute(writer, "type", "checkbox" );
 						getUtils().writeAttribute(writer, "value", "N" );
 			
 writer.endElement("input");
-writer.startElement("script", component);
-			getUtils().writeAttribute(writer, "type", "text/javascript" );
-			
-writer.writeText(convertToString("function setYvalue(){\n				var chkCmp = document.getElementById(\"" + convertToString(clientId) + "-chk\");\n				var chkVal = chkCmp.value;\n				if(chkVal == 'N'){\n					chkCmp.value = 'Y' \n				}\n			}"),null);
-
-writer.endElement("script");
  } 
 
 	}		

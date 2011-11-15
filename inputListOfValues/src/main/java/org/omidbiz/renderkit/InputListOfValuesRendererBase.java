@@ -15,8 +15,14 @@ public abstract class InputListOfValuesRendererBase extends HeaderResourcesRende
 	protected String getValueAsString(FacesContext context,
 			UIComponent component) throws IOException {
 
-//		UIInputListOfValues inputDate = (UIInputListOfValues) component;
+		UIInputListOfValues inputDate = (UIInputListOfValues) component;
 		String valueString = (String) component.getAttributes().get("valueName");
+		
+		Boolean required = (Boolean) component.getAttributes().get("required");
+		
+		if(required){
+			inputDate.setRequired(true);
+		}
 
 		
 		return valueString;

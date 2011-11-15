@@ -26,6 +26,13 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description></description>
+	   <name>checked</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>converter</description>
 	   <name>converter</name>
 	   	   	   					   	<deferred-value>
