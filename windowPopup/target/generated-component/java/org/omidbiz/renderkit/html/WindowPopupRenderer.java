@@ -205,6 +205,8 @@ variables.setVariable("border", getResource( "/org/omidbiz/renderkit/html/css/im
 
 variables.setVariable("view", component.getAttributes().get("view") );
 variables.setVariable("type", component.getAttributes().get("type") );
+variables.setVariable("id", component.getAttributes().get("id") );
+variables.setVariable("iframe", component.getAttributes().get("iframe") );
 
  
 			String type = (String) variables.getVariable("type");			
@@ -212,9 +214,9 @@ variables.setVariable("type", component.getAttributes().get("type") );
 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { 
 writer.startElement("a", component);
-			getUtils().writeAttribute(writer, "class", convertToString(clientId) + "lovClass" );
+			getUtils().writeAttribute(writer, "class", convertToString(variables.getVariable("id")) + "popupClass" );
 						getUtils().writeAttribute(writer, "href", variables.getVariable("view") );
-						getUtils().writeAttribute(writer, "rel", "rel" + convertToString(clientId) );
+						getUtils().writeAttribute(writer, "rel", "rel" + convertToString(variables.getVariable("id")) );
 			
 writer.writeText(convertToString(component.getAttributes().get("openText")),null);
 
@@ -222,7 +224,7 @@ writer.endElement("a");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready(function(){	\n			jQuery(\"." + convertToString(clientId) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n			jQuery('a[rel=rel" + convertToString(clientId) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:true}, Richfaces.colorboxControl.getParameters()));\n			\n		});"),null);
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n			jQuery(\"." + convertToString(variables.getVariable("id")) + "popupClass\").colorbox({width:\"80%\", height:\"80%\", iframe:" + convertToString(variables.getVariable("iframe")) + "});\n			jQuery('a[rel=rel" + convertToString(variables.getVariable("id")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "}, Richfaces.colorboxControl.getParameters()));\n			\n		});"),null);
 
 writer.endElement("script");
  } 

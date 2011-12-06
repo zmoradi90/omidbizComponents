@@ -153,6 +153,7 @@ protected InternetResource[] getScripts() {
 	  java.lang.String clientId = component.getClientId(context);
 variables.setVariable("value", component.getAttributes().get("value") );
 variables.setVariable("checked", component.getAttributes().get("checked") );
+variables.setVariable("change", component.getAttributes().get("onchange") );
 
  
 			String value = (String) variables.getVariable("value");
@@ -164,6 +165,7 @@ writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "checked", "checked" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
+						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
 						getUtils().writeAttribute(writer, "type", "checkbox" );
 						getUtils().writeAttribute(writer, "value", "Y" );
 			
@@ -172,6 +174,7 @@ writer.endElement("input");
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
+						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
 						getUtils().writeAttribute(writer, "onclick", "Richfaces.checkboxControl.setYvalue('" + convertToString(clientId) + "');" );
 						getUtils().writeAttribute(writer, "type", "checkbox" );
 						getUtils().writeAttribute(writer, "value", "N" );

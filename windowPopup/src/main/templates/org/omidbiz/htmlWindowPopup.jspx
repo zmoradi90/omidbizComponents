@@ -23,6 +23,8 @@
 	
 	<c:set var="view" value="#{component.attributes['view']}"/>
 	<c:set var="type" value="#{component.attributes['type']}"/>
+	<c:set var="id" value="#{component.attributes['id']}"/>
+	<c:set var="iframe" value="#{component.attributes['iframe']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -33,15 +35,15 @@
 	
 	<jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { ]]></jsp:scriptlet>	
 			
-	<a rel="rel#{clientId}" class="#{clientId}lovClass" href="#{view}">
+	<a rel="rel#{id}" class="#{id}popupClass" href="#{view}">
 		#{component.attributes['openText']}
 	</a>
 	
 	<script type="text/javascript">
  
 		jQuery(document).ready(function(){	
-			jQuery(".#{clientId}lovClass").colorbox({width:"80%", height:"80%", iframe:true});
-			jQuery('a[rel=rel#{clientId}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:true}, Richfaces.colorboxControl.getParameters()));
+			jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}});
+			jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:#{iframe}}, Richfaces.colorboxControl.getParameters()));
 			
 		});
 

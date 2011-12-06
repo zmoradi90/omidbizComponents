@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+	<namespace>http://omidbiz.com/persianCalendar</namespace>
+
+	<component>
+		<name>persianCalendar</name>
+
+		
+				<scripts>
+						<script>org.ajax4jsf.javascript.PrototypeScript</script>
+						<script>org.ajax4jsf.javascript.AjaxScript</script>
+						<script>org/richfaces/renderkit/html/scripts/events.js</script>
+						<script>org/richfaces/renderkit/html/scripts/utils.js</script>
+						<script>org/richfaces/renderkit/html/scripts/json/json-dom.js</script>
+						<script>org/richfaces/renderkit/html/scripts/scriptaculous/effects.js</script>
+						<script>org/richfaces/renderkit/html/scripts/jquery/jquery.js</script>
+						<script>org/richfaces/renderkit/html/scripts/JQuerySpinBtn.js</script>
+						<script>org/omidbiz/renderkit/html/script/calendar.js</script>
+					</scripts>
+		
+				<styles>
+						<style>org/richfaces/renderkit/html/css/calendar.xcss</style>
+					</styles>
+			</component>
+
+</components>

@@ -23,8 +23,5 @@ public class WindowPopupTagHandler extends ComponentHandler {
 	               new Class<?>[] { ActionEvent.class } ));
 	}
 	
-	
-	
-	
 
 }

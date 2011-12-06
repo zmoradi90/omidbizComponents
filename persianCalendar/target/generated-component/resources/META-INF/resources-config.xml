@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-config>
+<!-- Include manual created resource -->
+
+
+	<resource class="org.richfaces.renderkit.html.images.SpinnerButtonUp">
+		<name>org.richfaces.renderkit.html.images.SpinnerButtonUp</name>
+	</resource>
+	<resource class="org.ajax4jsf.javascript.PrototypeScript">
+		<name>org.ajax4jsf.javascript.PrototypeScript</name>
+	</resource>
+	<resource class="org.richfaces.renderkit.html.iconimages.CalendarSeparator">
+		<name>org.richfaces.renderkit.html.iconimages.CalendarSeparator</name>
+	</resource>
+	<resource class="org.richfaces.renderkit.html.images.SpinnerFieldGradient">
+		<name>org.richfaces.renderkit.html.images.SpinnerFieldGradient</name>
+	</resource>
+	<resource class="org.richfaces.renderkit.html.images.SpinnerButtonDown">
+		<name>org.richfaces.renderkit.html.images.SpinnerButtonDown</name>
+	</resource>
+	<resource class="org.ajax4jsf.javascript.AjaxScript">
+		<name>org.ajax4jsf.javascript.AjaxScript</name>
+	</resource>
+	<resource class="org.richfaces.renderkit.html.images.SpinnerButtonGradient">
+		<name>org.richfaces.renderkit.html.images.SpinnerButtonGradient</name>
+	</resource>
+	<resource class="org.omidbiz.renderkit.html.iconimages.DisabledCalendarIcon">
+		<name>org.omidbiz.renderkit.html.iconimages.DisabledCalendarIcon</name>
+	</resource>
+	<resource class="org.omidbiz.renderkit.html.iconimages.CalendarIcon">
+		<name>org.omidbiz.renderkit.html.iconimages.CalendarIcon</name>
+	</resource>
+
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/events.js</name>
+		<path>org/richfaces/renderkit/html/scripts/events.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/scriptaculous/effects.js</name>
+		<path>org/richfaces/renderkit/html/scripts/scriptaculous/effects.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/JQuerySpinBtn.js</name>
+		<path>org/richfaces/renderkit/html/scripts/JQuerySpinBtn.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/jquery/jquery.js</name>
+		<path>org/richfaces/renderkit/html/scripts/jquery/jquery.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/css/calendar.xcss</name>
+		<path>org/richfaces/renderkit/html/css/calendar.xcss</path>
+	</resource>
+	<resource>
+		<name>org/omidbiz/renderkit/html/script/calendar.js</name>
+		<path>org/omidbiz/renderkit/html/script/calendar.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/utils.js</name>
+		<path>org/richfaces/renderkit/html/scripts/utils.js</path>
+	</resource>
+	<resource>
+		<name>org/richfaces/renderkit/html/scripts/json/json-dom.js</name>
+		<path>org/richfaces/renderkit/html/scripts/json/json-dom.js</path>
+	</resource>
+</resource-config>

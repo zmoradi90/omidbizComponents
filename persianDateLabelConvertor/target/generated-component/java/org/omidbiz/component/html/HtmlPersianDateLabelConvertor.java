@@ -8,9 +8,14 @@ import org.omidbiz.component.UIPersianDateLabelConvertor;
 
 public class HtmlPersianDateLabelConvertor extends UIPersianDateLabelConvertor{
 
-static public final  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
 
-static public final  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
+static final public  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
+
+/*
+* 
+*/
+private  String _datePattern = null;
 
 /*
 * 
@@ -20,6 +25,32 @@ private  Object _value = null;
 
 public HtmlPersianDateLabelConvertor(){
 setRendererType("org.omidbiz.PersianDateLabelConvertorRenderer");
+}
+
+public String getDatePattern(){
+	if (this._datePattern != null) {
+		return this._datePattern;
+	}
+	ValueExpression ve = getValueExpression("datePattern");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setDatePattern(String _datePattern){
+this._datePattern = _datePattern;
 }
 
 public Object getValue(){
@@ -54,9 +85,10 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[2];
+Object [] state = new Object[3];
 state[0] = super.saveState(context);
-state[1] = saveAttachedState(context, _value);
+state[1] = _datePattern;
+state[2] = saveAttachedState(context, _value);
 return state;
 }
 
@@ -64,7 +96,8 @@ return state;
 public void restoreState(FacesContext context, Object state){
 Object[] states = (Object[]) state;
 super.restoreState(context, states[0]);
-	_value = (Object)restoreAttachedState(context, states[1]);
+	_datePattern = (String)states[1];;
+		_value = (Object)restoreAttachedState(context, states[2]);
 	
 }
 

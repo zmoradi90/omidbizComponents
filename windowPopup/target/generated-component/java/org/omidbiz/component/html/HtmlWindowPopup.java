@@ -9,9 +9,9 @@ import org.omidbiz.component.UIWindowPopup;
 
 public class HtmlWindowPopup extends UIWindowPopup{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
+static final public  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
@@ -46,6 +46,13 @@ private  String _closeText = null;
 private  boolean _disabled = false;
 
 private  boolean _disabledSet = false;
+
+/*
+* 
+*/
+private  boolean _iframe = false;
+
+private  boolean _iframeSet = false;
 
 /*
 * Specifies the maximum number of digits that could be entered into the input field. 
@@ -326,6 +333,36 @@ public boolean isDisabled(){
 public void setDisabled(boolean _disabled){
 this._disabled = _disabled;
 this._disabledSet = true;
+}
+
+public boolean isIframe(){
+	if (this._iframeSet) {
+	    return (this._iframe);
+	}
+	ValueExpression ve = getValueExpression("iframe");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._iframe);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._iframe);
+	}
+
+}
+
+public void setIframe(boolean _iframe){
+this._iframe = _iframe;
+this._iframeSet = true;
 }
 
 public int getMaxlength(){
@@ -914,7 +951,7 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[32];
+Object [] state = new Object[34];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
 state[2] = _align;
@@ -923,30 +960,32 @@ state[4] = saveAttachedState(context, _atMin);
 state[5] = _closeText;
 state[6] = Boolean.valueOf(_disabled);
 state[7] = Boolean.valueOf(_disabledSet);
-state[8] = Integer.valueOf(_maxlength);
-state[9] = Boolean.valueOf(_maxlengthSet);
-state[10] = _onblur;
-state[11] = _onchange;
-state[12] = _onclick;
-state[13] = _ondblclick;
-state[14] = _onfocus;
-state[15] = _onkeydown;
-state[16] = _onkeypress;
-state[17] = _onkeyup;
-state[18] = _onmousedown;
-state[19] = _onmousemove;
-state[20] = _onmouseout;
-state[21] = _onmouseover;
-state[22] = _onmouseup;
-state[23] = _onselect;
-state[24] = _openText;
-state[25] = Integer.valueOf(_size);
-state[26] = Boolean.valueOf(_sizeSet);
-state[27] = _style;
-state[28] = _styleClass;
-state[29] = _tabindex;
-state[30] = _type;
-state[31] = _view;
+state[8] = Boolean.valueOf(_iframe);
+state[9] = Boolean.valueOf(_iframeSet);
+state[10] = Integer.valueOf(_maxlength);
+state[11] = Boolean.valueOf(_maxlengthSet);
+state[12] = _onblur;
+state[13] = _onchange;
+state[14] = _onclick;
+state[15] = _ondblclick;
+state[16] = _onfocus;
+state[17] = _onkeydown;
+state[18] = _onkeypress;
+state[19] = _onkeyup;
+state[20] = _onmousedown;
+state[21] = _onmousemove;
+state[22] = _onmouseout;
+state[23] = _onmouseover;
+state[24] = _onmouseup;
+state[25] = _onselect;
+state[26] = _openText;
+state[27] = Integer.valueOf(_size);
+state[28] = Boolean.valueOf(_sizeSet);
+state[29] = _style;
+state[30] = _styleClass;
+state[31] = _tabindex;
+state[32] = _type;
+state[33] = _view;
 return state;
 }
 
@@ -961,30 +1000,32 @@ super.restoreState(context, states[0]);
 		_closeText = (String)states[5];;
 		_disabled = ((Boolean)states[6]).booleanValue();
 		_disabledSet = ((Boolean)states[7]).booleanValue();
-		_maxlength = ((Integer)states[8]).intValue();
-		_maxlengthSet = ((Boolean)states[9]).booleanValue();
-		_onblur = (String)states[10];;
-		_onchange = (String)states[11];;
-		_onclick = (String)states[12];;
-		_ondblclick = (String)states[13];;
-		_onfocus = (String)states[14];;
-		_onkeydown = (String)states[15];;
-		_onkeypress = (String)states[16];;
-		_onkeyup = (String)states[17];;
-		_onmousedown = (String)states[18];;
-		_onmousemove = (String)states[19];;
-		_onmouseout = (String)states[20];;
-		_onmouseover = (String)states[21];;
-		_onmouseup = (String)states[22];;
-		_onselect = (String)states[23];;
-		_openText = (String)states[24];;
-		_size = ((Integer)states[25]).intValue();
-		_sizeSet = ((Boolean)states[26]).booleanValue();
-		_style = (String)states[27];;
-		_styleClass = (String)states[28];;
-		_tabindex = (String)states[29];;
-		_type = (String)states[30];;
-		_view = (String)states[31];;
+		_iframe = ((Boolean)states[8]).booleanValue();
+		_iframeSet = ((Boolean)states[9]).booleanValue();
+		_maxlength = ((Integer)states[10]).intValue();
+		_maxlengthSet = ((Boolean)states[11]).booleanValue();
+		_onblur = (String)states[12];;
+		_onchange = (String)states[13];;
+		_onclick = (String)states[14];;
+		_ondblclick = (String)states[15];;
+		_onfocus = (String)states[16];;
+		_onkeydown = (String)states[17];;
+		_onkeypress = (String)states[18];;
+		_onkeyup = (String)states[19];;
+		_onmousedown = (String)states[20];;
+		_onmousemove = (String)states[21];;
+		_onmouseout = (String)states[22];;
+		_onmouseover = (String)states[23];;
+		_onmouseup = (String)states[24];;
+		_onselect = (String)states[25];;
+		_openText = (String)states[26];;
+		_size = ((Integer)states[27]).intValue();
+		_sizeSet = ((Boolean)states[28]).booleanValue();
+		_style = (String)states[29];;
+		_styleClass = (String)states[30];;
+		_tabindex = (String)states[31];;
+		_type = (String)states[32];;
+		_view = (String)states[33];;
 	
 }
 

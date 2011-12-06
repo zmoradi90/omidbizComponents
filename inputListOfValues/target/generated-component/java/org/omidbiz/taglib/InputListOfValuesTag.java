@@ -26,7 +26,54 @@ import org.omidbiz.component.html.HtmlInputListOfValues;
 public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase {
 
 		// Fields
-		 		 	  			  		  	  
+		 	  			  		  	  
+		/*
+		 * accesskey
+		 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
+		 */
+		private ValueExpression _accesskey;
+		/**
+		 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
+		 * Setter for accesskey
+		 * @param accesskey - new value
+		 */
+		 public void setAccesskey( ValueExpression  __accesskey ){
+			this._accesskey = __accesskey;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * align
+		 * Deprecated. This attribute specifies the horizontal alignment of its element with respect to the surrounding context. The  possible values are "left", "center", "right" and "justify".  
+            The default depends on the base text direction. For left to right text, the default is align="left", while for right to left text, the default is align="right".
+		 */
+		private ValueExpression _align;
+		/**
+		 * Deprecated. This attribute specifies the horizontal alignment of its element with respect to the surrounding context. The  possible values are "left", "center", "right" and "justify".  
+            The default depends on the base text direction. For left to right text, the default is align="left", while for right to left text, the default is align="right".
+		 * Setter for align
+		 * @param align - new value
+		 */
+		 public void setAlign( ValueExpression  __align ){
+			this._align = __align;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * alt
+		 * For a user agents that cannot display images, forms, or applets, this attribute specifies alternate text. The language of the alternate text is specified by the lang attribute
+		 */
+		private ValueExpression _alt;
+		/**
+		 * For a user agents that cannot display images, forms, or applets, this attribute specifies alternate text. The language of the alternate text is specified by the lang attribute
+		 * Setter for alt
+		 * @param alt - new value
+		 */
+		 public void setAlt( ValueExpression  __alt ){
+			this._alt = __alt;
+	     }
+	  
+	 	 		 		 	  			  		  	  
 		/*
 		 * converter
 		 * Id of Converter to be used or reference to a Converter
@@ -58,6 +105,21 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 		 */
 		 public void setConverterMessage( ValueExpression  __converterMessage ){
 			this._converterMessage = __converterMessage;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * disabled
+		 * When set for a form control, this boolean attribute disables the control for your input
+		 */
+		private ValueExpression _disabled;
+		/**
+		 * When set for a form control, this boolean attribute disables the control for your input
+		 * Setter for disabled
+		 * @param disabled - new value
+		 */
+		 public void setDisabled( ValueExpression  __disabled ){
+			this._disabled = __disabled;
 	     }
 	  
 	 	 		 		 		 	  			  		  	  
@@ -96,6 +158,40 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 	  
 	 	 		 	  			  		  	  
 		/*
+		 * maxlength
+		 * Specifies the maximum number of digits that could be entered into the input field. 
+		The maximum number is unlimited by default. 
+		If entered value exceeds the value specified in "maxValue" attribute than the slider takes a maximum value position.
+		 */
+		private ValueExpression _maxlength;
+		/**
+		 * Specifies the maximum number of digits that could be entered into the input field. 
+		The maximum number is unlimited by default. 
+		If entered value exceeds the value specified in "maxValue" attribute than the slider takes a maximum value position.
+		 * Setter for maxlength
+		 * @param maxlength - new value
+		 */
+		 public void setMaxlength( ValueExpression  __maxlength ){
+			this._maxlength = __maxlength;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * nameValue
+		 * nameValue
+		 */
+		private ValueExpression _nameValue;
+		/**
+		 * nameValue
+		 * Setter for nameValue
+		 * @param nameValue - new value
+		 */
+		 public void setNameValue( ValueExpression  __nameValue ){
+			this._nameValue = __nameValue;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * objectName
 		 * the most important attribute use for setting and retrieving value via javascript
 		 */
@@ -107,6 +203,66 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 		 */
 		 public void setObjectName( ValueExpression  __objectName ){
 			this._objectName = __objectName;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onblur
+		 * The client side script method to be called when the element loses the focus
+		 */
+		private ValueExpression _onblur;
+		/**
+		 * The client side script method to be called when the element loses the focus
+		 * Setter for onblur
+		 * @param onblur - new value
+		 */
+		 public void setOnblur( ValueExpression  __onblur ){
+			this._onblur = __onblur;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onchange
+		 * The client side script method to be called when the element value is changed
+		 */
+		private ValueExpression _onchange;
+		/**
+		 * The client side script method to be called when the element value is changed
+		 * Setter for onchange
+		 * @param onchange - new value
+		 */
+		 public void setOnchange( ValueExpression  __onchange ){
+			this._onchange = __onchange;
+	     }
+	  
+	 	 		 		 		 	  			  		  	  
+		/*
+		 * onfocus
+		 * The client side script method to be called when the element gets the focus
+		 */
+		private ValueExpression _onfocus;
+		/**
+		 * The client side script method to be called when the element gets the focus
+		 * Setter for onfocus
+		 * @param onfocus - new value
+		 */
+		 public void setOnfocus( ValueExpression  __onfocus ){
+			this._onfocus = __onfocus;
+	     }
+	  
+	 	 		 		 		 		 		 		 		 		 		 	  			  		  	  
+		/*
+		 * onselect
+		 * The client side script method to be called when some text is selected in the text field. This attribute can be used with the INPUT and TEXTAREA elements.
+		 */
+		private ValueExpression _onselect;
+		/**
+		 * The client side script method to be called when some text is selected in the text field. This attribute can be used with the INPUT and TEXTAREA elements.
+		 * Setter for onselect
+		 * @param onselect - new value
+		 */
+		 public void setOnselect( ValueExpression  __onselect ){
+			this._onselect = __onselect;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -203,6 +359,36 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 		 */
 		 public void setSendRequestToServer( ValueExpression  __sendRequestToServer ){
 			this._sendRequestToServer = __sendRequestToServer;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * size
+		 * This attribute tells the user agent the initial width of the control. The width is given in pixels except when type attribute has the value "text" or "password". In that case, its value refers to the (integer) number of characters
+		 */
+		private ValueExpression _size;
+		/**
+		 * This attribute tells the user agent the initial width of the control. The width is given in pixels except when type attribute has the value "text" or "password". In that case, its value refers to the (integer) number of characters
+		 * Setter for size
+		 * @param size - new value
+		 */
+		 public void setSize( ValueExpression  __size ){
+			this._size = __size;
+	     }
+	  
+	 	 		 		 		 	  			  		  	  
+		/*
+		 * tabindex
+		 * This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros
+		 */
+		private ValueExpression _tabindex;
+		/**
+		 * This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros
+		 * Setter for tabindex
+		 * @param tabindex - new value
+		 */
+		 public void setTabindex( ValueExpression  __tabindex ){
+			this._tabindex = __tabindex;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -309,6 +495,21 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 	  
 	 	 		 		 	  			  		  	  
 		/*
+		 * valueId
+		 * The value Id of the component show in hidden
+		 */
+		private ValueExpression _valueId;
+		/**
+		 * The value Id of the component show in hidden
+		 * Setter for valueId
+		 * @param valueId - new value
+		 */
+		 public void setValueId( ValueExpression  __valueId ){
+			this._valueId = __valueId;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * valueName
 		 * The value of the component show in textbox
 		 */
@@ -343,24 +544,37 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
     {
         // TODO Auto-generated method stub
         super.release();
-        		 		 		    this._converter = null;
+        		 		    this._accesskey = null;
+	 		 		    this._align = null;
+	 		 		    this._alt = null;
+	 		 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
+	 		 		    this._disabled = null;
 	 		 		 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
+	 		 		    this._maxlength = null;
+	 		 		    this._nameValue = null;
 	 		 		    this._objectName = null;
+	 		 		    this._onblur = null;
+	 		 		    this._onchange = null;
+	 		 		 		 		    this._onfocus = null;
+	 		 		 		 		 		 		 		 		 		 		    this._onselect = null;
 	 		 		    this._pValueText = null;
 	 		 		    this._pid = null;
 	 		 		 		    this._required = null;
 	 		 		    this._requiredMessage = null;
 	 		 		    this._selectedText = null;
 	 		 		    this._sendRequestToServer = null;
+	 		 		    this._size = null;
+	 		 		 		 		    this._tabindex = null;
 	 		 		    this._type = null;
 	 		 		    this._valid = null;
 	 		 		    this._validator = null;
 	 		 		    this._validatorMessage = null;
 	 		 		 		    this._value = null;
 	 		 		    this._valueChangeListener = null;
-	 		 		 		    this._valueName = null;
+	 		 		 		    this._valueId = null;
+	 		 		    this._valueName = null;
 	 		 		    this._view = null;
 	 		}
 	
@@ -372,7 +586,64 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
         // TODO Auto-generated method stub
         super.setProperties(component);
 		HtmlInputListOfValues comp = (HtmlInputListOfValues) component;
-  		 			setConverterProperty(comp, this._converter);
+ 		 			 
+						if (this._accesskey != null) {
+				if (this._accesskey.isLiteralText()) {
+					try {
+												
+						java.lang.String __accesskey = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._accesskey.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setAccesskey(__accesskey);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("accesskey", this._accesskey);
+				}
+			}
+					   		 			 
+						if (this._align != null) {
+				if (this._align.isLiteralText()) {
+					try {
+												
+						java.lang.String __align = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._align.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setAlign(__align);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("align", this._align);
+				}
+			}
+					   		 			 
+						if (this._alt != null) {
+				if (this._alt.isLiteralText()) {
+					try {
+												
+						java.lang.String __alt = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._alt.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setAlt(__alt);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("alt", this._alt);
+				}
+			}
+					    		 			setConverterProperty(comp, this._converter);
 		   		 			 
 						if (this._converterMessage != null) {
 				if (this._converterMessage.isLiteralText()) {
@@ -390,6 +661,25 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					}
 				} else {
 					component.setValueExpression("converterMessage", this._converterMessage);
+				}
+			}
+					   		 			 
+						if (this._disabled != null) {
+				if (this._disabled.isLiteralText()) {
+					try {
+												
+						Boolean __disabled = (Boolean) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._disabled.getExpressionString(), 
+											Boolean.class);
+					
+												comp.setDisabled(__disabled.booleanValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("disabled", this._disabled);
 				}
 			}
 					     		 			 
@@ -431,6 +721,44 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 				}
 			}
 					   		 			 
+						if (this._maxlength != null) {
+				if (this._maxlength.isLiteralText()) {
+					try {
+												
+						Integer __maxlength = (Integer) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._maxlength.getExpressionString(), 
+											Integer.class);
+					
+												comp.setMaxlength(__maxlength.intValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("maxlength", this._maxlength);
+				}
+			}
+					   		 			 
+						if (this._nameValue != null) {
+				if (this._nameValue.isLiteralText()) {
+					try {
+												
+						java.lang.Object __nameValue = (java.lang.Object) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._nameValue.getExpressionString(), 
+											java.lang.Object.class);
+					
+												comp.setNameValue(__nameValue);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("nameValue", this._nameValue);
+				}
+			}
+					   		 			 
 						if (this._objectName != null) {
 				if (this._objectName.isLiteralText()) {
 					try {
@@ -447,6 +775,82 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					}
 				} else {
 					component.setValueExpression("objectName", this._objectName);
+				}
+			}
+					   		 			 
+						if (this._onblur != null) {
+				if (this._onblur.isLiteralText()) {
+					try {
+												
+						java.lang.String __onblur = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onblur.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnblur(__onblur);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onblur", this._onblur);
+				}
+			}
+					   		 			 
+						if (this._onchange != null) {
+				if (this._onchange.isLiteralText()) {
+					try {
+												
+						java.lang.String __onchange = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onchange.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnchange(__onchange);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onchange", this._onchange);
+				}
+			}
+					     		 			 
+						if (this._onfocus != null) {
+				if (this._onfocus.isLiteralText()) {
+					try {
+												
+						java.lang.String __onfocus = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onfocus.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnfocus(__onfocus);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onfocus", this._onfocus);
+				}
+			}
+					           		 			 
+						if (this._onselect != null) {
+				if (this._onselect.isLiteralText()) {
+					try {
+												
+						java.lang.String __onselect = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onselect.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnselect(__onselect);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onselect", this._onselect);
 				}
 			}
 					   		 			 
@@ -564,6 +968,44 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 				}
 			}
 					   		 			 
+						if (this._size != null) {
+				if (this._size.isLiteralText()) {
+					try {
+												
+						Integer __size = (Integer) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._size.getExpressionString(), 
+											Integer.class);
+					
+												comp.setSize(__size.intValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("size", this._size);
+				}
+			}
+					     		 			 
+						if (this._tabindex != null) {
+				if (this._tabindex.isLiteralText()) {
+					try {
+												
+						java.lang.String __tabindex = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._tabindex.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setTabindex(__tabindex);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("tabindex", this._tabindex);
+				}
+			}
+					   		 			 
 						if (this._type != null) {
 				if (this._type.isLiteralText()) {
 					try {
@@ -642,6 +1084,25 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 			}
 					   		 			setValueChangeListenerProperty(comp, this._valueChangeListener);
 		    		 			 
+						if (this._valueId != null) {
+				if (this._valueId.isLiteralText()) {
+					try {
+												
+						java.lang.Object __valueId = (java.lang.Object) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._valueId.getExpressionString(), 
+											java.lang.Object.class);
+					
+												comp.setValueId(__valueId);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("valueId", this._valueId);
+				}
+			}
+					   		 			 
 						if (this._valueName != null) {
 				if (this._valueName.isLiteralText()) {
 					try {

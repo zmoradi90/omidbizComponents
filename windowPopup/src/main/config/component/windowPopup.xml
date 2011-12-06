@@ -62,7 +62,8 @@
 			<name>id</name>
 			<classname>java.lang.String</classname>
 			<description>
-			</description>			
+			</description>
+			<required>true</required>			
 		</property>
 		
 		<property>
@@ -72,6 +73,15 @@
 				MethodExpression representing an action listener method
 				that will be notified 
 			</description>
+		</property>
+		
+		<property>
+			<name>iframe</name>
+			<classname>boolean</classname>
+			<description>
+				 
+			</description>
+			<defaultvalue>false</defaultvalue>
 		</property>
 		
 		

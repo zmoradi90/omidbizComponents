@@ -54,6 +54,20 @@ public abstract class PersianDateLabelRendererBase extends
 			}
 
 		}
+		
+		String datePattern = (String) inputDate.getAttributes().get("datePattern");
+		
+		if(datePattern != null){
+			SimpleDateFormat formatter = new SimpleDateFormat(datePattern);
+			try {
+				String gregorianDate = pc.SolarToGregorian(valueString.toString());
+				valueString =pc.GregorianToSolar(formatter.format(formatter.parse(gregorianDate)));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return valueString;
 	}
 

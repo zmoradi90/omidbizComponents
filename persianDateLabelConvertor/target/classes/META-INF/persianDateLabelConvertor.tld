@@ -26,6 +26,13 @@ a backing bean</description>
 					<type>javax.faces.component.UIComponent</type>
 				</deferred-value>
 				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>datePattern</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
 		  	  		  <attribute>
 	   <description>Every component may have a unique id that is automatically created if omitted</description>
 	   <name>id</name>

@@ -15,6 +15,7 @@
 	
 	<c:set var="value" value="#{component.attributes['value']}"/>
 	<c:set var="checked" value="#{component.attributes['checked']}"/>
+	<c:set var="change" value="#{component.attributes['onchange']}"/>
 			<jsp:scriptlet>
 <![CDATA[ 
 			String value = (String) variables.getVariable("value");
@@ -23,9 +24,9 @@
 </jsp:scriptlet>
 	
 	<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { ]]></jsp:scriptlet>
-		<input type="checkbox" name="#{clientId}-chk" value="Y" id="#{clientId}-chk" checked="checked"/>
+		<input type="checkbox" onchange="#{change}" name="#{clientId}-chk" value="Y" id="#{clientId}-chk" checked="checked"/>
 	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-		<input type="checkbox" value="N" onclick="Richfaces.checkboxControl.setYvalue('#{clientId}');" name="#{clientId}-chk" id="#{clientId}-chk" />
+		<input type="checkbox" value="N" onchange="#{change}" onclick="Richfaces.checkboxControl.setYvalue('#{clientId}');" name="#{clientId}-chk" id="#{clientId}-chk" />
 		
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 </f:root>

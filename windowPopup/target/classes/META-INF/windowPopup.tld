@@ -88,8 +88,16 @@ a backing bean</description>
 		  	  		  <attribute>
 	   <description></description>
 	   <name>id</name>
+	   			<required>true</required>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>iframe</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

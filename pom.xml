@@ -128,5 +128,6 @@
     <module>inputExtra</module>
     <module>windowPopup</module>
     <module>inputNumeric</module>
+    <module>persianCalendar</module>
   </modules>
 </project>

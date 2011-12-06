@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+  version="1.2">	
+
+
+
+
+
+
+  <component>
+  	<description></description>
+        <component-type>org.omidbiz.PersianCalendar</component-type>
+    <component-class>org.omidbiz.component.html.HtmlPersianCalendar</component-class>
+    
+	<facet>
+  	<description>Redefines names of the week days. Related attributes are "weekDayLabels" and "weekDayLabelsShort"</description>
+          <facet-name>weekDay</facet-name>
+    </facet>
+	<facet>
+  	<description>Redefines calendar header. Related attribute is "showHeader"</description>
+          <facet-name>header</facet-name>
+    </facet>
+	<facet>
+  	<description>Defines calendar's optional footer</description>
+          <facet-name>optionalFooter</facet-name>
+    </facet>
+	<facet>
+  	<description>Redefines week number</description>
+          <facet-name>weekNumber</facet-name>
+    </facet>
+	<facet>
+  	<description>Defines calendar's optional header</description>
+          <facet-name>optionalHeader</facet-name>
+    </facet>
+	<facet>
+  	<description>Redefines calendar footer. Related attribute is "showFooter"</description>
+          <facet-name>footer</facet-name>
+    </facet>
+	    <component-extension>
+      <component-family>org.omidbiz.PersianCalendar</component-family>
+      <renderer-type>org.omidbiz.PersianCalendarRenderer</renderer-type>
+    </component-extension>
+      </component>
+
+  <render-kit>
+				<render-kit-id>HTML_BASIC</render-kit-id>
+							  		<renderer>
+			<component-family>org.omidbiz.PersianCalendar</component-family>
+			<renderer-type>
+				org.omidbiz.PersianCalendarRenderer
+			</renderer-type>
+			<renderer-class>
+				org.omidbiz.renderkit.html.PersianCalendarRenderer
+			</renderer-class>
+		</renderer>
+			
+
+  </render-kit>
+
+
+</faces-config>

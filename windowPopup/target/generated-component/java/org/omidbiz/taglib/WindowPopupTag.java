@@ -155,6 +155,21 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 	  
 	 	 		 		 		 	  			  		  	  
 		/*
+		 * iframe
+		 * 
+		 */
+		private ValueExpression _iframe;
+		/**
+		 * 
+		 * Setter for iframe
+		 * @param iframe - new value
+		 */
+		 public void setIframe( ValueExpression  __iframe ){
+			this._iframe = __iframe;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * immediate
 		 * A flag indicating that this component value must be converted
             and validated immediately (that is, during Apply Request Values
@@ -474,7 +489,8 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 	 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
 	 		 		    this._disabled = null;
-	 		 		 		 		    this._immediate = null;
+	 		 		 		 		    this._iframe = null;
+	 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
 	 		 		    this._maxlength = null;
 	 		 		    this._onblur = null;
@@ -630,6 +646,25 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 				}
 			}
 					     		 			 
+						if (this._iframe != null) {
+				if (this._iframe.isLiteralText()) {
+					try {
+												
+						Boolean __iframe = (Boolean) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._iframe.getExpressionString(), 
+											Boolean.class);
+					
+												comp.setIframe(__iframe.booleanValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("iframe", this._iframe);
+				}
+			}
+					   		 			 
 						if (this._immediate != null) {
 				if (this._immediate.isLiteralText()) {
 					try {

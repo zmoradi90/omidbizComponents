@@ -28,21 +28,20 @@
 		</taghandler>
 		-->
 		&ui_component_attributes;
-		<!--
-		<property>
-			<name>param</name>
-			<classname>java.lang.String</classname>
-			<description>
-			</description>
-			<defaultvalue>"default"</defaultvalue>
-		</property>
-        -->
+		
         <property>
 			<name>value</name>
 			<classname>java.lang.Object</classname>
 			<description>
 			</description>
 			<required>true</required>
+		</property>
+		<property>
+			<name>datePattern</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			
 		</property>
         
 	</component>

@@ -23,7 +23,22 @@ import org.omidbiz.component.html.HtmlPersianDateLabelConvertor;
 public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase {
 
 		// Fields
-		 		 		 		 		 	  			  		  	  
+		 		 	  			  		  	  
+		/*
+		 * datePattern
+		 * 
+		 */
+		private ValueExpression _datePattern;
+		/**
+		 * 
+		 * Setter for datePattern
+		 * @param datePattern - new value
+		 */
+		 public void setDatePattern( ValueExpression  __datePattern ){
+			this._datePattern = __datePattern;
+	     }
+	  
+	 	 		 		 		 		 	  			  		  	  
 		/*
 		 * value
 		 * 
@@ -44,7 +59,8 @@ public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.Htm
     {
         // TODO Auto-generated method stub
         super.release();
-        		 		 		 		 		 		    this._value = null;
+        		 		 		    this._datePattern = null;
+	 		 		 		 		 		    this._value = null;
 	 		}
 	
     /* (non-Javadoc)
@@ -55,7 +71,26 @@ public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.Htm
         // TODO Auto-generated method stub
         super.setProperties(component);
 		HtmlPersianDateLabelConvertor comp = (HtmlPersianDateLabelConvertor) component;
-     		 			 
+  		 			 
+						if (this._datePattern != null) {
+				if (this._datePattern.isLiteralText()) {
+					try {
+												
+						java.lang.String __datePattern = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._datePattern.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setDatePattern(__datePattern);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("datePattern", this._datePattern);
+				}
+			}
+					      		 			 
 						if (this._value != null) {
 				if (this._value.isLiteralText()) {
 					try {

@@ -42,11 +42,11 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  			  		  	  
 		/*
 		 * converter
-		 * converter
+		 * Id of Converter to be used or reference to a Converter
 		 */
 		private ValueExpression _converter;
 		/**
-		 * converter
+		 * Id of Converter to be used or reference to a Converter
 		 * Setter for converter
 		 * @param converter - new value
 		 */
@@ -57,11 +57,15 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  			  		  	  
 		/*
 		 * converterMessage
-		 * converterMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the converter message,
+			replacing any message that comes from the converter
 		 */
 		private ValueExpression _converterMessage;
 		/**
-		 * converterMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the converter message,
+			replacing any message that comes from the converter
 		 * Setter for converterMessage
 		 * @param converterMessage - new value
 		 */
@@ -72,11 +76,15 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 		 		 	  			  		  	  
 		/*
 		 * immediate
-		 * immediate
+		 * A flag indicating that this component value must be converted
+            and validated immediately (that is, during Apply Request Values
+            phase), rather than waiting until a Process Validations phase
 		 */
 		private ValueExpression _immediate;
 		/**
-		 * immediate
+		 * A flag indicating that this component value must be converted
+            and validated immediately (that is, during Apply Request Values
+            phase), rather than waiting until a Process Validations phase
 		 * Setter for immediate
 		 * @param immediate - new value
 		 */
@@ -99,14 +107,29 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			this._localValueSet = __localValueSet;
 	     }
 	  
-	 	 		 		 	  			  		  	  
+	 	 		 	  			  		  	  
+		/*
+		 * onchange
+		 * ${prop.xmlEncodedDescription}
+		 */
+		private ValueExpression _onchange;
+		/**
+		 * ${prop.xmlEncodedDescription}
+		 * Setter for onchange
+		 * @param onchange - new value
+		 */
+		 public void setOnchange( ValueExpression  __onchange ){
+			this._onchange = __onchange;
+	     }
+	  
+	 	 		 		 		 		 		 		 		 		 		 		 		 		 	  			  		  	  
 		/*
 		 * required
-		 * required
+		 * If "true", this component is checked for non-empty input
 		 */
 		private ValueExpression _required;
 		/**
-		 * required
+		 * If "true", this component is checked for non-empty input
 		 * Setter for required
 		 * @param required - new value
 		 */
@@ -117,11 +140,17 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  			  		  	  
 		/*
 		 * requiredMessage
-		 * requiredMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validation message for
+			the "required" facility, if the "required" facility is
+			used
 		 */
 		private ValueExpression _requiredMessage;
 		/**
-		 * requiredMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validation message for
+			the "required" facility, if the "required" facility is
+			used
 		 * Setter for requiredMessage
 		 * @param requiredMessage - new value
 		 */
@@ -147,11 +176,15 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  	  	  
 		/*
 		 * validator
-		 * validator
+		 * MethodBinding pointing at a method that is called during
+            Process Validations phase of the request processing lifecycle,
+            to validate the current value of this component
 		 */
 		private MethodExpression _validator;
 		/**
-		 * validator
+		 * MethodBinding pointing at a method that is called during
+            Process Validations phase of the request processing lifecycle,
+            to validate the current value of this component
 		 * Setter for validator
 		 * @param validator - new value
 		 */
@@ -162,11 +195,15 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  			  		  	  
 		/*
 		 * validatorMessage
-		 * validatorMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validator message,
+			replacing any message that comes from the validator
 		 */
 		private ValueExpression _validatorMessage;
 		/**
-		 * validatorMessage
+		 * A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validator message,
+			replacing any message that comes from the validator
 		 * Setter for validatorMessage
 		 * @param validatorMessage - new value
 		 */
@@ -192,11 +229,11 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 	 		 	  	  	  
 		/*
 		 * valueChangeListener
-		 * valueChangeListener
+		 * Listener for value changes
 		 */
 		private MethodExpression _valueChangeListener;
 		/**
-		 * valueChangeListener
+		 * Listener for value changes
 		 * Setter for valueChangeListener
 		 * @param valueChangeListener - new value
 		 */
@@ -215,7 +252,8 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 	 		 		    this._converterMessage = null;
 	 		 		 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
-	 		 		 		    this._required = null;
+	 		 		    this._onchange = null;
+	 		 		 		 		 		 		 		 		 		 		 		 		 		    this._required = null;
 	 		 		    this._requiredMessage = null;
 	 		 		    this._valid = null;
 	 		 		    this._validator = null;
@@ -309,7 +347,26 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 					component.setValueExpression("localValueSet", this._localValueSet);
 				}
 			}
-					    		 			 
+					   		 			 
+						if (this._onchange != null) {
+				if (this._onchange.isLiteralText()) {
+					try {
+												
+						java.lang.String __onchange = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onchange.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnchange(__onchange);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onchange", this._onchange);
+				}
+			}
+					              		 			 
 						if (this._required != null) {
 				if (this._required.isLiteralText()) {
 					try {
