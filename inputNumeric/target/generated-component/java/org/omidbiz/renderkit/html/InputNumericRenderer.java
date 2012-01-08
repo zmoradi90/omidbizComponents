@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.ComponentVariables;
+import org.ajax4jsf.resource.InternetResource;
 //
 //
 //
@@ -55,6 +56,49 @@ public class InputNumericRenderer extends InputNumericRendererBase {
 	// 
 	// Declarations
 	//
+	private final InternetResource[] scripts = {
+						getResource("/org/richfaces/renderkit/html/scripts/jquery/jquery.js")
+						,
+				getResource("/org/omidbiz/renderkit/html/script/autoNumeric.js")
+	};
+
+private InternetResource[] scriptsAll = null;
+
+protected InternetResource[] getScripts() {
+	synchronized (this) {
+		if (scriptsAll == null) {
+			InternetResource[] rsrcs = super.getScripts();
+			boolean ignoreSuper = rsrcs == null || rsrcs.length == 0;
+			boolean ignoreThis = scripts == null || scripts.length == 0;
+			
+			if (ignoreSuper) {
+				if (ignoreThis) {
+					scriptsAll = new InternetResource[0];	
+				} else {
+					scriptsAll = scripts;
+				}
+			} else {
+				if (ignoreThis) {
+					scriptsAll = rsrcs;
+				} else {
+					java.util.Set rsrcsSet = new java.util.LinkedHashSet();
+
+					for (int i = 0; i < rsrcs.length; i++ ) {
+						rsrcsSet.add(rsrcs[i]);
+					}
+
+					for (int i = 0; i < scripts.length; i++ ) {
+						rsrcsSet.add(scripts[i]);
+					}
+
+					scriptsAll = (InternetResource[]) rsrcsSet.toArray(new InternetResource[rsrcsSet.size()]);
+				}
+			}
+		}
+	}
+	
+	return scriptsAll;
+}
 	// 
 	// 
 	//
@@ -104,7 +148,7 @@ public class InputNumericRenderer extends InputNumericRendererBase {
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UIInputNumeric component, ComponentVariables variables) throws IOException {
 	  java.lang.String clientId = component.getClientId(context);
 writer.startElement("input", component);
-			getUtils().writeAttribute(writer, "class", "my-inputDate-input " + convertToString(component.getAttributes().get("inputClass")) );
+			getUtils().writeAttribute(writer, "class", "myAutoNumeric" );
 						getUtils().writeAttribute(writer, "id", clientId );
 						getUtils().writeAttribute(writer, "name", clientId );
 						getUtils().writeAttribute(writer, "style", component.getAttributes().get("inputStyle") );
@@ -112,6 +156,12 @@ writer.startElement("input", component);
 						getUtils().writeAttribute(writer, "value", getValueAsString(context,component) );
 			
 writer.endElement("input");
+writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery(document).ready(function(){\n			 jQuery('input.myAutoNumeric').autoNumeric({aSep: ''});\n		  });"),null);
+
+writer.endElement("script");
 
 	}		
 	

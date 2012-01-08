@@ -224,7 +224,7 @@ writer.endElement("a");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready(function(){	\n			jQuery(\"." + convertToString(variables.getVariable("id")) + "popupClass\").colorbox({width:\"80%\", height:\"80%\", iframe:" + convertToString(variables.getVariable("iframe")) + "});\n			jQuery('a[rel=rel" + convertToString(variables.getVariable("id")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "}, Richfaces.colorboxControl.getParameters()));\n			\n		});"),null);
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n			jQuery(\"." + convertToString(variables.getVariable("id")) + "popupClass\").colorbox({width:\"80%\", height:\"80%\", iframe:" + convertToString(variables.getVariable("iframe")) + ", rel : 'nofollow'});\n			jQuery('a[rel=rel" + convertToString(variables.getVariable("id")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "}, Richfaces.colorboxControl.getParameters()));\n			\n		});"),null);
 
 writer.endElement("script");
  } 

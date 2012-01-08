@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+ <tlib-version>1.0</tlib-version>
+ <short-name>persianCalendar</short-name>
+ <uri>http://omidbiz.com/persianCalendar</uri>
+
+
+
+					 <tag>
+	  	  <description></description>
+	  	  	  		  <name>persianCalendar</name>
+	  	  <tag-class>org.omidbiz.taglib.PersianCalendarTag</tag-class>
+	  <body-content>JSP</body-content>
+	  
+	    		  <attribute>
+	   <description>boolean attribute which provides possibility to limit JSF tree processing(decoding, conversion/validation, value applying) to the component which send the request only.
+				Default value is "true"</description>
+	   <name>ajaxSingle</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The attribute takes a value-binding expression for a component property of
+a backing bean</description>
+	   <name>binding</name>
+	   	   	   					   	<deferred-value>
+					<type>javax.faces.component.UIComponent</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>This attribute is responsible for behaviour of dates 
+				from the previous and next months which are displayed in the current month. Valid values
+				are "inactive" (Default) dates inactive and
+				gray colored, "scroll" boundaries work as
+				month scrolling controls, and "select"
+				boundaries work in the same way as "scroll"
+				but with the date clicked selection. Default value is "inactive".</description>
+	   <name>boundaryDatesMode</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Style Class attribute for the popup button</description>
+	   <name>buttonClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines icon for the popup button element. The attribute
+				is ignored if the "buttonLabel" is set</description>
+	   <name>buttonIcon</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines disabled icon for the popup button element. The
+				attribute is ignored if the "buttonLabel" is set</description>
+	   <name>buttonIconDisabled</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines label for the popup button element. If the
+				attribute is set "buttonIcon" and "buttonIconDisabled"
+				are ignored</description>
+	   <name>buttonLabel</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true", after process validations phase it skips updates of model beans on a force render response. It can be used for validating components input</description>
+	   <name>bypassUpdates</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>attribute to set fixed cells height</description>
+	   <name>cellHeight</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>attribute to set fixed cells width</description>
+	   <name>cellWidth</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Id of Converter to be used or reference to a Converter</description>
+	   <name>converter</name>
+	   	   	   					   	<deferred-value>
+					<type>javax.faces.convert.Converter</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the converter message,
+			replacing any message that comes from the converter</description>
+	   <name>converterMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines current date</description>
+	   <name>currentDate</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>MethodExpression representing an action listener method
+				that will be notified after date selection</description>
+	   <name>currentDateChangeListener</name>
+	   	   	   						<deferred-method>
+					<method-signature>void currentDateChangeListener(${prop.methodargs})</method-signature>
+				</deferred-method>
+				   	  </attribute>
+		  	  	  	  		  <attribute>
+	   <description>Used to provide data for calendar elements. If data is
+				not provided, all Data Model related functions are
+				disabled</description>
+	   <name>dataModel</name>
+	   	   	   					   	<deferred-value>
+					<type>org.omidbiz.model.CalendarDataModel</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines date pattern. Default value is "MMM d, yyyy".</description>
+	   <name>datePattern</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Should be binded to some JS function that will provide style classes
+				for special sets of days highlighting.</description>
+	   <name>dayStyleClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines time that will be used:
+			1) to set time when the value is empty
+			2) to set time when date changes and flag "resetTimeOnDateSelect" is true. Default value is "getDefaultValueOfDefaultTime()"</description>
+	   <name>defaultTime</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines direction of the calendar popup ("top-left",
+				"top-right", "bottom-left", "bottom-right" (Default), "auto"). Default value is "bottom-right".</description>
+	   <name>direction</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true", rendered is disabled. In
+				"popup" mode both controls are disabled. Default value is "false".</description>
+	   <name>disabled</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true" calendar input will be editable and
+				it will be possible to change the date manualy. If
+				"false" value for this attribute makes a text
+				field "read-only", so the value can be changed
+				only from a handle. Default value is "false".</description>
+	   <name>enableManualInput</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Name of requests queue to avoid send next request before complete other from same event. Can be used to reduce number of requests of frequently events (key press, mouse move etc.)</description>
+	   <name>eventsQueue</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>Gets what the first day of the week is; e.g., SUNDAY in the U.S., MONDAY in France. Default value is "getDefaultFirstWeekDay()". Possible values should be integers from 0 to 6, 0 corresponds to Sunday</description>
+	   <name>firstWeekDay</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>id of element to set focus after request completed on client side</description>
+	   <name>focus</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>Sets the horizontal offset between button and calendar
+				element conjunction point. Default value is "0".</description>
+	   <name>horizontalOffset</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Every component may have a unique id that is automatically created if omitted</description>
+	   <name>id</name>
+	   	   	   		<rtexprvalue>false</rtexprvalue>
+	   		<type>java.lang.String</type>
+	   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute allows to ignore an Ajax Response produced by a request if the newest 'similar' request is
+in a queue already. ignoreDupResponses="true" does not cancel the request while it is processed on the server,
+but just allows to avoid unnecessary updates on the client side if the response isn't actual now</description>
+	   <name>ignoreDupResponses</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>A flag indicating that this component value must be converted
+            and validated immediately (that is, during Apply Request Values
+            phase), rather than waiting until a Process Validations phase</description>
+	   <name>immediate</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Style Class attribute for the text field</description>
+	   <name>inputClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines the size of an input field. Similar to the "size" attribute of &amp;lt;h:inputText/&amp;gt;</description>
+	   <name>inputSize</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Style attribute for text field</description>
+	   <name>inputStyle</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Should be binded to some JS function that returns day state.</description>
+	   <name>isDayEnabled</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Set the corner of the button for the popup to be
+				connected with (top-left, top-right, bottom-left
+				(Default), bottom-right, auto). Default value is "bottom-left".</description>
+	   <name>jointPoint</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>A localized user presentable name for this component.</description>
+	   <name>label</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true", then of all AJAX-rendered on the page components only those will be updated, 
+		which ID's are passed to the "reRender" attribute of the describable component. 
+		"false"-the default value-means that all components with ajaxRendered="true" will be updated.</description>
+	   <name>limitToList</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  	  		  <attribute>
+	   <description>Used for locale definition.   Default value is "getDefaultLocale()".</description>
+	   <name>locale</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Gets what the minimal days required in the first week of the year 
+			are; e.g., if the first week is defined as one that contains the first 
+			day of the first month of a year, this method returns 1. If the 
+			minimal days required must be a full week, this method returns 7. Default value is "getDefaultMinDaysInFirstWeek()".</description>
+	   <name>minDaysInFirstWeek</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Valid values: ajax or client. Default value is "client".</description>
+	   <name>mode</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute that allows to customize names of the months.
+				Should accept list with the month names</description>
+	   <name>monthLabels</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute that allows to customize short names of the
+				months. Should accept list with the month names</description>
+	   <name>monthLabelsShort</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called before DOM is updated</description>
+	   <name>onbeforedomupdate</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the date or time is changed and applied to input</description>
+	   <name>onchanged</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called before the calendar popup is closed</description>
+	   <name>oncollapse</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called after the request is completed</description>
+	   <name>oncomplete</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the current month or year is changed</description>
+	   <name>oncurrentdateselect</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called after the current month or year is changed</description>
+	   <name>oncurrentdateselected</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved away from the date cell</description>
+	   <name>ondatemouseout</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved onto the date cell</description>
+	   <name>ondatemouseover</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when some date cell is selected</description>
+	   <name>ondateselect</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called after some date cell is selected</description>
+	   <name>ondateselected</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called before the calendar popup is opened</description>
+	   <name>onexpand</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the input field loses the focus</description>
+	   <name>oninputblur</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the input field value is changed manually</description>
+	   <name>oninputchange</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the input field is clicked</description>
+	   <name>oninputclick</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the input field gets the focus</description>
+	   <name>oninputfocus</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is pressed down in the input field</description>
+	   <name>oninputkeydown</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is pressed and released in the input field</description>
+	   <name>oninputkeypress</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is released in the input field</description>
+	   <name>oninputkeyup</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved away from the input field</description>
+	   <name>oninputmouseout</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved onto the input field</description>
+	   <name>oninputmouseover</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the input field value is selected</description>
+	   <name>oninputselect</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called before new time is selected</description>
+	   <name>ontimeselect</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called after time is selected</description>
+	   <name>ontimeselected</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true", the calendar will be rendered initially
+				as hidden with additional elements for calling as popup. Default value is "true".</description>
+	   <name>popup</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  	  		  <attribute>
+	   <description>Define the initial range of date which will be loaded to
+				client from dataModel under rendering. Default value is "getDefaultPreloadBegin(getCurrentDateOrDefault())".</description>
+	   <name>preloadDateRangeBegin</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Defines the last range of date which will be loaded to
+				client from dataModel under rendering. Default value is "getDefaultPreloadEnd(getCurrentDateOrDefault())".</description>
+	   <name>preloadDateRangeEnd</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>Id['s] (in format of call  UIComponent.findComponent()) of components, processed at the phases 2-5 in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection</description>
+	   <name>process</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Id['s] (in format of call  UIComponent.findComponent()) of components, rendered in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection</description>
+	   <name>reRender</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true". Date and time are not selectable.  In
+				"popup" mode input is disabled and button is enabled. Default value is "false".</description>
+	   <name>readonly</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "false", this component is not rendered</description>
+	   <name>rendered</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute defines the time (in ms.) that the request will be wait in the queue before it is ready to send.
+When the delay time is over, the request will be sent to the server or removed if the newest 'similar' request is in a queue already</description>
+	   <name>requestDelay</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If "true", this component is checked for non-empty input</description>
+	   <name>required</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validation message for
+			the "required" facility, if the "required" facility is
+			used</description>
+	   <name>requiredMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If value is true then calendar should change time to defaultTime for newly-selected dates. Default value is "false"</description>
+	   <name>resetTimeOnDateSelect</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If false ApplyButton should not be shown. Default value is "false".</description>
+	   <name>showApplyButton</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If false Calendar's footer should not be shown. Default value is "true".</description>
+	   <name>showFooter</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If false Calendar's header should not be shown. Default value is "true".</description>
+	   <name>showHeader</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>"false" value for this attribute makes text
+				field invisible. It works only if popupMode="true"
+				If showInput is "true" - input field will
+				be shown. Default value is "true".</description>
+	   <name>showInput</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If false this bar should not be shown. Default value is "true".</description>
+	   <name>showWeekDaysBar</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If false this bar should not be shown. Default value is "true".</description>
+	   <name>showWeeksBar</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>If there are any component requests with identical IDs then these requests will be grouped.</description>
+	   <name>similarityGroupingId</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>ID (in format of call UIComponent.findComponent()) of Request status component</description>
+	   <name>status</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>CSS style(s) is/are to be applied when this component is
+				rendered</description>
+	   <name>style</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Corresponds to the HTML class attribute</description>
+	   <name>styleClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros</description>
+	   <name>tabindex</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Used for current date calculations. Default value is "getDefaultTimeZone()".</description>
+	   <name>timeZone</name>
+	   	   	   					   	<deferred-value>
+					<type>java.util.TimeZone</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Response waiting time on a particular request. If a response is not received during this time, the request is aborted</description>
+	   <name>timeout</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>This attribute defines the mode for "today" control. Possible values are "scroll", "select", "hidden". Default value is "select".</description>
+	   <name>todayControlMode</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  	  		  <attribute>
+	   <description>MethodBinding pointing at a method that is called during
+            Process Validations phase of the request processing lifecycle,
+            to validate the current value of this component</description>
+	   <name>validator</name>
+	   	   	   						<deferred-method>
+					<method-signature>void validator(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)</method-signature>
+				</deferred-method>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>A ValueExpression enabled attribute that, if present,
+			will be used as the text of the validator message,
+			replacing any message that comes from the validator</description>
+	   <name>validatorMessage</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>The current value of this component</description>
+	   <name>value</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Listener for value changes</description>
+	   <name>valueChangeListener</name>
+	   	   	   						<deferred-method>
+					<method-signature>void valueChangeListener(javax.faces.event.ValueChangeEvent)</method-signature>
+				</deferred-method>
+				   	  </attribute>
+		  	  		  <attribute>
+	   <description>Sets the vertical offset between button and calendar
+				element conjunction point. Default value is "0".</description>
+	   <name>verticalOffset</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>List of the day names displays on the days bar in the
+				following way "Sun, Mon, Tue, Wed, "</description>
+	   <name>weekDayLabels</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute that allows to customize short names of the
+				weeks. Should accept list with the weeks names.</description>
+	   <name>weekDayLabelsShort</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Attribute is similar to the standard HTML attribute and
+				can specify window placement relative to the content. Default value is "3".</description>
+	   <name>zindex</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  	  
+	</tag>
+	
+				
+  
+</taglib>

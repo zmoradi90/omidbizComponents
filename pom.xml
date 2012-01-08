@@ -129,5 +129,6 @@
     <module>windowPopup</module>
     <module>inputNumeric</module>
     <module>persianCalendar</module>
+    <module>nationalCode</module>
   </modules>
 </project>

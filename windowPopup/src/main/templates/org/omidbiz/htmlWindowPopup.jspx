@@ -42,7 +42,7 @@
 	<script type="text/javascript">
  
 		jQuery(document).ready(function(){	
-			jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}});
+			jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
 			jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:#{iframe}}, Richfaces.colorboxControl.getParameters()));
 			
 		});

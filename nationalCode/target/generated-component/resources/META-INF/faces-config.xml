@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+  version="1.2">	
+
+
+
+
+
+
+  <component>
+  	<description></description>
+        <component-type>org.omidbiz.NationalCode</component-type>
+    <component-class>org.omidbiz.component.html.HtmlNationalCode</component-class>
+    
+	    <component-extension>
+      <component-family>org.omidbiz.NationalCode</component-family>
+      <renderer-type>org.omidbiz.NationalCodeRenderer</renderer-type>
+    </component-extension>
+      </component>
+
+  <render-kit>
+				<render-kit-id>HTML_BASIC</render-kit-id>
+							  		<renderer>
+			<component-family>org.omidbiz.NationalCode</component-family>
+			<renderer-type>
+				org.omidbiz.NationalCodeRenderer
+			</renderer-type>
+			<renderer-class>
+				org.omidbiz.renderkit.html.NationalCodeRenderer
+			</renderer-class>
+		</renderer>
+			
+
+  </render-kit>
+
+
+</faces-config>
