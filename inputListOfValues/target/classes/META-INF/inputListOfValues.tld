@@ -18,6 +18,28 @@
 	  <body-content>JSP</body-content>
 	  
 	    		  <attribute>
+	   <description>This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey</description>
+	   <name>accesskey</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Deprecated. This attribute specifies the horizontal alignment of its element with respect to the surrounding context. The  possible values are "left", "center", "right" and "justify".  
+            The default depends on the base text direction. For left to right text, the default is align="left", while for right to left text, the default is align="right".</description>
+	   <name>align</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>For a user agents that cannot display images, forms, or applets, this attribute specifies alternate text. The language of the alternate text is specified by the lang attribute</description>
+	   <name>alt</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>The attribute takes a value-binding expression for a component property of
 a backing bean</description>
 	   <name>binding</name>
@@ -39,6 +61,13 @@ a backing bean</description>
 	   <name>converterMessage</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>When set for a form control, this boolean attribute disables the control for your input</description>
+	   <name>disabled</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
 				</deferred-value>
 				   	  </attribute>
 		  	  		  <attribute>
@@ -64,9 +93,123 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description>Specifies the maximum number of digits that could be entered into the input field. 
+		The maximum number is unlimited by default. 
+		If entered value exceeds the value specified in "maxValue" attribute than the slider takes a maximum value position.</description>
+	   <name>maxlength</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>nameValue</description>
+	   <name>nameValue</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>the most important attribute use for setting and retrieving value via javascript</description>
 	   <name>objectName</name>
 	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the element loses the focus</description>
+	   <name>onblur</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the element value is changed</description>
+	   <name>onchange</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The clientside script method to be called when the element is clicked</description>
+	   <name>onclick</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the element is double-clicked</description>
+	   <name>ondblclick</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when the element gets the focus</description>
+	   <name>onfocus</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is pressed down over the element</description>
+	   <name>onkeydown</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is pressed over the element and released</description>
+	   <name>onkeypress</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a key is released</description>
+	   <name>onkeyup</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a mouse button is pressed down over the element</description>
+	   <name>onmousedown</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved within the element</description>
+	   <name>onmousemove</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved away from the element</description>
+	   <name>onmouseout</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a pointer is moved onto the element</description>
+	   <name>onmouseover</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when a mouse button is released</description>
+	   <name>onmouseup</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>The client side script method to be called when some text is selected in the text field. This attribute can be used with the INPUT and TEXTAREA elements.</description>
+	   <name>onselect</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
 				</deferred-value>
@@ -124,6 +267,34 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description>This attribute tells the user agent the initial width of the control. The width is given in pixels except when type attribute has the value "text" or "password". In that case, its value refers to the (integer) number of characters</description>
+	   <name>size</name>
+	   	   	   					   	<deferred-value>
+					<type>int</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>CSS style(s) is/are to be applied when this component is rendered</description>
+	   <name>style</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>Corresponds to the HTML class attribute</description>
+	   <name>styleClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros</description>
+	   <name>tabindex</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>define how comonent being rendered 
 				dialog
 				link</description>
@@ -173,6 +344,13 @@ a backing bean</description>
 				</deferred-method>
 				   	  </attribute>
 		  	  		  <attribute>
+	   <description>The value Id of the component show in hidden</description>
+	   <name>valueId</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>The value of the component show in textbox</description>
 	   <name>valueName</name>
 	   	   	   					   	<deferred-value>

@@ -11,9 +11,9 @@ import org.omidbiz.model.CalendarDataModel;
 
 public class HtmlPersianCalendar extends UIPersianCalendar{
 
-static public final  String COMPONENT_FAMILY = "org.omidbiz.PersianCalendar";
+public static final  String COMPONENT_FAMILY = "org.omidbiz.PersianCalendar";
 
-static public final  String COMPONENT_TYPE = "org.omidbiz.PersianCalendar";
+public static final  String COMPONENT_TYPE = "org.omidbiz.PersianCalendar";
 
 /*
 * boolean attribute which provides possibility to limit JSF tree processing(decoding, conversion/validation, value applying) to the component which send the request only.

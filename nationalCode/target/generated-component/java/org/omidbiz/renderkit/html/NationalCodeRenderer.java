@@ -103,33 +103,6 @@ public class NationalCodeRenderer extends AjaxComponentRendererBase {
 
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UINationalCode component, ComponentVariables variables) throws IOException {
 	  java.lang.String clientId = component.getClientId(context);
-writer.startElement("div", component);
-			getUtils().writeAttribute(writer, "id", clientId );
-			//
-// pass thru attributes
-//
-getUtils().encodeAttributesFromArray(context,component,new String[] {
-    "align" ,
-	    "dir" ,
-	    "lang" ,
-	    "onclick" ,
-	    "ondblclick" ,
-	    "onkeydown" ,
-	    "onkeypress" ,
-	    "onkeyup" ,
-	    "onmousedown" ,
-	    "onmousemove" ,
-	    "onmouseout" ,
-	    "onmouseover" ,
-	    "onmouseup" ,
-	    "style" ,
-	    "title" ,
-	    "xml:lang" });
-//
-//
-//
-
-writer.endElement("div");
 
 	}		
 	

@@ -12,26 +12,5 @@
 	>
 	<f:clientid var="clientId"/>
 	
-	<input type="text" id="#{clientId}" name="#{clientId} />
-	
-	<script type="text/javascript">
-                                    function identificationCheck(element) {
-                                        var result = checkIdentificationNo("identificationNo");
-                                        switch (result) {
-                                            case 1:
-                                                changeValidatorMessage("entity.identificationNo", "identificationCheck", "<pform:message key='digitOnly'/>");
-                                                break;
-                                            case 2:
-                                                changeValidatorMessage("entity.identificationNo", "identificationCheck", "<pform:message key='tenDigitOnly'/>");
-                                                break;
-                                            case 3:
-                                                changeValidatorMessage("entity.identificationNo", "identificationCheck", "<pform:message key='repeatedDigits'/>");
-                                                break;
-                                            case 4:
-                                                changeValidatorMessage("entity.identificationNo", "identificationCheck", "<pform:message key='notValidIdentification'/>");
-                                                break;
-                                        }
-                                        return result == 0;
-                                    }
-                                </script>
+
 </f:root>
