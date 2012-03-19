@@ -218,6 +218,14 @@ variables.setVariable("valueName", component.getAttributes().get("valueName") );
 variables.setVariable("type", component.getAttributes().get("type") );
 variables.setVariable("objectName", component.getAttributes().get("objectName") );
 variables.setVariable("sendRequestToServer", component.getAttributes().get("sendRequestToServer") );
+variables.setVariable("width", component.getAttributes().get("width") );
+variables.setVariable("height", component.getAttributes().get("height") );
+variables.setVariable("iframe", component.getAttributes().get("iframe") );
+variables.setVariable("onOpen", component.getAttributes().get("onOpen") );
+variables.setVariable("onLoad", component.getAttributes().get("onLoad") );
+variables.setVariable("onComplete", component.getAttributes().get("onComplete") );
+variables.setVariable("onCleanup", component.getAttributes().get("onCleanup") );
+variables.setVariable("onClosed", component.getAttributes().get("onClosed") );
 
  
 			String type = (String) variables.getVariable("type");
@@ -228,7 +236,7 @@ variables.setVariable("sendRequestToServer", component.getAttributes().get("send
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready(function(){	\n	jQuery(\"." + convertToString(variables.getVariable("objectName")) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n	jQuery('a[rel=rel" + convertToString(variables.getVariable("objectName")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0}, Richfaces.colorboxControl.getParameters()));\n	\n});"),null);
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n	jQuery(\"." + convertToString(variables.getVariable("objectName")) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n	jQuery('a[rel=rel" + convertToString(variables.getVariable("objectName")) + "]').colorbox(jQuery.extend({\n		onOpen:function(){ " + convertToString(variables.getVariable("onOpen")) + " },\n		onLoad:function(){ " + convertToString(variables.getVariable("onLoad")) + " },\n		onComplete:function(){ " + convertToString(variables.getVariable("onComplete")) + " },\n		onCleanup:function(){ " + convertToString(variables.getVariable("onCleanup")) + " },\n		onClosed:function(){ " + convertToString(variables.getVariable("onClosed")) + " },\n		width:'" + convertToString(variables.getVariable("width")) + "', height:'" + convertToString(variables.getVariable("height")) + "', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "\n		}, Richfaces.colorboxControl.getParameters()));\n	\n});"),null);
 
 writer.endElement("script");
 writer.startElement("input", component);

@@ -36,6 +36,18 @@ private  boolean _disabled = false;
 private  boolean _disabledSet = false;
 
 /*
+* 
+*/
+private  String _height = null;
+
+/*
+* 
+*/
+private  boolean _iframe = true;
+
+private  boolean _iframeSet = false;
+
+/*
 * Specifies the maximum number of digits that could be entered into the input field. 
 		The maximum number is unlimited by default. 
 		If entered value exceeds the value specified in "maxValue" attribute than the slider takes a maximum value position.
@@ -48,6 +60,31 @@ private  boolean _maxlengthSet = false;
 * the most important attribute use for setting and retrieving value via javascript
 */
 private  String _objectName = null;
+
+/*
+* 
+*/
+private  String _onCleanup = null;
+
+/*
+* 
+*/
+private  String _onClosed = null;
+
+/*
+* 
+*/
+private  String _onComplete = null;
+
+/*
+* 
+*/
+private  String _onLoad = null;
+
+/*
+* 
+*/
+private  String _onOpen = null;
 
 /*
 * The client side script method to be called when the element loses the focus
@@ -183,6 +220,11 @@ private  Object _valueName = null;
 */
 private  String _view = null;
 
+/*
+* 
+*/
+private  String _width = null;
+
 
 public HtmlInputListOfValues(){
 setRendererType("org.omidbiz.InputListOfValuesRenderer");
@@ -296,6 +338,62 @@ this._disabled = _disabled;
 this._disabledSet = true;
 }
 
+public String getHeight(){
+	if (this._height != null) {
+		return this._height;
+	}
+	ValueExpression ve = getValueExpression("height");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "85%";
+	
+
+}
+
+public void setHeight(String _height){
+this._height = _height;
+}
+
+public boolean isIframe(){
+	if (this._iframeSet) {
+	    return (this._iframe);
+	}
+	ValueExpression ve = getValueExpression("iframe");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._iframe);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._iframe);
+	}
+
+}
+
+public void setIframe(boolean _iframe){
+this._iframe = _iframe;
+this._iframeSet = true;
+}
+
 public int getMaxlength(){
 	if (this._maxlengthSet) {
 	    return (this._maxlength);
@@ -350,6 +448,136 @@ public String getObjectName(){
 
 public void setObjectName(String _objectName){
 this._objectName = _objectName;
+}
+
+public String getOnCleanup(){
+	if (this._onCleanup != null) {
+		return this._onCleanup;
+	}
+	ValueExpression ve = getValueExpression("onCleanup");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnCleanup(String _onCleanup){
+this._onCleanup = _onCleanup;
+}
+
+public String getOnClosed(){
+	if (this._onClosed != null) {
+		return this._onClosed;
+	}
+	ValueExpression ve = getValueExpression("onClosed");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnClosed(String _onClosed){
+this._onClosed = _onClosed;
+}
+
+public String getOnComplete(){
+	if (this._onComplete != null) {
+		return this._onComplete;
+	}
+	ValueExpression ve = getValueExpression("onComplete");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnComplete(String _onComplete){
+this._onComplete = _onComplete;
+}
+
+public String getOnLoad(){
+	if (this._onLoad != null) {
+		return this._onLoad;
+	}
+	ValueExpression ve = getValueExpression("onLoad");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnLoad(String _onLoad){
+this._onLoad = _onLoad;
+}
+
+public String getOnOpen(){
+	if (this._onOpen != null) {
+		return this._onOpen;
+	}
+	ValueExpression ve = getValueExpression("onOpen");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnOpen(String _onOpen){
+this._onOpen = _onOpen;
 }
 
 public String getOnblur(){
@@ -1032,49 +1260,84 @@ public void setView(String _view){
 this._view = _view;
 }
 
+public String getWidth(){
+	if (this._width != null) {
+		return this._width;
+	}
+	ValueExpression ve = getValueExpression("width");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "85%";
+	
+
+}
+
+public void setWidth(String _width){
+this._width = _width;
+}
+
 public String getFamily(){
 return COMPONENT_FAMILY;
 }
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[36];
+Object [] state = new Object[45];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
 state[2] = _align;
 state[3] = _alt;
 state[4] = Boolean.valueOf(_disabled);
 state[5] = Boolean.valueOf(_disabledSet);
-state[6] = Integer.valueOf(_maxlength);
-state[7] = Boolean.valueOf(_maxlengthSet);
-state[8] = _objectName;
-state[9] = _onblur;
-state[10] = _onchange;
-state[11] = _onclick;
-state[12] = _ondblclick;
-state[13] = _onfocus;
-state[14] = _onkeydown;
-state[15] = _onkeypress;
-state[16] = _onkeyup;
-state[17] = _onmousedown;
-state[18] = _onmousemove;
-state[19] = _onmouseout;
-state[20] = _onmouseover;
-state[21] = _onmouseup;
-state[22] = _onselect;
-state[23] = _pValueText;
-state[24] = saveAttachedState(context, _pid);
-state[25] = _selectedText;
-state[26] = _sendRequestToServer;
-state[27] = Integer.valueOf(_size);
-state[28] = Boolean.valueOf(_sizeSet);
-state[29] = _style;
-state[30] = _styleClass;
-state[31] = _tabindex;
-state[32] = _type;
-state[33] = saveAttachedState(context, _valueId);
-state[34] = saveAttachedState(context, _valueName);
-state[35] = _view;
+state[6] = _height;
+state[7] = Boolean.valueOf(_iframe);
+state[8] = Boolean.valueOf(_iframeSet);
+state[9] = Integer.valueOf(_maxlength);
+state[10] = Boolean.valueOf(_maxlengthSet);
+state[11] = _objectName;
+state[12] = _onCleanup;
+state[13] = _onClosed;
+state[14] = _onComplete;
+state[15] = _onLoad;
+state[16] = _onOpen;
+state[17] = _onblur;
+state[18] = _onchange;
+state[19] = _onclick;
+state[20] = _ondblclick;
+state[21] = _onfocus;
+state[22] = _onkeydown;
+state[23] = _onkeypress;
+state[24] = _onkeyup;
+state[25] = _onmousedown;
+state[26] = _onmousemove;
+state[27] = _onmouseout;
+state[28] = _onmouseover;
+state[29] = _onmouseup;
+state[30] = _onselect;
+state[31] = _pValueText;
+state[32] = saveAttachedState(context, _pid);
+state[33] = _selectedText;
+state[34] = _sendRequestToServer;
+state[35] = Integer.valueOf(_size);
+state[36] = Boolean.valueOf(_sizeSet);
+state[37] = _style;
+state[38] = _styleClass;
+state[39] = _tabindex;
+state[40] = _type;
+state[41] = saveAttachedState(context, _valueId);
+state[42] = saveAttachedState(context, _valueName);
+state[43] = _view;
+state[44] = _width;
 return state;
 }
 
@@ -1087,36 +1350,45 @@ super.restoreState(context, states[0]);
 		_alt = (String)states[3];;
 		_disabled = ((Boolean)states[4]).booleanValue();
 		_disabledSet = ((Boolean)states[5]).booleanValue();
-		_maxlength = ((Integer)states[6]).intValue();
-		_maxlengthSet = ((Boolean)states[7]).booleanValue();
-		_objectName = (String)states[8];;
-		_onblur = (String)states[9];;
-		_onchange = (String)states[10];;
-		_onclick = (String)states[11];;
-		_ondblclick = (String)states[12];;
-		_onfocus = (String)states[13];;
-		_onkeydown = (String)states[14];;
-		_onkeypress = (String)states[15];;
-		_onkeyup = (String)states[16];;
-		_onmousedown = (String)states[17];;
-		_onmousemove = (String)states[18];;
-		_onmouseout = (String)states[19];;
-		_onmouseover = (String)states[20];;
-		_onmouseup = (String)states[21];;
-		_onselect = (String)states[22];;
-		_pValueText = (String)states[23];;
-		_pid = (Object)restoreAttachedState(context, states[24]);
-		_selectedText = (String)states[25];;
-		_sendRequestToServer = (Boolean)states[26];;
-		_size = ((Integer)states[27]).intValue();
-		_sizeSet = ((Boolean)states[28]).booleanValue();
-		_style = (String)states[29];;
-		_styleClass = (String)states[30];;
-		_tabindex = (String)states[31];;
-		_type = (String)states[32];;
-		_valueId = (Object)restoreAttachedState(context, states[33]);
-		_valueName = (Object)restoreAttachedState(context, states[34]);
-		_view = (String)states[35];;
+		_height = (String)states[6];;
+		_iframe = ((Boolean)states[7]).booleanValue();
+		_iframeSet = ((Boolean)states[8]).booleanValue();
+		_maxlength = ((Integer)states[9]).intValue();
+		_maxlengthSet = ((Boolean)states[10]).booleanValue();
+		_objectName = (String)states[11];;
+		_onCleanup = (String)states[12];;
+		_onClosed = (String)states[13];;
+		_onComplete = (String)states[14];;
+		_onLoad = (String)states[15];;
+		_onOpen = (String)states[16];;
+		_onblur = (String)states[17];;
+		_onchange = (String)states[18];;
+		_onclick = (String)states[19];;
+		_ondblclick = (String)states[20];;
+		_onfocus = (String)states[21];;
+		_onkeydown = (String)states[22];;
+		_onkeypress = (String)states[23];;
+		_onkeyup = (String)states[24];;
+		_onmousedown = (String)states[25];;
+		_onmousemove = (String)states[26];;
+		_onmouseout = (String)states[27];;
+		_onmouseover = (String)states[28];;
+		_onmouseup = (String)states[29];;
+		_onselect = (String)states[30];;
+		_pValueText = (String)states[31];;
+		_pid = (Object)restoreAttachedState(context, states[32]);
+		_selectedText = (String)states[33];;
+		_sendRequestToServer = (Boolean)states[34];;
+		_size = ((Integer)states[35]).intValue();
+		_sizeSet = ((Boolean)states[36]).booleanValue();
+		_style = (String)states[37];;
+		_styleClass = (String)states[38];;
+		_tabindex = (String)states[39];;
+		_type = (String)states[40];;
+		_valueId = (Object)restoreAttachedState(context, states[41]);
+		_valueName = (Object)restoreAttachedState(context, states[42]);
+		_view = (String)states[43];;
+		_width = (String)states[44];;
 	
 }
 

@@ -71,11 +71,25 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  	  		  <attribute>
+	   <description></description>
+	   <name>height</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>Every component may have a unique id that is automatically created if omitted</description>
 	   <name>id</name>
 	   	   	   		<rtexprvalue>false</rtexprvalue>
 	   		<type>java.lang.String</type>
 	   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>iframe</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
 		  		  <attribute>
 	   <description>A flag indicating that this component value must be converted
             and validated immediately (that is, during Apply Request Values
@@ -112,6 +126,41 @@ a backing bean</description>
 	   <description>the most important attribute use for setting and retrieving value via javascript</description>
 	   <name>objectName</name>
 	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onCleanup</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onClosed</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onComplete</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onLoad</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onOpen</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
 				</deferred-value>
@@ -360,6 +409,13 @@ a backing bean</description>
 		  		  <attribute>
 	   <description>used when type is dialog to define which page should load in iframe</description>
 	   <name>view</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>width</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
 				</deferred-value>

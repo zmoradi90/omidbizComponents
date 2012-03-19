@@ -122,7 +122,37 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 			this._disabled = __disabled;
 	     }
 	  
-	 	 		 		 		 	  			  		  	  
+	 	 		 		 	  			  		  	  
+		/*
+		 * height
+		 * 
+		 */
+		private ValueExpression _height;
+		/**
+		 * 
+		 * Setter for height
+		 * @param height - new value
+		 */
+		 public void setHeight( ValueExpression  __height ){
+			this._height = __height;
+	     }
+	  
+	 	 		 		 	  			  		  	  
+		/*
+		 * iframe
+		 * 
+		 */
+		private ValueExpression _iframe;
+		/**
+		 * 
+		 * Setter for iframe
+		 * @param iframe - new value
+		 */
+		 public void setIframe( ValueExpression  __iframe ){
+			this._iframe = __iframe;
+	     }
+	  
+	 	 		 	  			  		  	  
 		/*
 		 * immediate
 		 * A flag indicating that this component value must be converted
@@ -203,6 +233,81 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 		 */
 		 public void setObjectName( ValueExpression  __objectName ){
 			this._objectName = __objectName;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onCleanup
+		 * 
+		 */
+		private ValueExpression _onCleanup;
+		/**
+		 * 
+		 * Setter for onCleanup
+		 * @param onCleanup - new value
+		 */
+		 public void setOnCleanup( ValueExpression  __onCleanup ){
+			this._onCleanup = __onCleanup;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onClosed
+		 * 
+		 */
+		private ValueExpression _onClosed;
+		/**
+		 * 
+		 * Setter for onClosed
+		 * @param onClosed - new value
+		 */
+		 public void setOnClosed( ValueExpression  __onClosed ){
+			this._onClosed = __onClosed;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onComplete
+		 * 
+		 */
+		private ValueExpression _onComplete;
+		/**
+		 * 
+		 * Setter for onComplete
+		 * @param onComplete - new value
+		 */
+		 public void setOnComplete( ValueExpression  __onComplete ){
+			this._onComplete = __onComplete;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onLoad
+		 * 
+		 */
+		private ValueExpression _onLoad;
+		/**
+		 * 
+		 * Setter for onLoad
+		 * @param onLoad - new value
+		 */
+		 public void setOnLoad( ValueExpression  __onLoad ){
+			this._onLoad = __onLoad;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onOpen
+		 * 
+		 */
+		private ValueExpression _onOpen;
+		/**
+		 * 
+		 * Setter for onOpen
+		 * @param onOpen - new value
+		 */
+		 public void setOnOpen( ValueExpression  __onOpen ){
+			this._onOpen = __onOpen;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -538,6 +643,21 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 			this._view = __view;
 	     }
 	  
+	 	 		 	  			  		  	  
+		/*
+		 * width
+		 * 
+		 */
+		private ValueExpression _width;
+		/**
+		 * 
+		 * Setter for width
+		 * @param width - new value
+		 */
+		 public void setWidth( ValueExpression  __width ){
+			this._width = __width;
+	     }
+	  
 	 	 	
 	
     public void release()
@@ -550,11 +670,18 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 	 		 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
 	 		 		    this._disabled = null;
-	 		 		 		 		    this._immediate = null;
+	 		 		 		    this._height = null;
+	 		 		 		    this._iframe = null;
+	 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
 	 		 		    this._maxlength = null;
 	 		 		    this._nameValue = null;
 	 		 		    this._objectName = null;
+	 		 		    this._onCleanup = null;
+	 		 		    this._onClosed = null;
+	 		 		    this._onComplete = null;
+	 		 		    this._onLoad = null;
+	 		 		    this._onOpen = null;
 	 		 		    this._onblur = null;
 	 		 		    this._onchange = null;
 	 		 		 		 		    this._onfocus = null;
@@ -576,6 +703,7 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 	 		 		 		    this._valueId = null;
 	 		 		    this._valueName = null;
 	 		 		    this._view = null;
+	 		 		    this._width = null;
 	 		}
 	
     /* (non-Javadoc)
@@ -682,7 +810,45 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					component.setValueExpression("disabled", this._disabled);
 				}
 			}
-					     		 			 
+					    		 			 
+						if (this._height != null) {
+				if (this._height.isLiteralText()) {
+					try {
+												
+						java.lang.String __height = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._height.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setHeight(__height);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("height", this._height);
+				}
+			}
+					    		 			 
+						if (this._iframe != null) {
+				if (this._iframe.isLiteralText()) {
+					try {
+												
+						Boolean __iframe = (Boolean) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._iframe.getExpressionString(), 
+											Boolean.class);
+					
+												comp.setIframe(__iframe.booleanValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("iframe", this._iframe);
+				}
+			}
+					   		 			 
 						if (this._immediate != null) {
 				if (this._immediate.isLiteralText()) {
 					try {
@@ -775,6 +941,101 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					}
 				} else {
 					component.setValueExpression("objectName", this._objectName);
+				}
+			}
+					   		 			 
+						if (this._onCleanup != null) {
+				if (this._onCleanup.isLiteralText()) {
+					try {
+												
+						java.lang.String __onCleanup = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onCleanup.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnCleanup(__onCleanup);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onCleanup", this._onCleanup);
+				}
+			}
+					   		 			 
+						if (this._onClosed != null) {
+				if (this._onClosed.isLiteralText()) {
+					try {
+												
+						java.lang.String __onClosed = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onClosed.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnClosed(__onClosed);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onClosed", this._onClosed);
+				}
+			}
+					   		 			 
+						if (this._onComplete != null) {
+				if (this._onComplete.isLiteralText()) {
+					try {
+												
+						java.lang.String __onComplete = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onComplete.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnComplete(__onComplete);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onComplete", this._onComplete);
+				}
+			}
+					   		 			 
+						if (this._onLoad != null) {
+				if (this._onLoad.isLiteralText()) {
+					try {
+												
+						java.lang.String __onLoad = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onLoad.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnLoad(__onLoad);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onLoad", this._onLoad);
+				}
+			}
+					   		 			 
+						if (this._onOpen != null) {
+				if (this._onOpen.isLiteralText()) {
+					try {
+												
+						java.lang.String __onOpen = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onOpen.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnOpen(__onOpen);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onOpen", this._onOpen);
 				}
 			}
 					   		 			 
@@ -1138,6 +1399,25 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					}
 				} else {
 					component.setValueExpression("view", this._view);
+				}
+			}
+					   		 			 
+						if (this._width != null) {
+				if (this._width.isLiteralText()) {
+					try {
+												
+						java.lang.String __width = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._width.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setWidth(__width);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("width", this._width);
 				}
 			}
 					     }

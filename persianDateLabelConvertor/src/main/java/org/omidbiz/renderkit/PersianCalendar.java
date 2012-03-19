@@ -1,9 +1,25 @@
+/*******************************************************************************
+ * Copyright 2012 Omid Pourhadi
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package org.omidbiz.renderkit;
 
 /**
  * @author omidp Email : omidpourhadi AT gmail DOT com
  */
-public class PersianCalendar {
+public class PersianCalendar
+{
 
 	public static String CONSTANT_Delimiter = "/";
 
@@ -17,15 +33,19 @@ public class PersianCalendar {
 	 * @return gregorian date format e.g 2008-03-31 or this method customize for
 	 *         adempiere
 	 */
-	public String SolarToGregorian(String solarDateAsTimeStamp) {
-		if (solarDateAsTimeStamp.indexOf("-") != -1) {
+	public String SolarToGregorian(String solarDateAsTimeStamp)
+	{
+		if (solarDateAsTimeStamp.indexOf("-") != -1)
+		{
 			CONSTANT_Delimiter = "-";
-		} else {
+		}
+		else
+		{
 			CONSTANT_Delimiter = "/";
 		}
-		if (solarDateAsTimeStamp.length() > 0) {
-			String[] dateElement = solarDateAsTimeStamp.toString().split(
-					CONSTANT_Delimiter);
+		if (solarDateAsTimeStamp.length() > 0)
+		{
+			String[] dateElement = solarDateAsTimeStamp.toString().split(CONSTANT_Delimiter);
 			//
 			int m_currentYear = Integer.parseInt(dateElement[0]);
 			int m_currentMonth = Integer.parseInt(dateElement[1]);
@@ -47,24 +67,23 @@ public class PersianCalendar {
 			if (m_currentMonth < 10)
 				month = "0" + month;
 
-			if (daywithtime.length > 2) {
-				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay))
-						+ " " + daywithtime[1] + " " + daywithtime[2];
+			if (daywithtime.length > 2)
+			{
+				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay)) + " " + daywithtime[1] + " " + daywithtime[2];
 				/**
 				 * SimpleDateFormat retValue =
 				 * (SimpleDateFormat)DateFormat.getDateTimeInstance
 				 * (DateFormat.SHORT, DateFormat.SHORT, m_locale);
 				 */
-				solarDateAsTimeStamp = changeFormat(solarDateAsTimeStamp) + " "
-						+ daywithtime[1] + " " + daywithtime[2];
-			} else if (daywithtime.length > 1 && daywithtime.length < 3)
-				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay))
-						+ " " + daywithtime[1];
+				solarDateAsTimeStamp = changeFormat(solarDateAsTimeStamp) + " " + daywithtime[1] + " " + daywithtime[2];
+			}
+			else if (daywithtime.length > 1 && daywithtime.length < 3)
+				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay)) + " " + daywithtime[1];
 			else
-				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay));
+				solarDateAsTimeStamp = convertJdnToGregorian(convertPersianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay));
 
 			// solarDateAsTimeStamp = daywithtime.length > 1 ?
 			// convertJdnToGregorian(convertPersianToJdn(
@@ -86,16 +105,20 @@ public class PersianCalendar {
 	 *            convertion other methods use this
 	 * @return solar date format e.g 1387-01-01
 	 */
-	public String GregorianToSolar(String gregorianDateAsTimeStamp) {
+	public String GregorianToSolar(String gregorianDateAsTimeStamp)
+	{
 
-		if (gregorianDateAsTimeStamp.indexOf("-") != -1) {
+		if (gregorianDateAsTimeStamp.indexOf("-") != -1)
+		{
 			CONSTANT_Delimiter = "-";
-		} else {
+		}
+		else
+		{
 			CONSTANT_Delimiter = "/";
 		}
-		if (gregorianDateAsTimeStamp.length() > 0) {
-			String[] dateElement = gregorianDateAsTimeStamp.toString().split(
-					CONSTANT_Delimiter);
+		if (gregorianDateAsTimeStamp.length() > 0)
+		{
+			String[] dateElement = gregorianDateAsTimeStamp.toString().split(CONSTANT_Delimiter);
 			int m_currentYear = Integer.parseInt(dateElement[0]);
 
 			int m_currentMonth = Integer.parseInt(dateElement[1]);
@@ -106,14 +129,15 @@ public class PersianCalendar {
 			 * this check is for short simple date format 7/25/08 10:00 AM after
 			 * format fix we don not need to use this in solar method again
 			 * */
-			if (daywithtime.length > 2) {
+			if (daywithtime.length > 2)
+			{
 				m_currentYear = Integer.parseInt(daywithtime[0]);
 				m_currentMonth = Integer.parseInt(dateElement[0]);
 				m_currentDay = Integer.parseInt(dateElement[1]);
 			}
 
-//			if (m_currentYear < 2000)
-//				m_currentYear += 2000;
+			// if (m_currentYear < 2000)
+			// m_currentYear += 2000;
 
 			String day, month, year;
 
@@ -128,18 +152,16 @@ public class PersianCalendar {
 
 			/** usin supprot for this format 7/25/08 10:00 AM */
 			if (daywithtime.length > 2)
-				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay))
-						+ " " + daywithtime[1] + " " + daywithtime[2];
+				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay)) + " " + daywithtime[1] + " " + daywithtime[2];
 			/** 2008-03-31 12:59:00.00 */
 			else if (daywithtime.length > 1 && daywithtime.length < 3)
-				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay))
-						+ " " + daywithtime[1];
+				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay)) + " " + daywithtime[1];
 			/** 2008-07-17, 2008/07/17 */
 			else
-				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(
-						m_currentYear, m_currentMonth, m_currentDay));
+				gregorianDateAsTimeStamp = convertJdnToPersian(convertGregorianToJdn(m_currentYear, m_currentMonth,
+						m_currentDay));
 
 			// gregorianDateAsTimeStamp = daywithtime.length > 1 ?
 			// convertJdnToPersian(convertGregorianToJdn(
@@ -159,10 +181,10 @@ public class PersianCalendar {
 	 * @param gDay
 	 * @return
 	 */
-	public String GregorianToSolar(int gYear, int gMonth, int gDay) {
+	public String GregorianToSolar(int gYear, int gMonth, int gDay)
+	{
 		String compondDate = String.valueOf(gYear) + CONSTANT_Delimiter
-				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(gDay);
+				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter) + String.valueOf(gDay);
 		return GregorianToSolar(compondDate);
 	}
 
@@ -171,10 +193,10 @@ public class PersianCalendar {
 	 *            as timestamp.toString()
 	 * @return
 	 */
-	public int getSolarYear(String gregorianDate) {
+	public int getSolarYear(String gregorianDate)
+	{
 		int solarYear = 0;
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarYear = Integer.parseInt(spliterDate[0]);
 		return solarYear;
 	}
@@ -185,13 +207,12 @@ public class PersianCalendar {
 	 * @param gDay
 	 * @return
 	 */
-	public int getSolarYear(int gYear, int gMonth, int gDay) {
+	public int getSolarYear(int gYear, int gMonth, int gDay)
+	{
 		int solarYear = 0;
 		String gregorianDate = String.valueOf(gYear) + CONSTANT_Delimiter
-				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(gDay);
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter) + String.valueOf(gDay);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarYear = Integer.parseInt(spliterDate[0]);
 		return solarYear;
 	}
@@ -201,10 +222,10 @@ public class PersianCalendar {
 	 *            as timestamp.toString()
 	 * @return
 	 */
-	public int getSolarMonth(String gregorianDate) {
+	public int getSolarMonth(String gregorianDate)
+	{
 		int solarMonth = 0;
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarMonth = Integer.parseInt(spliterDate[1]);
 		return solarMonth;
 	}
@@ -215,13 +236,12 @@ public class PersianCalendar {
 	 * @param gDay
 	 * @return
 	 */
-	public int getSolarMonth(int gYear, int gMonth, int gDay) {
+	public int getSolarMonth(int gYear, int gMonth, int gDay)
+	{
 		int solarMonth = 0;
 		String gregorianDate = String.valueOf(gYear) + CONSTANT_Delimiter
-				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(gDay);
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter) + String.valueOf(gDay);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarMonth = Integer.parseInt(spliterDate[1]);
 		return solarMonth;
 	}
@@ -231,10 +251,10 @@ public class PersianCalendar {
 	 *            as timestamp.toString()
 	 * @return
 	 */
-	public int getSolarDay(String gregorianDate) {
+	public int getSolarDay(String gregorianDate)
+	{
 		int solarDay = 0;
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarDay = Integer.parseInt(spliterDate[2]);
 		return solarDay;
 	}
@@ -245,13 +265,12 @@ public class PersianCalendar {
 	 * @param gDay
 	 * @return
 	 */
-	public int getSolarDay(int gYear, int gMonth, int gDay) {
+	public int getSolarDay(int gYear, int gMonth, int gDay)
+	{
 		int solarDay = 0;
 		String gregorianDate = String.valueOf(gYear) + CONSTANT_Delimiter
-				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(gDay);
-		String[] spliterDate = GregorianToSolar(gregorianDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(gMonth).concat(CONSTANT_Delimiter) + String.valueOf(gDay);
+		String[] spliterDate = GregorianToSolar(gregorianDate).split(CONSTANT_Delimiter);
 		solarDay = Integer.parseInt(spliterDate[2]);
 		return solarDay;
 	}
@@ -262,13 +281,12 @@ public class PersianCalendar {
 	 * @param solarDay
 	 * @return only return gregorian year
 	 */
-	public int getGregorianYear(int sYear, int sMonth, int sDay) {
+	public int getGregorianYear(int sYear, int sMonth, int sDay)
+	{
 		int gregorianYear = 0;
 		String solarDate = String.valueOf(sYear) + CONSTANT_Delimiter
-				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(sDay);
-		String[] spliterDate = SolarToGregorian(solarDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter) + String.valueOf(sDay);
+		String[] spliterDate = SolarToGregorian(solarDate).split(CONSTANT_Delimiter);
 		gregorianYear = Integer.parseInt(spliterDate[0]);
 		return gregorianYear;
 	}
@@ -279,13 +297,12 @@ public class PersianCalendar {
 	 * @param solarDay
 	 * @return only return gregorian Month
 	 */
-	public int getGregorianMonth(int sYear, int sMonth, int sDay) {
+	public int getGregorianMonth(int sYear, int sMonth, int sDay)
+	{
 		int gregorianMonth = 0;
 		String solarDate = String.valueOf(sYear) + CONSTANT_Delimiter
-				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(sDay);
-		String[] spliterDate = SolarToGregorian(solarDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter) + String.valueOf(sDay);
+		String[] spliterDate = SolarToGregorian(solarDate).split(CONSTANT_Delimiter);
 		gregorianMonth = Integer.parseInt(spliterDate[1]);
 		return gregorianMonth;
 	}
@@ -296,47 +313,48 @@ public class PersianCalendar {
 	 * @param solarDay
 	 * @return only return gregorian day
 	 */
-	public int getGregorianDay(int sYear, int sMonth, int sDay) {
+	public int getGregorianDay(int sYear, int sMonth, int sDay)
+	{
 		int gregorianDay = 0;
 		String solarDate = String.valueOf(sYear) + CONSTANT_Delimiter
-				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter)
-				+ String.valueOf(sDay);
-		String[] spliterDate = SolarToGregorian(solarDate).split(
-				CONSTANT_Delimiter);
+				+ String.valueOf(sMonth).concat(CONSTANT_Delimiter) + String.valueOf(sDay);
+		String[] spliterDate = SolarToGregorian(solarDate).split(CONSTANT_Delimiter);
 		gregorianDay = Integer.parseInt(spliterDate[2]);
 		return gregorianDay;
 	}
 
-	public static boolean Leap_Persian(int year) {
+	public static boolean Leap_Persian(int year)
+	{
 		return ((((((year - ((year > 0) ? 474 : 473)) % 2820) + 474) + 38) * 682) % 2816) < 682;
 	}
 
 	// LEAP_GREGORIAN -- Is a given year in the Gregorian calendar a leap year ?
-	public boolean Leap_Gregorian(double year) {
-		return ((year % 4) == 0)
-				&& (!(((year % 100) == 0) && ((year % 400) != 0)));
+	public boolean Leap_Gregorian(double year)
+	{
+		return ((year % 4) == 0) && (!(((year % 100) == 0) && ((year % 400) != 0)));
 	}
 
 	/** Convert to JDN */
 
 	// GREGORIAN_TO_JD -- Determine Julian day number from Gregorian calendar
 	// date
-	public double convertGregorianToJdn(double year, double month, int day) {
+	public double convertGregorianToJdn(double year, double month, int day)
+	{
 		return (GREGORIAN_EPOCH - 1)
 				+ (365 * (year - 1))
 				+ Math.floor((year - 1) / 4)
 				+ (-Math.floor((year - 1) / 100))
 				+ Math.floor((year - 1) / 400)
-				+ Math.floor((((367 * month) - 362) / 12)
-						+ ((month <= 2) ? 0 : (Leap_Gregorian(year) ? -1 : -2))
-						+ day);
+				+ Math.floor((((367 * month) - 362) / 12) + ((month <= 2) ? 0 : (Leap_Gregorian(year) ? -1 : -2)) + day);
 	}
 
 	// JULIAN_TO_JD -- Determine Julian day number from Julian calendar date
-	public double convertJulianToJdn(int year, int month, int day) {
+	public double convertJulianToJdn(int year, int month, int day)
+	{
 		/* Adjust negative common era years to the zero-based notation we use. */
 
-		if (year < 1) {
+		if (year < 1)
+		{
 			year++;
 		}
 
@@ -345,26 +363,25 @@ public class PersianCalendar {
 		 * 61
 		 */
 
-		if (month <= 2) {
+		if (month <= 2)
+		{
 			year--;
 			month += 12;
 		}
 
-		return ((Math.floor((365.25 * (year + 4716)))
-				+ Math.floor((30.6001 * (month + 1))) + day) - 1524.5);
+		return ((Math.floor((365.25 * (year + 4716))) + Math.floor((30.6001 * (month + 1))) + day) - 1524.5);
 	}
 
 	// PERSIAN_TO_JD -- Determine Julian day from Persian date
-	public double convertPersianToJdn(double year, double month, double day) {
+	public double convertPersianToJdn(double year, double month, double day)
+	{
 		double epbase, epyear;
 
 		epbase = year - ((year >= 0) ? 474 : 473);
 		epyear = 474 + mod(epbase, 2820);
 
-		return day
-				+ ((month <= 7) ? ((month - 1) * 31) : (((month - 1) * 30) + 6))
-				+ Math.floor(((epyear * 682) - 110) / 2816) + (epyear - 1)
-				* 365 + Math.floor(epbase / 2820) * 1029983
+		return day + ((month <= 7) ? ((month - 1) * 31) : (((month - 1) * 30) + 6))
+				+ Math.floor(((epyear * 682) - 110) / 2816) + (epyear - 1) * 365 + Math.floor(epbase / 2820) * 1029983
 				+ (PERSIAN_EPOCH - 1);
 	}
 
@@ -373,7 +390,8 @@ public class PersianCalendar {
 	 * @param jdn
 	 * @return
 	 */
-	public String convertJdnToPersian(double jd) {
+	public String convertJdnToPersian(double jd)
+	{
 		double year, month, day, depoch, cycle, cyear, ycycle, aux1, aux2, yday;
 
 		jd = Math.floor(jd) + 0.5;
@@ -381,40 +399,41 @@ public class PersianCalendar {
 		depoch = jd - convertPersianToJdn(475, 1, 1);
 		cycle = Math.floor(depoch / 1029983);
 		cyear = mod(depoch, 1029983);
-		if (cyear == 1029982) {
+		if (cyear == 1029982)
+		{
 			ycycle = 2820;
-		} else {
+		}
+		else
+		{
 			aux1 = Math.floor(cyear / 366);
 			aux2 = mod(cyear, 366);
-			ycycle = Math
-					.floor(((2134 * aux1) + (2816 * aux2) + 2815) / 1028522)
-					+ aux1 + 1;
+			ycycle = Math.floor(((2134 * aux1) + (2816 * aux2) + 2815) / 1028522) + aux1 + 1;
 		}
 		year = ycycle + (2820 * cycle) + 474;
-		if (year <= 0) {
+		if (year <= 0)
+		{
 			year--;
 		}
 		yday = (jd - convertPersianToJdn(year, 1, 1)) + 1;
-		month = (yday <= 186) ? Math.ceil(yday / 31) : Math
-				.ceil((yday - 6) / 30);
+		month = (yday <= 186) ? Math.ceil(yday / 31) : Math.ceil((yday - 6) / 30);
 		day = (jd - convertPersianToJdn(year, month, 1)) + 1;
-		String strYear = Integer.toString((int) year), strMonth = Integer
-				.toString((int) month), strDay = Integer.toString((int) day);
+		String strYear = Integer.toString((int) year), strMonth = Integer.toString((int) month), strDay = Integer
+				.toString((int) day);
 
 		if (strMonth.length() < 2)
 			strMonth = "0" + strMonth;
 		if (strDay.length() < 2)
 			strDay = "0" + strDay;
 
-		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter
-				+ strDay;
+		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter + strDay;
 	}
 
 	/**
 	 * @param jdn
 	 * @return
 	 */
-	public String convertJdnToGregorian(double jd) {
+	public String convertJdnToGregorian(double jd)
+	{
 		double wjd, depoch, quadricent, dqc, cent, dcent, quad, dquad, yindex, dyindex, year, yearday, leapadj;
 
 		wjd = Math.floor(jd - 0.5) + 0.5;
@@ -427,32 +446,32 @@ public class PersianCalendar {
 		dquad = mod(dcent, 1461);
 		yindex = Math.floor(dquad / 365);
 		year = (quadricent * 400) + (cent * 100) + (quad * 4) + yindex;
-		if (!((cent == 4) || (yindex == 4))) {
+		if (!((cent == 4) || (yindex == 4)))
+		{
 			year++;
 		}
 		yearday = wjd - convertGregorianToJdn(year, 1, 1);
-		leapadj = ((wjd < convertGregorianToJdn(year, 3, 1)) ? 0
-				: (Leap_Gregorian(year) ? 1 : 2));
+		leapadj = ((wjd < convertGregorianToJdn(year, 3, 1)) ? 0 : (Leap_Gregorian(year) ? 1 : 2));
 		double month = Math.floor((((yearday + leapadj) * 12) + 373) / 367);
 		double day = (wjd - convertGregorianToJdn(year, month, 1)) + 1;
 
-		String strYear = Integer.toString((int) year), strMonth = Integer
-				.toString((int) month), strDay = Integer.toString((int) day);
+		String strYear = Integer.toString((int) year), strMonth = Integer.toString((int) month), strDay = Integer
+				.toString((int) day);
 
 		if (strMonth.length() < 2)
 			strMonth = "0" + strMonth;
 		if (strDay.length() < 2)
 			strDay = "0" + strDay;
 
-		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter
-				+ strDay;
+		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter + strDay;
 	}
 
 	/**
 	 * @param jdn
 	 * @return
 	 */
-	public String convertJdnToJulian(double jdn) {
+	public String convertJdnToJulian(double jdn)
+	{
 		double z, a, alpha, b, c, d, e, year, month, day, td = 0;
 
 		td += 0.5;
@@ -474,22 +493,23 @@ public class PersianCalendar {
 		 * is followed by year 1 (1 C.E.).
 		 */
 
-		if (year < 1) {
+		if (year < 1)
+		{
 			year--;
 		}
-		String strYear = Integer.toString((int) year), strMonth = Integer
-				.toString((int) month), strDay = Integer.toString((int) day);
+		String strYear = Integer.toString((int) year), strMonth = Integer.toString((int) month), strDay = Integer
+				.toString((int) day);
 
 		if (strMonth.length() < 2)
 			strMonth = "0" + strMonth;
 		if (strDay.length() < 2)
 			strDay = "0" + strDay;
 
-		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter
-				+ strDay;
+		return strYear + CONSTANT_Delimiter + strMonth + CONSTANT_Delimiter + strDay;
 	}
 
-	public double mod(double args1, double args2) {
+	public double mod(double args1, double args2)
+	{
 		return args1 % args2;
 	}
 
@@ -499,18 +519,20 @@ public class PersianCalendar {
 	 *            change format to 7/16/08 7:59 AM
 	 * @return gregorian date format as 7/16/08 7:59 AM
 	 */
-	public String changeFormat(String Date) {
+	public String changeFormat(String Date)
+	{
 		String[] fixFormat = Date.split(CONSTANT_Delimiter);
 		String newMonth = fixFormat[1].substring(1);
 		String newDay = fixFormat[2].substring(0, fixFormat[2].indexOf(" "));
 		String newYear = fixFormat[0].substring(2);
 		return newMonth + "/" + newDay + "/" + newYear;
 	}
-		
+
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		// /PersianCalendar pc = new PersianCalendar();
 
 		// System.out.println(pc.GregorianToSolar("08/07/17 10:00 AM"));

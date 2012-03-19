@@ -1,130 +1,145 @@
-// ColorBox v1.3.17.2 - a full featured, light-weight, customizable lightbox based on jQuery 1.3+
-// Copyright (c) 2011 Jack Moore - jack@colorpowered.com
-// Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
-
+// ColorBox v1.3.19 - jQuery lightbox plugin
+// (c) 2011 Jack Moore - jacklmoore.com
+// License: http://www.opensource.org/licenses/mit-license.php
 (function (jQuery, document, window) {
-	var
-	// ColorBox Default Settings.	
-	// See http://colorpowered.com/colorbox for details.
-	defaults = {
-		transition: "elastic",
-		speed: 300,
-		width: false,
-		initialWidth: "600",
-		innerWidth: false,
-		maxWidth: false,
-		height: false,
-		initialHeight: "450",
-		innerHeight: false,
-		maxHeight: false,
-		scalePhotos: true,
-		scrolling: true,
-		inline: false,
-		html: false,
-		iframe: false,
-		fastIframe: true,
-		photo: false,
-		href: false,
-		title: false,
-		rel: false,
-		opacity: 0.9,
-		preloading: true,
-		current: "image {current} of {total}",
-		previous: "previous",
-		next: "next",
-		close: "close",
-		open: false,
-		returnFocus: true,
-		loop: true,
-		slideshow: false,
-		slideshowAuto: true,
-		slideshowSpeed: 2500,
-		slideshowStart: "start slideshow",
-		slideshowStop: "stop slideshow",
-		onOpen: false,
-		onLoad: false,
-		onComplete: false,
-		onCleanup: false,
-		onClosed: false,
-		overlayClose: true,		
-		escKey: true,
-		arrowKey: true,
+    var
+    // Default settings object.	
+    // See http://jacklmoore.com/colorbox for details.
+    defaults = {
+        transition: "elastic",
+        speed: 300,
+        width: false,
+        initialWidth: "600",
+        innerWidth: false,
+        maxWidth: false,
+        height: false,
+        initialHeight: "450",
+        innerHeight: false,
+        maxHeight: false,
+        scalePhotos: true,
+        scrolling: true,
+        inline: false,
+        html: false,
+        iframe: false,
+        fastIframe: true,
+        photo: false,
+        href: false,
+        title: false,
+        rel: false,
+        opacity: 0.9,
+        preloading: true,
+        current: "image {current} of {total}",
+        previous: "previous",
+        next: "next",
+        close: "close",
+        open: false,
+        returnFocus: true,
+        reposition: true,
+        loop: true,
+        slideshow: false,
+        slideshowAuto: true,
+        slideshowSpeed: 2500,
+        slideshowStart: "start slideshow",
+        slideshowStop: "stop slideshow",
+        onOpen: false,
+        onLoad: false,
+        onComplete: false,
+        onCleanup: false,
+        onClosed: false,
+        overlayClose: true,		
+        escKey: true,
+        arrowKey: true,
         top: false,
         bottom: false,
         left: false,
         right: false,
         fixed: false,
-        data: false
-	},
+        data: undefined
+    },
 	
-	// Abstracting the HTML and event identifiers for easy rebranding
-	colorbox = 'colorbox',
-	prefix = 'cbox',
+    // Abstracting the HTML and event identifiers for easy rebranding
+    colorbox = 'colorbox',
+    prefix = 'cbox',
     boxElement = prefix + 'Element',
-	
-	// Events	
-	event_open = prefix + '_open',
-	event_load = prefix + '_load',
-	event_complete = prefix + '_complete',
-	event_cleanup = prefix + '_cleanup',
-	event_closed = prefix + '_closed',
-	event_purge = prefix + '_purge',
-	
-	// Special Handling for IE
-	isIE = jQuery.browser.msie && !jQuery.support.opacity, // Detects IE6,7,8.  IE9 supports opacity.  Feature detection alone gave a false positive on at least one phone browser and on some development versions of Chrome, hence the user-agent test.
-	isIE6 = isIE && jQuery.browser.version < 7,
-	event_ie6 = prefix + '_IE6',
+    
+    // Events	
+    event_open = prefix + '_open',
+    event_load = prefix + '_load',
+    event_complete = prefix + '_complete',
+    event_cleanup = prefix + '_cleanup',
+    event_closed = prefix + '_closed',
+    event_purge = prefix + '_purge',
+    
+    // Special Handling for IE
+    isIE = !jQuery.support.opacity && !jQuery.support.style, // IE7 & IE8
+    isIE6 = isIE && !window.XMLHttpRequest, // IE6
+    event_ie6 = prefix + '_IE6',
 
-	// Cached jQuery Object Variables
-	jQueryoverlay,
-	jQuerybox,
-	jQuerywrap,
-	jQuerycontent,
-	jQuerytopBorder,
-	jQueryleftBorder,
-	jQueryrightBorder,
-	jQuerybottomBorder,
-	jQueryrelated,
-	jQuerywindow,
-	jQueryloaded,
-	jQueryloadingBay,
-	jQueryloadingOverlay,
-	jQuerytitle,
-	jQuerycurrent,
-	jQueryslideshow,
-	jQuerynext,
-	jQueryprev,
-	jQueryclose,
-	jQuerygroupControls,
-
-	// Variables for cached values or use across multiple functions
-	settings,
-	interfaceHeight,
-	interfaceWidth,
-	loadedHeight,
-	loadedWidth,
-	element,
-	index,
-	photo,
-	open,
-	active,
-	closing,
-    handler,
+    // Cached jQuery Object Variables
+    jQueryoverlay,
+    jQuerybox,
+    jQuerywrap,
+    jQuerycontent,
+    jQuerytopBorder,
+    jQueryleftBorder,
+    jQueryrightBorder,
+    jQuerybottomBorder,
+    jQueryrelated,
+    jQuerywindow,
+    jQueryloaded,
+    jQueryloadingBay,
+    jQueryloadingOverlay,
+    jQuerytitle,
+    jQuerycurrent,
+    jQueryslideshow,
+    jQuerynext,
+    jQueryprev,
+    jQueryclose,
+    jQuerygroupControls,
+    
+    // Variables for cached values or use across multiple functions
+    settings,
+    interfaceHeight,
+    interfaceWidth,
+    loadedHeight,
+    loadedWidth,
+    element,
+    index,
+    photo,
+    open,
+    active,
+    closing,
     loadingTimer,
-    publicMethod;
-	
+    publicMethod,
+    div = "div",
+    init;
+
 	// ****************
 	// HELPER FUNCTIONS
 	// ****************
+    
+	// Convience function for creating new jQuery objects
+    function jQuerytag(tag, id, css) {
+		var element = document.createElement(tag);
 
-	// jQuery object generator to reduce code size
-	function jQuerydiv(id, cssText, div) { 
-		div = document.createElement('div');
 		if (id) {
-            div.id = prefix + id;
-        }
-		div.style.cssText = cssText || '';
-		return jQuery(div);
+			element.id = prefix + id;
+		}
+
+		if (css) {
+			element.style.cssText = css;
+		}
+
+		return jQuery(element);
+    }
+
+	// Determine the next and previous members in a group.
+	function getIndex(increment) {
+		var 
+		max = jQueryrelated.length, 
+		newIndex = (index + increment) % max;
+		
+		return (newIndex < 0) ? max + newIndex : newIndex;
 	}
 
 	// Convert '%' and 'px' values to integers
@@ -135,15 +150,16 @@
 	// Checks an href to see if it is a photo.
 	// There is a force photo option (photo: true) for hrefs that cannot be matched by this regex.
 	function isImage(url) {
-		return settings.photo || /\.(gif|png|jpg|jpeg|bmp)(?:\?([^#]*))?(?:#(\.*))?$/i.test(url);
+		return settings.photo || /\.(gif|png|jpe?g|bmp|ico)((#|\?).*)?$/i.test(url);
 	}
 	
-	// Assigns function results to their respective settings.  This allows functions to be used as values.
-	function makeSettings(i) {
+	// Assigns function results to their respective properties
+	function makeSettings() {
+        var i;
         settings = jQuery.extend({}, jQuery.data(element, colorbox));
         
 		for (i in settings) {
-			if (jQuery.isFunction(settings[i]) && i.substring(0, 2) !== 'on') { // checks to make sure the function isn't one of the callbacks, they will be handled at the appropriate time.
+			if (jQuery.isFunction(settings[i]) && i.slice(0, 2) !== 'on') { // checks to make sure the function isn't one of the callbacks, they will be handled at the appropriate time.
 			    settings[i] = settings[i].call(element);
 			}
 		}
@@ -158,10 +174,10 @@
 	}
 
 	function trigger(event, callback) {
+		jQuery.event.trigger(event);
 		if (callback) {
 			callback.call(element);
 		}
-		jQuery.event.trigger(event);
 	}
 
 	// Slideshow functionality
@@ -180,7 +196,7 @@
 					.text(settings.slideshowStop)
 					.unbind(click)
 					.bind(event_complete, function () {
-						if (index < jQueryrelated.length - 1 || settings.loop) {
+						if (settings.loop || jQueryrelated[index + 1]) {
 							timeOut = setTimeout(publicMethod.next, settings.slideshowSpeed);
 						}
 					})
@@ -197,7 +213,10 @@
 				jQueryslideshow
 					.text(settings.slideshowStart)
 					.unbind([event_complete, event_load, event_cleanup, click].join(' '))
-					.one(click, start);
+					.one(click, function () {
+						publicMethod.next();
+						start();
+					});
 				jQuerybox.removeClass(className + "on").addClass(className + "off");
 			};
 			
@@ -242,18 +261,9 @@
 				jQuerybox.show();
 				
 				if (settings.returnFocus) {
-					try {
-						element.blur();
-						jQuery(element).one(event_closed, function () {
-							try {
-								this.focus();
-							} catch (e) {
-								// do nothing
-							}
-						});
-					} catch (e) {
-						// do nothing
-					}
+					jQuery(element).blur().one(event_closed, function () {
+						jQuery(this).focus();
+					});
 				}
 				
 				// +settings.opacity avoids a problem in IE when using non-zero-prefixed-string-values, like '.5'
@@ -281,6 +291,125 @@
 		}
 	}
 
+	// ColorBox's markup needs to be added to the DOM prior to being called
+	// so that the browser will go ahead and load the CSS background images.
+	function appendHTML() {
+		if (!jQuerybox && document.body) {
+			init = false;
+
+			jQuerywindow = jQuery(window);
+			jQuerybox = jQuerytag(div).attr({id: colorbox, 'class': isIE ? prefix + (isIE6 ? 'IE6' : 'IE') : ''}).hide();
+			jQueryoverlay = jQuerytag(div, "Overlay", isIE6 ? 'position:absolute' : '').hide();
+			jQuerywrap = jQuerytag(div, "Wrapper");
+			jQuerycontent = jQuerytag(div, "Content").append(
+				jQueryloaded = jQuerytag(div, "LoadedContent", 'width:0; height:0; overflow:hidden'),
+				jQueryloadingOverlay = jQuerytag(div, "LoadingOverlay").add(jQuerytag(div, "LoadingGraphic")),
+				jQuerytitle = jQuerytag(div, "Title"),
+				jQuerycurrent = jQuerytag(div, "Current"),
+				jQuerynext = jQuerytag(div, "Next"),
+				jQueryprev = jQuerytag(div, "Previous"),
+				jQueryslideshow = jQuerytag(div, "Slideshow").bind(event_open, slideshow),
+				jQueryclose = jQuerytag(div, "Close")
+			);
+			
+			jQuerywrap.append( // The 3x3 Grid that makes up ColorBox
+				jQuerytag(div).append(
+					jQuerytag(div, "TopLeft"),
+					jQuerytopBorder = jQuerytag(div, "TopCenter"),
+					jQuerytag(div, "TopRight")
+				),
+				jQuerytag(div, false, 'clear:left').append(
+					jQueryleftBorder = jQuerytag(div, "MiddleLeft"),
+					jQuerycontent,
+					jQueryrightBorder = jQuerytag(div, "MiddleRight")
+				),
+				jQuerytag(div, false, 'clear:left').append(
+					jQuerytag(div, "BottomLeft"),
+					jQuerybottomBorder = jQuerytag(div, "BottomCenter"),
+					jQuerytag(div, "BottomRight")
+				)
+			).find('div div').css({'float': 'left'});
+			
+			jQueryloadingBay = jQuerytag(div, false, 'position:absolute; width:9999px; visibility:hidden; display:none');
+			
+			jQuerygroupControls = jQuerynext.add(jQueryprev).add(jQuerycurrent).add(jQueryslideshow);
+
+			jQuery(document.body).append(jQueryoverlay, jQuerybox.append(jQuerywrap, jQueryloadingBay));
+		}
+	}
+
+	// Add ColorBox's event bindings
+	function addBindings() {
+		if (jQuerybox) {
+			if (!init) {
+				init = true;
+
+				// Cache values needed for size calculations
+				interfaceHeight = jQuerytopBorder.height() + jQuerybottomBorder.height() + jQuerycontent.outerHeight(true) - jQuerycontent.height();//Subtraction needed for IE6
+				interfaceWidth = jQueryleftBorder.width() + jQueryrightBorder.width() + jQuerycontent.outerWidth(true) - jQuerycontent.width();
+				loadedHeight = jQueryloaded.outerHeight(true);
+				loadedWidth = jQueryloaded.outerWidth(true);
+				
+				// Setting padding to remove the need to do size conversions during the animation step.
+				jQuerybox.css({"padding-bottom": interfaceHeight, "padding-right": interfaceWidth});
+
+				// Anonymous functions here keep the public method from being cached, thereby allowing them to be redefined on the fly.
+				jQuerynext.click(function () {
+					publicMethod.next();
+				});
+				jQueryprev.click(function () {
+					publicMethod.prev();
+				});
+				jQueryclose.click(function () {
+					publicMethod.close();
+				});
+				jQueryoverlay.click(function () {
+					if (settings.overlayClose) {
+						publicMethod.close();
+					}
+				});
+				
+				// Key Bindings
+				jQuery(document).bind('keydown.' + prefix, function (e) {
+					var key = e.keyCode;
+					if (open && settings.escKey && key === 27) {
+						e.preventDefault();
+						publicMethod.close();
+					}
+					if (open && settings.arrowKey && jQueryrelated[1]) {
+						if (key === 37) {
+							e.preventDefault();
+							jQueryprev.click();
+						} else if (key === 39) {
+							e.preventDefault();
+							jQuerynext.click();
+						}
+					}
+				});
+
+				jQuery('.' + boxElement, document).live('click', function (e) {
+			        // ignore non-left-mouse-clicks and clicks modified with ctrl / command, shift, or alt.
+			        // See: http://jacklmoore.com/notes/click-events/
+			        if (!(e.which > 1 || e.shiftKey || e.altKey || e.metaKey)) {
+			            e.preventDefault();
+			            launch(this);
+			        }
+			    });
+			}
+			return true;
+		}
+		return false;
+	}
+
+	// Don't do anything if ColorBox already exists.
+	if (jQuery.colorbox) {
+		return;
+	}
+
+	// Append the HTML when the DOM loads
+	jQuery(appendHTML);
+
+
 	// ****************
 	// PUBLIC FUNCTIONS
 	// Usage format: jQuery.fn.colorbox.close();
@@ -292,153 +421,57 @@
 		
         options = options || {};
         
-		if (!jQuerythis[0]) {
-			if (jQuerythis.selector) { // if a selector was given and it didn't match any elements, go ahead and exit.
-                return jQuerythis;
-            }
-            // if no selector was given (ie. jQuery.colorbox()), create a temporary element to work with
-			jQuerythis = jQuery('<a/>');
-			options.open = true; // assume an immediate open
-		}
-		
-		if (callback) {
-			options.onComplete = callback;
-		}
-		
-		jQuerythis.each(function () {
-			jQuery.data(this, colorbox, jQuery.extend({}, jQuery.data(this, colorbox) || defaults, options));
-			jQuery(this).addClass(boxElement);
-		});
-		
-        if ((jQuery.isFunction(options.open) && options.open.call(jQuerythis)) || options.open) {
-			launch(jQuerythis[0]);
+        appendHTML();
+
+		if (addBindings()) {
+			if (!jQuerythis[0]) {
+				if (jQuerythis.selector) { // if a selector was given and it didn't match any elements, go ahead and exit.
+	                return jQuerythis;
+	            }
+	            // if no selector was given (ie. jQuery.colorbox()), create a temporary element to work with
+				jQuerythis = jQuery('<a/>');
+				options.open = true; // assume an immediate open
+			}
+			
+			if (callback) {
+				options.onComplete = callback;
+			}
+			
+			jQuerythis.each(function () {
+				jQuery.data(this, colorbox, jQuery.extend({}, jQuery.data(this, colorbox) || defaults, options));
+			}).addClass(boxElement);
+			
+	        if ((jQuery.isFunction(options.open) && options.open.call(jQuerythis)) || options.open) {
+				launch(jQuerythis[0]);
+			}
 		}
         
 		return jQuerythis;
 	};
 
-	// Initialize ColorBox: store common calculations, preload the interface graphics, append the html.
-	// This preps ColorBox for a speedy open when clicked, and minimizes the burdon on the browser by only
-	// having to run once, instead of each time colorbox is opened.
-	publicMethod.init = function () {
-		// Create & Append jQuery Objects
-		jQuerywindow = jQuery(window);
-		jQuerybox = jQuerydiv().attr({id: colorbox, 'class': isIE ? prefix + (isIE6 ? 'IE6' : 'IE') : ''});
-		jQueryoverlay = jQuerydiv("Overlay", isIE6 ? 'position:absolute' : '').hide();
-		
-		jQuerywrap = jQuerydiv("Wrapper");
-		jQuerycontent = jQuerydiv("Content").append(
-			jQueryloaded = jQuerydiv("LoadedContent", 'width:0; height:0; overflow:hidden'),
-			jQueryloadingOverlay = jQuerydiv("LoadingOverlay").add(jQuerydiv("LoadingGraphic")),
-			jQuerytitle = jQuerydiv("Title"),
-			jQuerycurrent = jQuerydiv("Current"),
-			jQuerynext = jQuerydiv("Next"),
-			jQueryprev = jQuerydiv("Previous"),
-			jQueryslideshow = jQuerydiv("Slideshow").bind(event_open, slideshow),
-			jQueryclose = jQuerydiv("Close")
-		);
-		jQuerywrap.append( // The 3x3 Grid that makes up ColorBox
-			jQuerydiv().append(
-				jQuerydiv("TopLeft"),
-				jQuerytopBorder = jQuerydiv("TopCenter"),
-				jQuerydiv("TopRight")
-			),
-			jQuerydiv(false, 'clear:left').append(
-				jQueryleftBorder = jQuerydiv("MiddleLeft"),
-				jQuerycontent,
-				jQueryrightBorder = jQuerydiv("MiddleRight")
-			),
-			jQuerydiv(false, 'clear:left').append(
-				jQuerydiv("BottomLeft"),
-				jQuerybottomBorder = jQuerydiv("BottomCenter"),
-				jQuerydiv("BottomRight")
-			)
-		).children().children().css({'float': 'left'});
-		
-		jQueryloadingBay = jQuerydiv(false, 'position:absolute; width:9999px; visibility:hidden; display:none');
-		
-		jQuery('body').prepend(jQueryoverlay, jQuerybox.append(jQuerywrap, jQueryloadingBay));
-		
-		jQuerycontent.children()
-		.hover(function () {
-			jQuery(this).addClass('hover');
-		}, function () {
-			jQuery(this).removeClass('hover');
-		}).addClass('hover');
-		
-		// Cache values needed for size calculations
-		interfaceHeight = jQuerytopBorder.height() + jQuerybottomBorder.height() + jQuerycontent.outerHeight(true) - jQuerycontent.height();//Subtraction needed for IE6
-		interfaceWidth = jQueryleftBorder.width() + jQueryrightBorder.width() + jQuerycontent.outerWidth(true) - jQuerycontent.width();
-		loadedHeight = jQueryloaded.outerHeight(true);
-		loadedWidth = jQueryloaded.outerWidth(true);
-		
-		// Setting padding to remove the need to do size conversions during the animation step.
-		jQuerybox.css({"padding-bottom": interfaceHeight, "padding-right": interfaceWidth}).hide();
-		
-        // Setup button events.
-        // Anonymous functions here keep the public method from being cached, thereby allowing them to be redefined on the fly.
-        jQuerynext.click(function () {
-            publicMethod.next();
-        });
-        jQueryprev.click(function () {
-            publicMethod.prev();
-        });
-        jQueryclose.click(function () {
-            publicMethod.close();
-        });
-		
-		jQuerygroupControls = jQuerynext.add(jQueryprev).add(jQuerycurrent).add(jQueryslideshow);
-		
-		// Adding the 'hover' class allowed the browser to load the hover-state
-		// background graphics in case the images were not part of a sprite.  The class can now can be removed.
-		jQuerycontent.children().removeClass('hover');
-		
-		jQueryoverlay.click(function () {
-			if (settings.overlayClose) {
-				publicMethod.close();
-			}
-		});
-		
-		// Set Navigation Key Bindings
-		jQuery(document).bind('keydown.' + prefix, function (e) {
-            var key = e.keyCode;
-			if (open && settings.escKey && key === 27) {
-				e.preventDefault();
-				publicMethod.close();
-			}
-			if (open && settings.arrowKey && jQueryrelated[1]) {
-				if (key === 37) {
-					e.preventDefault();
-					jQueryprev.click();
-				} else if (key === 39) {
-					e.preventDefault();
-					jQuerynext.click();
-				}
-			}
-		});
-	};
-	
-	publicMethod.remove = function () {
-		jQuerybox.add(jQueryoverlay).remove();
-		jQuery('.' + boxElement).removeData(colorbox).removeClass(boxElement);
-	};
-
 	publicMethod.position = function (speed, loadedCallback) {
-        var top = 0, left = 0;
+        var 
+        top = 0, 
+        left = 0, 
+        offset = jQuerybox.offset(),
+        scrollTop = jQuerywindow.scrollTop(), 
+        scrollLeft = jQuerywindow.scrollLeft();
         
         jQuerywindow.unbind('resize.' + prefix);
-        
+
         // remove the modal so that it doesn't influence the document width/height        
-        jQuerybox.hide();
-        
+        jQuerybox.css({top: -9e4, left: -9e4});
+
         if (settings.fixed && !isIE6) {
+			offset.top -= scrollTop;
+			offset.left -= scrollLeft;
             jQuerybox.css({position: 'fixed'});
         } else {
-            top = jQuerywindow.scrollTop();
-            left = jQuerywindow.scrollLeft();
+            top = scrollTop;
+            left = scrollLeft;
             jQuerybox.css({position: 'absolute'});
         }
-        
+
 		// keeps the top and left positions within the browser's viewport.
         if (settings.right !== false) {
             left += Math.max(jQuerywindow.width() - settings.w - loadedWidth - interfaceWidth - setSize(settings.right, 'x'), 0);
@@ -449,15 +482,15 @@
         }
         
         if (settings.bottom !== false) {
-            top += Math.max(document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight - setSize(settings.bottom, 'y'), 0);
+            top += Math.max(jQuerywindow.height() - settings.h - loadedHeight - interfaceHeight - setSize(settings.bottom, 'y'), 0);
         } else if (settings.top !== false) {
             top += setSize(settings.top, 'y');
         } else {
-            top += Math.round(Math.max(document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight, 0) / 2);
+            top += Math.round(Math.max(jQuerywindow.height() - settings.h - loadedHeight - interfaceHeight, 0) / 2);
         }
-        
-        jQuerybox.show();
-        
+
+        jQuerybox.css({top: offset.top, left: offset.left});
+
 		// setting the speed to 0 to reduce the delay between same-sized content.
 		speed = (jQuerybox.width() === settings.w + loadedWidth && jQuerybox.height() === settings.h + loadedHeight) ? 0 : speed || 0;
         
@@ -467,9 +500,8 @@
 		jQuerywrap[0].style.width = jQuerywrap[0].style.height = "9999px";
 		
 		function modalDimensions(that) {
-			// loading overlay height has to be explicitly set for IE6.
 			jQuerytopBorder[0].style.width = jQuerybottomBorder[0].style.width = jQuerycontent[0].style.width = that.style.width;
-			jQueryloadingOverlay[0].style.height = jQueryloadingOverlay[1].style.height = jQuerycontent[0].style.height = jQueryleftBorder[0].style.height = jQueryrightBorder[0].style.height = that.style.height;
+			jQuerycontent[0].style.height = jQueryleftBorder[0].style.height = jQueryrightBorder[0].style.height = that.style.height;
 		}
 		
 		jQuerybox.dequeue().animate({width: settings.w + loadedWidth, height: settings.h + loadedHeight, top: top, left: left}, {
@@ -482,14 +514,16 @@
 				// shrink the wrapper down to exactly the size of colorbox to avoid a bug in IE's iframe implementation.
 				jQuerywrap[0].style.width = (settings.w + loadedWidth + interfaceWidth) + "px";
 				jQuerywrap[0].style.height = (settings.h + loadedHeight + interfaceHeight) + "px";
-				
+                
+                if (settings.reposition) {
+	                setTimeout(function () {  // small delay before binding onresize due to an IE8 bug.
+	                    jQuerywindow.bind('resize.' + prefix, publicMethod.position);
+	                }, 1);
+	            }
+
 				if (loadedCallback) {
 					loadedCallback();
 				}
-                
-                setTimeout(function(){  // small delay before binding onresize due to an IE8 bug.
-                    jQuerywindow.bind('resize.' + prefix, publicMethod.position);
-                }, 1);
 			},
 			step: function () {
 				modalDimensions(this);
@@ -515,10 +549,9 @@
 			if (options.innerHeight) {
 				settings.h = setSize(options.innerHeight, 'y');
 			}
-			if (!options.innerHeight && !options.height) {				
-				var jQuerychild = jQueryloaded.wrapInner("<div style='overflow:auto'></div>").children(); // temporary wrapper to get an accurate estimate of just how high the total content should be.
-				settings.h = jQuerychild.height();
-				jQuerychild.replaceWith(jQuerychild.children()); // ditch the temporary wrapper div used in height calculation
+			if (!options.innerHeight && !options.height) {
+				jQueryloaded.css({height: "auto"});
+				settings.h = jQueryloaded.height();
 			}
 			jQueryloaded.css({height: settings.h});
 			
@@ -534,7 +567,7 @@
 		var callback, speed = settings.transition === "none" ? 0 : settings.speed;
 		
 		jQueryloaded.remove();
-		jQueryloaded = jQuerydiv('LoadedContent').append(object);
+		jQueryloaded = jQuerytag(div, 'LoadedContent').append(object);
 		
 		function getWidth() {
 			settings.w = settings.w || jQueryloaded.width();
@@ -570,7 +603,7 @@
 		}
 		
 		callback = function () {
-            var prev, prevSrc, next, nextSrc, total = jQueryrelated.length, iframe, complete;
+            var preload, i, total = jQueryrelated.length, iframe, frameBorder = 'frameBorder', allowTransparency = 'allowTransparency', complete, src, img;
             
             if (!open) {
                 return;
@@ -604,55 +637,53 @@
                 
                 jQuerynext[(settings.loop || index < total - 1) ? "show" : "hide"]().html(settings.next);
                 jQueryprev[(settings.loop || index) ? "show" : "hide"]().html(settings.previous);
-                
-                prev = index ? jQueryrelated[index - 1] : jQueryrelated[total - 1];
-                next = index < total - 1 ? jQueryrelated[index + 1] : jQueryrelated[0];
-                
+				
                 if (settings.slideshow) {
                     jQueryslideshow.show();
                 }
-                
+				
                 // Preloads images within a rel group
                 if (settings.preloading) {
-                    nextSrc = jQuery.data(next, colorbox).href || next.href;
-                    prevSrc = jQuery.data(prev, colorbox).href || prev.href;
-                    
-                    nextSrc = jQuery.isFunction(nextSrc) ? nextSrc.call(next) : nextSrc;
-                    prevSrc = jQuery.isFunction(prevSrc) ? prevSrc.call(prev) : prevSrc;
-                    
-                    if (isImage(nextSrc)) {
-                        jQuery('<img/>')[0].src = nextSrc;
-                    }
-                    
-                    if (isImage(prevSrc)) {
-                        jQuery('<img/>')[0].src = prevSrc;
-                    }
+					preload = [
+						getIndex(-1),
+						getIndex(1)
+					];
+					while (i = jQueryrelated[preload.pop()]) {
+						src = jQuery.data(i, colorbox).href || i.href;
+						if (jQuery.isFunction(src)) {
+							src = src.call(i);
+						}
+						if (isImage(src)) {
+							img = new Image();
+							img.src = src;
+						}
+					}
                 }
             } else {
                 jQuerygroupControls.hide();
             }
             
             if (settings.iframe) {
-                iframe = jQuery('<iframe/>').addClass(prefix + 'Iframe')[0];
+                iframe = jQuerytag('iframe')[0];
                 
+                if (frameBorder in iframe) {
+                    iframe[frameBorder] = 0;
+                }
+                if (allowTransparency in iframe) {
+                    iframe[allowTransparency] = "true";
+                }
+                // give the iframe a unique name to prevent caching
+                iframe.name = prefix + (+new Date());
                 if (settings.fastIframe) {
                     complete();
                 } else {
                     jQuery(iframe).one('load', complete);
                 }
-                iframe.name = prefix + (+new Date());
                 iframe.src = settings.href;
-                
                 if (!settings.scrolling) {
                     iframe.scrolling = "no";
                 }
-                
-                if (isIE) {
-                    iframe.frameBorder = 0;
-                    iframe.allowTransparency = "true";
-                }
-                
-                jQuery(iframe).appendTo(jQueryloaded).one(event_purge, function () {
+                jQuery(iframe).addClass(prefix + 'Iframe').appendTo(jQueryloaded).one(event_purge, function () {
                     iframe.src = "//about:blank";
                 });
             } else {
@@ -724,7 +755,7 @@
 		if (settings.inline) {
 			// Inserts an empty placeholder where inline content is being pulled from.
 			// An event is bound to put inline content back when ColorBox closes or loads new content.
-			jQuerydiv().hide().insertBefore(jQuery(href)[0]).one(event_purge, function () {
+			jQuerytag(div).hide().insertBefore(jQuery(href)[0]).one(event_purge, function () {
 				jQuery(this).replaceWith(jQueryloaded.children());
 			});
 			prep(jQuery(href));
@@ -739,7 +770,7 @@
 			.addClass(prefix + 'Photo')
 			.error(function () {
 				settings.title = false;
-				prep(jQuerydiv('Error').text('This image could not be loaded'));
+				prep(jQuerytag(div, 'Error').text('This image could not be loaded'));
 			})
 			.load(function () {
 				var percent;
@@ -764,7 +795,7 @@
 					photo.style.marginTop = Math.max(settings.h - photo.height, 0) / 2 + 'px';
 				}
 				
-				if (jQueryrelated[1] && (index < jQueryrelated.length - 1 || settings.loop)) {
+				if (jQueryrelated[1] && (settings.loop || jQueryrelated[index + 1])) {
 					photo.style.cursor = 'pointer';
 					photo.onclick = function () {
                         publicMethod.next();
@@ -785,22 +816,22 @@
 			}, 1);
 		} else if (href) {
 			jQueryloadingBay.load(href, settings.data, function (data, status, xhr) {
-				prep(status === 'error' ? jQuerydiv('Error').text('Request unsuccessful: ' + xhr.statusText) : jQuery(this).contents());
+				prep(status === 'error' ? jQuerytag(div, 'Error').text('Request unsuccessful: ' + xhr.statusText) : jQuery(this).contents());
 			});
 		}
 	};
         
 	// Navigates to the next page/image in a set.
 	publicMethod.next = function () {
-		if (!active && jQueryrelated[1] && (index < jQueryrelated.length - 1 || settings.loop)) {
-			index = index < jQueryrelated.length - 1 ? index + 1 : 0;
+		if (!active && jQueryrelated[1] && (settings.loop || jQueryrelated[index + 1])) {
+			index = getIndex(1);
 			publicMethod.load();
 		}
 	};
 	
 	publicMethod.prev = function () {
-		if (!active && jQueryrelated[1] && (index || settings.loop)) {
-			index = index ? index - 1 : jQueryrelated.length - 1;
+		if (!active && jQueryrelated[1] && (settings.loop || index)) {
+			index = getIndex(-1);
 			publicMethod.load();
 		}
 	};
@@ -835,6 +866,17 @@
 		}
 	};
 
+	// Removes changes ColorBox made to the document, but does not remove the plugin
+	// from jQuery.
+	publicMethod.remove = function () {
+		jQuery([]).add(jQuerybox).add(jQueryoverlay).remove();
+		jQuerybox = null;
+		jQuery('.' + boxElement)
+			.removeData(colorbox)
+			.removeClass(boxElement)
+			.die();
+	};
+
 	// A method for fetching the current element ColorBox is referencing.
 	// returns a jQuery object.
 	publicMethod.element = function () {
@@ -842,23 +884,5 @@
 	};
 
 	publicMethod.settings = defaults;
-    
-	// Bind the live event before DOM-ready for maximum performance in IE6 & 7.
-    handler = function (e) {
-        // checks to see if it was a non-left mouse-click and for clicks modified with ctrl, shift, or alt.
-        if (!((e.button !== 0 && typeof e.button !== 'undefined') || e.ctrlKey || e.shiftKey || e.altKey)) {
-            e.preventDefault();
-            launch(this);
-        }
-    };
-    
-    if (jQuery.fn.delegate) {
-        jQuery(document).delegate('.' + boxElement, 'click', handler);
-    } else {
-        jQuery('.' + boxElement).live('click', handler);
-    }
-    
-	// Initializes ColorBox when the DOM has loaded
-	jQuery(publicMethod.init);
 
 }(jQuery, document, this));

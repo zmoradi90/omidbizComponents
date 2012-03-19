@@ -31,6 +31,16 @@
 	<c:set var="objectName" value="#{component.attributes['objectName']}"/>
 	<c:set var="sendRequestToServer" value="#{component.attributes['sendRequestToServer']}"/>
 	
+	<c:set var="width" value="#{component.attributes['width']}"/>
+	<c:set var="height" value="#{component.attributes['height']}"/>
+	<c:set var="iframe" value="#{component.attributes['iframe']}"/>
+	
+	<c:set var="onOpen" value="#{component.attributes['onOpen']}"/>
+	<c:set var="onLoad" value="#{component.attributes['onLoad']}"/>
+	<c:set var="onComplete" value="#{component.attributes['onComplete']}"/>
+	<c:set var="onCleanup" value="#{component.attributes['onCleanup']}"/>
+	<c:set var="onClosed" value="#{component.attributes['onClosed']}"/>
+	
 
 		<jsp:scriptlet>
 <![CDATA[ 
@@ -44,7 +54,14 @@
  
 jQuery(document).ready(function(){	
 	jQuery(".#{objectName}lovClass").colorbox({width:"80%", height:"80%", iframe:true});
-	jQuery('a[rel=rel#{objectName}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0}, Richfaces.colorboxControl.getParameters()));
+	jQuery('a[rel=rel#{objectName}]').colorbox(jQuery.extend({
+		onOpen:function(){ #{onOpen} },
+		onLoad:function(){ #{onLoad} },
+		onComplete:function(){ #{onComplete} },
+		onCleanup:function(){ #{onCleanup} },
+		onClosed:function(){ #{onClosed} },
+		width:'#{width}', height:'#{height}', speed:0, iframe:#{iframe}
+		}, Richfaces.colorboxControl.getParameters()));
 	
 });
 

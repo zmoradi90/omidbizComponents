@@ -119,6 +119,82 @@
 			</description>
 			
 		</property>
+		
+		<property>
+			<name>onOpen</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>onLoad</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>onComplete</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>onCleanup</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>onClosed</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>width</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			<defaultvalue>"85%"</defaultvalue>
+		</property>
+		
+		<property>
+			<name>height</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			<defaultvalue>"85%"</defaultvalue>
+		</property>
+		
+		<property>
+			<name>iframe</name>
+			<classname>boolean</classname>
+			<description>
+					
+			</description>
+			<defaultvalue>true</defaultvalue>
+		</property>
+		
+		
+		
+		
 		<!--<property>
 			<name>customEvent</name>
 			<classname>javax.faces.el.MethodBinding</classname>
