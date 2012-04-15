@@ -29,20 +29,6 @@ import org.omidbiz.component.UIInputListOfValues;
 public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 {
 
-	// @Override
-	// public void preDecode(FacesContext context, UIComponent component) {
-	// UIInputListOfValues inputLov = (UIInputListOfValues) component;
-	// MethodExpressionValueChangeListener listener = null;
-	// MethodExpression methodExpression
-	// = (MethodExpression) inputLov.getAttributes().get("customEvent");
-	// listener = new MethodExpressionValueChangeListener(methodExpression);
-	// FacesEvent event = new ActionEvent(inputLov);
-	// event.setPhaseId(PhaseId.INVOKE_APPLICATION);
-	// inputLov.queueEvent(event);
-	//
-	//
-	// }
-
 	@Override
 	public void decode(FacesContext context, UIComponent component)
 	{
@@ -98,11 +84,6 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 	{
 		return super.getConvertedValue(context, component, submittedValue);
 	}
-
-	// protected String getConvertedStringValue(FacesContext context,
-	// UIInputListOfValues component, Object value) {
-	// return InputUtils.getConvertedStringValue(context, component, value);
-	// }
 
 	protected Object getValueForId(FacesContext context, UIComponent component) throws IOException
 	{

@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.ComponentVariables;
+import org.ajax4jsf.resource.InternetResource;
 import javax.faces.context.FacesContext;
 import javax.faces.component.UIComponent;
 //
@@ -57,6 +58,53 @@ public class LovCloseButtonRenderer extends CloseButtonRendererBase {
 	// 
 	// Declarations
 	//
+	private final InternetResource[] scripts = {
+						getResource("/org/richfaces/renderkit/html/scripts/jquery/jquery.js")
+						,
+				new org.ajax4jsf.javascript.PrototypeScript()
+						,
+				new org.ajax4jsf.javascript.AjaxScript()
+						,
+				getResource("/org/omidbiz/renderkit/html/script/colorboxUtil.js")
+	};
+
+private InternetResource[] scriptsAll = null;
+
+protected InternetResource[] getScripts() {
+	synchronized (this) {
+		if (scriptsAll == null) {
+			InternetResource[] rsrcs = super.getScripts();
+			boolean ignoreSuper = rsrcs == null || rsrcs.length == 0;
+			boolean ignoreThis = scripts == null || scripts.length == 0;
+			
+			if (ignoreSuper) {
+				if (ignoreThis) {
+					scriptsAll = new InternetResource[0];	
+				} else {
+					scriptsAll = scripts;
+				}
+			} else {
+				if (ignoreThis) {
+					scriptsAll = rsrcs;
+				} else {
+					java.util.Set rsrcsSet = new java.util.LinkedHashSet();
+
+					for (int i = 0; i < rsrcs.length; i++ ) {
+						rsrcsSet.add(rsrcs[i]);
+					}
+
+					for (int i = 0; i < scripts.length; i++ ) {
+						rsrcsSet.add(scripts[i]);
+					}
+
+					scriptsAll = (InternetResource[]) rsrcsSet.toArray(new InternetResource[rsrcsSet.size()]);
+				}
+			}
+		}
+	}
+	
+	return scriptsAll;
+}
 	// 
 	// 
 	//
@@ -109,13 +157,19 @@ public class LovCloseButtonRenderer extends CloseButtonRendererBase {
 	}		
 
 	public void doEncodeBegin(ResponseWriter writer, FacesContext context, org.omidbiz.component.UILovCloseButton component, ComponentVariables variables ) throws IOException {
-	    java.lang.String clientId = component.getClientId(context);
+	    writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery.noConflict();"),null);
+
+writer.endElement("script");
+java.lang.String clientId = component.getClientId(context);
 writer.startElement("a", component);
 			getUtils().writeAttribute(writer, "class", component.getAttributes().get("styleClass") );
 						getUtils().writeAttribute(writer, "href", "#" );
 						getUtils().writeAttribute(writer, "id", clientId );
 						getUtils().writeAttribute(writer, "name", clientId );
-						getUtils().writeAttribute(writer, "onclick", getOnClick(context,component) );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.colorboxControl.extendedClose(" + convertToString(component.getAttributes().get("pid")) + ",'" + convertToString(component.getAttributes().get("pValueText")) + "','" + convertToString(variables.getVariable("objectName")) + "');" + convertToString(getOnClick(context,component)) );
 						getUtils().writeAttribute(writer, "type", component.getAttributes().get("type") );
 			//
 // pass thru attributes

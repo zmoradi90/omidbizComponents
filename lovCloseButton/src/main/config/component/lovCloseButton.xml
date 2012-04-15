@@ -46,6 +46,28 @@ but just allows to avoid unnecessary updates on the client side if the response 
 			<description>Timeout ( in ms ) for request.</description>
 		</property>
 		<property>
+			<name>objectName</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the most important attribute use for setting and retrieving value via javascript				
+			</description>			
+			<required>true</required>
+		</property>
+		<property>
+			<name>pid</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				it is used for filling hidden field
+			</description>			
+		</property>
+		<property>
+			<name>pValueText</name>
+			<classname>java.lang.String</classname>
+			<description>
+				it is used to show in textbox
+			</description>			
+		</property>
+		<property>
 			<name>disabled</name>
 			<classname>boolean</classname>
 			<description>If true, disable this component on page.</description>

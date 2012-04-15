@@ -171,6 +171,14 @@ but just allows to avoid unnecessary updates on the client side if the response 
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description>the most important attribute use for setting and retrieving value via javascript</description>
+	   <name>objectName</name>
+	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>The client side script method to be called before DOM is updated</description>
 	   <name>onbeforedomupdate</name>
 	   	   	   					   	<deferred-value>
@@ -266,6 +274,20 @@ but just allows to avoid unnecessary updates on the client side if the response 
 	   <name>onmouseup</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>it is used to show in textbox</description>
+	   <name>pValueText</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>it is used for filling hidden field</description>
+	   <name>pid</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.Object</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

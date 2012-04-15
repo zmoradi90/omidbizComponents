@@ -287,6 +287,21 @@ but just allows to avoid unnecessary updates on the client side if the response 
 	  
 	 	 		 	  			  		  	  
 		/*
+		 * objectName
+		 * the most important attribute use for setting and retrieving value via javascript
+		 */
+		private ValueExpression _objectName;
+		/**
+		 * the most important attribute use for setting and retrieving value via javascript
+		 * Setter for objectName
+		 * @param objectName - new value
+		 */
+		 public void setObjectName( ValueExpression  __objectName ){
+			this._objectName = __objectName;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * onbeforedomupdate
 		 * The client side script method to be called before DOM is updated
 		 */
@@ -346,6 +361,36 @@ but just allows to avoid unnecessary updates on the client side if the response 
 	     }
 	  
 	 	 		 		 		 		 		 		 		 		 		 	  			  		  	  
+		/*
+		 * pValueText
+		 * it is used to show in textbox
+		 */
+		private ValueExpression _pValueText;
+		/**
+		 * it is used to show in textbox
+		 * Setter for pValueText
+		 * @param pValueText - new value
+		 */
+		 public void setPValueText( ValueExpression  __pValueText ){
+			this._pValueText = __pValueText;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * pid
+		 * it is used for filling hidden field
+		 */
+		private ValueExpression _pid;
+		/**
+		 * it is used for filling hidden field
+		 * Setter for pid
+		 * @param pid - new value
+		 */
+		 public void setPid( ValueExpression  __pid ){
+			this._pid = __pid;
+	     }
+	  
+	 	 		 	  			  		  	  
 		/*
 		 * process
 		 * Id['s] (in format of call  UIComponent.findComponent()) of components, processed at the phases 2-5 in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection
@@ -567,11 +612,14 @@ When the delay time is over, the request will be sent to the server or removed i
 	 		 		 		    this._ignoreDupResponses = null;
 	 		 		    this._immediate = null;
 	 		 		 		    this._limitToList = null;
+	 		 		    this._objectName = null;
 	 		 		    this._onbeforedomupdate = null;
 	 		 		    this._onblur = null;
 	 		 		 		    this._oncomplete = null;
 	 		 		 		    this._onfocus = null;
-	 		 		 		 		 		 		 		 		 		 		    this._process = null;
+	 		 		 		 		 		 		 		 		 		 		    this._pValueText = null;
+	 		 		    this._pid = null;
+	 		 		    this._process = null;
 	 		 		    this._reRender = null;
 	 		 		    this._rel = null;
 	 		 		 		    this._requestDelay = null;
@@ -844,6 +892,25 @@ When the delay time is over, the request will be sent to the server or removed i
 				}
 			}
 					   		 			 
+						if (this._objectName != null) {
+				if (this._objectName.isLiteralText()) {
+					try {
+												
+						java.lang.String __objectName = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._objectName.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setObjectName(__objectName);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("objectName", this._objectName);
+				}
+			}
+					   		 			 
 						if (this._onbeforedomupdate != null) {
 				if (this._onbeforedomupdate.isLiteralText()) {
 					try {
@@ -920,6 +987,44 @@ When the delay time is over, the request will be sent to the server or removed i
 				}
 			}
 					           		 			 
+						if (this._pValueText != null) {
+				if (this._pValueText.isLiteralText()) {
+					try {
+												
+						java.lang.String __pValueText = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._pValueText.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setPValueText(__pValueText);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("pValueText", this._pValueText);
+				}
+			}
+					   		 			 
+						if (this._pid != null) {
+				if (this._pid.isLiteralText()) {
+					try {
+												
+						java.lang.Object __pid = (java.lang.Object) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._pid.getExpressionString(), 
+											java.lang.Object.class);
+					
+												comp.setPid(__pid);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("pid", this._pid);
+				}
+			}
+					   		 			 
 						if (this._process != null) {
 				if (this._process.isLiteralText()) {
 					try {

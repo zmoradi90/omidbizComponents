@@ -8,9 +8,9 @@ import org.omidbiz.component.UILovCloseButton;
 
 public class HtmlLovCloseButton extends UILovCloseButton{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.LovCloseButton";
+final static public  String COMPONENT_FAMILY = "org.omidbiz.LovCloseButton";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.LovCloseButton";
+final static public  String COMPONENT_TYPE = "org.omidbiz.LovCloseButton";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
@@ -106,6 +106,11 @@ private  boolean _limitToList = false;
 private  boolean _limitToListSet = false;
 
 /*
+* the most important attribute use for setting and retrieving value via javascript
+*/
+private  String _objectName = null;
+
+/*
 * The client side script method to be called before DOM is updated
 */
 private  String _onbeforedomupdate = null;
@@ -174,6 +179,16 @@ private  String _onmouseover = null;
 * The client side script method to be called when a mouse button is released
 */
 private  String _onmouseup = null;
+
+/*
+* it is used to show in textbox
+*/
+private  String _pValueText = null;
+
+/*
+* it is used for filling hidden field
+*/
+private  Object _pid = null;
 
 /*
 * Id['s] (in format of call  UIComponent.findComponent()) of components, processed at the phases 2-5 in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection
@@ -646,6 +661,32 @@ this._limitToList = _limitToList;
 this._limitToListSet = true;
 }
 
+public String getObjectName(){
+	if (this._objectName != null) {
+		return this._objectName;
+	}
+	ValueExpression ve = getValueExpression("objectName");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setObjectName(String _objectName){
+this._objectName = _objectName;
+}
+
 public String getOnbeforedomupdate(){
 	if (this._onbeforedomupdate != null) {
 		return this._onbeforedomupdate;
@@ -1008,6 +1049,58 @@ public String getOnmouseup(){
 
 public void setOnmouseup(String _onmouseup){
 this._onmouseup = _onmouseup;
+}
+
+public String getPValueText(){
+	if (this._pValueText != null) {
+		return this._pValueText;
+	}
+	ValueExpression ve = getValueExpression("pValueText");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setPValueText(String _pValueText){
+this._pValueText = _pValueText;
+}
+
+public Object getPid(){
+	if (this._pid != null) {
+		return this._pid;
+	}
+	ValueExpression ve = getValueExpression("pid");
+	if (ve != null) {
+	    Object value = null;
+	    
+	    try {
+			value = (Object) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setPid(Object _pid){
+this._pid = _pid;
 }
 
 public Object getProcess(){
@@ -1414,7 +1507,7 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[51];
+Object [] state = new Object[54];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
 state[2] = Boolean.valueOf(_ajaxSingle);
@@ -1435,37 +1528,40 @@ state[16] = Boolean.valueOf(_ignoreDupResponsesSet);
 state[17] = _lang;
 state[18] = Boolean.valueOf(_limitToList);
 state[19] = Boolean.valueOf(_limitToListSet);
-state[20] = _onbeforedomupdate;
-state[21] = _onblur;
-state[22] = _onclick;
-state[23] = _oncomplete;
-state[24] = _ondblclick;
-state[25] = _onfocus;
-state[26] = _onkeydown;
-state[27] = _onkeypress;
-state[28] = _onkeyup;
-state[29] = _onmousedown;
-state[30] = _onmousemove;
-state[31] = _onmouseout;
-state[32] = _onmouseover;
-state[33] = _onmouseup;
-state[34] = saveAttachedState(context, _process);
-state[35] = saveAttachedState(context, _reRender);
-state[36] = _rel;
-state[37] = Integer.valueOf(_requestDelay);
-state[38] = Boolean.valueOf(_requestDelaySet);
-state[39] = _rev;
-state[40] = _shape;
-state[41] = _similarityGroupingId;
-state[42] = _status;
-state[43] = _style;
-state[44] = _styleClass;
-state[45] = _tabindex;
-state[46] = _target;
-state[47] = Integer.valueOf(_timeout);
-state[48] = Boolean.valueOf(_timeoutSet);
-state[49] = _title;
-state[50] = _type;
+state[20] = _objectName;
+state[21] = _onbeforedomupdate;
+state[22] = _onblur;
+state[23] = _onclick;
+state[24] = _oncomplete;
+state[25] = _ondblclick;
+state[26] = _onfocus;
+state[27] = _onkeydown;
+state[28] = _onkeypress;
+state[29] = _onkeyup;
+state[30] = _onmousedown;
+state[31] = _onmousemove;
+state[32] = _onmouseout;
+state[33] = _onmouseover;
+state[34] = _onmouseup;
+state[35] = _pValueText;
+state[36] = saveAttachedState(context, _pid);
+state[37] = saveAttachedState(context, _process);
+state[38] = saveAttachedState(context, _reRender);
+state[39] = _rel;
+state[40] = Integer.valueOf(_requestDelay);
+state[41] = Boolean.valueOf(_requestDelaySet);
+state[42] = _rev;
+state[43] = _shape;
+state[44] = _similarityGroupingId;
+state[45] = _status;
+state[46] = _style;
+state[47] = _styleClass;
+state[48] = _tabindex;
+state[49] = _target;
+state[50] = Integer.valueOf(_timeout);
+state[51] = Boolean.valueOf(_timeoutSet);
+state[52] = _title;
+state[53] = _type;
 return state;
 }
 
@@ -1492,37 +1588,40 @@ super.restoreState(context, states[0]);
 		_lang = (String)states[17];;
 		_limitToList = ((Boolean)states[18]).booleanValue();
 		_limitToListSet = ((Boolean)states[19]).booleanValue();
-		_onbeforedomupdate = (String)states[20];;
-		_onblur = (String)states[21];;
-		_onclick = (String)states[22];;
-		_oncomplete = (String)states[23];;
-		_ondblclick = (String)states[24];;
-		_onfocus = (String)states[25];;
-		_onkeydown = (String)states[26];;
-		_onkeypress = (String)states[27];;
-		_onkeyup = (String)states[28];;
-		_onmousedown = (String)states[29];;
-		_onmousemove = (String)states[30];;
-		_onmouseout = (String)states[31];;
-		_onmouseover = (String)states[32];;
-		_onmouseup = (String)states[33];;
-		_process = (Object)restoreAttachedState(context, states[34]);
-		_reRender = (Object)restoreAttachedState(context, states[35]);
-		_rel = (String)states[36];;
-		_requestDelay = ((Integer)states[37]).intValue();
-		_requestDelaySet = ((Boolean)states[38]).booleanValue();
-		_rev = (String)states[39];;
-		_shape = (String)states[40];;
-		_similarityGroupingId = (String)states[41];;
-		_status = (String)states[42];;
-		_style = (String)states[43];;
-		_styleClass = (String)states[44];;
-		_tabindex = (String)states[45];;
-		_target = (String)states[46];;
-		_timeout = ((Integer)states[47]).intValue();
-		_timeoutSet = ((Boolean)states[48]).booleanValue();
-		_title = (String)states[49];;
-		_type = (String)states[50];;
+		_objectName = (String)states[20];;
+		_onbeforedomupdate = (String)states[21];;
+		_onblur = (String)states[22];;
+		_onclick = (String)states[23];;
+		_oncomplete = (String)states[24];;
+		_ondblclick = (String)states[25];;
+		_onfocus = (String)states[26];;
+		_onkeydown = (String)states[27];;
+		_onkeypress = (String)states[28];;
+		_onkeyup = (String)states[29];;
+		_onmousedown = (String)states[30];;
+		_onmousemove = (String)states[31];;
+		_onmouseout = (String)states[32];;
+		_onmouseover = (String)states[33];;
+		_onmouseup = (String)states[34];;
+		_pValueText = (String)states[35];;
+		_pid = (Object)restoreAttachedState(context, states[36]);
+		_process = (Object)restoreAttachedState(context, states[37]);
+		_reRender = (Object)restoreAttachedState(context, states[38]);
+		_rel = (String)states[39];;
+		_requestDelay = ((Integer)states[40]).intValue();
+		_requestDelaySet = ((Boolean)states[41]).booleanValue();
+		_rev = (String)states[42];;
+		_shape = (String)states[43];;
+		_similarityGroupingId = (String)states[44];;
+		_status = (String)states[45];;
+		_style = (String)states[46];;
+		_styleClass = (String)states[47];;
+		_tabindex = (String)states[48];;
+		_target = (String)states[49];;
+		_timeout = ((Integer)states[50]).intValue();
+		_timeoutSet = ((Boolean)states[51]).booleanValue();
+		_title = (String)states[52];;
+		_type = (String)states[53];;
 	
 }
 
