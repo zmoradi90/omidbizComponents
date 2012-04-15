@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputListOfValues;
 
 public class HtmlInputListOfValues extends UIInputListOfValues{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
+static final public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey

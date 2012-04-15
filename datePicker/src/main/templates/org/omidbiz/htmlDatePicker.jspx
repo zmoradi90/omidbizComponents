@@ -45,8 +45,8 @@
 	
 	 
 		<input type="text" readonly="readonly" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
-		<img id="#{clientId}_btn" src="#{icon}" style="vertical-align: top;" calss=".name"/>
-		<img style="border: 0;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}');"/>
+		<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
+		<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}');"/>
 		<script type="text/javascript">
 		Calendar.setup({
 						inputField  : "#{clientId}",   // id of the input field

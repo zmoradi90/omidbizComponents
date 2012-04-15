@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputNumeric;
 
 public class HtmlInputNumeric extends UIInputNumeric{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.InputNumeric";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.InputNumeric";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.InputNumeric";
+static final public  String COMPONENT_TYPE = "org.omidbiz.InputNumeric";
 
 /*
 * Style Class attribute for the Caption facet

@@ -205,11 +205,14 @@ variables.setVariable("border", getResource( "/org/omidbiz/renderkit/html/css/im
 
 variables.setVariable("view", component.getAttributes().get("view") );
 variables.setVariable("type", component.getAttributes().get("type") );
+variables.setVariable("useImage", component.getAttributes().get("useImage") );
+variables.setVariable("imageSrc", component.getAttributes().get("imageSrc") );
 variables.setVariable("id", component.getAttributes().get("id") );
 variables.setVariable("iframe", component.getAttributes().get("iframe") );
 
  
-			String type = (String) variables.getVariable("type");			
+			String type = (String) variables.getVariable("type");
+			Boolean useImage = (Boolean) variables.getVariable("useImage");
 
 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { 
@@ -218,8 +221,17 @@ writer.startElement("a", component);
 						getUtils().writeAttribute(writer, "href", variables.getVariable("view") );
 						getUtils().writeAttribute(writer, "rel", "rel" + convertToString(variables.getVariable("id")) );
 			
+ if (useImage) { 
+writer.startElement("img", component);
+			getUtils().writeAttribute(writer, "border", "0" );
+						getUtils().writeAttribute(writer, "src", variables.getVariable("imageSrc") );
+						getUtils().writeAttribute(writer, "title", component.getAttributes().get("title") );
+			
+writer.endElement("img");
+ } else { 
 writer.writeText(convertToString(component.getAttributes().get("openText")),null);
 
+ } 
 writer.endElement("a");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );

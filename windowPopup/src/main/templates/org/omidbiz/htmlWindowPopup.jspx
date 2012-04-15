@@ -23,12 +23,15 @@
 	
 	<c:set var="view" value="#{component.attributes['view']}"/>
 	<c:set var="type" value="#{component.attributes['type']}"/>
+	<c:set var="useImage" value="#{component.attributes['useImage']}"/>
+	<c:set var="imageSrc" value="#{component.attributes['imageSrc']}"/>
 	<c:set var="id" value="#{component.attributes['id']}"/>
 	<c:set var="iframe" value="#{component.attributes['iframe']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
-			String type = (String) variables.getVariable("type");			
+			String type = (String) variables.getVariable("type");
+			Boolean useImage = (Boolean) variables.getVariable("useImage");
 ]]>
 </jsp:scriptlet>
 	
@@ -36,7 +39,11 @@
 	<jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { ]]></jsp:scriptlet>	
 			
 	<a rel="rel#{id}" class="#{id}popupClass" href="#{view}">
-		#{component.attributes['openText']}
+		<jsp:scriptlet><![CDATA[ if (useImage) { ]]></jsp:scriptlet>
+			<img border="0" src="#{imageSrc}" title="#{component.attributes['title']}"/>
+		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+			#{component.attributes['openText']}
+		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	</a>
 	
 	<script type="text/javascript">

@@ -101,6 +101,13 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description></description>
+	   <name>imageSrc</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>A flag indicating that this component value must be converted
             and validated immediately (that is, during Apply Request Values
             phase), rather than waiting until a Process Validations phase</description>
@@ -283,11 +290,25 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description>Image title if you use image</description>
+	   <name>title</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description></description>
 	   <name>type</name>
 	   			<required>true</required>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>useImage</name>
+	   	   	   					   	<deferred-value>
+					<type>boolean</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

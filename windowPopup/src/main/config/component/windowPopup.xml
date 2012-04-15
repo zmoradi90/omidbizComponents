@@ -84,6 +84,33 @@
 			<defaultvalue>false</defaultvalue>
 		</property>
 		
+		<property>
+			<name>useImage</name>
+			<classname>boolean</classname>
+			<description>
+				 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		
+		<property>
+			<name>imageSrc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				 
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+				 Image title if you use image
+			</description>
+			
+		</property>
+		
 		
 		
 	</component>

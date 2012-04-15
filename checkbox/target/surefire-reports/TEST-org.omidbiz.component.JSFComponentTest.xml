@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.016" errors="0" skipped="0" tests="1" name="org.omidbiz.component.JSFComponentTest">
+<testsuite failures="0" time="0.019" errors="0" skipped="0" tests="1" name="org.omidbiz.component.JSFComponentTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/omidbiz/apps/java/jdk1.6.0_12/jre/lib/i386"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="/home/omidbiz/projects/omidbizComponents/checkbox"/>
     <property name="java.endorsed.dirs" value="/home/omidbiz/apps/java/jdk1.6.0_12/jre/lib/endorsed"/>
     <property name="os.arch" value="i386"/>
-    <property name="surefire.real.class.path" value="/tmp/surefirebooter5158558835639639396.jar"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter6216129105975455820.jar"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
@@ -31,7 +31,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="50.0"/>
     <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
-    <property name="os.version" value="3.2.9-2.fc16.i686.PAE"/>
+    <property name="os.version" value="3.3.0-4.fc16.i686.PAE"/>
     <property name="user.home" value="/home/omidbiz"/>
     <property name="user.timezone" value=""/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>

@@ -262,7 +262,7 @@ writer.startElement("a", component);
 writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "alt", "Open Colorbox" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("icon") );
-						getUtils().writeAttribute(writer, "style", "border: 0;" );
+						getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;" );
 			
 writer.endElement("img");
 writer.endElement("a");
@@ -270,7 +270,7 @@ writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "alt", "clear" );
 						getUtils().writeAttribute(writer, "onclick", "Richfaces.colorboxControl.removeValue('" + convertToString(variables.getVariable("objectName")) + "');" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon") );
-						getUtils().writeAttribute(writer, "style", "border: 0;" );
+						getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;" );
 			
 writer.endElement("img");
  } 

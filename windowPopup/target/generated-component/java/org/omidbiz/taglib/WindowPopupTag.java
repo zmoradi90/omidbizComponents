@@ -170,6 +170,21 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 	  
 	 	 		 	  			  		  	  
 		/*
+		 * imageSrc
+		 * 
+		 */
+		private ValueExpression _imageSrc;
+		/**
+		 * 
+		 * Setter for imageSrc
+		 * @param imageSrc - new value
+		 */
+		 public void setImageSrc( ValueExpression  __imageSrc ){
+			this._imageSrc = __imageSrc;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * immediate
 		 * A flag indicating that this component value must be converted
             and validated immediately (that is, during Apply Request Values
@@ -362,7 +377,7 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 			this._tabindex = __tabindex;
 	     }
 	  
-	 	 		 	  			  		  	  
+	 	 		 		 	  			  		  	  
 		/*
 		 * type
 		 * 
@@ -375,6 +390,21 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 		 */
 		 public void setType( ValueExpression  __type ){
 			this._type = __type;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * useImage
+		 * 
+		 */
+		private ValueExpression _useImage;
+		/**
+		 * 
+		 * Setter for useImage
+		 * @param useImage - new value
+		 */
+		 public void setUseImage( ValueExpression  __useImage ){
+			this._useImage = __useImage;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -490,6 +520,7 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 	 		 		    this._converterMessage = null;
 	 		 		    this._disabled = null;
 	 		 		 		 		    this._iframe = null;
+	 		 		    this._imageSrc = null;
 	 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
 	 		 		    this._maxlength = null;
@@ -502,7 +533,8 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 	 		 		    this._requiredMessage = null;
 	 		 		    this._size = null;
 	 		 		 		 		    this._tabindex = null;
-	 		 		    this._type = null;
+	 		 		 		    this._type = null;
+	 		 		    this._useImage = null;
 	 		 		    this._valid = null;
 	 		 		    this._validator = null;
 	 		 		    this._validatorMessage = null;
@@ -662,6 +694,25 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 					}
 				} else {
 					component.setValueExpression("iframe", this._iframe);
+				}
+			}
+					   		 			 
+						if (this._imageSrc != null) {
+				if (this._imageSrc.isLiteralText()) {
+					try {
+												
+						java.lang.String __imageSrc = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._imageSrc.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setImageSrc(__imageSrc);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("imageSrc", this._imageSrc);
 				}
 			}
 					   		 			 
@@ -892,7 +943,7 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 					component.setValueExpression("tabindex", this._tabindex);
 				}
 			}
-					   		 			 
+					    		 			 
 						if (this._type != null) {
 				if (this._type.isLiteralText()) {
 					try {
@@ -909,6 +960,25 @@ public class WindowPopupTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagB
 					}
 				} else {
 					component.setValueExpression("type", this._type);
+				}
+			}
+					   		 			 
+						if (this._useImage != null) {
+				if (this._useImage.isLiteralText()) {
+					try {
+												
+						Boolean __useImage = (Boolean) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._useImage.getExpressionString(), 
+											Boolean.class);
+					
+												comp.setUseImage(__useImage.booleanValue());
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("useImage", this._useImage);
 				}
 			}
 					   		 			 

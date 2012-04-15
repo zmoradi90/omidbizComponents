@@ -233,14 +233,14 @@ writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "calss", ".name" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "_btn" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("icon") );
-						getUtils().writeAttribute(writer, "style", "vertical-align: top;" );
+						getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;" );
 			
 writer.endElement("img");
 writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "alt", "clear" );
 						getUtils().writeAttribute(writer, "onclick", "Richfaces.calendarControl.removeValue('" + convertToString(clientId) + "');" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon") );
-						getUtils().writeAttribute(writer, "style", "border: 0;" );
+						getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;" );
 			
 writer.endElement("img");
 writer.startElement("script", component);

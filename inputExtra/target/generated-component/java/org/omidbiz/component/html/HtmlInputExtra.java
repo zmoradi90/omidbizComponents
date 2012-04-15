@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputExtra;
 
 public class HtmlInputExtra extends UIInputExtra{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.InputExtra";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.InputExtra";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.InputExtra";
+static final public  String COMPONENT_TYPE = "org.omidbiz.InputExtra";
 
 /*
 * 
