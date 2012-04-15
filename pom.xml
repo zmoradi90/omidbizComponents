@@ -130,5 +130,6 @@
     <module>inputNumeric</module>
     <module>persianCalendar</module>
     <module>nationalCode</module>
+    <module>lovCloseButton</module>
   </modules>
 </project>
