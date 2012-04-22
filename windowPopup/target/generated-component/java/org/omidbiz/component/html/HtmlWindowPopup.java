@@ -4,14 +4,13 @@ import javax.el.ELException;
 import javax.el.ValueExpression;
 import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
-import javax.faces.el.MethodBinding;
 import org.omidbiz.component.UIWindowPopup;
 
 public class HtmlWindowPopup extends UIWindowPopup{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+final static public  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
+final static public  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
@@ -19,21 +18,24 @@ public static final  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 private  String _accesskey = null;
 
 /*
-* Deprecated. This attribute specifies the horizontal alignment of its element with respect to the surrounding context. The  possible values are "left", "center", "right" and "justify".  
-            The default depends on the base text direction. For left to right text, the default is align="left", while for right to left text, the default is align="right".
+* boolean attribute which provides possibility to limit JSF tree processing(decoding, conversion/validation, value applying) 
+to the component which send the request only
 */
-private  String _align = null;
+private  boolean _ajaxSingle = false;
+
+private  boolean _ajaxSingleSet = false;
 
 /*
-* For a user agents that cannot display images, forms, or applets, this attribute specifies alternate text. The language of the alternate text is specified by the lang attribute
+* If "true", after process validations phase it skips updates of model beans on a force render response. It can be used for validating components input
 */
-private  String _alt = null;
+private  boolean _bypassUpdates = false;
+
+private  boolean _bypassUpdatesSet = false;
 
 /*
-* MethodExpression representing an action listener method
-				that will be notified
+* The character encoding of a resource designated by this hyperlink
 */
-private  MethodBinding _atMin = null;
+private  String _charset = null;
 
 /*
 * 
@@ -41,11 +43,49 @@ private  MethodBinding _atMin = null;
 private  String _closeText = null;
 
 /*
-* When set for a form control, this boolean attribute disables the control for your input
+* This attribute specifies the position and shape on the screen. The number and order of values depends on the shape being defined. Possible combinations:
+            
+            * rect: left-x, top-y, right-x, bottom-y.
+            * circle: center-x, center-y, radius. Note. When the radius value is percentage value, user agents should calculate the final radius value based on the associated object's width and height. The radius should be the smaller value of the two.
+            * poly: x1, y1, x2, y2, ..., xN, yN. The first x and y coordinate pair and the last should be the same to close the polygon. When these coordinate values are not the same, user agents should infer an additional coordinate pair to close the polygon.
+            
+            Coordinates are relative to the top, left corner of the object. All values are lengths. All values are separated by commas
+*/
+private  String _coords = null;
+
+/*
+* Serialized (on default with JSON) data passed on the client by a developer on AJAX request. It's accessible via "data.foo" syntax
+*/
+private  Object _data = null;
+
+/*
+* Direction indication for text that does not inherit
+			directionality. Valid values are "LTR" (left-to-right)
+			and "RTL" (right-to-left)
+*/
+private  String _dir = null;
+
+/*
+* If true, disable this component on page.
 */
 private  boolean _disabled = false;
 
 private  boolean _disabledSet = false;
+
+/*
+* Name of requests queue to avoid send next request before complete other from same event. Can be used to reduce number of requests of frequently events (key press, mouse move etc.)
+*/
+private  String _eventsQueue = null;
+
+/*
+* id of element to set focus after request completed on client side
+*/
+private  String _focus = null;
+
+/*
+* Base language of a resource specified with the href attribute; hreflang may only be used with href
+*/
+private  String _hreflang = null;
 
 /*
 * 
@@ -55,28 +95,45 @@ private  boolean _iframe = false;
 private  boolean _iframeSet = false;
 
 /*
+* Attribute allows to ignore an Ajax Response produced by a request if the
+				newest 'similar' request is
+				in a queue already. ignoreDupResponses="true" does not cancel the
+				request while it is processed on the server,
+				but just allows to avoid unnecessary updates on the client side if the
+				response isn't actual now
+*/
+private  boolean _ignoreDupResponses = false;
+
+private  boolean _ignoreDupResponsesSet = false;
+
+/*
 * 
 */
 private  String _imageSrc = null;
 
 /*
-* Specifies the maximum number of digits that could be entered into the input field. 
-		The maximum number is unlimited by default. 
-		If entered value exceeds the value specified in "maxValue" attribute than the slider takes a maximum value position.
+* Code describing the language used in the generated markup for this component
 */
-private  int _maxlength = Integer.MIN_VALUE;
-
-private  boolean _maxlengthSet = false;
+private  String _lang = null;
 
 /*
-* The client side script method to be called when the element loses the focus
+* If "true", then of all AJAX-rendered on the page components only those will be updated, 
+		which ID's are passed to the "reRender" attribute of the describable component. 
+		"false"-the default value-means that all components with ajaxRendered="true" will be updated.
+*/
+private  boolean _limitToList = false;
+
+private  boolean _limitToListSet = false;
+
+/*
+* The client side script method to be called before DOM is updated
+*/
+private  String _onbeforedomupdate = null;
+
+/*
+* JavaScript code. The onblur event occurs when an element loses focus either by the pointing device or by tabbing navigation. It may be used with the same elements as onfocus
 */
 private  String _onblur = null;
-
-/*
-* The client side script method to be called when the element value is changed
-*/
-private  String _onchange = null;
 
 /*
 * The clientside script method to be called when the element is clicked
@@ -84,12 +141,17 @@ private  String _onchange = null;
 private  String _onclick = null;
 
 /*
+* The client side script method to be called after the request is completed
+*/
+private  String _oncomplete = null;
+
+/*
 * The client side script method to be called when the element is double-clicked
 */
 private  String _ondblclick = null;
 
 /*
-* The client side script method to be called when the element gets the focus
+* JavaScript code. The onfocus event occurs when an element gets focus
 */
 private  String _onfocus = null;
 
@@ -134,21 +196,52 @@ private  String _onmouseover = null;
 private  String _onmouseup = null;
 
 /*
-* The client side script method to be called when some text is selected in the text field. This attribute can be used with the INPUT and TEXTAREA elements.
-*/
-private  String _onselect = null;
-
-/*
 * 
 */
 private  String _openText = null;
 
 /*
-* This attribute tells the user agent the initial width of the control. The width is given in pixels except when type attribute has the value "text" or "password". In that case, its value refers to the (integer) number of characters
+* Id['s] (in format of call  UIComponent.findComponent()) of components, processed at the phases 2-5 in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection
 */
-private  int _size = Integer.MIN_VALUE;
+private  Object _process = null;
 
-private  boolean _sizeSet = false;
+/*
+* Id['s] (in format of call  UIComponent.findComponent()) of components, rendered in case of AjaxRequest  caused by this component. Can be single id, comma-separated list of Id's, or EL Expression  with array or Collection
+*/
+private  Object _reRender = null;
+
+/*
+* The relationship from the current document to the anchor specified by this hyperlink. The value of this attribute is a space-separated list of link types
+*/
+private  String _rel = null;
+
+/*
+* Attribute defines the time (in ms.) that the request will be wait in the queue before it is ready to send.
+When the delay time is over, the request will be sent to the server or removed if the newest 'similar' request is in a queue already
+*/
+private  int _requestDelay = Integer.MIN_VALUE;
+
+private  boolean _requestDelaySet = false;
+
+/*
+* A reverse link from the anchor specified by this hyperlink to the current document. The value of this attribute is a space-separated list of link types
+*/
+private  String _rev = null;
+
+/*
+* This attribute specifies the shape of a region. The possible values are "default", "rect", "circle" and "poly".
+*/
+private  String _shape = null;
+
+/*
+* If there are any component requests with identical IDs then these requests will be grouped.
+*/
+private  String _similarityGroupingId = null;
+
+/*
+* ID (in format of call UIComponent.findComponent()) of Request status component
+*/
+private  String _status = null;
 
 /*
 * CSS style(s) is/are to be applied when this component is rendered
@@ -164,6 +257,20 @@ private  String _styleClass = null;
 * This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros
 */
 private  String _tabindex = null;
+
+/*
+* This attribute specifies the name of a frame where a document is to be opened.
+            
+            By assigning a name to a frame via the name attribute, authors can refer to it as the "target" of links defined by other elements
+*/
+private  String _target = null;
+
+/*
+* Response waiting time on a particular request. If a response is not received during this time, the request is aborted
+*/
+private  int _timeout = Integer.MIN_VALUE;
+
+private  boolean _timeoutSet = false;
 
 /*
 * Image title if you use image
@@ -218,11 +325,71 @@ public void setAccesskey(String _accesskey){
 this._accesskey = _accesskey;
 }
 
-public String getAlign(){
-	if (this._align != null) {
-		return this._align;
+public boolean isAjaxSingle(){
+	if (this._ajaxSingleSet) {
+	    return (this._ajaxSingle);
 	}
-	ValueExpression ve = getValueExpression("align");
+	ValueExpression ve = getValueExpression("ajaxSingle");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._ajaxSingle);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._ajaxSingle);
+	}
+
+}
+
+public void setAjaxSingle(boolean _ajaxSingle){
+this._ajaxSingle = _ajaxSingle;
+this._ajaxSingleSet = true;
+}
+
+public boolean isBypassUpdates(){
+	if (this._bypassUpdatesSet) {
+	    return (this._bypassUpdates);
+	}
+	ValueExpression ve = getValueExpression("bypassUpdates");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._bypassUpdates);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._bypassUpdates);
+	}
+
+}
+
+public void setBypassUpdates(boolean _bypassUpdates){
+this._bypassUpdates = _bypassUpdates;
+this._bypassUpdatesSet = true;
+}
+
+public String getCharset(){
+	if (this._charset != null) {
+		return this._charset;
+	}
+	ValueExpression ve = getValueExpression("charset");
 	if (ve != null) {
 	    String value = null;
 	    
@@ -240,60 +407,8 @@ public String getAlign(){
 
 }
 
-public void setAlign(String _align){
-this._align = _align;
-}
-
-public String getAlt(){
-	if (this._alt != null) {
-		return this._alt;
-	}
-	ValueExpression ve = getValueExpression("alt");
-	if (ve != null) {
-	    String value = null;
-	    
-	    try {
-			value = (String) ve.getValue(getFacesContext().getELContext());
-	    } catch (ELException e) {
-			throw new FacesException(e);
-	    }
-	    
-	    return value;
-	} 
-
-    return null;
-	
-
-}
-
-public void setAlt(String _alt){
-this._alt = _alt;
-}
-
-public MethodBinding getAtMin(){
-	if (this._atMin != null) {
-		return this._atMin;
-	}
-	ValueExpression ve = getValueExpression("atMin");
-	if (ve != null) {
-	    MethodBinding value = null;
-	    
-	    try {
-			value = (MethodBinding) ve.getValue(getFacesContext().getELContext());
-	    } catch (ELException e) {
-			throw new FacesException(e);
-	    }
-	    
-	    return value;
-	} 
-
-    return null;
-	
-
-}
-
-public void setAtMin(MethodBinding _atMin){
-this._atMin = _atMin;
+public void setCharset(String _charset){
+this._charset = _charset;
 }
 
 public String getCloseText(){
@@ -320,6 +435,84 @@ public String getCloseText(){
 
 public void setCloseText(String _closeText){
 this._closeText = _closeText;
+}
+
+public String getCoords(){
+	if (this._coords != null) {
+		return this._coords;
+	}
+	ValueExpression ve = getValueExpression("coords");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setCoords(String _coords){
+this._coords = _coords;
+}
+
+public Object getData(){
+	if (this._data != null) {
+		return this._data;
+	}
+	ValueExpression ve = getValueExpression("data");
+	if (ve != null) {
+	    Object value = null;
+	    
+	    try {
+			value = (Object) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setData(Object _data){
+this._data = _data;
+}
+
+public String getDir(){
+	if (this._dir != null) {
+		return this._dir;
+	}
+	ValueExpression ve = getValueExpression("dir");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setDir(String _dir){
+this._dir = _dir;
 }
 
 public boolean isDisabled(){
@@ -352,6 +545,84 @@ this._disabled = _disabled;
 this._disabledSet = true;
 }
 
+public String getEventsQueue(){
+	if (this._eventsQueue != null) {
+		return this._eventsQueue;
+	}
+	ValueExpression ve = getValueExpression("eventsQueue");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setEventsQueue(String _eventsQueue){
+this._eventsQueue = _eventsQueue;
+}
+
+public String getFocus(){
+	if (this._focus != null) {
+		return this._focus;
+	}
+	ValueExpression ve = getValueExpression("focus");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setFocus(String _focus){
+this._focus = _focus;
+}
+
+public String getHreflang(){
+	if (this._hreflang != null) {
+		return this._hreflang;
+	}
+	ValueExpression ve = getValueExpression("hreflang");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setHreflang(String _hreflang){
+this._hreflang = _hreflang;
+}
+
 public boolean isIframe(){
 	if (this._iframeSet) {
 	    return (this._iframe);
@@ -382,6 +653,36 @@ this._iframe = _iframe;
 this._iframeSet = true;
 }
 
+public boolean isIgnoreDupResponses(){
+	if (this._ignoreDupResponsesSet) {
+	    return (this._ignoreDupResponses);
+	}
+	ValueExpression ve = getValueExpression("ignoreDupResponses");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._ignoreDupResponses);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._ignoreDupResponses);
+	}
+
+}
+
+public void setIgnoreDupResponses(boolean _ignoreDupResponses){
+this._ignoreDupResponses = _ignoreDupResponses;
+this._ignoreDupResponsesSet = true;
+}
+
 public String getImageSrc(){
 	if (this._imageSrc != null) {
 		return this._imageSrc;
@@ -408,34 +709,86 @@ public void setImageSrc(String _imageSrc){
 this._imageSrc = _imageSrc;
 }
 
-public int getMaxlength(){
-	if (this._maxlengthSet) {
-	    return (this._maxlength);
+public String getLang(){
+	if (this._lang != null) {
+		return this._lang;
 	}
-	ValueExpression ve = getValueExpression("maxlength");
+	ValueExpression ve = getValueExpression("lang");
 	if (ve != null) {
-	    Integer value = null;
+	    String value = null;
 	    
 	    try {
-			value = (Integer) ve.getValue(getFacesContext().getELContext());
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setLang(String _lang){
+this._lang = _lang;
+}
+
+public boolean isLimitToList(){
+	if (this._limitToListSet) {
+	    return (this._limitToList);
+	}
+	ValueExpression ve = getValueExpression("limitToList");
+	if (ve != null) {
+	    Boolean value = null;
+	    
+	    try {
+			value = (Boolean) ve.getValue(getFacesContext().getELContext());
 	    } catch (ELException e) {
 			throw new FacesException(e);
 	    }
 	    
 	    if (null == value) {
-			return (this._maxlength);
+			return (this._limitToList);
 	    }
 	    
 	    return value;
 	} else {
-	    return (this._maxlength);
+	    return (this._limitToList);
 	}
 
 }
 
-public void setMaxlength(int _maxlength){
-this._maxlength = _maxlength;
-this._maxlengthSet = true;
+public void setLimitToList(boolean _limitToList){
+this._limitToList = _limitToList;
+this._limitToListSet = true;
+}
+
+public String getOnbeforedomupdate(){
+	if (this._onbeforedomupdate != null) {
+		return this._onbeforedomupdate;
+	}
+	ValueExpression ve = getValueExpression("onbeforedomupdate");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnbeforedomupdate(String _onbeforedomupdate){
+this._onbeforedomupdate = _onbeforedomupdate;
 }
 
 public String getOnblur(){
@@ -464,32 +817,6 @@ public void setOnblur(String _onblur){
 this._onblur = _onblur;
 }
 
-public String getOnchange(){
-	if (this._onchange != null) {
-		return this._onchange;
-	}
-	ValueExpression ve = getValueExpression("onchange");
-	if (ve != null) {
-	    String value = null;
-	    
-	    try {
-			value = (String) ve.getValue(getFacesContext().getELContext());
-	    } catch (ELException e) {
-			throw new FacesException(e);
-	    }
-	    
-	    return value;
-	} 
-
-    return null;
-	
-
-}
-
-public void setOnchange(String _onchange){
-this._onchange = _onchange;
-}
-
 public String getOnclick(){
 	if (this._onclick != null) {
 		return this._onclick;
@@ -514,6 +841,32 @@ public String getOnclick(){
 
 public void setOnclick(String _onclick){
 this._onclick = _onclick;
+}
+
+public String getOncomplete(){
+	if (this._oncomplete != null) {
+		return this._oncomplete;
+	}
+	ValueExpression ve = getValueExpression("oncomplete");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOncomplete(String _oncomplete){
+this._oncomplete = _oncomplete;
 }
 
 public String getOndblclick(){
@@ -776,32 +1129,6 @@ public void setOnmouseup(String _onmouseup){
 this._onmouseup = _onmouseup;
 }
 
-public String getOnselect(){
-	if (this._onselect != null) {
-		return this._onselect;
-	}
-	ValueExpression ve = getValueExpression("onselect");
-	if (ve != null) {
-	    String value = null;
-	    
-	    try {
-			value = (String) ve.getValue(getFacesContext().getELContext());
-	    } catch (ELException e) {
-			throw new FacesException(e);
-	    }
-	    
-	    return value;
-	} 
-
-    return null;
-	
-
-}
-
-public void setOnselect(String _onselect){
-this._onselect = _onselect;
-}
-
 public String getOpenText(){
 	if (this._openText != null) {
 		return this._openText;
@@ -828,11 +1155,89 @@ public void setOpenText(String _openText){
 this._openText = _openText;
 }
 
-public int getSize(){
-	if (this._sizeSet) {
-	    return (this._size);
+public Object getProcess(){
+	if (this._process != null) {
+		return this._process;
 	}
-	ValueExpression ve = getValueExpression("size");
+	ValueExpression ve = getValueExpression("process");
+	if (ve != null) {
+	    Object value = null;
+	    
+	    try {
+			value = (Object) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setProcess(Object _process){
+this._process = _process;
+}
+
+public Object getReRender(){
+	if (this._reRender != null) {
+		return this._reRender;
+	}
+	ValueExpression ve = getValueExpression("reRender");
+	if (ve != null) {
+	    Object value = null;
+	    
+	    try {
+			value = (Object) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setReRender(Object _reRender){
+this._reRender = _reRender;
+}
+
+public String getRel(){
+	if (this._rel != null) {
+		return this._rel;
+	}
+	ValueExpression ve = getValueExpression("rel");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setRel(String _rel){
+this._rel = _rel;
+}
+
+public int getRequestDelay(){
+	if (this._requestDelaySet) {
+	    return (this._requestDelay);
+	}
+	ValueExpression ve = getValueExpression("requestDelay");
 	if (ve != null) {
 	    Integer value = null;
 	    
@@ -843,19 +1248,123 @@ public int getSize(){
 	    }
 	    
 	    if (null == value) {
-			return (this._size);
+			return (this._requestDelay);
 	    }
 	    
 	    return value;
 	} else {
-	    return (this._size);
+	    return (this._requestDelay);
 	}
 
 }
 
-public void setSize(int _size){
-this._size = _size;
-this._sizeSet = true;
+public void setRequestDelay(int _requestDelay){
+this._requestDelay = _requestDelay;
+this._requestDelaySet = true;
+}
+
+public String getRev(){
+	if (this._rev != null) {
+		return this._rev;
+	}
+	ValueExpression ve = getValueExpression("rev");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setRev(String _rev){
+this._rev = _rev;
+}
+
+public String getShape(){
+	if (this._shape != null) {
+		return this._shape;
+	}
+	ValueExpression ve = getValueExpression("shape");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setShape(String _shape){
+this._shape = _shape;
+}
+
+public String getSimilarityGroupingId(){
+	if (this._similarityGroupingId != null) {
+		return this._similarityGroupingId;
+	}
+	ValueExpression ve = getValueExpression("similarityGroupingId");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setSimilarityGroupingId(String _similarityGroupingId){
+this._similarityGroupingId = _similarityGroupingId;
+}
+
+public String getStatus(){
+	if (this._status != null) {
+		return this._status;
+	}
+	ValueExpression ve = getValueExpression("status");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setStatus(String _status){
+this._status = _status;
 }
 
 public String getStyle(){
@@ -934,6 +1443,62 @@ public String getTabindex(){
 
 public void setTabindex(String _tabindex){
 this._tabindex = _tabindex;
+}
+
+public String getTarget(){
+	if (this._target != null) {
+		return this._target;
+	}
+	ValueExpression ve = getValueExpression("target");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setTarget(String _target){
+this._target = _target;
+}
+
+public int getTimeout(){
+	if (this._timeoutSet) {
+	    return (this._timeout);
+	}
+	ValueExpression ve = getValueExpression("timeout");
+	if (ve != null) {
+	    Integer value = null;
+	    
+	    try {
+			value = (Integer) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    if (null == value) {
+			return (this._timeout);
+	    }
+	    
+	    return value;
+	} else {
+	    return (this._timeout);
+	}
+
+}
+
+public void setTimeout(int _timeout){
+this._timeout = _timeout;
+this._timeoutSet = true;
 }
 
 public String getTitle(){
@@ -1050,45 +1615,66 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[38];
+Object [] state = new Object[59];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
-state[2] = _align;
-state[3] = _alt;
-state[4] = saveAttachedState(context, _atMin);
-state[5] = _closeText;
-state[6] = Boolean.valueOf(_disabled);
-state[7] = Boolean.valueOf(_disabledSet);
-state[8] = Boolean.valueOf(_iframe);
-state[9] = Boolean.valueOf(_iframeSet);
-state[10] = _imageSrc;
-state[11] = Integer.valueOf(_maxlength);
-state[12] = Boolean.valueOf(_maxlengthSet);
-state[13] = _onblur;
-state[14] = _onchange;
-state[15] = _onclick;
-state[16] = _ondblclick;
-state[17] = _onfocus;
-state[18] = _onkeydown;
-state[19] = _onkeypress;
-state[20] = _onkeyup;
-state[21] = _onmousedown;
-state[22] = _onmousemove;
-state[23] = _onmouseout;
-state[24] = _onmouseover;
-state[25] = _onmouseup;
-state[26] = _onselect;
-state[27] = _openText;
-state[28] = Integer.valueOf(_size);
-state[29] = Boolean.valueOf(_sizeSet);
-state[30] = _style;
-state[31] = _styleClass;
-state[32] = _tabindex;
-state[33] = _title;
-state[34] = _type;
-state[35] = Boolean.valueOf(_useImage);
-state[36] = Boolean.valueOf(_useImageSet);
-state[37] = _view;
+state[2] = Boolean.valueOf(_ajaxSingle);
+state[3] = Boolean.valueOf(_ajaxSingleSet);
+state[4] = Boolean.valueOf(_bypassUpdates);
+state[5] = Boolean.valueOf(_bypassUpdatesSet);
+state[6] = _charset;
+state[7] = _closeText;
+state[8] = _coords;
+state[9] = saveAttachedState(context, _data);
+state[10] = _dir;
+state[11] = Boolean.valueOf(_disabled);
+state[12] = Boolean.valueOf(_disabledSet);
+state[13] = _eventsQueue;
+state[14] = _focus;
+state[15] = _hreflang;
+state[16] = Boolean.valueOf(_iframe);
+state[17] = Boolean.valueOf(_iframeSet);
+state[18] = Boolean.valueOf(_ignoreDupResponses);
+state[19] = Boolean.valueOf(_ignoreDupResponsesSet);
+state[20] = _imageSrc;
+state[21] = _lang;
+state[22] = Boolean.valueOf(_limitToList);
+state[23] = Boolean.valueOf(_limitToListSet);
+state[24] = _onbeforedomupdate;
+state[25] = _onblur;
+state[26] = _onclick;
+state[27] = _oncomplete;
+state[28] = _ondblclick;
+state[29] = _onfocus;
+state[30] = _onkeydown;
+state[31] = _onkeypress;
+state[32] = _onkeyup;
+state[33] = _onmousedown;
+state[34] = _onmousemove;
+state[35] = _onmouseout;
+state[36] = _onmouseover;
+state[37] = _onmouseup;
+state[38] = _openText;
+state[39] = saveAttachedState(context, _process);
+state[40] = saveAttachedState(context, _reRender);
+state[41] = _rel;
+state[42] = Integer.valueOf(_requestDelay);
+state[43] = Boolean.valueOf(_requestDelaySet);
+state[44] = _rev;
+state[45] = _shape;
+state[46] = _similarityGroupingId;
+state[47] = _status;
+state[48] = _style;
+state[49] = _styleClass;
+state[50] = _tabindex;
+state[51] = _target;
+state[52] = Integer.valueOf(_timeout);
+state[53] = Boolean.valueOf(_timeoutSet);
+state[54] = _title;
+state[55] = _type;
+state[56] = Boolean.valueOf(_useImage);
+state[57] = Boolean.valueOf(_useImageSet);
+state[58] = _view;
 return state;
 }
 
@@ -1097,42 +1683,63 @@ public void restoreState(FacesContext context, Object state){
 Object[] states = (Object[]) state;
 super.restoreState(context, states[0]);
 	_accesskey = (String)states[1];;
-		_align = (String)states[2];;
-		_alt = (String)states[3];;
-		_atMin = (MethodBinding)restoreAttachedState(context, states[4]);
-		_closeText = (String)states[5];;
-		_disabled = ((Boolean)states[6]).booleanValue();
-		_disabledSet = ((Boolean)states[7]).booleanValue();
-		_iframe = ((Boolean)states[8]).booleanValue();
-		_iframeSet = ((Boolean)states[9]).booleanValue();
-		_imageSrc = (String)states[10];;
-		_maxlength = ((Integer)states[11]).intValue();
-		_maxlengthSet = ((Boolean)states[12]).booleanValue();
-		_onblur = (String)states[13];;
-		_onchange = (String)states[14];;
-		_onclick = (String)states[15];;
-		_ondblclick = (String)states[16];;
-		_onfocus = (String)states[17];;
-		_onkeydown = (String)states[18];;
-		_onkeypress = (String)states[19];;
-		_onkeyup = (String)states[20];;
-		_onmousedown = (String)states[21];;
-		_onmousemove = (String)states[22];;
-		_onmouseout = (String)states[23];;
-		_onmouseover = (String)states[24];;
-		_onmouseup = (String)states[25];;
-		_onselect = (String)states[26];;
-		_openText = (String)states[27];;
-		_size = ((Integer)states[28]).intValue();
-		_sizeSet = ((Boolean)states[29]).booleanValue();
-		_style = (String)states[30];;
-		_styleClass = (String)states[31];;
-		_tabindex = (String)states[32];;
-		_title = (String)states[33];;
-		_type = (String)states[34];;
-		_useImage = ((Boolean)states[35]).booleanValue();
-		_useImageSet = ((Boolean)states[36]).booleanValue();
-		_view = (String)states[37];;
+		_ajaxSingle = ((Boolean)states[2]).booleanValue();
+		_ajaxSingleSet = ((Boolean)states[3]).booleanValue();
+		_bypassUpdates = ((Boolean)states[4]).booleanValue();
+		_bypassUpdatesSet = ((Boolean)states[5]).booleanValue();
+		_charset = (String)states[6];;
+		_closeText = (String)states[7];;
+		_coords = (String)states[8];;
+		_data = (Object)restoreAttachedState(context, states[9]);
+		_dir = (String)states[10];;
+		_disabled = ((Boolean)states[11]).booleanValue();
+		_disabledSet = ((Boolean)states[12]).booleanValue();
+		_eventsQueue = (String)states[13];;
+		_focus = (String)states[14];;
+		_hreflang = (String)states[15];;
+		_iframe = ((Boolean)states[16]).booleanValue();
+		_iframeSet = ((Boolean)states[17]).booleanValue();
+		_ignoreDupResponses = ((Boolean)states[18]).booleanValue();
+		_ignoreDupResponsesSet = ((Boolean)states[19]).booleanValue();
+		_imageSrc = (String)states[20];;
+		_lang = (String)states[21];;
+		_limitToList = ((Boolean)states[22]).booleanValue();
+		_limitToListSet = ((Boolean)states[23]).booleanValue();
+		_onbeforedomupdate = (String)states[24];;
+		_onblur = (String)states[25];;
+		_onclick = (String)states[26];;
+		_oncomplete = (String)states[27];;
+		_ondblclick = (String)states[28];;
+		_onfocus = (String)states[29];;
+		_onkeydown = (String)states[30];;
+		_onkeypress = (String)states[31];;
+		_onkeyup = (String)states[32];;
+		_onmousedown = (String)states[33];;
+		_onmousemove = (String)states[34];;
+		_onmouseout = (String)states[35];;
+		_onmouseover = (String)states[36];;
+		_onmouseup = (String)states[37];;
+		_openText = (String)states[38];;
+		_process = (Object)restoreAttachedState(context, states[39]);
+		_reRender = (Object)restoreAttachedState(context, states[40]);
+		_rel = (String)states[41];;
+		_requestDelay = ((Integer)states[42]).intValue();
+		_requestDelaySet = ((Boolean)states[43]).booleanValue();
+		_rev = (String)states[44];;
+		_shape = (String)states[45];;
+		_similarityGroupingId = (String)states[46];;
+		_status = (String)states[47];;
+		_style = (String)states[48];;
+		_styleClass = (String)states[49];;
+		_tabindex = (String)states[50];;
+		_target = (String)states[51];;
+		_timeout = ((Integer)states[52]).intValue();
+		_timeoutSet = ((Boolean)states[53]).booleanValue();
+		_title = (String)states[54];;
+		_type = (String)states[55];;
+		_useImage = ((Boolean)states[56]).booleanValue();
+		_useImageSet = ((Boolean)states[57]).booleanValue();
+		_view = (String)states[58];;
 	
 }
 

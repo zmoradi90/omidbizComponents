@@ -23,26 +23,26 @@
 			</superclass>
 		</tag>
 		<taghandler>
-			<classname>org.omidbiz.handler.WindowPopupTagHandler</classname>			
+			<classname>org.ajax4jsf.webapp.taglib.AjaxComponentHandler</classname>
 		</taghandler>
-		&ui_component_attributes;
-		&ui_input_attributes;
-		&html_style_attributes;
-		&html_input_attributes;
+		&ui_command_attributes;
 		&html_events;
-		&html_input_events;
-        <property>
+		&html_universal_attributes;
+		&html_anchor_attributes;
+		&html_style_attributes;
+		&ajax_component_attributes;
+		<property>
 			<name>view</name>
 			<classname>java.lang.String</classname>
 			<description>
-			</description>			
+			</description>
 		</property>
 		<property>
 			<name>type</name>
 			<classname>java.lang.String</classname>
 			<description>
 			</description>
-			<required>true</required>			
+			<required>true</required>
 		</property>
 		<property>
 			<name>openText</name>
@@ -63,55 +63,62 @@
 			<classname>java.lang.String</classname>
 			<description>
 			</description>
-			<required>true</required>			
+			<required>true</required>
 		</property>
-		
-		<property>
-			<name>atMin</name>
-			<classname>javax.faces.el.MethodBinding</classname>
-			<description>
-				MethodExpression representing an action listener method
-				that will be notified 
-			</description>
-		</property>
-		
+
 		<property>
 			<name>iframe</name>
 			<classname>boolean</classname>
 			<description>
-				 
+
 			</description>
 			<defaultvalue>false</defaultvalue>
 		</property>
-		
+
 		<property>
 			<name>useImage</name>
 			<classname>boolean</classname>
 			<description>
-				 
+
 			</description>
 			<defaultvalue>false</defaultvalue>
 		</property>
-		
+
 		<property>
 			<name>imageSrc</name>
 			<classname>java.lang.String</classname>
 			<description>
-				 
+
 			</description>
-			
+
 		</property>
-		
+
 		<property>
 			<name>title</name>
 			<classname>java.lang.String</classname>
 			<description>
-				 Image title if you use image
+				Image title if you use image
 			</description>
-			
+
 		</property>
-		
-		
-		
+
+		<property>
+			<name>disabled</name>
+			<classname>boolean</classname>
+			<description>If true, disable this component on page.</description>
+		</property>
+		<property>
+			<name>ignoreDupResponses</name>
+			<classname>boolean</classname>
+			<description>
+				Attribute allows to ignore an Ajax Response produced by a request if the
+				newest 'similar' request is
+				in a queue already. ignoreDupResponses="true" does not cancel the
+				request while it is processed on the server,
+				but just allows to avoid unnecessary updates on the client side if the
+				response isn't actual now
+			</description>
+		</property>
+
 	</component>
 </components>
