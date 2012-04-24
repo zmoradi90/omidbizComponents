@@ -13,6 +13,9 @@
 						<script>org/omidbiz/renderkit/html/script/checkBox.js</script>
 					</scripts>
 		
+				<styles>
+						<style>org/omidbiz/renderkit/html/css/checkBox.css</style>
+					</styles>
 			</component>
 
 </components>

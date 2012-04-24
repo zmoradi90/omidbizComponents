@@ -35,6 +35,7 @@ import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.ComponentVariables;
 import org.ajax4jsf.resource.InternetResource;
+import org.ajax4jsf.resource.InternetResource;
 //
 //
 //
@@ -56,6 +57,47 @@ public class CheckboxRenderer extends CheckboxRenderBase {
 	// 
 	// Declarations
 	//
+	private final InternetResource[] styles = {
+						getResource("/org/omidbiz/renderkit/html/css/checkBox.css")
+	};
+
+private InternetResource[] stylesAll = null;
+
+protected InternetResource[] getStyles() {
+	synchronized (this) {
+		if (stylesAll == null) {
+			InternetResource[] rsrcs = super.getStyles();
+			boolean ignoreSuper = rsrcs == null || rsrcs.length == 0;
+			boolean ignoreThis = styles == null || styles.length == 0;
+			
+			if (ignoreSuper) {
+				if (ignoreThis) {
+					stylesAll = new InternetResource[0];	
+				} else {
+					stylesAll = styles;
+				}
+			} else {
+				if (ignoreThis) {
+					stylesAll = rsrcs;
+				} else {
+					java.util.Set rsrcsSet = new java.util.LinkedHashSet();
+
+					for (int i = 0; i < rsrcs.length; i++ ) {
+						rsrcsSet.add(rsrcs[i]);
+					}
+
+					for (int i = 0; i < styles.length; i++ ) {
+						rsrcsSet.add(styles[i]);
+					}
+
+					stylesAll = (InternetResource[]) rsrcsSet.toArray(new InternetResource[rsrcsSet.size()]);
+				}
+			}
+		}
+	}
+	
+	return stylesAll;
+}
 	private final InternetResource[] scripts = {
 						getResource("/org/richfaces/renderkit/html/scripts/jquery/jquery.js")
 						,
@@ -150,7 +192,13 @@ protected InternetResource[] getScripts() {
 
 
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UICheckbox component, ComponentVariables variables) throws IOException {
-	  java.lang.String clientId = component.getClientId(context);
+	  writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery.noConflict();"),null);
+
+writer.endElement("script");
+java.lang.String clientId = component.getClientId(context);
 variables.setVariable("value", component.getAttributes().get("value") );
 variables.setVariable("checked", component.getAttributes().get("checked") );
 variables.setVariable("change", component.getAttributes().get("onchange") );
@@ -160,9 +208,31 @@ variables.setVariable("change", component.getAttributes().get("onchange") );
 			Boolean checked = (Boolean) variables.getVariable("checked");
 
 
+writer.startElement("p", component);
+			getUtils().writeAttribute(writer, "class", "field switch" );
+			
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-enable " + convertToString(clientId) );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString("On"),null);
+
+writer.endElement("span");
+writer.endElement("label");
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-disable " + convertToString(clientId) + " selected" );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString("Off"),null);
+
+writer.endElement("span");
+writer.endElement("label");
  if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { 
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "checked", "checked" );
+						getUtils().writeAttribute(writer, "class", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
@@ -172,7 +242,8 @@ writer.startElement("input", component);
 writer.endElement("input");
  } else { 
 writer.startElement("input", component);
-			getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
+			getUtils().writeAttribute(writer, "class", convertToString(clientId) + "-chk" );
+						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
 						getUtils().writeAttribute(writer, "onclick", "Richfaces.checkboxControl.setYvalue('" + convertToString(clientId) + "');" );
@@ -181,6 +252,13 @@ writer.startElement("input", component);
 			
 writer.endElement("input");
  } 
+writer.endElement("p");
+writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery(document).ready( function(){ \n		jQuery(\".cb-enable " + convertToString(clientId) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery(\".cb-disable " + convertToString(clientId) + "\",parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery(\"." + convertToString(clientId) + "-chk\",parent).attr('checked', true);\n			jQuery( \"." + convertToString(clientId) + "-chk\" ).click();\n	      \n	              \n		});\n		jQuery(\".cb-disable " + convertToString(clientId) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery('.cb-enable " + convertToString(clientId) + "',parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery('." + convertToString(clientId) + "-chk',parent).attr('checked', false);\n			jQuery( \"." + convertToString(clientId) + "-chk\" ).click();\n		});\n	});"),null);
+
+writer.endElement("script");
 
 	}		
 	
