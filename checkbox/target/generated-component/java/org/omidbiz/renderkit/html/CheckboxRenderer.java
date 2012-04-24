@@ -199,6 +199,8 @@ writer.writeText(convertToString("jQuery.noConflict();"),null);
 
 writer.endElement("script");
 java.lang.String clientId = component.getClientId(context);
+variables.setVariable("$variable", getResource( "/org/omidbiz/renderkit/html/css/images/switch.gif" ).getUri(context, component) );
+
 variables.setVariable("value", component.getAttributes().get("value") );
 variables.setVariable("checked", component.getAttributes().get("checked") );
 variables.setVariable("change", component.getAttributes().get("onchange") );
