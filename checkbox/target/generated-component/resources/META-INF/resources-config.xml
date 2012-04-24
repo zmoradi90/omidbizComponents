@@ -19,8 +19,8 @@
 		<path>org/omidbiz/renderkit/html/css/checkBox.css</path>
 	</resource>
 	<resource>
-		<name>org/omidbiz/renderkit/html/css/images/switch.gif</name>
-		<path>org/omidbiz/renderkit/html/css/images/switch.gif</path>
+		<name>org/omidbiz/renderkit/html/css/switch.gif</name>
+		<path>org/omidbiz/renderkit/html/css/switch.gif</path>
 	</resource>
 	<resource>
 		<name>org/omidbiz/renderkit/html/script/checkBox.js</name>

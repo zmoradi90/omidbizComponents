@@ -8,9 +8,9 @@ import org.omidbiz.component.UICheckbox;
 
 public class HtmlCheckbox extends UICheckbox{
 
-final public static  String COMPONENT_FAMILY = "org.omidbiz.Checkbox";
+final static public  String COMPONENT_FAMILY = "org.omidbiz.Checkbox";
 
-final public static  String COMPONENT_TYPE = "org.omidbiz.Checkbox";
+final static public  String COMPONENT_TYPE = "org.omidbiz.Checkbox";
 
 /*
 * 
