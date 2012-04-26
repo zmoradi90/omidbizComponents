@@ -70,7 +70,7 @@
 
 		<a rel="rel#{id}" class="#{id}popupClass" href="#{view}">
 			<button onclick="#{this:getOnClick(context,component)}" class="wpopupBtn">
-				<span class="wpopupspan">
+				<span>
 					#{component.attributes['openText']}
 				</span>
 				<f:call name="renderChildren" />

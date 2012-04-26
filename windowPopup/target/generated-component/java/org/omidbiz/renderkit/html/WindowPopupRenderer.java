@@ -258,10 +258,15 @@ writer.startElement("a", component);
 						getUtils().writeAttribute(writer, "rel", "rel" + convertToString(variables.getVariable("id")) );
 			
 writer.startElement("button", component);
-			getUtils().writeAttribute(writer, "onclick", getOnClick(context,component) );
+			getUtils().writeAttribute(writer, "class", "wpopupBtn" );
+						getUtils().writeAttribute(writer, "onclick", getOnClick(context,component) );
+			
+writer.startElement("span", component);
+			getUtils().writeAttribute(writer, "class", "wpopupspan" );
 			
 writer.writeText(convertToString(component.getAttributes().get("openText")),null);
 
+writer.endElement("span");
 renderChildren(context, component);
 
 writer.endElement("button");
