@@ -49,6 +49,14 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  	  		  <attribute>
+	   <description>${prop.xmlEncodedDescription}</description>
+	   <name>forceId</name>
+	   			<required>true</required>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>Every component may have a unique id that is automatically created if omitted</description>
 	   <name>id</name>
 	   	   	   		<rtexprvalue>false</rtexprvalue>
@@ -68,6 +76,20 @@ a backing bean</description>
 	   <name>localValueSet</name>
 	   	   	   					   	<deferred-value>
 					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>${prop.xmlEncodedDescription}</description>
+	   <name>offText</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description>${prop.xmlEncodedDescription}</description>
+	   <name>onText</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

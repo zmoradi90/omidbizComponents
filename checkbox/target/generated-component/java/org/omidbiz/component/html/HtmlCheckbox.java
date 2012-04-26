@@ -8,9 +8,9 @@ import org.omidbiz.component.UICheckbox;
 
 public class HtmlCheckbox extends UICheckbox{
 
-final static public  String COMPONENT_FAMILY = "org.omidbiz.Checkbox";
+static public final  String COMPONENT_FAMILY = "org.omidbiz.Checkbox";
 
-final static public  String COMPONENT_TYPE = "org.omidbiz.Checkbox";
+static public final  String COMPONENT_TYPE = "org.omidbiz.Checkbox";
 
 /*
 * 
@@ -18,6 +18,21 @@ final static public  String COMPONENT_TYPE = "org.omidbiz.Checkbox";
 private  boolean _checked = false;
 
 private  boolean _checkedSet = false;
+
+/*
+* null
+*/
+private  String _forceId = null;
+
+/*
+* null
+*/
+private  String _offText = null;
+
+/*
+* null
+*/
+private  String _onText = null;
 
 /*
 * null
@@ -107,6 +122,84 @@ public boolean isChecked(){
 public void setChecked(boolean _checked){
 this._checked = _checked;
 this._checkedSet = true;
+}
+
+public String getForceId(){
+	if (this._forceId != null) {
+		return this._forceId;
+	}
+	ValueExpression ve = getValueExpression("forceId");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setForceId(String _forceId){
+this._forceId = _forceId;
+}
+
+public String getOffText(){
+	if (this._offText != null) {
+		return this._offText;
+	}
+	ValueExpression ve = getValueExpression("offText");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "Off";
+	
+
+}
+
+public void setOffText(String _offText){
+this._offText = _offText;
+}
+
+public String getOnText(){
+	if (this._onText != null) {
+		return this._onText;
+	}
+	ValueExpression ve = getValueExpression("onText");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "On";
+	
+
+}
+
+public void setOnText(String _onText){
+this._onText = _onText;
 }
 
 public String getOnchange(){
@@ -401,21 +494,24 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[14];
+Object [] state = new Object[17];
 state[0] = super.saveState(context);
 state[1] = Boolean.valueOf(_checked);
 state[2] = Boolean.valueOf(_checkedSet);
-state[3] = _onchange;
-state[4] = _onclick;
-state[5] = _ondblclick;
-state[6] = _onkeydown;
-state[7] = _onkeypress;
-state[8] = _onkeyup;
-state[9] = _onmousedown;
-state[10] = _onmousemove;
-state[11] = _onmouseout;
-state[12] = _onmouseover;
-state[13] = _onmouseup;
+state[3] = _forceId;
+state[4] = _offText;
+state[5] = _onText;
+state[6] = _onchange;
+state[7] = _onclick;
+state[8] = _ondblclick;
+state[9] = _onkeydown;
+state[10] = _onkeypress;
+state[11] = _onkeyup;
+state[12] = _onmousedown;
+state[13] = _onmousemove;
+state[14] = _onmouseout;
+state[15] = _onmouseover;
+state[16] = _onmouseup;
 return state;
 }
 
@@ -425,17 +521,20 @@ Object[] states = (Object[]) state;
 super.restoreState(context, states[0]);
 	_checked = ((Boolean)states[1]).booleanValue();
 		_checkedSet = ((Boolean)states[2]).booleanValue();
-		_onchange = (String)states[3];;
-		_onclick = (String)states[4];;
-		_ondblclick = (String)states[5];;
-		_onkeydown = (String)states[6];;
-		_onkeypress = (String)states[7];;
-		_onkeyup = (String)states[8];;
-		_onmousedown = (String)states[9];;
-		_onmousemove = (String)states[10];;
-		_onmouseout = (String)states[11];;
-		_onmouseover = (String)states[12];;
-		_onmouseup = (String)states[13];;
+		_forceId = (String)states[3];;
+		_offText = (String)states[4];;
+		_onText = (String)states[5];;
+		_onchange = (String)states[6];;
+		_onclick = (String)states[7];;
+		_ondblclick = (String)states[8];;
+		_onkeydown = (String)states[9];;
+		_onkeypress = (String)states[10];;
+		_onkeyup = (String)states[11];;
+		_onmousedown = (String)states[12];;
+		_onmousemove = (String)states[13];;
+		_onmouseout = (String)states[14];;
+		_onmouseover = (String)states[15];;
+		_onmouseup = (String)states[16];;
 	
 }
 

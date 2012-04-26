@@ -20,40 +20,46 @@
 	<c:set var="value" value="#{component.attributes['value']}"/>
 	<c:set var="checked" value="#{component.attributes['checked']}"/>
 	<c:set var="change" value="#{component.attributes['onchange']}"/>
-			<jsp:scriptlet>
+	<c:set var="forceId" value="#{component.attributes['forceId']}"/>
+	<c:set var="onText" value="#{component.attributes['onText']}"/>
+	<c:set var="offText" value="#{component.attributes['offText']}"/>
+	
+	<jsp:scriptlet>
 <![CDATA[ 
 			String value = (String) variables.getVariable("value");
 			Boolean checked = (Boolean) variables.getVariable("checked");
 ]]>
-</jsp:scriptlet>
+	</jsp:scriptlet>
 	
-	<p class="field switch">
-	<label class="cb-enable #{clientId}"><span>On</span></label>
-	<label class="cb-disable #{clientId} selected"><span>Off</span></label>
+	<p class="field switch">	
 	<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { ]]></jsp:scriptlet>
-		<input type="checkbox" onchange="#{change}" name="#{clientId}-chk" value="Y" id="#{clientId}-chk" checked="checked" class="#{clientId}-chk"/>
+		<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
+		<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
+		<input type="checkbox" onchange="#{change}" name="#{clientId}-chk" style="display: none;" value="Y" id="#{clientId}-chk" checked="checked" class="#{forceId}-chk"/>
 	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-		<input type="checkbox" value="N" onchange="#{change}" onclick="Richfaces.checkboxControl.setYvalue('#{clientId}');" name="#{clientId}-chk" id="#{clientId}-chk" class="#{clientId}-chk"/>
+		<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
+		<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
+		<input type="checkbox" value="N" onchange="#{change}" style="display: none;" name="#{clientId}-chk" id="#{clientId}-chk" class="#{forceId}-chk"/>
 		
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	</p>
 	<script type="text/javascript">
 	jQuery(document).ready( function(){ 
-		jQuery(".cb-enable #{clientId}").click(function(){
+		jQuery(".cb-enable.#{forceId}").click(function(){
 			var parent = jQuery(this).parents('.switch');
-			jQuery(".cb-disable #{clientId}",parent).removeClass('selected');
+			jQuery(".#{forceId}",parent).removeClass('selected');
 			jQuery(this).addClass('selected');
-			jQuery(".#{clientId}-chk",parent).attr('checked', true);
-			jQuery( ".#{clientId}-chk" ).click();
+			jQuery(".#{forceId}-chk",parent).val('Y');
+			jQuery( ".#{forceId}-chk" ).click();
 	      
 	              
 		});
-		jQuery(".cb-disable #{clientId}").click(function(){
+		jQuery(".cb-disable.#{forceId}").click(function(){
 			var parent = jQuery(this).parents('.switch');
-			jQuery('.cb-enable #{clientId}',parent).removeClass('selected');
+			jQuery('.#{forceId}',parent).removeClass('selected');
 			jQuery(this).addClass('selected');
-			jQuery('.#{clientId}-chk',parent).attr('checked', false);
-			jQuery( ".#{clientId}-chk" ).click();
+			jQuery(".#{forceId}-chk",parent).val('N');
+			jQuery( ".#{forceId}-chk" ).click();
 		});
 	});
 

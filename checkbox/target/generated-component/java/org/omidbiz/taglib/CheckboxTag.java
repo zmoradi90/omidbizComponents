@@ -73,7 +73,22 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			this._converterMessage = __converterMessage;
 	     }
 	  
-	 	 		 		 		 	  			  		  	  
+	 	 		 		 	  			  		  	  
+		/*
+		 * forceId
+		 * ${prop.xmlEncodedDescription}
+		 */
+		private ValueExpression _forceId;
+		/**
+		 * ${prop.xmlEncodedDescription}
+		 * Setter for forceId
+		 * @param forceId - new value
+		 */
+		 public void setForceId( ValueExpression  __forceId ){
+			this._forceId = __forceId;
+	     }
+	  
+	 	 		 		 	  			  		  	  
 		/*
 		 * immediate
 		 * A flag indicating that this component value must be converted
@@ -105,6 +120,36 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 		 */
 		 public void setLocalValueSet( ValueExpression  __localValueSet ){
 			this._localValueSet = __localValueSet;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * offText
+		 * ${prop.xmlEncodedDescription}
+		 */
+		private ValueExpression _offText;
+		/**
+		 * ${prop.xmlEncodedDescription}
+		 * Setter for offText
+		 * @param offText - new value
+		 */
+		 public void setOffText( ValueExpression  __offText ){
+			this._offText = __offText;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onText
+		 * ${prop.xmlEncodedDescription}
+		 */
+		private ValueExpression _onText;
+		/**
+		 * ${prop.xmlEncodedDescription}
+		 * Setter for onText
+		 * @param onText - new value
+		 */
+		 public void setOnText( ValueExpression  __onText ){
+			this._onText = __onText;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -250,8 +295,11 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
         		 		 		    this._checked = null;
 	 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
-	 		 		 		 		    this._immediate = null;
+	 		 		 		    this._forceId = null;
+	 		 		 		    this._immediate = null;
 	 		 		 		    this._localValueSet = null;
+	 		 		    this._offText = null;
+	 		 		    this._onText = null;
 	 		 		    this._onchange = null;
 	 		 		 		 		 		 		 		 		 		 		 		 		 		    this._required = null;
 	 		 		    this._requiredMessage = null;
@@ -309,7 +357,26 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 					component.setValueExpression("converterMessage", this._converterMessage);
 				}
 			}
-					     		 			 
+					    		 			 
+						if (this._forceId != null) {
+				if (this._forceId.isLiteralText()) {
+					try {
+												
+						java.lang.String __forceId = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._forceId.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setForceId(__forceId);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("forceId", this._forceId);
+				}
+			}
+					    		 			 
 						if (this._immediate != null) {
 				if (this._immediate.isLiteralText()) {
 					try {
@@ -345,6 +412,44 @@ public class CheckboxTag extends org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 					}
 				} else {
 					component.setValueExpression("localValueSet", this._localValueSet);
+				}
+			}
+					   		 			 
+						if (this._offText != null) {
+				if (this._offText.isLiteralText()) {
+					try {
+												
+						java.lang.String __offText = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._offText.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOffText(__offText);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("offText", this._offText);
+				}
+			}
+					   		 			 
+						if (this._onText != null) {
+				if (this._onText.isLiteralText()) {
+					try {
+												
+						java.lang.String __onText = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onText.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnText(__onText);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onText", this._onText);
 				}
 			}
 					   		 			 

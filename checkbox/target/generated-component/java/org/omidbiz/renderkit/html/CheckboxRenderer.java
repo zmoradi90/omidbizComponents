@@ -204,51 +204,73 @@ variables.setVariable("$variable", getResource( "/org/omidbiz/renderkit/html/css
 variables.setVariable("value", component.getAttributes().get("value") );
 variables.setVariable("checked", component.getAttributes().get("checked") );
 variables.setVariable("change", component.getAttributes().get("onchange") );
+variables.setVariable("forceId", component.getAttributes().get("forceId") );
+variables.setVariable("onText", component.getAttributes().get("onText") );
+variables.setVariable("offText", component.getAttributes().get("offText") );
 
  
 			String value = (String) variables.getVariable("value");
 			Boolean checked = (Boolean) variables.getVariable("checked");
 
-
+	
 writer.startElement("p", component);
 			getUtils().writeAttribute(writer, "class", "field switch" );
 			
-writer.startElement("label", component);
-			getUtils().writeAttribute(writer, "class", "cb-enable " + convertToString(clientId) );
-			
-writer.startElement("span", component);
-
-writer.writeText(convertToString("On"),null);
-
-writer.endElement("span");
-writer.endElement("label");
-writer.startElement("label", component);
-			getUtils().writeAttribute(writer, "class", "cb-disable " + convertToString(clientId) + " selected" );
-			
-writer.startElement("span", component);
-
-writer.writeText(convertToString("Off"),null);
-
-writer.endElement("span");
-writer.endElement("label");
  if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { 
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-enable " + convertToString(variables.getVariable("forceId")) + " selected" );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString(variables.getVariable("onText")),null);
+
+writer.endElement("span");
+writer.endElement("label");
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-disable " + convertToString(variables.getVariable("forceId")) );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString(variables.getVariable("offText")),null);
+
+writer.endElement("span");
+writer.endElement("label");
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "checked", "checked" );
-						getUtils().writeAttribute(writer, "class", convertToString(clientId) + "-chk" );
+						getUtils().writeAttribute(writer, "class", convertToString(variables.getVariable("forceId")) + "-chk" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
+						getUtils().writeAttribute(writer, "style", "display: none;" );
 						getUtils().writeAttribute(writer, "type", "checkbox" );
 						getUtils().writeAttribute(writer, "value", "Y" );
 			
 writer.endElement("input");
  } else { 
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-enable " + convertToString(variables.getVariable("forceId")) );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString(variables.getVariable("onText")),null);
+
+writer.endElement("span");
+writer.endElement("label");
+writer.startElement("label", component);
+			getUtils().writeAttribute(writer, "class", "cb-disable " + convertToString(variables.getVariable("forceId")) + " selected" );
+			
+writer.startElement("span", component);
+
+writer.writeText(convertToString(variables.getVariable("offText")),null);
+
+writer.endElement("span");
+writer.endElement("label");
 writer.startElement("input", component);
-			getUtils().writeAttribute(writer, "class", convertToString(clientId) + "-chk" );
+			getUtils().writeAttribute(writer, "class", convertToString(variables.getVariable("forceId")) + "-chk" );
 						getUtils().writeAttribute(writer, "id", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "-chk" );
 						getUtils().writeAttribute(writer, "onchange", variables.getVariable("change") );
-						getUtils().writeAttribute(writer, "onclick", "Richfaces.checkboxControl.setYvalue('" + convertToString(clientId) + "');" );
+						getUtils().writeAttribute(writer, "style", "display: none;" );
 						getUtils().writeAttribute(writer, "type", "checkbox" );
 						getUtils().writeAttribute(writer, "value", "N" );
 			
@@ -258,7 +280,7 @@ writer.endElement("p");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready( function(){ \n		jQuery(\".cb-enable " + convertToString(clientId) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery(\".cb-disable " + convertToString(clientId) + "\",parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery(\"." + convertToString(clientId) + "-chk\",parent).attr('checked', true);\n			jQuery( \"." + convertToString(clientId) + "-chk\" ).click();\n	      \n	              \n		});\n		jQuery(\".cb-disable " + convertToString(clientId) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery('.cb-enable " + convertToString(clientId) + "',parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery('." + convertToString(clientId) + "-chk',parent).attr('checked', false);\n			jQuery( \"." + convertToString(clientId) + "-chk\" ).click();\n		});\n	});"),null);
+writer.writeText(convertToString("jQuery(document).ready( function(){ \n		jQuery(\".cb-enable." + convertToString(variables.getVariable("forceId")) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery(\"." + convertToString(variables.getVariable("forceId")) + "\",parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery(\"." + convertToString(variables.getVariable("forceId")) + "-chk\",parent).val('Y');\n			jQuery( \"." + convertToString(variables.getVariable("forceId")) + "-chk\" ).click();\n	      \n	              \n		});\n		jQuery(\".cb-disable." + convertToString(variables.getVariable("forceId")) + "\").click(function(){\n			var parent = jQuery(this).parents('.switch');\n			jQuery('." + convertToString(variables.getVariable("forceId")) + "',parent).removeClass('selected');\n			jQuery(this).addClass('selected');\n			jQuery(\"." + convertToString(variables.getVariable("forceId")) + "-chk\",parent).val('N');\n			jQuery( \"." + convertToString(variables.getVariable("forceId")) + "-chk\" ).click();\n		});\n	});"),null);
 
 writer.endElement("script");
 

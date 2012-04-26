@@ -51,9 +51,24 @@
 			<description>
 			</description>					
 		</property>
-<property>
+		<property>
 			<name>onchange</name>
 			<classname>java.lang.String</classname>
+		</property>
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<required>true</required>			
+		</property>
+		<property>
+			<name>onText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"On"</defaultvalue>			
+		</property>
+		<property>
+			<name>offText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Off"</defaultvalue>			
 		</property>
 	</component>
 </components>
