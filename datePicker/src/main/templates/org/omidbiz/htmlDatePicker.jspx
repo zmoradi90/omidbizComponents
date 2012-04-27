@@ -42,9 +42,29 @@
 	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
 	<c:set var="dateType" value="#{component.attributes['dateType']}" />
 	
+	<jsp:scriptlet>
+		<![CDATA[
+		String value = (String)component.getSubmittedValue();         
+		if (value == null) {         
+			value = getConvertedStringValue(context, component,component.getValue());
+		}
+		
+		String fieldValue = value;
+		
+		if (value == null || value.trim().equals("")) {
+	   		fieldValue = "";
+	   		 
+	   	}
+	   	
+	   	variables.setVariable("value", value);
+	   	variables.setVariable("fieldValue", fieldValue);
+	   	
+	   	]]>
+		</jsp:scriptlet>
+	
 	
 	 
-		<input type="text" readonly="readonly" value="#{this:getSolarValueAsString(context, component)}" id="#{clientId}" name="#{clientId}" />
+		<input type="text" readonly="readonly" value="#{fieldValue}" id="#{clientId}" name="#{clientId}" />
 		<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
 		<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}');"/>
 		<script type="text/javascript">
