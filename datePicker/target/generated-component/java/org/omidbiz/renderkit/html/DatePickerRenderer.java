@@ -221,31 +221,12 @@ variables.setVariable("datePattern", component.getAttributes().get("datePattern"
 variables.setVariable("weekNumbers", component.getAttributes().get("weekNumbers") );
 variables.setVariable("showOthers", component.getAttributes().get("showOthers") );
 variables.setVariable("dateType", component.getAttributes().get("dateType") );
-
-		
-		String value = (String)component.getSubmittedValue();         
-		if (value == null) {         
-			value = getConvertedStringValue(context, component,component.getValue());
-		}
-		
-		String fieldValue = value;
-		
-		if (value == null || value.trim().equals("")) {
-	   		fieldValue = "";
-	   		 
-	   	}
-	   	
-	   	variables.setVariable("value", value);
-	   	variables.setVariable("fieldValue", fieldValue);
-	   	
-	   	
-		
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", clientId );
 						getUtils().writeAttribute(writer, "name", clientId );
 						getUtils().writeAttribute(writer, "readonly", "readonly" );
 						getUtils().writeAttribute(writer, "type", "text" );
-						getUtils().writeAttribute(writer, "value", variables.getVariable("fieldValue") );
+						getUtils().writeAttribute(writer, "value", getConvertedStringValue(context,component) );
 			
 writer.endElement("input");
 writer.startElement("img", component);

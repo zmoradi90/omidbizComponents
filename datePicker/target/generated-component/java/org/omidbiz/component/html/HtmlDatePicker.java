@@ -8,9 +8,9 @@ import org.omidbiz.component.UIDatePicker;
 
 public class HtmlDatePicker extends UIDatePicker{
 
-public final static  String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
+public static final  String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
 
-public final static  String COMPONENT_TYPE = "org.omidbiz.DatePicker";
+public static final  String COMPONENT_TYPE = "org.omidbiz.DatePicker";
 
 /*
 * Default is : %Y/%m/%d

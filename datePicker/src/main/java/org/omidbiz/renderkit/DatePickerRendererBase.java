@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.DateTimeConverter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
@@ -39,6 +40,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 	final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 	final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	final SimpleDateFormat dateInstanceFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss z");
 
 	public void decode(FacesContext context, UIComponent component)
 	{
@@ -47,47 +49,19 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		UIDatePicker inputDate = (UIDatePicker) component;
 		String clientId = inputDate.getClientId(context);
 		String submittedValue = (String) requestParams.get(clientId);
-		if (submittedValue != null && submittedValue.length() > 1)
-		{
-			String gDate = pc.SolarToGregorian(submittedValue);
-			try
-			{
-				inputDate.setSubmittedValue(sdf.parse(gDate));
-			}
-			catch (ParseException e)
-			{
-				try
-				{
-					inputDate.setSubmittedValue(dateFormat.parse(gDate));
-				}
-				catch (ParseException e1)
-				{
-					try
-					{
-						inputDate.setSubmittedValue(dateTimeFormat.parse(gDate));
-					}
-					catch (ParseException e2)
-					{
-						e2.printStackTrace();
-					}
-				}
-			}
-		}
-		else
-		{
-			inputDate.setSubmittedValue(submittedValue);
-		}
+		inputDate.setSubmittedValue(getConvertedDateValue(submittedValue, context, inputDate));
 
 	}
 
-	protected String getConvertedStringValue(FacesContext context, UIDatePicker component, Object value)
+	protected String getConvertedStringValue(FacesContext context, UIDatePicker component)
 	{
-		Object valueString = component.getValue();
-		if (valueString != null)
+		UIDatePicker inputDate = (UIDatePicker) component;
+		Object value = inputDate.getValue();
+		if (value != null)
 		{
-			Date val = (Date) valueString;
-			String gDate = pc.GregorianToSolar(sdf.format(val));
-			return gDate;
+			Date gDate = (Date) value;
+			String solarValue = pc.GregorianToSolar(dateTimeFormat.format(gDate));
+			return InputUtils.getConvertedStringValue(context, component, solarValue);
 		}
 		else
 		{
@@ -99,6 +73,46 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 	protected Class<? extends UIComponent> getComponentClass()
 	{
 		return UIDatePicker.class;
+	}
+
+	protected Object getConvertedDateValue(String gregorianDate, FacesContext context, UIDatePicker component)
+	{
+		if (gregorianDate.length() > 0)
+		{
+			String gDate = pc.SolarToGregorian(gregorianDate);
+			try
+			{
+				return sdf.parse(gDate);
+			}
+			catch (ParseException e)
+			{
+				try
+				{
+					return dateFormat.parse(gDate);
+				}
+				catch (ParseException e1)
+				{
+					try
+					{
+						return dateTimeFormat.parse(gDate);
+					}
+					catch (ParseException e2)
+					{
+						DateTimeConverter datetime = new DateTimeConverter();
+						datetime.setPattern("m/y");
+						Date newCurrentDate = (Date) datetime.getAsObject(context, component, gregorianDate);
+						return newCurrentDate;
+					}
+				}
+			}
+		}
+		else
+		{
+			DateTimeConverter datetime = new DateTimeConverter();
+			datetime.setPattern("m/y");
+			Date newCurrentDate = (Date) datetime.getAsObject(context, component, gregorianDate);
+			return newCurrentDate;
+		}
 	}
 
 }
