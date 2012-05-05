@@ -47,17 +47,34 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		ExternalContext external = context.getExternalContext();
 		Map requestParams = external.getRequestParameterMap();
 		UIDatePicker inputDate = (UIDatePicker) component;
-		String clientId = inputDate.getClientId(context);
+		String clientId = inputDate.getClientId(context)+"_date";
 		String submittedValue = (String) requestParams.get(clientId);
-		inputDate.setSubmittedValue(getConvertedDateValue(submittedValue, context, inputDate));
-
+		boolean required = (Boolean) inputDate.getAttributes().get("required");
+		Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
+		if (required && convertedDate == null)
+		{
+			inputDate.setSubmittedValue("");
+		}
+		if (!required && convertedDate == null)
+		{
+			// Null Object doesn't cause update component
+			inputDate.resetValue();
+			inputDate.setSubmittedValue(null);
+			inputDate.setValue(null);
+			
+		}
+		if (convertedDate != null && convertedDate.toString().length() >1)
+		{
+			inputDate.setSubmittedValue(convertedDate);
+		}
 	}
 
 	protected String getConvertedStringValue(FacesContext context, UIDatePicker component)
 	{
 		UIDatePicker inputDate = (UIDatePicker) component;
+		
 		Object value = inputDate.getValue();
-		if (value != null)
+		if (value != null && value.toString().length() > 1)
 		{
 			Date gDate = (Date) value;
 			String solarValue = pc.GregorianToSolar(dateTimeFormat.format(gDate));
@@ -65,7 +82,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		}
 		else
 		{
-			return InputUtils.getConvertedStringValue(context, component, value);
+			return null;
 		}
 
 	}
@@ -75,6 +92,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		return UIDatePicker.class;
 	}
 
+	// TODO:Null Object doesn't cause update component
 	protected Object getConvertedDateValue(String gregorianDate, FacesContext context, UIDatePicker component)
 	{
 		if (gregorianDate.length() > 0)

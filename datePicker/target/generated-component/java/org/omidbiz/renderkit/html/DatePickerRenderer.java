@@ -222,9 +222,8 @@ variables.setVariable("weekNumbers", component.getAttributes().get("weekNumbers"
 variables.setVariable("showOthers", component.getAttributes().get("showOthers") );
 variables.setVariable("dateType", component.getAttributes().get("dateType") );
 writer.startElement("input", component);
-			getUtils().writeAttribute(writer, "id", clientId );
-						getUtils().writeAttribute(writer, "name", clientId );
-						getUtils().writeAttribute(writer, "readonly", "readonly" );
+			getUtils().writeAttribute(writer, "id", convertToString(clientId) + "_date" );
+						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "_date" );
 						getUtils().writeAttribute(writer, "type", "text" );
 						getUtils().writeAttribute(writer, "value", getConvertedStringValue(context,component) );
 			
@@ -238,7 +237,7 @@ writer.startElement("img", component);
 writer.endElement("img");
 writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "alt", "clear" );
-						getUtils().writeAttribute(writer, "onclick", "Richfaces.calendarControl.removeValue('" + convertToString(clientId) + "');" );
+						getUtils().writeAttribute(writer, "onclick", "Richfaces.calendarControl.removeValue('" + convertToString(clientId) + "_date');" );
 						getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon") );
 						getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;" );
 			
@@ -246,7 +245,7 @@ writer.endElement("img");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("Calendar.setup({\n						inputField  : \"" + convertToString(clientId) + "\",   // id of the input field\n						button      : \"" + convertToString(clientId) + "_btn\",   // trigger for the calendar (button ID)\n			       		ifFormat    : \"" + convertToString(variables.getVariable("datePattern")) + "\",       // format of the input field\n	        			dateType	: '" + convertToString(variables.getVariable("dateType")) + "',\n	        			showOthers	: " + convertToString(variables.getVariable("showOthers")) + ",\n						weekNumbers : " + convertToString(variables.getVariable("weekNumbers")) + "\n					});"),null);
+writer.writeText(convertToString("Calendar.setup({\n						inputField  : \"" + convertToString(clientId) + "_date\",   // id of the input field\n						button      : \"" + convertToString(clientId) + "_btn\",   // trigger for the calendar (button ID)\n			       		ifFormat    : \"" + convertToString(variables.getVariable("datePattern")) + "\",       // format of the input field\n	        			dateType	: '" + convertToString(variables.getVariable("dateType")) + "',\n	        			showOthers	: " + convertToString(variables.getVariable("showOthers")) + ",\n						weekNumbers : " + convertToString(variables.getVariable("weekNumbers")) + "\n					});"),null);
 
 writer.endElement("script");
 
