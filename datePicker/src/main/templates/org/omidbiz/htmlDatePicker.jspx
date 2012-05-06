@@ -44,7 +44,7 @@
 	
 	
 			 
-		<input type="text"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" />
+		<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" />
 		<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
 		<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}_date');"/>
 		<script type="text/javascript">

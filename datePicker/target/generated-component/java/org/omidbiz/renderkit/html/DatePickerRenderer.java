@@ -224,6 +224,7 @@ variables.setVariable("dateType", component.getAttributes().get("dateType") );
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(clientId) + "_date" );
 						getUtils().writeAttribute(writer, "name", convertToString(clientId) + "_date" );
+						getUtils().writeAttribute(writer, "readonly", "readonly" );
 						getUtils().writeAttribute(writer, "type", "text" );
 						getUtils().writeAttribute(writer, "value", getConvertedStringValue(context,component) );
 			
