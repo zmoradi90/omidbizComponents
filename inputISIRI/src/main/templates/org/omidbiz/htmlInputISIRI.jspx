@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.InputISIRIRenderer"
+	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
+	component="org.omidbiz.component.UIInputISIRI" 
+	>
+	<f:clientid var="clientId"/>
+	<h:scripts>
+		script/isiri2901.js
+	</h:scripts>
+	
+	<f:resource name="images/lang.png" var="icon" />
+	
+	<input type="text" onkeydown="return PersianKeyDown(event)"
+    onkeypress="return PersianKeyPress(event)" id="#{clientId}" name="#{clientId}"/>
+	<a href="javascript:setPersian(document.getElementById('#{clientId}'))">Persian</a> / 
+  	<a href="javascript:setEnglish(document.getElementById('#{clientId}'))">English</a> 
+</f:root>

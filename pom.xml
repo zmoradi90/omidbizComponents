@@ -131,5 +131,6 @@
     <module>persianCalendar</module>
     <module>nationalCode</module>
     <module>lovCloseButton</module>
+    <module>inputISIRI</module>
   </modules>
 </project>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputISIRI</name>
+		<family>org.omidbiz.InputISIRI</family>
+		<classname>org.omidbiz.component.html.HtmlInputISIRI</classname>
+		<superclass>org.omidbiz.component.UIInputISIRI</superclass>
+		<description>
+			<![CDATA[
+			Persian/Farsi keyboard emulation under IE/Mozilla/Firefox browsers using Javascript. 
+			This code is originally an implementation of National Iranian Keyboard Standard (ISIRI 2901:1994) from Roozbeh Pournader and Behdad Esfahbod
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputISIRIRenderer</name>
+			<template>org/omidbiz/htmlInputISIRI.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputISIRI</name>
+			<classname>org.omidbiz.taglib.InputISIRITag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		&html_events;
+		&ui_input_attributes;
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+			</description>
+		</property>
+	</component>
+</components>
