@@ -4,13 +4,12 @@
 	xmlns:c=" http://java.sun.com/jsf/core" 
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
-	xmlns:h=" http://ajax4jsf.org/cdk/h"
-	xmlns:vcp="http://ajax4jsf.org/vcp"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"	
 	class="org.omidbiz.renderkit.html.WindowPopupRenderer"
 	baseclass="org.omidbiz.renderkit.WindowPopupRendererBase"
 	component="org.omidbiz.component.UIWindowPopup" 
 	>
-	<jsp:directive.page import="javax.faces.context.FacesContext,javax.faces.component.UIComponent"/>
+	
 	<f:clientid var="clientId"/>
 	
 	
@@ -68,19 +67,16 @@
 	
 	<jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("button") ) { ]]></jsp:scriptlet>
 
-		<a rel="rel#{id}" class="#{id}popupClass" href="#{view}">
-			<button onclick="#{this:getOnClick(context,component)}" class="wpopupBtn">
+		<a rel="rel#{id}" class="popupLinkClass" href="#{view}">
 				<span class="wpopupspan">
 					#{component.attributes['openText']}
-				</span>
-				<f:call name="renderChildren" />
-			</button>
+				</span>				
 		</a>
 		
 		<script type="text/javascript">
  
 			jQuery(document).ready(function(){	
-				jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
+				jQuery("a[rel=rel#{id}]").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
 				jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:#{iframe}}, Richfaces.colorboxControl.getParameters()));
 				
 			});

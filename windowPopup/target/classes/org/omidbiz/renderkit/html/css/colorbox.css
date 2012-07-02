@@ -1,3 +1,19 @@
+.popupLinkClass {
+    -moz-transition: color 0.231s ease 0s;
+    background: -moz-linear-gradient(center top , #F2F6F8 0px, #D8E1E7 50%, #B5C6D0 51%, #E0EFF9 100%) repeat scroll 0 0 transparent;
+    border: 1px solid #414141;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 -3px 1px rgba(0, 0, 0, 0.45) inset, 0 2px 2px rgba(0, 0, 0, 0.25);
+    color: #555555;
+    cursor: pointer;
+    font-family: BKoodakBold,Arial,tahoma,sans-serif;
+    height: 30px;
+    margin: 5px 5px 5px 0;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 200px;
+}
 /*
     ColorBox Core Style:
     The following CSS is consistent between example themes and should not be altered.

@@ -34,8 +34,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.ComponentVariables;
-import javax.faces.context.FacesContext;
-import javax.faces.component.UIComponent;
 import org.ajax4jsf.resource.InternetResource;
 import org.ajax4jsf.resource.InternetResource;
 //
@@ -253,13 +251,9 @@ writer.endElement("a");
  } 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("button") ) { 
 writer.startElement("a", component);
-			getUtils().writeAttribute(writer, "class", convertToString(variables.getVariable("id")) + "popupClass" );
+			getUtils().writeAttribute(writer, "class", "popupLinkClass" );
 						getUtils().writeAttribute(writer, "href", variables.getVariable("view") );
 						getUtils().writeAttribute(writer, "rel", "rel" + convertToString(variables.getVariable("id")) );
-			
-writer.startElement("button", component);
-			getUtils().writeAttribute(writer, "class", "wpopupBtn" );
-						getUtils().writeAttribute(writer, "onclick", getOnClick(context,component) );
 			
 writer.startElement("span", component);
 			getUtils().writeAttribute(writer, "class", "wpopupspan" );
@@ -267,14 +261,11 @@ writer.startElement("span", component);
 writer.writeText(convertToString(component.getAttributes().get("openText")),null);
 
 writer.endElement("span");
-renderChildren(context, component);
-
-writer.endElement("button");
 writer.endElement("a");
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready(function(){	\n				jQuery(\"." + convertToString(variables.getVariable("id")) + "popupClass\").colorbox({width:\"80%\", height:\"80%\", iframe:" + convertToString(variables.getVariable("iframe")) + ", rel : 'nofollow'});\n				jQuery('a[rel=rel" + convertToString(variables.getVariable("id")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "}, Richfaces.colorboxControl.getParameters()));\n				\n			});"),null);
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n				jQuery(\"a[rel=rel" + convertToString(variables.getVariable("id")) + "]\").colorbox({width:\"80%\", height:\"80%\", iframe:" + convertToString(variables.getVariable("iframe")) + ", rel : 'nofollow'});\n				jQuery('a[rel=rel" + convertToString(variables.getVariable("id")) + "]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "}, Richfaces.colorboxControl.getParameters()));\n				\n			});"),null);
 
 writer.endElement("script");
  } 

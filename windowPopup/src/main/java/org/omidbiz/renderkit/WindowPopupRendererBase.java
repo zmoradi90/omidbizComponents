@@ -20,6 +20,12 @@ import javax.faces.component.UIComponent;
 import org.ajax4jsf.renderkit.AjaxCommandRendererBase;
 import org.omidbiz.component.UIWindowPopup;
 
+/**
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
+ * 
+ */
 public class WindowPopupRendererBase extends AjaxCommandRendererBase
 {
 
