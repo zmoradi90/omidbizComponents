@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputISIRI;
 
 public class HtmlInputISIRI extends UIInputISIRI{
 
-final static public  String COMPONENT_FAMILY = "org.omidbiz.InputISIRI";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.InputISIRI";
 
-final static public  String COMPONENT_TYPE = "org.omidbiz.InputISIRI";
+final public static  String COMPONENT_TYPE = "org.omidbiz.InputISIRI";
 
 /*
 * The clientside script method to be called when the element is clicked

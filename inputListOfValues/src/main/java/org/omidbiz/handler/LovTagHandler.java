@@ -15,8 +15,6 @@
  ******************************************************************************/
 package org.omidbiz.handler;
 
-import javax.faces.event.ActionEvent;
-import javax.faces.event.MethodExpressionValueChangeListener;
 import javax.faces.event.ValueChangeEvent;
 
 import com.sun.facelets.tag.MetaRuleset;
@@ -24,6 +22,12 @@ import com.sun.facelets.tag.MethodRule;
 import com.sun.facelets.tag.jsf.ComponentConfig;
 import com.sun.facelets.tag.jsf.ComponentHandler;
 
+/**
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
+ * 
+ */
 public class LovTagHandler extends ComponentHandler
 {
 

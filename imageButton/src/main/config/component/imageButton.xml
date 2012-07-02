@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.ImageButton</name>
+		<family>org.omidbiz.ImageButton</family>
+		<classname>org.omidbiz.component.html.HtmlImageButton</classname>
+		<superclass>org.omidbiz.component.UIImageButton</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.ImageButtonRenderer</name>
+			<template>org/omidbiz/htmlImageButton.jspx</template>
+		</renderer>
+		<tag>
+			<name>imageButton</name>
+			<classname>org.omidbiz.taglib.ImageButtonTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		<taghandler>
+			<classname>org.ajax4jsf.webapp.taglib.AjaxComponentHandler</classname>
+		</taghandler>
+		&ui_command_attributes;
+		&html_events;
+		&html_universal_attributes;
+		&html_anchor_attributes;
+		&html_style_attributes;
+		&ajax_component_attributes;
+		<!-- -->
+		<property>
+			<name>url</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>alt</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		
+		
+        
+	</component>
+</components>

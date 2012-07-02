@@ -132,5 +132,6 @@
     <module>nationalCode</module>
     <module>lovCloseButton</module>
     <module>inputISIRI</module>
+    <module>imageButton</module>
   </modules>
 </project>

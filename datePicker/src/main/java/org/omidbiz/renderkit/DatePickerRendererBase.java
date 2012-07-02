@@ -30,7 +30,9 @@ import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIDatePicker;
 
 /**
- * @author omidbiz
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
  * 
  */
 public class DatePickerRendererBase extends HeaderResourcesRendererBase
@@ -47,7 +49,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		ExternalContext external = context.getExternalContext();
 		Map requestParams = external.getRequestParameterMap();
 		UIDatePicker inputDate = (UIDatePicker) component;
-		String clientId = inputDate.getClientId(context)+"_date";
+		String clientId = inputDate.getClientId(context) + "_date";
 		String submittedValue = (String) requestParams.get(clientId);
 		boolean required = (Boolean) inputDate.getAttributes().get("required");
 		Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
@@ -61,9 +63,9 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 			inputDate.resetValue();
 			inputDate.setSubmittedValue(null);
 			inputDate.setValue(null);
-			
+
 		}
-		if (convertedDate != null && convertedDate.toString().length() >1)
+		if (convertedDate != null && convertedDate.toString().length() > 1)
 		{
 			inputDate.setSubmittedValue(convertedDate);
 		}
@@ -72,7 +74,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 	protected String getConvertedStringValue(FacesContext context, UIDatePicker component)
 	{
 		UIDatePicker inputDate = (UIDatePicker) component;
-		
+
 		Object value = inputDate.getValue();
 		if (value != null && value.toString().length() > 1)
 		{

@@ -26,6 +26,12 @@ import javax.faces.context.FacesContext;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIPersianDateLabelConvertor;
 
+/**
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
+ * 
+ */
 public abstract class PersianDateLabelRendererBase extends HeaderResourcesRendererBase
 {
 

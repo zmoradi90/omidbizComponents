@@ -24,6 +24,12 @@ import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIInputExtra;
 
+/**
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
+ * 
+ */
 public class InputExtraRenderBase extends HeaderResourcesRendererBase
 {
 

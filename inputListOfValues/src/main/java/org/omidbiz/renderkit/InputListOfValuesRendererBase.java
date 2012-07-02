@@ -26,6 +26,12 @@ import javax.faces.convert.ConverterException;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIInputListOfValues;
 
+/**
+ * 
+ * @author Omid Pourhadi
+ * @version $Revision: 1.0
+ * 
+ */
 public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 {
 

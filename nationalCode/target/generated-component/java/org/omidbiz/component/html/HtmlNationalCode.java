@@ -5,9 +5,9 @@ import org.omidbiz.component.UINationalCode;
 
 public class HtmlNationalCode extends UINationalCode{
 
-public static final  String COMPONENT_FAMILY = "org.omidbiz.NationalCode";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.NationalCode";
 
-public static final  String COMPONENT_TYPE = "org.omidbiz.NationalCode";
+final public static  String COMPONENT_TYPE = "org.omidbiz.NationalCode";
 
 
 public HtmlNationalCode(){

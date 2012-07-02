@@ -16,7 +16,7 @@
 package org.omidbiz.renderkit;
 
 /**
- * @author omidp Email : omidpourhadi AT gmail DOT com
+ * @author omid pourhadi Email : omidpourhadi AT gmail DOT com
  */
 public class PersianCalendar
 {
