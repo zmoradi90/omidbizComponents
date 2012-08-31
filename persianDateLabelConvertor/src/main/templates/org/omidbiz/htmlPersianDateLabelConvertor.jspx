@@ -10,9 +10,29 @@
 	component="org.omidbiz.component.UIPersianDateLabelConvertor" 
 	>
 	<f:clientid var="clientId"/>
+	<c:set var="layout" value="#{component.attributes['layout']}"/>
+	<c:set var="styleClass" value="#{component.attributes['styleClass']}"/>
+	
+	<jsp:scriptlet>
+<![CDATA[ 
+			String layout = (String) variables.getVariable("layout");
+]]>
+</jsp:scriptlet>
+	
+	<jsp:scriptlet><![CDATA[ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("block") ) { ]]></jsp:scriptlet>
 	<div id="#{clientId}"
-		x:passThruWithExclusions="value,name,type,id"
+		class="#{styleClass}"
 		>
-		<span>#{this:getSolarValueAsString(context, component)}</span>
+		#{this:getSolarValueAsString(context, component)}
 	</div>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+	
+	<jsp:scriptlet><![CDATA[ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("inline") ) { ]]></jsp:scriptlet>
+		<span class="#{styleClass}">#{this:getSolarValueAsString(context, component)}</span>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+	
+	<jsp:scriptlet><![CDATA[ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("none") ) { ]]></jsp:scriptlet>
+		#{this:getSolarValueAsString(context, component)}
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+	
 </f:root>

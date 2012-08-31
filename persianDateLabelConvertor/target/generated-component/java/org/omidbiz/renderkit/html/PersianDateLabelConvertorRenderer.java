@@ -83,38 +83,34 @@ public class PersianDateLabelConvertorRenderer extends PersianDateLabelRendererB
 
 	public void doEncodeEnd(ResponseWriter writer, FacesContext context, org.omidbiz.component.UIPersianDateLabelConvertor component, ComponentVariables variables) throws IOException {
 	  java.lang.String clientId = component.getClientId(context);
+variables.setVariable("layout", component.getAttributes().get("layout") );
+variables.setVariable("styleClass", component.getAttributes().get("styleClass") );
+
+ 
+			String layout = (String) variables.getVariable("layout");
+
+
+ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("block") ) { 
 writer.startElement("div", component);
-			getUtils().writeAttribute(writer, "id", clientId );
-			//
-// pass thru attributes
-//
-getUtils().encodeAttributesFromArray(context,component,new String[] {
-    "align" ,
-	    "dir" ,
-	    "lang" ,
-	    "onclick" ,
-	    "ondblclick" ,
-	    "onkeydown" ,
-	    "onkeypress" ,
-	    "onkeyup" ,
-	    "onmousedown" ,
-	    "onmousemove" ,
-	    "onmouseout" ,
-	    "onmouseover" ,
-	    "onmouseup" ,
-	    "style" ,
-	    "title" ,
-	    "xml:lang" });
-//
-//
-//
+			getUtils().writeAttribute(writer, "class", variables.getVariable("styleClass") );
+						getUtils().writeAttribute(writer, "id", clientId );
+			
+writer.writeText(convertToString(getSolarValueAsString(context,component)),null);
 
+writer.endElement("div");
+ } 
+ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("inline") ) { 
 writer.startElement("span", component);
-
+			getUtils().writeAttribute(writer, "class", variables.getVariable("styleClass") );
+			
 writer.writeText(convertToString(getSolarValueAsString(context,component)),null);
 
 writer.endElement("span");
-writer.endElement("div");
+ } 
+ if (! "".equals(layout.trim()) && layout.equalsIgnoreCase("none") ) { 
+writer.writeText(convertToString(getSolarValueAsString(context,component)),null);
+
+ } 
 
 	}		
 	

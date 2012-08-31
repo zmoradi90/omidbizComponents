@@ -43,6 +43,24 @@
 			</description>
 			
 		</property>
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			
+		</property>
+		<property>
+			<name>layout</name>
+			<classname>java.lang.String</classname>
+			<description>
+				possible values 
+					block : generate div
+					inline : generate span
+					none : generate nothing
+			</description>
+			<defaultvalue>"none"</defaultvalue>
+		</property>
         
 	</component>
 </components>

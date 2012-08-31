@@ -40,10 +40,27 @@ a backing bean</description>
 	   		<type>java.lang.String</type>
 	   	  </attribute>
 		  		  <attribute>
+	   <description>possible values 
+					block : generate div
+					inline : generate span
+					none : generate nothing</description>
+	   <name>layout</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>If "false", this component is not rendered</description>
 	   <name>rendered</name>
 	   	   	   					   	<deferred-value>
 					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>styleClass</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>

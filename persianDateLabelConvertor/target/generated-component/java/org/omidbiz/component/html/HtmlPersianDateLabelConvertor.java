@@ -8,14 +8,27 @@ import org.omidbiz.component.UIPersianDateLabelConvertor;
 
 public class HtmlPersianDateLabelConvertor extends UIPersianDateLabelConvertor{
 
-public final static  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.PersianDateLabelConvertor";
 
-public final static  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
+final public static  String COMPONENT_TYPE = "org.omidbiz.PersianDateLabelConvertor";
 
 /*
 * 
 */
 private  String _datePattern = null;
+
+/*
+* possible values 
+					block : generate div
+					inline : generate span
+					none : generate nothing
+*/
+private  String _layout = null;
+
+/*
+* 
+*/
+private  String _styleClass = null;
 
 /*
 * 
@@ -53,6 +66,58 @@ public void setDatePattern(String _datePattern){
 this._datePattern = _datePattern;
 }
 
+public String getLayout(){
+	if (this._layout != null) {
+		return this._layout;
+	}
+	ValueExpression ve = getValueExpression("layout");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "none";
+	
+
+}
+
+public void setLayout(String _layout){
+this._layout = _layout;
+}
+
+public String getStyleClass(){
+	if (this._styleClass != null) {
+		return this._styleClass;
+	}
+	ValueExpression ve = getValueExpression("styleClass");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setStyleClass(String _styleClass){
+this._styleClass = _styleClass;
+}
+
 public Object getValue(){
 	if (this._value != null) {
 		return this._value;
@@ -85,10 +150,12 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[3];
+Object [] state = new Object[5];
 state[0] = super.saveState(context);
 state[1] = _datePattern;
-state[2] = saveAttachedState(context, _value);
+state[2] = _layout;
+state[3] = _styleClass;
+state[4] = saveAttachedState(context, _value);
 return state;
 }
 
@@ -97,7 +164,9 @@ public void restoreState(FacesContext context, Object state){
 Object[] states = (Object[]) state;
 super.restoreState(context, states[0]);
 	_datePattern = (String)states[1];;
-		_value = (Object)restoreAttachedState(context, states[2]);
+		_layout = (String)states[2];;
+		_styleClass = (String)states[3];;
+		_value = (Object)restoreAttachedState(context, states[4]);
 	
 }
 

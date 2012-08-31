@@ -38,7 +38,28 @@ public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.Htm
 			this._datePattern = __datePattern;
 	     }
 	  
-	 	 		 		 		 		 	  			  		  	  
+	 	 		 		 		 	  			  		  	  
+		/*
+		 * layout
+		 * possible values 
+					block : generate div
+					inline : generate span
+					none : generate nothing
+		 */
+		private ValueExpression _layout;
+		/**
+		 * possible values 
+					block : generate div
+					inline : generate span
+					none : generate nothing
+		 * Setter for layout
+		 * @param layout - new value
+		 */
+		 public void setLayout( ValueExpression  __layout ){
+			this._layout = __layout;
+	     }
+	  
+	 	 		 		 		 	  			  		  	  
 		/*
 		 * value
 		 * 
@@ -60,7 +81,8 @@ public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.Htm
         // TODO Auto-generated method stub
         super.release();
         		 		 		    this._datePattern = null;
-	 		 		 		 		 		    this._value = null;
+	 		 		 		 		    this._layout = null;
+	 		 		 		 		    this._value = null;
 	 		}
 	
     /* (non-Javadoc)
@@ -90,7 +112,26 @@ public class PersianDateLabelConvertorTag extends org.ajax4jsf.webapp.taglib.Htm
 					component.setValueExpression("datePattern", this._datePattern);
 				}
 			}
-					      		 			 
+					     		 			 
+						if (this._layout != null) {
+				if (this._layout.isLiteralText()) {
+					try {
+												
+						java.lang.String __layout = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._layout.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setLayout(__layout);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("layout", this._layout);
+				}
+			}
+					     		 			 
 						if (this._value != null) {
 				if (this._value.isLiteralText()) {
 					try {
