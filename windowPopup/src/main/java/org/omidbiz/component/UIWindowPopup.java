@@ -15,8 +15,6 @@
  ******************************************************************************/
 package org.omidbiz.component;
 
-import javax.faces.component.UIInput;
-
 import org.ajax4jsf.component.AjaxActionComponent;
 
 /**

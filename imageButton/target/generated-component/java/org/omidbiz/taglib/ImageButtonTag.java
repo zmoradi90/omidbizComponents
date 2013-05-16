@@ -534,11 +534,11 @@ When the delay time is over, the request will be sent to the server or removed i
 	 	 		 	  			  		  	  
 		/*
 		 * url
-		 * 
+		 * image url
 		 */
 		private ValueExpression _url;
 		/**
-		 * 
+		 * image url
 		 * Setter for url
 		 * @param url - new value
 		 */

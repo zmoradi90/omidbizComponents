@@ -384,7 +384,7 @@ When the delay time is over, the request will be sent to the server or removed i
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
-	   <description></description>
+	   <description>image url</description>
 	   <name>url</name>
 	   			<required>true</required>
 	   	   	   					   	<deferred-value>

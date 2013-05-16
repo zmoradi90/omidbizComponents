@@ -60,9 +60,6 @@ public abstract class InputNumericRendererBase extends HeaderResourcesRendererBa
 			Object value = inputDate.getValue();
 			if (value != null)
 			{
-				// Converter converter = getConverter(context, inputDate);
-				// valueString = converter.getAsString(context, component,
-				// value);
 				valueString = value.toString();
 			}
 		}

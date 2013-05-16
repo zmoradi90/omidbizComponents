@@ -4,13 +4,12 @@
 	xmlns:c=" http://java.sun.com/jsf/core" 
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
-	xmlns:h=" http://ajax4jsf.org/cdk/h"
-	xmlns:vcp="http://ajax4jsf.org/vcp"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"	
 	class="org.omidbiz.renderkit.html.WindowPopupRenderer"
 	baseclass="org.omidbiz.renderkit.WindowPopupRendererBase"
 	component="org.omidbiz.component.UIWindowPopup" 
 	>
-	<jsp:directive.page import="javax.faces.context.FacesContext,javax.faces.component.UIComponent"/>
+	
 	<f:clientid var="clientId"/>
 	
 	
@@ -29,6 +28,13 @@
 	<c:set var="imageSrc" value="#{component.attributes['imageSrc']}"/>
 	<c:set var="id" value="#{component.attributes['id']}"/>
 	<c:set var="iframe" value="#{component.attributes['iframe']}"/>
+	<c:set var="width" value="#{component.attributes['width']}"/>
+	<c:set var="height" value="#{component.attributes['height']}"/>
+	<c:set var="onOpen" value="#{component.attributes['onOpen']}"/>
+	<c:set var="onLoad" value="#{component.attributes['onLoad']}"/>
+	<c:set var="onComplete" value="#{component.attributes['onComplete']}"/>
+	<c:set var="onCleanup" value="#{component.attributes['onCleanup']}"/>
+	<c:set var="onClosed" value="#{component.attributes['onClosed']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -52,9 +58,14 @@
  
 		jQuery(document).ready(function(){	
 			jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
-			jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:#{iframe}}, Richfaces.colorboxControl.getParameters()));
-			
-		});
+			jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({
+		onOpen:function(){ #{onOpen} },
+		onLoad:function(){ #{onLoad} },
+		onComplete:function(){ #{onComplete} },
+		onCleanup:function(){ #{onCleanup} },
+		onClosed:function(){ #{onClosed} },
+		width:'#{width}', height:'#{height}', speed:0, iframe:#{iframe}
+		}, Richfaces.colorboxControl.getParameters()));
 
 	</script>	
 	
@@ -68,22 +79,24 @@
 	
 	<jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("button") ) { ]]></jsp:scriptlet>
 
-		<a rel="rel#{id}" class="#{id}popupClass" href="#{view}">
-			<button onclick="#{this:getOnClick(context,component)}" class="wpopupBtn">
-				<span>
+		<a rel="rel#{id}" class="popupLinkClass" href="#{view}">
+				<span class="wpopupspan">
 					#{component.attributes['openText']}
-				</span>
-				<f:call name="renderChildren" />
-			</button>
+				</span>				
 		</a>
 		
 		<script type="text/javascript">
  
 			jQuery(document).ready(function(){	
-				jQuery(".#{id}popupClass").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
-				jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({width:'80%', height:'80%', speed:0, iframe:#{iframe}}, Richfaces.colorboxControl.getParameters()));
-				
-			});
+				jQuery("a[rel=rel#{id}]").colorbox({width:"80%", height:"80%", iframe:#{iframe}, rel : 'nofollow'});
+				jQuery('a[rel=rel#{id}]').colorbox(jQuery.extend({
+		onOpen:function(){ #{onOpen} },
+		onLoad:function(){ #{onLoad} },
+		onComplete:function(){ #{onComplete} },
+		onCleanup:function(){ #{onCleanup} },
+		onClosed:function(){ #{onClosed} },
+		width:'#{width}', height:'#{height}', speed:0, iframe:#{iframe}
+		}, Richfaces.colorboxControl.getParameters()));
 
 		</script>	
 		

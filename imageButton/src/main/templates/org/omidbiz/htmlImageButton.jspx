@@ -11,7 +11,7 @@
 	component="org.omidbiz.component.UIImageButton" 
 	>
 	<f:clientid var="clientId"/>
-	
+	<c:set var="src" value="#{component.attributes['url']}" />
 	<img id="#{clientId}"  style="border: 0px;" src="#{src}"  alt="#{alt}" title="#{title}" onclick="#{this:getOnClick(context,component)}">
 		
 		<vcp:body>

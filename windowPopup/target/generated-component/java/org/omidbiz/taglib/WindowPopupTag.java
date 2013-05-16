@@ -228,6 +228,21 @@ to the component which send the request only
 	  
 	 	 		 	  			  		  	  
 		/*
+		 * height
+		 * 
+		 */
+		private ValueExpression _height;
+		/**
+		 * 
+		 * Setter for height
+		 * @param height - new value
+		 */
+		 public void setHeight( ValueExpression  __height ){
+			this._height = __height;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
 		 * hreflang
 		 * Base language of a resource specified with the href attribute; hreflang may only be used with href
 		 */
@@ -334,6 +349,81 @@ to the component which send the request only
 		 */
 		 public void setLimitToList( ValueExpression  __limitToList ){
 			this._limitToList = __limitToList;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onCleanup
+		 * 
+		 */
+		private ValueExpression _onCleanup;
+		/**
+		 * 
+		 * Setter for onCleanup
+		 * @param onCleanup - new value
+		 */
+		 public void setOnCleanup( ValueExpression  __onCleanup ){
+			this._onCleanup = __onCleanup;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onClosed
+		 * 
+		 */
+		private ValueExpression _onClosed;
+		/**
+		 * 
+		 * Setter for onClosed
+		 * @param onClosed - new value
+		 */
+		 public void setOnClosed( ValueExpression  __onClosed ){
+			this._onClosed = __onClosed;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onComplete
+		 * 
+		 */
+		private ValueExpression _onComplete;
+		/**
+		 * 
+		 * Setter for onComplete
+		 * @param onComplete - new value
+		 */
+		 public void setOnComplete( ValueExpression  __onComplete ){
+			this._onComplete = __onComplete;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onLoad
+		 * 
+		 */
+		private ValueExpression _onLoad;
+		/**
+		 * 
+		 * Setter for onLoad
+		 * @param onLoad - new value
+		 */
+		 public void setOnLoad( ValueExpression  __onLoad ){
+			this._onLoad = __onLoad;
+	     }
+	  
+	 	 		 	  			  		  	  
+		/*
+		 * onOpen
+		 * 
+		 */
+		private ValueExpression _onOpen;
+		/**
+		 * 
+		 * Setter for onOpen
+		 * @param onOpen - new value
+		 */
+		 public void setOnOpen( ValueExpression  __onOpen ){
+			this._onOpen = __onOpen;
 	     }
 	  
 	 	 		 	  			  		  	  
@@ -642,6 +732,21 @@ When the delay time is over, the request will be sent to the server or removed i
 			this._view = __view;
 	     }
 	  
+	 	 		 	  			  		  	  
+		/*
+		 * width
+		 * 
+		 */
+		private ValueExpression _width;
+		/**
+		 * 
+		 * Setter for width
+		 * @param width - new value
+		 */
+		 public void setWidth( ValueExpression  __width ){
+			this._width = __width;
+	     }
+	  
 	 	 	
 	
     public void release()
@@ -660,12 +765,18 @@ When the delay time is over, the request will be sent to the server or removed i
 	 		 		 		    this._disabled = null;
 	 		 		    this._eventsQueue = null;
 	 		 		 		    this._focus = null;
+	 		 		    this._height = null;
 	 		 		    this._hreflang = null;
 	 		 		 		    this._iframe = null;
 	 		 		    this._ignoreDupResponses = null;
 	 		 		    this._imageSrc = null;
 	 		 		    this._immediate = null;
 	 		 		 		    this._limitToList = null;
+	 		 		    this._onCleanup = null;
+	 		 		    this._onClosed = null;
+	 		 		    this._onComplete = null;
+	 		 		    this._onLoad = null;
+	 		 		    this._onOpen = null;
 	 		 		    this._onbeforedomupdate = null;
 	 		 		    this._onblur = null;
 	 		 		 		    this._oncomplete = null;
@@ -686,6 +797,7 @@ When the delay time is over, the request will be sent to the server or removed i
 	 		 		    this._useImage = null;
 	 		 		    this._value = null;
 	 		 		    this._view = null;
+	 		 		    this._width = null;
 	 		}
 	
     /* (non-Javadoc)
@@ -889,6 +1001,25 @@ When the delay time is over, the request will be sent to the server or removed i
 				}
 			}
 					   		 			 
+						if (this._height != null) {
+				if (this._height.isLiteralText()) {
+					try {
+												
+						java.lang.String __height = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._height.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setHeight(__height);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("height", this._height);
+				}
+			}
+					   		 			 
 						if (this._hreflang != null) {
 				if (this._hreflang.isLiteralText()) {
 					try {
@@ -1000,6 +1131,101 @@ When the delay time is over, the request will be sent to the server or removed i
 					}
 				} else {
 					component.setValueExpression("limitToList", this._limitToList);
+				}
+			}
+					   		 			 
+						if (this._onCleanup != null) {
+				if (this._onCleanup.isLiteralText()) {
+					try {
+												
+						java.lang.String __onCleanup = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onCleanup.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnCleanup(__onCleanup);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onCleanup", this._onCleanup);
+				}
+			}
+					   		 			 
+						if (this._onClosed != null) {
+				if (this._onClosed.isLiteralText()) {
+					try {
+												
+						java.lang.String __onClosed = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onClosed.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnClosed(__onClosed);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onClosed", this._onClosed);
+				}
+			}
+					   		 			 
+						if (this._onComplete != null) {
+				if (this._onComplete.isLiteralText()) {
+					try {
+												
+						java.lang.String __onComplete = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onComplete.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnComplete(__onComplete);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onComplete", this._onComplete);
+				}
+			}
+					   		 			 
+						if (this._onLoad != null) {
+				if (this._onLoad.isLiteralText()) {
+					try {
+												
+						java.lang.String __onLoad = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onLoad.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnLoad(__onLoad);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onLoad", this._onLoad);
+				}
+			}
+					   		 			 
+						if (this._onOpen != null) {
+				if (this._onOpen.isLiteralText()) {
+					try {
+												
+						java.lang.String __onOpen = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._onOpen.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setOnOpen(__onOpen);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("onOpen", this._onOpen);
 				}
 			}
 					   		 			 
@@ -1380,6 +1606,25 @@ When the delay time is over, the request will be sent to the server or removed i
 					}
 				} else {
 					component.setValueExpression("view", this._view);
+				}
+			}
+					   		 			 
+						if (this._width != null) {
+				if (this._width.isLiteralText()) {
+					try {
+												
+						java.lang.String __width = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._width.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setWidth(__width);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("width", this._width);
 				}
 			}
 					     }

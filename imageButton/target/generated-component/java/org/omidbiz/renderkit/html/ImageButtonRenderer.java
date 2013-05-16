@@ -108,6 +108,7 @@ public class ImageButtonRenderer extends ImageButtonRendererBase {
 
 	public void doEncodeBegin(ResponseWriter writer, FacesContext context, org.omidbiz.component.UIImageButton component, ComponentVariables variables ) throws IOException {
 	    java.lang.String clientId = component.getClientId(context);
+variables.setVariable("src", component.getAttributes().get("url") );
 writer.startElement("img", component);
 			getUtils().writeAttribute(writer, "alt", variables.getVariable("alt") );
 						getUtils().writeAttribute(writer, "id", clientId );

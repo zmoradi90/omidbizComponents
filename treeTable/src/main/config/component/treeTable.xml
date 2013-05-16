@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.TreeTable</name>
+		<family>org.omidbiz.TreeTable</family>
+		<classname>org.omidbiz.component.html.HtmlTreeTable</classname>
+		<superclass>org.omidbiz.component.UITreeTable</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<facet>
+		   <name>caption</name>
+		   <description>Defines the table caption</description>
+		</facet>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.TreeTableRenderer</name>
+			<template>org/omidbiz/htmlTreeTable.jspx</template>
+		</renderer>
+		<tag>
+			<name>treeTable</name>
+			<classname>org.omidbiz.taglib.TreeTableTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		&ui_data_attributes;
+		&html_universal_attributes;
+		&html_table_attributes;
+		&html_events;
+		&spec_table_attributes;
+		<!--
+		<property>
+			<name>param</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+        -->
+        <property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>The current value for this component</description>
+		</property>
+	</component>
+</components>

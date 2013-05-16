@@ -8,9 +8,9 @@ import org.omidbiz.component.UIWindowPopup;
 
 public class HtmlWindowPopup extends UIWindowPopup{
 
-final public static  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
 
-final public static  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
+static final public  String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
@@ -83,6 +83,11 @@ private  String _eventsQueue = null;
 private  String _focus = null;
 
 /*
+* 
+*/
+private  String _height = null;
+
+/*
 * Base language of a resource specified with the href attribute; hreflang may only be used with href
 */
 private  String _hreflang = null;
@@ -124,6 +129,31 @@ private  String _lang = null;
 private  boolean _limitToList = false;
 
 private  boolean _limitToListSet = false;
+
+/*
+* 
+*/
+private  String _onCleanup = null;
+
+/*
+* 
+*/
+private  String _onClosed = null;
+
+/*
+* 
+*/
+private  String _onComplete = null;
+
+/*
+* 
+*/
+private  String _onLoad = null;
+
+/*
+* 
+*/
+private  String _onOpen = null;
 
 /*
 * The client side script method to be called before DOM is updated
@@ -293,6 +323,11 @@ private  boolean _useImageSet = false;
 * 
 */
 private  String _view = null;
+
+/*
+* 
+*/
+private  String _width = null;
 
 
 public HtmlWindowPopup(){
@@ -597,6 +632,32 @@ public void setFocus(String _focus){
 this._focus = _focus;
 }
 
+public String getHeight(){
+	if (this._height != null) {
+		return this._height;
+	}
+	ValueExpression ve = getValueExpression("height");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "85%";
+	
+
+}
+
+public void setHeight(String _height){
+this._height = _height;
+}
+
 public String getHreflang(){
 	if (this._hreflang != null) {
 		return this._hreflang;
@@ -763,6 +824,136 @@ public boolean isLimitToList(){
 public void setLimitToList(boolean _limitToList){
 this._limitToList = _limitToList;
 this._limitToListSet = true;
+}
+
+public String getOnCleanup(){
+	if (this._onCleanup != null) {
+		return this._onCleanup;
+	}
+	ValueExpression ve = getValueExpression("onCleanup");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnCleanup(String _onCleanup){
+this._onCleanup = _onCleanup;
+}
+
+public String getOnClosed(){
+	if (this._onClosed != null) {
+		return this._onClosed;
+	}
+	ValueExpression ve = getValueExpression("onClosed");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnClosed(String _onClosed){
+this._onClosed = _onClosed;
+}
+
+public String getOnComplete(){
+	if (this._onComplete != null) {
+		return this._onComplete;
+	}
+	ValueExpression ve = getValueExpression("onComplete");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnComplete(String _onComplete){
+this._onComplete = _onComplete;
+}
+
+public String getOnLoad(){
+	if (this._onLoad != null) {
+		return this._onLoad;
+	}
+	ValueExpression ve = getValueExpression("onLoad");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnLoad(String _onLoad){
+this._onLoad = _onLoad;
+}
+
+public String getOnOpen(){
+	if (this._onOpen != null) {
+		return this._onOpen;
+	}
+	ValueExpression ve = getValueExpression("onOpen");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setOnOpen(String _onOpen){
+this._onOpen = _onOpen;
 }
 
 public String getOnbeforedomupdate(){
@@ -1609,13 +1800,39 @@ public void setView(String _view){
 this._view = _view;
 }
 
+public String getWidth(){
+	if (this._width != null) {
+		return this._width;
+	}
+	ValueExpression ve = getValueExpression("width");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return "85%";
+	
+
+}
+
+public void setWidth(String _width){
+this._width = _width;
+}
+
 public String getFamily(){
 return COMPONENT_FAMILY;
 }
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[59];
+Object [] state = new Object[66];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
 state[2] = Boolean.valueOf(_ajaxSingle);
@@ -1631,50 +1848,57 @@ state[11] = Boolean.valueOf(_disabled);
 state[12] = Boolean.valueOf(_disabledSet);
 state[13] = _eventsQueue;
 state[14] = _focus;
-state[15] = _hreflang;
-state[16] = Boolean.valueOf(_iframe);
-state[17] = Boolean.valueOf(_iframeSet);
-state[18] = Boolean.valueOf(_ignoreDupResponses);
-state[19] = Boolean.valueOf(_ignoreDupResponsesSet);
-state[20] = _imageSrc;
-state[21] = _lang;
-state[22] = Boolean.valueOf(_limitToList);
-state[23] = Boolean.valueOf(_limitToListSet);
-state[24] = _onbeforedomupdate;
-state[25] = _onblur;
-state[26] = _onclick;
-state[27] = _oncomplete;
-state[28] = _ondblclick;
-state[29] = _onfocus;
-state[30] = _onkeydown;
-state[31] = _onkeypress;
-state[32] = _onkeyup;
-state[33] = _onmousedown;
-state[34] = _onmousemove;
-state[35] = _onmouseout;
-state[36] = _onmouseover;
-state[37] = _onmouseup;
-state[38] = _openText;
-state[39] = saveAttachedState(context, _process);
-state[40] = saveAttachedState(context, _reRender);
-state[41] = _rel;
-state[42] = Integer.valueOf(_requestDelay);
-state[43] = Boolean.valueOf(_requestDelaySet);
-state[44] = _rev;
-state[45] = _shape;
-state[46] = _similarityGroupingId;
-state[47] = _status;
-state[48] = _style;
-state[49] = _styleClass;
-state[50] = _tabindex;
-state[51] = _target;
-state[52] = Integer.valueOf(_timeout);
-state[53] = Boolean.valueOf(_timeoutSet);
-state[54] = _title;
-state[55] = _type;
-state[56] = Boolean.valueOf(_useImage);
-state[57] = Boolean.valueOf(_useImageSet);
-state[58] = _view;
+state[15] = _height;
+state[16] = _hreflang;
+state[17] = Boolean.valueOf(_iframe);
+state[18] = Boolean.valueOf(_iframeSet);
+state[19] = Boolean.valueOf(_ignoreDupResponses);
+state[20] = Boolean.valueOf(_ignoreDupResponsesSet);
+state[21] = _imageSrc;
+state[22] = _lang;
+state[23] = Boolean.valueOf(_limitToList);
+state[24] = Boolean.valueOf(_limitToListSet);
+state[25] = _onCleanup;
+state[26] = _onClosed;
+state[27] = _onComplete;
+state[28] = _onLoad;
+state[29] = _onOpen;
+state[30] = _onbeforedomupdate;
+state[31] = _onblur;
+state[32] = _onclick;
+state[33] = _oncomplete;
+state[34] = _ondblclick;
+state[35] = _onfocus;
+state[36] = _onkeydown;
+state[37] = _onkeypress;
+state[38] = _onkeyup;
+state[39] = _onmousedown;
+state[40] = _onmousemove;
+state[41] = _onmouseout;
+state[42] = _onmouseover;
+state[43] = _onmouseup;
+state[44] = _openText;
+state[45] = saveAttachedState(context, _process);
+state[46] = saveAttachedState(context, _reRender);
+state[47] = _rel;
+state[48] = Integer.valueOf(_requestDelay);
+state[49] = Boolean.valueOf(_requestDelaySet);
+state[50] = _rev;
+state[51] = _shape;
+state[52] = _similarityGroupingId;
+state[53] = _status;
+state[54] = _style;
+state[55] = _styleClass;
+state[56] = _tabindex;
+state[57] = _target;
+state[58] = Integer.valueOf(_timeout);
+state[59] = Boolean.valueOf(_timeoutSet);
+state[60] = _title;
+state[61] = _type;
+state[62] = Boolean.valueOf(_useImage);
+state[63] = Boolean.valueOf(_useImageSet);
+state[64] = _view;
+state[65] = _width;
 return state;
 }
 
@@ -1696,50 +1920,57 @@ super.restoreState(context, states[0]);
 		_disabledSet = ((Boolean)states[12]).booleanValue();
 		_eventsQueue = (String)states[13];;
 		_focus = (String)states[14];;
-		_hreflang = (String)states[15];;
-		_iframe = ((Boolean)states[16]).booleanValue();
-		_iframeSet = ((Boolean)states[17]).booleanValue();
-		_ignoreDupResponses = ((Boolean)states[18]).booleanValue();
-		_ignoreDupResponsesSet = ((Boolean)states[19]).booleanValue();
-		_imageSrc = (String)states[20];;
-		_lang = (String)states[21];;
-		_limitToList = ((Boolean)states[22]).booleanValue();
-		_limitToListSet = ((Boolean)states[23]).booleanValue();
-		_onbeforedomupdate = (String)states[24];;
-		_onblur = (String)states[25];;
-		_onclick = (String)states[26];;
-		_oncomplete = (String)states[27];;
-		_ondblclick = (String)states[28];;
-		_onfocus = (String)states[29];;
-		_onkeydown = (String)states[30];;
-		_onkeypress = (String)states[31];;
-		_onkeyup = (String)states[32];;
-		_onmousedown = (String)states[33];;
-		_onmousemove = (String)states[34];;
-		_onmouseout = (String)states[35];;
-		_onmouseover = (String)states[36];;
-		_onmouseup = (String)states[37];;
-		_openText = (String)states[38];;
-		_process = (Object)restoreAttachedState(context, states[39]);
-		_reRender = (Object)restoreAttachedState(context, states[40]);
-		_rel = (String)states[41];;
-		_requestDelay = ((Integer)states[42]).intValue();
-		_requestDelaySet = ((Boolean)states[43]).booleanValue();
-		_rev = (String)states[44];;
-		_shape = (String)states[45];;
-		_similarityGroupingId = (String)states[46];;
-		_status = (String)states[47];;
-		_style = (String)states[48];;
-		_styleClass = (String)states[49];;
-		_tabindex = (String)states[50];;
-		_target = (String)states[51];;
-		_timeout = ((Integer)states[52]).intValue();
-		_timeoutSet = ((Boolean)states[53]).booleanValue();
-		_title = (String)states[54];;
-		_type = (String)states[55];;
-		_useImage = ((Boolean)states[56]).booleanValue();
-		_useImageSet = ((Boolean)states[57]).booleanValue();
-		_view = (String)states[58];;
+		_height = (String)states[15];;
+		_hreflang = (String)states[16];;
+		_iframe = ((Boolean)states[17]).booleanValue();
+		_iframeSet = ((Boolean)states[18]).booleanValue();
+		_ignoreDupResponses = ((Boolean)states[19]).booleanValue();
+		_ignoreDupResponsesSet = ((Boolean)states[20]).booleanValue();
+		_imageSrc = (String)states[21];;
+		_lang = (String)states[22];;
+		_limitToList = ((Boolean)states[23]).booleanValue();
+		_limitToListSet = ((Boolean)states[24]).booleanValue();
+		_onCleanup = (String)states[25];;
+		_onClosed = (String)states[26];;
+		_onComplete = (String)states[27];;
+		_onLoad = (String)states[28];;
+		_onOpen = (String)states[29];;
+		_onbeforedomupdate = (String)states[30];;
+		_onblur = (String)states[31];;
+		_onclick = (String)states[32];;
+		_oncomplete = (String)states[33];;
+		_ondblclick = (String)states[34];;
+		_onfocus = (String)states[35];;
+		_onkeydown = (String)states[36];;
+		_onkeypress = (String)states[37];;
+		_onkeyup = (String)states[38];;
+		_onmousedown = (String)states[39];;
+		_onmousemove = (String)states[40];;
+		_onmouseout = (String)states[41];;
+		_onmouseover = (String)states[42];;
+		_onmouseup = (String)states[43];;
+		_openText = (String)states[44];;
+		_process = (Object)restoreAttachedState(context, states[45]);
+		_reRender = (Object)restoreAttachedState(context, states[46]);
+		_rel = (String)states[47];;
+		_requestDelay = ((Integer)states[48]).intValue();
+		_requestDelaySet = ((Boolean)states[49]).booleanValue();
+		_rev = (String)states[50];;
+		_shape = (String)states[51];;
+		_similarityGroupingId = (String)states[52];;
+		_status = (String)states[53];;
+		_style = (String)states[54];;
+		_styleClass = (String)states[55];;
+		_tabindex = (String)states[56];;
+		_target = (String)states[57];;
+		_timeout = ((Integer)states[58]).intValue();
+		_timeoutSet = ((Boolean)states[59]).booleanValue();
+		_title = (String)states[60];;
+		_type = (String)states[61];;
+		_useImage = ((Boolean)states[62]).booleanValue();
+		_useImageSet = ((Boolean)states[63]).booleanValue();
+		_view = (String)states[64];;
+		_width = (String)states[65];;
 	
 }
 

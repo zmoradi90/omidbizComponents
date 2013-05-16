@@ -8,9 +8,9 @@ import org.omidbiz.component.UIPager;
 
 public class HtmlPager extends UIPager{
 
-final public static  String COMPONENT_FAMILY = "org.omidbiz.Pager";
+static final public  String COMPONENT_FAMILY = "org.omidbiz.Pager";
 
-final public static  String COMPONENT_TYPE = "org.omidbiz.Pager";
+static final public  String COMPONENT_TYPE = "org.omidbiz.Pager";
 
 /*
 * 

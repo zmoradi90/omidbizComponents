@@ -37,6 +37,7 @@
 			<name>url</name>
 			<classname>java.lang.String</classname>
 			<description>
+				image url
 			</description>
 			<required>true</required>
 		</property>

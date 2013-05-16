@@ -130,6 +130,13 @@ a backing bean</description>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description></description>
+	   <name>height</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>Base language of a resource specified with the href attribute; hreflang may only be used with href</description>
 	   <name>hreflang</name>
 	   	   	   					   	<deferred-value>
@@ -194,6 +201,41 @@ a backing bean</description>
 	   <name>limitToList</name>
 	   	   	   					   	<deferred-value>
 					<type>boolean</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onCleanup</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onClosed</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onComplete</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onLoad</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>onOpen</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
@@ -434,6 +476,13 @@ When the delay time is over, the request will be sent to the server or removed i
 		  		  <attribute>
 	   <description></description>
 	   <name>view</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>width</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
 				</deferred-value>

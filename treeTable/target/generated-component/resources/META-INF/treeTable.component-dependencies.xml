@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+	<namespace>http://omidbiz.com/treeTable</namespace>
+
+	<component>
+		<name>treeTable</name>
+
+		
+		
+				<styles>
+						<style>org/omidbiz/renderkit/html/css/treeTable.xcss</style>
+					</styles>
+			</component>
+
+</components>
