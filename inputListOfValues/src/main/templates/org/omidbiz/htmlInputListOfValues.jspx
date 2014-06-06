@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js, /org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</h:scripts>
 	
 	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
 	
@@ -41,15 +41,21 @@
 	<c:set var="onCleanup" value="#{component.attributes['onCleanup']}"/>
 	<c:set var="onClosed" value="#{component.attributes['onClosed']}"/>
 	
+	<c:set var="autocompleteUrl" value="#{component.attributes['autocompleteUrl']}"/>
+	
 
 		<jsp:scriptlet>
 <![CDATA[ 
 			String type = (String) variables.getVariable("type");
+			String autocompleteUrl = (String) variables.getVariable("autocompleteUrl");
 			Boolean sendRequestToServer = (Boolean) variables.getVariable("sendRequestToServer");
 ]]>
 </jsp:scriptlet>
 	
 <jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { ]]></jsp:scriptlet>
+
+<jsp:scriptlet><![CDATA[ if (autocompleteUrl != null && !"".equals(autocompleteUrl.trim()) ) { ]]></jsp:scriptlet>
+
 	<script type="text/javascript">
  
 jQuery(document).ready(function(){	
@@ -63,12 +69,39 @@ jQuery(document).ready(function(){
 		width:'#{width}', height:'#{height}', speed:0, iframe:#{iframe}
 		}, Richfaces.colorboxControl.getParameters()));
 	
+	jQuery( '.#{objectName}Name' ).autocomplete({
+		source: "#{autocompleteUrl}",
+		minLength: 2,
+		select: function( event, ui ) {
+			document.getElementById("#{objectName}Id").value = ui.item.id;
+			document.getElementById("#{objectName}Name").value = ui.item.value;
+		}		
+		});
 });
-
 </script>
+<input class="#{objectName}Name" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+	<script type="text/javascript">
+ 
+jQuery(document).ready(function(){	
+	jQuery(".#{objectName}lovClass").colorbox({width:"80%", height:"80%", iframe:true});
+	jQuery('a[rel=rel#{objectName}]').colorbox(jQuery.extend({
+		onOpen:function(){ #{onOpen} },
+		onLoad:function(){ #{onLoad} },
+		onComplete:function(){ #{onComplete} },
+		onCleanup:function(){ #{onCleanup} },
+		onClosed:function(){ #{onClosed} },
+		width:'#{width}', height:'#{height}', speed:0, iframe:#{iframe}
+		}, Richfaces.colorboxControl.getParameters()));
+	
+	
+});
+</script>
+<input readonly="readonly" disabled="disabled" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueForId(context, component)}"/>
-	<input readonly="readonly" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+	
 	<a rel="rel#{objectName}" class="#{objectName}lovClass" href="#{view}">
 		<img alt="Open Colorbox" src="#{icon}" style="border: 0;vertical-align: middle;"/>
 	</a>

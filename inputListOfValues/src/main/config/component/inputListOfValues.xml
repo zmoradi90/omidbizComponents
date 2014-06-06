@@ -63,6 +63,7 @@
 				define how comonent being rendered 
 				dialog
 				link
+				
 			</description>			
 			<required>true</required>
 		</property>
@@ -74,6 +75,17 @@
 			</description>			
 			<required>true</required>
 		</property>
+		<!-- autocomplete -->
+		<property>
+			<name>autocompleteUrl</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>			
+		</property>
+		
+		
+		
+		
 		<property>
 			<name>pid</name>
 			<classname>java.lang.Object</classname>
