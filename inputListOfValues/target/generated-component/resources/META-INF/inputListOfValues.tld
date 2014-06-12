@@ -40,6 +40,13 @@
 				</deferred-value>
 				   	  </attribute>
 		  		  <attribute>
+	   <description></description>
+	   <name>autocompleteUrl</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
 	   <description>The attribute takes a value-binding expression for a component property of
 a backing bean</description>
 	   <name>binding</name>
@@ -339,6 +346,13 @@ a backing bean</description>
 		  		  <attribute>
 	   <description>This attribute specifies the position of the current element in the tabbing order for the current document. This value must be a number between 0 and 32767. User agents should ignore leading zeros</description>
 	   <name>tabindex</name>
+	   	   	   					   	<deferred-value>
+					<type>java.lang.String</type>
+				</deferred-value>
+				   	  </attribute>
+		  		  <attribute>
+	   <description></description>
+	   <name>title</name>
 	   	   	   					   	<deferred-value>
 					<type>java.lang.String</type>
 				</deferred-value>

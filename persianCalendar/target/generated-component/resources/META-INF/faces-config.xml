@@ -15,28 +15,28 @@
     <component-class>org.omidbiz.component.html.HtmlPersianCalendar</component-class>
     
 	<facet>
-  	<description>Defines calendar's optional footer</description>
-          <facet-name>optionalFooter</facet-name>
-    </facet>
-	<facet>
-  	<description>Redefines week number</description>
-          <facet-name>weekNumber</facet-name>
+  	<description>Redefines calendar footer. Related attribute is "showFooter"</description>
+          <facet-name>footer</facet-name>
     </facet>
 	<facet>
   	<description>Defines calendar's optional header</description>
           <facet-name>optionalHeader</facet-name>
     </facet>
 	<facet>
-  	<description>Redefines names of the week days. Related attributes are "weekDayLabels" and "weekDayLabelsShort"</description>
-          <facet-name>weekDay</facet-name>
+  	<description>Redefines week number</description>
+          <facet-name>weekNumber</facet-name>
+    </facet>
+	<facet>
+  	<description>Defines calendar's optional footer</description>
+          <facet-name>optionalFooter</facet-name>
     </facet>
 	<facet>
   	<description>Redefines calendar header. Related attribute is "showHeader"</description>
           <facet-name>header</facet-name>
     </facet>
 	<facet>
-  	<description>Redefines calendar footer. Related attribute is "showFooter"</description>
-          <facet-name>footer</facet-name>
+  	<description>Redefines names of the week days. Related attributes are "weekDayLabels" and "weekDayLabelsShort"</description>
+          <facet-name>weekDay</facet-name>
     </facet>
 	    <component-extension>
       <component-family>org.omidbiz.PersianCalendar</component-family>

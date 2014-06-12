@@ -26,6 +26,7 @@ Richfaces.colorboxControl.extendedClose = function extendedClose(id, value, obj)
 	
 }
 
+
 Richfaces.colorboxControl.extendedRequestClose = function extendedClose(id, value, obj, url){		
 	parent.document.getElementById(obj+"Id").value = id
 	parent.document.getElementById(obj+"Name").value = value;

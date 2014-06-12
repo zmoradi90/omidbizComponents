@@ -73,6 +73,21 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 			this._alt = __alt;
 	     }
 	  
+	 	 		 	  			  		  	  
+		/*
+		 * autocompleteUrl
+		 * 
+		 */
+		private ValueExpression _autocompleteUrl;
+		/**
+		 * 
+		 * Setter for autocompleteUrl
+		 * @param autocompleteUrl - new value
+		 */
+		 public void setAutocompleteUrl( ValueExpression  __autocompleteUrl ){
+			this._autocompleteUrl = __autocompleteUrl;
+	     }
+	  
 	 	 		 		 	  			  		  	  
 		/*
 		 * converter
@@ -496,7 +511,7 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 			this._tabindex = __tabindex;
 	     }
 	  
-	 	 		 	  			  		  	  
+	 	 		 		 	  			  		  	  
 		/*
 		 * type
 		 * define how comonent being rendered 
@@ -667,6 +682,7 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
         		 		    this._accesskey = null;
 	 		 		    this._align = null;
 	 		 		    this._alt = null;
+	 		 		    this._autocompleteUrl = null;
 	 		 		 		    this._converter = null;
 	 		 		    this._converterMessage = null;
 	 		 		    this._disabled = null;
@@ -694,7 +710,7 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 	 		 		    this._sendRequestToServer = null;
 	 		 		    this._size = null;
 	 		 		 		 		    this._tabindex = null;
-	 		 		    this._type = null;
+	 		 		 		    this._type = null;
 	 		 		    this._valid = null;
 	 		 		    this._validator = null;
 	 		 		    this._validatorMessage = null;
@@ -769,6 +785,25 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					}
 				} else {
 					component.setValueExpression("alt", this._alt);
+				}
+			}
+					   		 			 
+						if (this._autocompleteUrl != null) {
+				if (this._autocompleteUrl.isLiteralText()) {
+					try {
+												
+						java.lang.String __autocompleteUrl = (java.lang.String) getFacesContext().
+							getApplication().
+								getExpressionFactory().
+									coerceToType(this._autocompleteUrl.getExpressionString(), 
+											java.lang.String.class);
+					
+												comp.setAutocompleteUrl(__autocompleteUrl);
+											} catch (ELException e) {
+						throw new FacesException(e);
+					}
+				} else {
+					component.setValueExpression("autocompleteUrl", this._autocompleteUrl);
 				}
 			}
 					    		 			setConverterProperty(comp, this._converter);
@@ -1266,7 +1301,7 @@ public class InputListOfValuesTag extends org.ajax4jsf.webapp.taglib.HtmlCompone
 					component.setValueExpression("tabindex", this._tabindex);
 				}
 			}
-					   		 			 
+					    		 			 
 						if (this._type != null) {
 				if (this._type.isLiteralText()) {
 					try {

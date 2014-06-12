@@ -35,6 +35,10 @@
 		<path>org/omidbiz/renderkit/html/css/images/loading_background.png</path>
 	</resource>
 	<resource>
+		<name>org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</name>
+		<path>org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</path>
+	</resource>
+	<resource>
 		<name>org/omidbiz/renderkit/html/script/colorboxUtil.js</name>
 		<path>org/omidbiz/renderkit/html/script/colorboxUtil.js</path>
 	</resource>

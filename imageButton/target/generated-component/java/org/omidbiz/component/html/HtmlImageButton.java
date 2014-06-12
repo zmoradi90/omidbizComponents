@@ -10,9 +10,9 @@ import org.omidbiz.component.UIImageButton;
 
 public class HtmlImageButton extends UIImageButton{
 
-static public final  String COMPONENT_FAMILY = "org.omidbiz.ImageButton";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.ImageButton";
 
-static public final  String COMPONENT_TYPE = "org.omidbiz.ImageButton";
+final public static  String COMPONENT_TYPE = "org.omidbiz.ImageButton";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey

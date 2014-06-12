@@ -8,9 +8,9 @@ import org.omidbiz.component.UIInputListOfValues;
 
 public class HtmlInputListOfValues extends UIInputListOfValues{
 
-static final public  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-static final public  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
+final public static  String COMPONENT_TYPE = "org.omidbiz.InputListOfValues";
 
 /*
 * This attribute assigns an access key to an element. An access key is a single character from the document character set. Note: Authors should consider the input method of the expected reader when specifying an accesskey
@@ -27,6 +27,11 @@ private  String _align = null;
 * For a user agents that cannot display images, forms, or applets, this attribute specifies alternate text. The language of the alternate text is specified by the lang attribute
 */
 private  String _alt = null;
+
+/*
+* 
+*/
+private  String _autocompleteUrl = null;
 
 /*
 * When set for a form control, this boolean attribute disables the control for your input
@@ -199,6 +204,11 @@ private  String _styleClass = null;
 private  String _tabindex = null;
 
 /*
+* 
+*/
+private  String _title = null;
+
+/*
 * define how comonent being rendered 
 				dialog
 				link
@@ -306,6 +316,32 @@ public String getAlt(){
 
 public void setAlt(String _alt){
 this._alt = _alt;
+}
+
+public String getAutocompleteUrl(){
+	if (this._autocompleteUrl != null) {
+		return this._autocompleteUrl;
+	}
+	ValueExpression ve = getValueExpression("autocompleteUrl");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setAutocompleteUrl(String _autocompleteUrl){
+this._autocompleteUrl = _autocompleteUrl;
 }
 
 public boolean isDisabled(){
@@ -1156,6 +1192,32 @@ public void setTabindex(String _tabindex){
 this._tabindex = _tabindex;
 }
 
+public String getTitle(){
+	if (this._title != null) {
+		return this._title;
+	}
+	ValueExpression ve = getValueExpression("title");
+	if (ve != null) {
+	    String value = null;
+	    
+	    try {
+			value = (String) ve.getValue(getFacesContext().getELContext());
+	    } catch (ELException e) {
+			throw new FacesException(e);
+	    }
+	    
+	    return value;
+	} 
+
+    return null;
+	
+
+}
+
+public void setTitle(String _title){
+this._title = _title;
+}
+
 public String getType(){
 	if (this._type != null) {
 		return this._type;
@@ -1292,52 +1354,54 @@ return COMPONENT_FAMILY;
 
 @Override
 public Object saveState(FacesContext context){
-Object [] state = new Object[45];
+Object [] state = new Object[47];
 state[0] = super.saveState(context);
 state[1] = _accesskey;
 state[2] = _align;
 state[3] = _alt;
-state[4] = Boolean.valueOf(_disabled);
-state[5] = Boolean.valueOf(_disabledSet);
-state[6] = _height;
-state[7] = Boolean.valueOf(_iframe);
-state[8] = Boolean.valueOf(_iframeSet);
-state[9] = Integer.valueOf(_maxlength);
-state[10] = Boolean.valueOf(_maxlengthSet);
-state[11] = _objectName;
-state[12] = _onCleanup;
-state[13] = _onClosed;
-state[14] = _onComplete;
-state[15] = _onLoad;
-state[16] = _onOpen;
-state[17] = _onblur;
-state[18] = _onchange;
-state[19] = _onclick;
-state[20] = _ondblclick;
-state[21] = _onfocus;
-state[22] = _onkeydown;
-state[23] = _onkeypress;
-state[24] = _onkeyup;
-state[25] = _onmousedown;
-state[26] = _onmousemove;
-state[27] = _onmouseout;
-state[28] = _onmouseover;
-state[29] = _onmouseup;
-state[30] = _onselect;
-state[31] = _pValueText;
-state[32] = saveAttachedState(context, _pid);
-state[33] = _selectedText;
-state[34] = _sendRequestToServer;
-state[35] = Integer.valueOf(_size);
-state[36] = Boolean.valueOf(_sizeSet);
-state[37] = _style;
-state[38] = _styleClass;
-state[39] = _tabindex;
-state[40] = _type;
-state[41] = saveAttachedState(context, _valueId);
-state[42] = saveAttachedState(context, _valueName);
-state[43] = _view;
-state[44] = _width;
+state[4] = _autocompleteUrl;
+state[5] = Boolean.valueOf(_disabled);
+state[6] = Boolean.valueOf(_disabledSet);
+state[7] = _height;
+state[8] = Boolean.valueOf(_iframe);
+state[9] = Boolean.valueOf(_iframeSet);
+state[10] = Integer.valueOf(_maxlength);
+state[11] = Boolean.valueOf(_maxlengthSet);
+state[12] = _objectName;
+state[13] = _onCleanup;
+state[14] = _onClosed;
+state[15] = _onComplete;
+state[16] = _onLoad;
+state[17] = _onOpen;
+state[18] = _onblur;
+state[19] = _onchange;
+state[20] = _onclick;
+state[21] = _ondblclick;
+state[22] = _onfocus;
+state[23] = _onkeydown;
+state[24] = _onkeypress;
+state[25] = _onkeyup;
+state[26] = _onmousedown;
+state[27] = _onmousemove;
+state[28] = _onmouseout;
+state[29] = _onmouseover;
+state[30] = _onmouseup;
+state[31] = _onselect;
+state[32] = _pValueText;
+state[33] = saveAttachedState(context, _pid);
+state[34] = _selectedText;
+state[35] = _sendRequestToServer;
+state[36] = Integer.valueOf(_size);
+state[37] = Boolean.valueOf(_sizeSet);
+state[38] = _style;
+state[39] = _styleClass;
+state[40] = _tabindex;
+state[41] = _title;
+state[42] = _type;
+state[43] = saveAttachedState(context, _valueId);
+state[44] = saveAttachedState(context, _valueName);
+state[45] = _view;
+state[46] = _width;
 return state;
 }
 
@@ -1348,47 +1412,49 @@ super.restoreState(context, states[0]);
 	_accesskey = (String)states[1];;
 		_align = (String)states[2];;
 		_alt = (String)states[3];;
-		_disabled = ((Boolean)states[4]).booleanValue();
-		_disabledSet = ((Boolean)states[5]).booleanValue();
-		_height = (String)states[6];;
-		_iframe = ((Boolean)states[7]).booleanValue();
-		_iframeSet = ((Boolean)states[8]).booleanValue();
-		_maxlength = ((Integer)states[9]).intValue();
-		_maxlengthSet = ((Boolean)states[10]).booleanValue();
-		_objectName = (String)states[11];;
-		_onCleanup = (String)states[12];;
-		_onClosed = (String)states[13];;
-		_onComplete = (String)states[14];;
-		_onLoad = (String)states[15];;
-		_onOpen = (String)states[16];;
-		_onblur = (String)states[17];;
-		_onchange = (String)states[18];;
-		_onclick = (String)states[19];;
-		_ondblclick = (String)states[20];;
-		_onfocus = (String)states[21];;
-		_onkeydown = (String)states[22];;
-		_onkeypress = (String)states[23];;
-		_onkeyup = (String)states[24];;
-		_onmousedown = (String)states[25];;
-		_onmousemove = (String)states[26];;
-		_onmouseout = (String)states[27];;
-		_onmouseover = (String)states[28];;
-		_onmouseup = (String)states[29];;
-		_onselect = (String)states[30];;
-		_pValueText = (String)states[31];;
-		_pid = (Object)restoreAttachedState(context, states[32]);
-		_selectedText = (String)states[33];;
-		_sendRequestToServer = (Boolean)states[34];;
-		_size = ((Integer)states[35]).intValue();
-		_sizeSet = ((Boolean)states[36]).booleanValue();
-		_style = (String)states[37];;
-		_styleClass = (String)states[38];;
-		_tabindex = (String)states[39];;
-		_type = (String)states[40];;
-		_valueId = (Object)restoreAttachedState(context, states[41]);
-		_valueName = (Object)restoreAttachedState(context, states[42]);
-		_view = (String)states[43];;
-		_width = (String)states[44];;
+		_autocompleteUrl = (String)states[4];;
+		_disabled = ((Boolean)states[5]).booleanValue();
+		_disabledSet = ((Boolean)states[6]).booleanValue();
+		_height = (String)states[7];;
+		_iframe = ((Boolean)states[8]).booleanValue();
+		_iframeSet = ((Boolean)states[9]).booleanValue();
+		_maxlength = ((Integer)states[10]).intValue();
+		_maxlengthSet = ((Boolean)states[11]).booleanValue();
+		_objectName = (String)states[12];;
+		_onCleanup = (String)states[13];;
+		_onClosed = (String)states[14];;
+		_onComplete = (String)states[15];;
+		_onLoad = (String)states[16];;
+		_onOpen = (String)states[17];;
+		_onblur = (String)states[18];;
+		_onchange = (String)states[19];;
+		_onclick = (String)states[20];;
+		_ondblclick = (String)states[21];;
+		_onfocus = (String)states[22];;
+		_onkeydown = (String)states[23];;
+		_onkeypress = (String)states[24];;
+		_onkeyup = (String)states[25];;
+		_onmousedown = (String)states[26];;
+		_onmousemove = (String)states[27];;
+		_onmouseout = (String)states[28];;
+		_onmouseover = (String)states[29];;
+		_onmouseup = (String)states[30];;
+		_onselect = (String)states[31];;
+		_pValueText = (String)states[32];;
+		_pid = (Object)restoreAttachedState(context, states[33]);
+		_selectedText = (String)states[34];;
+		_sendRequestToServer = (Boolean)states[35];;
+		_size = ((Integer)states[36]).intValue();
+		_sizeSet = ((Boolean)states[37]).booleanValue();
+		_style = (String)states[38];;
+		_styleClass = (String)states[39];;
+		_tabindex = (String)states[40];;
+		_title = (String)states[41];;
+		_type = (String)states[42];;
+		_valueId = (Object)restoreAttachedState(context, states[43]);
+		_valueName = (Object)restoreAttachedState(context, states[44]);
+		_view = (String)states[45];;
+		_width = (String)states[46];;
 	
 }
 

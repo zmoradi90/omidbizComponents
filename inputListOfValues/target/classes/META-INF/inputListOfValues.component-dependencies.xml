@@ -12,6 +12,7 @@
 						<script>org.ajax4jsf.javascript.AjaxScript</script>
 						<script>org/omidbiz/renderkit/html/script/colorboxUtil.js</script>
 						<script>org/omidbiz/renderkit/html/script/colorbox.js</script>
+						<script>org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</script>
 					</scripts>
 		
 				<styles>

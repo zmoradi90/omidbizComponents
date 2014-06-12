@@ -8,9 +8,9 @@ import org.omidbiz.component.UITreeTable;
 
 public class HtmlTreeTable extends UITreeTable{
 
-static final public  String COMPONENT_FAMILY = "org.omidbiz.TreeTable";
+final public static  String COMPONENT_FAMILY = "org.omidbiz.TreeTable";
 
-static final public  String COMPONENT_TYPE = "org.omidbiz.TreeTable";
+final public static  String COMPONENT_TYPE = "org.omidbiz.TreeTable";
 
 /*
 * Deprecated. This attribute specifies the position of the table with respect to the document. 

@@ -83,7 +83,13 @@
 			</description>			
 		</property>
 		
-		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>			
+		</property>
 		
 		
 		<property>

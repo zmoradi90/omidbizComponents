@@ -67,6 +67,8 @@ public class InputListOfValuesRenderer extends InputListOfValuesRendererBase {
 				getResource("/org/omidbiz/renderkit/html/script/colorboxUtil.js")
 						,
 				getResource("/org/omidbiz/renderkit/html/script/colorbox.js")
+						,
+				getResource("/org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js")
 	};
 
 private InternetResource[] scriptsAll = null;
@@ -226,32 +228,54 @@ variables.setVariable("onLoad", component.getAttributes().get("onLoad") );
 variables.setVariable("onComplete", component.getAttributes().get("onComplete") );
 variables.setVariable("onCleanup", component.getAttributes().get("onCleanup") );
 variables.setVariable("onClosed", component.getAttributes().get("onClosed") );
+variables.setVariable("autocompleteUrl", component.getAttributes().get("autocompleteUrl") );
 
  
 			String type = (String) variables.getVariable("type");
+			String autocompleteUrl = (String) variables.getVariable("autocompleteUrl");
 			Boolean sendRequestToServer = (Boolean) variables.getVariable("sendRequestToServer");
 
 
  if (! "".equals(type.trim()) && type.equalsIgnoreCase("dialog") ) { 
+ if (autocompleteUrl != null && !"".equals(autocompleteUrl.trim()) ) { 
 writer.startElement("script", component);
 			getUtils().writeAttribute(writer, "type", "text/javascript" );
 			
-writer.writeText(convertToString("jQuery(document).ready(function(){	\n	jQuery(\"." + convertToString(variables.getVariable("objectName")) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n	jQuery('a[rel=rel" + convertToString(variables.getVariable("objectName")) + "]').colorbox(jQuery.extend({\n		onOpen:function(){ " + convertToString(variables.getVariable("onOpen")) + " },\n		onLoad:function(){ " + convertToString(variables.getVariable("onLoad")) + " },\n		onComplete:function(){ " + convertToString(variables.getVariable("onComplete")) + " },\n		onCleanup:function(){ " + convertToString(variables.getVariable("onCleanup")) + " },\n		onClosed:function(){ " + convertToString(variables.getVariable("onClosed")) + " },\n		width:'" + convertToString(variables.getVariable("width")) + "', height:'" + convertToString(variables.getVariable("height")) + "', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "\n		}, Richfaces.colorboxControl.getParameters()));\n	\n});"),null);
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n	jQuery(\"." + convertToString(variables.getVariable("objectName")) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n	jQuery('a[rel=rel" + convertToString(variables.getVariable("objectName")) + "]').colorbox(jQuery.extend({\n		onOpen:function(){ " + convertToString(variables.getVariable("onOpen")) + " },\n		onLoad:function(){ " + convertToString(variables.getVariable("onLoad")) + " },\n		onComplete:function(){ " + convertToString(variables.getVariable("onComplete")) + " },\n		onCleanup:function(){ " + convertToString(variables.getVariable("onCleanup")) + " },\n		onClosed:function(){ " + convertToString(variables.getVariable("onClosed")) + " },\n		width:'" + convertToString(variables.getVariable("width")) + "', height:'" + convertToString(variables.getVariable("height")) + "', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "\n		}, Richfaces.colorboxControl.getParameters()));\n	\n	jQuery( '." + convertToString(variables.getVariable("objectName")) + "Name' ).autocomplete({\n		source: \"" + convertToString(variables.getVariable("autocompleteUrl")) + "\",\n		minLength: 2,\n		select: function( event, ui ) {\n			document.getElementById(\"" + convertToString(variables.getVariable("objectName")) + "Id\").value = ui.item.id;\n			document.getElementById(\"" + convertToString(variables.getVariable("objectName")) + "Name\").value = ui.item.value;\n		}		\n		});\n});"),null);
 
 writer.endElement("script");
+writer.startElement("input", component);
+			getUtils().writeAttribute(writer, "class", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "title", component.getAttributes().get("title") );
+						getUtils().writeAttribute(writer, "type", "text" );
+						getUtils().writeAttribute(writer, "value", getValueForName(context,component) );
+			
+writer.endElement("input");
+ } else { 
+writer.startElement("script", component);
+			getUtils().writeAttribute(writer, "type", "text/javascript" );
+			
+writer.writeText(convertToString("jQuery(document).ready(function(){	\n	jQuery(\"." + convertToString(variables.getVariable("objectName")) + "lovClass\").colorbox({width:\"80%\", height:\"80%\", iframe:true});\n	jQuery('a[rel=rel" + convertToString(variables.getVariable("objectName")) + "]').colorbox(jQuery.extend({\n		onOpen:function(){ " + convertToString(variables.getVariable("onOpen")) + " },\n		onLoad:function(){ " + convertToString(variables.getVariable("onLoad")) + " },\n		onComplete:function(){ " + convertToString(variables.getVariable("onComplete")) + " },\n		onCleanup:function(){ " + convertToString(variables.getVariable("onCleanup")) + " },\n		onClosed:function(){ " + convertToString(variables.getVariable("onClosed")) + " },\n		width:'" + convertToString(variables.getVariable("width")) + "', height:'" + convertToString(variables.getVariable("height")) + "', speed:0, iframe:" + convertToString(variables.getVariable("iframe")) + "\n		}, Richfaces.colorboxControl.getParameters()));\n	\n	\n});"),null);
+
+writer.endElement("script");
+writer.startElement("input", component);
+			getUtils().writeAttribute(writer, "disabled", "disabled" );
+						getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
+						getUtils().writeAttribute(writer, "readonly", "readonly" );
+						getUtils().writeAttribute(writer, "title", component.getAttributes().get("title") );
+						getUtils().writeAttribute(writer, "type", "text" );
+						getUtils().writeAttribute(writer, "value", getValueForName(context,component) );
+			
+writer.endElement("input");
+ } 
 writer.startElement("input", component);
 			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Id" );
 						getUtils().writeAttribute(writer, "type", "hidden" );
 						getUtils().writeAttribute(writer, "value", getValueForId(context,component) );
-			
-writer.endElement("input");
-writer.startElement("input", component);
-			getUtils().writeAttribute(writer, "id", convertToString(variables.getVariable("objectName")) + "Name" );
-						getUtils().writeAttribute(writer, "name", convertToString(variables.getVariable("objectName")) + "Name" );
-						getUtils().writeAttribute(writer, "readonly", "readonly" );
-						getUtils().writeAttribute(writer, "type", "text" );
-						getUtils().writeAttribute(writer, "value", getValueForName(context,component) );
 			
 writer.endElement("input");
 writer.startElement("a", component);
