@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIInputNumeric;
@@ -45,7 +46,11 @@ public abstract class InputNumericRendererBase extends HeaderResourcesRendererBa
 
 		if (submittedValue != null)
 		{
-			inputDate.setSubmittedValue(submittedValue);
+			Converter converter = inputDate.getConverter();
+			if(converter != null)			
+				inputDate.setSubmittedValue(converter.getAsObject(context, component, submittedValue));
+			else
+				inputDate.setSubmittedValue(submittedValue);
 		}
 	}
 
@@ -60,7 +65,11 @@ public abstract class InputNumericRendererBase extends HeaderResourcesRendererBa
 			Object value = inputDate.getValue();
 			if (value != null)
 			{
-				valueString = value.toString();
+				Converter converter = inputDate.getConverter();
+				if (converter != null)
+					valueString = converter.getAsString(context, component, String.valueOf(value));
+				else
+					valueString = value.toString();
 			}
 		}
 		return valueString;

@@ -39,6 +39,13 @@
 			</description>
 		</property>
 		<property>
+			<name>separator</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>&quot;,&quot;</defaultvalue>
+		</property>
+		<property>
 			<name>name</name>
 			<classname>java.lang.String</classname>
 			<description>

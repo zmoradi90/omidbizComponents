@@ -930,12 +930,12 @@
 		* value must be enclosed in quotes and use the period for the decimal point
 		* value must be larger than vMin
 		*/
-		vMax: '999999999.99',
+		vMax: '999999999999',
 		/** minimum possible value
 		* value must be enclosed in quotes and use the period for the decimal point
 		* value must be smaller than vMax
 		*/
-		vMin: '0.00',
+		vMin: '0',
 		/** max number of decimal places = used to overide deciaml places set by the vMin & vMax values
 		* value must be enclosed in quotes example mDec: '3',
 		* This can also set the value via a call back function mDec: 'css:#
