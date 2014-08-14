@@ -32,7 +32,7 @@ import org.omidbiz.component.UIInputNumeric;
  * @version $Revision: 1.0
  * 
  */
-public abstract class InputNumericRendererBase extends HeaderResourcesRendererBase
+public class InputNumericRendererBase extends HeaderResourcesRendererBase
 {
 
 	@Override
@@ -47,11 +47,23 @@ public abstract class InputNumericRendererBase extends HeaderResourcesRendererBa
 		if (submittedValue != null)
 		{
 			Converter converter = inputDate.getConverter();
-			if(converter != null)			
+			if (converter != null)
 				inputDate.setSubmittedValue(converter.getAsObject(context, component, submittedValue));
 			else
 				inputDate.setSubmittedValue(submittedValue);
 		}
+	}
+
+	@Override
+	protected Class<? extends UIComponent> getComponentClass()
+	{
+		return UIInputNumeric.class;
+	}
+
+	@Override
+	public boolean getRendersChildren()
+	{
+		return true;
 	}
 
 	protected String getValueAsString(FacesContext context, UIComponent component) throws IOException

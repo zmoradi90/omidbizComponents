@@ -103,4 +103,12 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 		return value;
 	}
 
+	@Override
+	public boolean getRendersChildren()
+	{
+		return true;
+	}
+	
+	
+
 }
