@@ -73,10 +73,26 @@
 			<defaultvalue>"jalali"</defaultvalue>
 		</property>
 		<property>
+			<name>onchange</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		<property>
 			<name>value</name>
 			<classname>java.lang.Object</classname>
 			<description>
 				The value of the component
+			</description>
+
+		</property>
+		<property>
+			<name>idname</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
 			</description>
 
 		</property>

@@ -49,7 +49,16 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		ExternalContext external = context.getExternalContext();
 		Map requestParams = external.getRequestParameterMap();
 		UIDatePicker inputDate = (UIDatePicker) component;
-		String clientId = inputDate.getClientId(context) + "_date";
+		String clientId = null;
+		String idname = (String)inputDate.getAttributes().get("idname");
+		if(idname != null && idname.length() >0)
+		{
+			clientId = idname;
+		}
+		else
+		{
+		 clientId = inputDate.getClientId(context) + "_date";
+	    }
 		String submittedValue = (String) requestParams.get(clientId);
 		boolean required = (Boolean) inputDate.getAttributes().get("required");
 		Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);

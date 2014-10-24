@@ -41,21 +41,43 @@
 	<c:set var="weekNumbers" value="#{component.attributes['weekNumbers']}" />
 	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
 	<c:set var="dateType" value="#{component.attributes['dateType']}" />
+	<c:set var="idname" value="#{component.attributes['idname']}" />
+	<jsp:scriptlet>
+<![CDATA[ 
+			String idname = (String) variables.getVariable("idname");
+			
+]]>
+</jsp:scriptlet>
 	
-	
-			 
-		<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" />
-		<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
-		<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}_date');"/>
-		<script type="text/javascript">
-		Calendar.setup({
-						inputField  : "#{clientId}_date",   // id of the input field
-						button      : "#{clientId}_btn",   // trigger for the calendar (button ID)
-			       		ifFormat    : "#{datePattern}",       // format of the input field
-	        			dateType	: '#{dateType}',
-	        			showOthers	: #{showOthers},
-						weekNumbers : #{weekNumbers}
-					});
-		</script>
+		<jsp:scriptlet><![CDATA[ if (idname != null ) { ]]></jsp:scriptlet>	 		
+			<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
+			<img id="#{idname}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
+			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{idname}_date');"/>
+			<script type="text/javascript">
+			Calendar.setup({
+							inputField  : "#{idname}",   // id of the input field
+							button      : "#{idname}_btn",   // trigger for the calendar (button ID)
+							ifFormat    : "#{datePattern}",       // format of the input field
+							dateType	: '#{dateType}',
+							showOthers	: #{showOthers},
+							weekNumbers : #{weekNumbers}
+						});
+			</script>
+		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+			<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" onchange="#{component.attributes['onchange']}"/>
+			<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
+			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}_date');"/>
+			<script type="text/javascript">
+			Calendar.setup({
+							inputField  : "#{clientId}_date",   // id of the input field
+							button      : "#{clientId}_btn",   // trigger for the calendar (button ID)
+							ifFormat    : "#{datePattern}",       // format of the input field
+							dateType	: '#{dateType}',
+							showOthers	: #{showOthers},
+							weekNumbers : #{weekNumbers}
+						});
+			</script>
+		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+		
 	
 </f:root>
