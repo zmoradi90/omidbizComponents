@@ -52,7 +52,7 @@
 		<jsp:scriptlet><![CDATA[ if (idname != null ) { ]]></jsp:scriptlet>	 		
 			<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
 			<img id="#{idname}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
-			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{idname}_date');"/>
+			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{idname}');"/>
 			<script type="text/javascript">
 			Calendar.setup({
 							inputField  : "#{idname}",   // id of the input field
