@@ -50,7 +50,7 @@
 </jsp:scriptlet>
 	
 		<jsp:scriptlet><![CDATA[ if (idname != null ) { ]]></jsp:scriptlet>	 		
-			<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
+			<input type="text" readonly="readonly" style="#{component.attributes['style']}"  value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
 			<img id="#{idname}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
 			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{idname}');"/>
 			<script type="text/javascript">
@@ -64,7 +64,7 @@
 						});
 			</script>
 		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-			<input type="text" readonly="readonly"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" onchange="#{component.attributes['onchange']}"/>
+			<input type="text" readonly="readonly" style="#{component.attributes['style']}"  value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" onchange="#{component.attributes['onchange']}"/>
 			<img id="#{clientId}_btn" src="#{icon}" style="border: 0;vertical-align: middle;" calss=".name"/>
 			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.calendarControl.removeValue('#{clientId}_date');"/>
 			<script type="text/javascript">

@@ -88,7 +88,16 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 		if (value != null && value.toString().length() > 1)
 		{
 			Date gDate = (Date) value;
-			String solarValue = pc.GregorianToSolar(dateTimeFormat.format(gDate));
+			String valuePattern = (String)inputDate.getAttributes().get("valuePattern");
+			String solarValue = null;			
+			if(valuePattern != null){
+				SimpleDateFormat sdfVal = new SimpleDateFormat(valuePattern);
+				solarValue = pc.GregorianToSolar(sdfVal.format(gDate));
+			}
+			else{
+				solarValue = pc.GregorianToSolar(dateTimeFormat.format(gDate));
+			}
+			 
 			return InputUtils.getConvertedStringValue(context, component, solarValue);
 		}
 		else

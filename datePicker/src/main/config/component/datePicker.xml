@@ -43,6 +43,18 @@
 			<required>true</required>
 		</property>
 		<property>
+			<name>valuePattern</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
 			<name>weekNumbers</name>
 			<classname>java.lang.Boolean</classname>
 			<description>
