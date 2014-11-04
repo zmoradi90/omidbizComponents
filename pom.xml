@@ -134,5 +134,6 @@
     <module>inputISIRI</module>
     <module>imageButton</module>
     <module>treeTable</module>
+    <module>gauge</module>
   </modules>
 </project>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>ir.sapp.Gauge</name>
+		<family>ir.sapp.Gauge</family>
+		<classname>ir.sapp.component.html.HtmlGauge</classname>
+		<superclass>ir.sapp.component.UIGauge</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>ir.sapp.GaugeRenderer</name>
+			<template>ir/sapp/htmlGauge.jspx</template>
+		</renderer>
+		<tag>
+			<name>gauge</name>
+			<classname>ir.sapp.taglib.GaugeTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		<!-- -->
+		<property>
+			<name>gvalue</name>
+			<classname>int</classname>
+			<description>
+			</description>
+			<defaultvalue>10</defaultvalue>
+		</property>
+		
+		<property>
+			<name>gmin</name>
+			<classname>int</classname>
+			<description>
+			</description>
+			<defaultvalue>0</defaultvalue>
+		</property>
+		
+		<property>
+			<name>gmax</name>
+			<classname>int</classname>
+			<description>
+			</description>
+			<defaultvalue>100</defaultvalue>
+		</property>
+		<property>
+			<name>gwidthscale</name>
+			<classname>double</classname>
+			<description>
+			</description>
+			<defaultvalue>0.2</defaultvalue>
+		</property>
+		
+		<property>
+			<name>gtitle</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>" "</defaultvalue>
+		</property>
+		
+		<property>
+			<name>glabel</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>" "</defaultvalue>
+		</property>
+		
+        <property>
+			<name>gid</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"gauge"</defaultvalue>
+		</property>
+		
+	</component>
+</components>

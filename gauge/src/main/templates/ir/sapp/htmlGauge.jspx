@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="ir.sapp.renderkit.html.GaugeRenderer"
+	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
+	component="ir.sapp.component.UIGauge" >
+	<f:clientid var="clientId"/>
+	<f:resource name="/ir/sapp/renderkit/html/css/images/true.png" var="bg" />
+	<c:set var="gvalue" value="#{component.attributes['gvalue']}"/>
+	<c:set var="gmin" value="#{component.attributes['gmin']}"/>
+	<c:set var="gmax" value="#{component.attributes['gmax']}"/>
+	<c:set var="gwidthscale" value="#{component.attributes['gwidthscale']}"/>
+	<c:set var="gtitle" value="#{component.attributes['gtitle']}"/>
+	<c:set var="glabel" value="#{component.attributes['glabel']}"/>
+	<c:set var="gid" value="#{component.attributes['gid']}"/>
+	
+	
+	<div id="#{clientId}"
+		x:passThruWithExclusions="value,name,type,id">
+
+
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/ir/sapp/renderkit/html/script/raphael.2.1.0.min.js,/ir/sapp/renderkit/html/script/justgage.1.0.1.min.js</h:scripts>
+
+	
+
+		<div id="#{gid}" />
+    
+    <script>
+	    var g = new JustGage({
+	    id: "#{gid}",
+	    value: #{gvalue},
+	    min: #{gmin},
+	    max: #{gmax},
+	    gaugeWidthScale: #{gwidthscale},
+	    title: "#{gtitle}",
+	    label: "#{glabel}",
+	    levelColorsGradient: true
+	    });
+	    
+    </script>	
+		
+		
+		
+		
+	</div>
+</f:root>
