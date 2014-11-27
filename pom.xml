@@ -135,5 +135,7 @@
     <module>imageButton</module>
     <module>treeTable</module>
     <module>gauge</module>
+    <module>inputFilter</module>
+    <module>tipsy</module>
   </modules>
 </project>

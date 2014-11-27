@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputTipsy</name>
+		<family>org.omidbiz.InputTipsy</family>
+		<classname>org.omidbiz.component.html.HtmlInputTipsy</classname>
+		<superclass>org.omidbiz.component.UIInputTipsy</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputTipsyRenderer</name>
+			<template>org/omidbiz/htmlInputTipsy.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputTipsy</name>
+			<classname>org.omidbiz.taglib.InputTipsyTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		
+		
+        
+	</component>
+</components>
