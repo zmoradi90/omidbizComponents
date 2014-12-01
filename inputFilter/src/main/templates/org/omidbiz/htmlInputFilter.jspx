@@ -20,11 +20,28 @@ function runScript(event) {
     }
 }
 </script>
+
+<c:set var="forceId" value="#{component.attributes['forceId']}"/>
+<jsp:scriptlet>
+<![CDATA[ 
+			String forceId = (String) variables.getVariable("forceId");
+]]>
+</jsp:scriptlet>
+	
+	
+	<jsp:scriptlet><![CDATA[ if (forceId != null && "".equals(forceId.trim()) == false ) { ]]></jsp:scriptlet>	
+	<input type="text" id="#{forceId}" class="#{component.attributes['styleClass']}"
+		name="#{forceId}" onkeypress="return runScript(event)" >
+		
+	</input>
+	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 	<input type="text" id="#{clientId}" class="#{component.attributes['styleClass']}"
-		name="#{clientId}" onkeypress="return runScript(event)" value="#{this:getValue(component)}">
+		name="#{clientId}" onkeypress="return runScript(event)" >
+		
+	</input>
+	<jsp:scriptlet><![CDATA[ }  ]]></jsp:scriptlet>
+	
 		<vcp:body>
 		<f:call name="renderChildren" />
 		</vcp:body>
-	</input>
-	
 </f:root>
