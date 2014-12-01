@@ -66,8 +66,18 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
             //
             uiComponent.queueEvent(new AjaxEvent(uiComponent));
             //
-            if(submittedValue != null && submittedValue.length() > 0)
-                inputFilter.setSubmittedValue(submittedValue);
+            if (submittedValue != null && submittedValue.length() > 0)
+            {
+                // TODO : no idea why this happens
+                if (submittedValue.equals(clientId))
+                {
+                    inputFilter.setSubmittedValue(null);
+                }
+                else
+                {
+                    inputFilter.setSubmittedValue(submittedValue);
+                }
+            }
             else
                 inputFilter.setSubmittedValue(null);
         }
@@ -112,10 +122,11 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
         {
             return false;
         }
-//        String clientId = uiComponent.getClientId(facesContext);
-//        Map<String, String> paramMap = facesContext.getExternalContext().getRequestParameterMap();
-//        Object value = paramMap.get(clientId);
-//        boolean submitted = null != value;
+        // String clientId = uiComponent.getClientId(facesContext);
+        // Map<String, String> paramMap =
+        // facesContext.getExternalContext().getRequestParameterMap();
+        // Object value = paramMap.get(clientId);
+        // boolean submitted = null != value;
         return true;
     }
 
