@@ -90,7 +90,6 @@ public abstract class UIInputFilter extends UIInput implements AjaxComponent, Aj
 //                actionListener.processAction((AjaxEvent)event);
             // complete re-Render fields. AjaxEvent deliver before render
             // response.
-            System.out.println("omad");
             setupReRender(context);
             // Put data for send in response
             Object data = getData();
