@@ -30,12 +30,24 @@ function runScript(event) {
 	
 	
 	<jsp:scriptlet><![CDATA[ if (forceId != null && "".equals(forceId.trim()) == false ) { ]]></jsp:scriptlet>	
+	<script>
+		jQuery(document).ready(function(){
+			document.getElementById("#{forceId}").focus();
+		});
+	</script>
 	<input type="text" id="#{forceId}" class="#{component.attributes['styleClass']}"
+		value="#{this:getValue(component)}"
 		name="#{forceId}" onkeypress="return runScript(event)" >
 		
 	</input>
 	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+	<script>
+		jQuery(document).ready(function(){
+			document.getElementById("#{clientId}").focus();
+		});
+	</script>
 	<input type="text" id="#{clientId}" class="#{component.attributes['styleClass']}"
+		value="#{this:getValue(component)}"
 		name="#{clientId}" onkeypress="return runScript(event)" >
 		
 	</input>
