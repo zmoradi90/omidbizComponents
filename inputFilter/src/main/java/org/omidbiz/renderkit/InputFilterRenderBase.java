@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.ajax4jsf.context.AjaxContext;
+import org.ajax4jsf.event.AjaxEvent;
 import org.ajax4jsf.renderkit.AjaxComponentRendererBase;
 import org.ajax4jsf.renderkit.AjaxRendererUtils;
 import org.omidbiz.component.InputFilterEvent;
@@ -41,25 +42,34 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
 
     protected void doDecode(FacesContext facesContext, UIComponent uiComponent)
     {
-        System.out.println("DFGGGGGGGGGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
         // super.decode must not be called, because value is handled here
         if (isSubmitted(facesContext, uiComponent))
         {
             UIInputFilter inputFilter = (UIInputFilter) uiComponent;
             ExternalContext external = facesContext.getExternalContext();
             Map requestParams = external.getRequestParameterMap();
-            String clientId = inputFilter.getClientId(facesContext);
+            Object forceId = inputFilter.getAttributes().get("forceId");
+            String clientId = null;
+            if (forceId != null)
+            {
+                clientId = (String) forceId;
+            }
+            else
+            {
+                clientId = inputFilter.getClientId(facesContext);
+            }
             String submittedValue = (String) requestParams.get(clientId);
             //
             ActionEvent event;
             event = new ActionEvent(uiComponent);
             uiComponent.queueEvent(event);
             //
-            uiComponent.queueEvent(new InputFilterEvent(uiComponent, submittedValue));
-            System.out.println("Submited Value : ");
-            System.out.println(submittedValue);
+            uiComponent.queueEvent(new AjaxEvent(uiComponent));
             //
-            inputFilter.setSubmittedValue(submittedValue);
+            if(submittedValue != null && submittedValue.length() > 0)
+                inputFilter.setSubmittedValue(submittedValue);
+            else
+                inputFilter.setSubmittedValue(null);
         }
     }
 
@@ -88,10 +98,6 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
 
     public Object getValue(UIComponent uiComponent)
     {
-        if (uiComponent instanceof ValueHolder)
-        {
-            return ((ValueHolder) uiComponent).getValue();
-        }
         return uiComponent.getAttributes().get("value");
     }
 
@@ -106,12 +112,11 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
         {
             return false;
         }
-        String clientId = uiComponent.getClientId(facesContext);
-        Map<String, String> paramMap = facesContext.getExternalContext().getRequestParameterMap();
-        Object value = paramMap.get(clientId);
-        boolean submitted = null != value;
-        System.out.println("Sbmited : " + submitted);
-        return submitted;
+//        String clientId = uiComponent.getClientId(facesContext);
+//        Map<String, String> paramMap = facesContext.getExternalContext().getRequestParameterMap();
+//        Object value = paramMap.get(clientId);
+//        boolean submitted = null != value;
+        return true;
     }
 
     @Override
