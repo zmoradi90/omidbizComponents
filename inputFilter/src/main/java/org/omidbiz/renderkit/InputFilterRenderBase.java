@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.ValueHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -28,7 +27,6 @@ import org.ajax4jsf.context.AjaxContext;
 import org.ajax4jsf.event.AjaxEvent;
 import org.ajax4jsf.renderkit.AjaxComponentRendererBase;
 import org.ajax4jsf.renderkit.AjaxRendererUtils;
-import org.omidbiz.component.InputFilterEvent;
 import org.omidbiz.component.UIInputFilter;
 
 /**
@@ -108,7 +106,18 @@ public class InputFilterRenderBase extends AjaxComponentRendererBase
 
     public Object getValue(UIComponent uiComponent)
     {
-        return uiComponent.getAttributes().get("value");
+        UIInputFilter inputDate = (UIInputFilter) uiComponent;
+        String valueString = (String) inputDate.getSubmittedValue();
+
+        if (valueString == null)
+        {
+            Object value = inputDate.getValue();
+            if (value != null)
+            {
+                valueString = value.toString();
+            }
+        }
+        return valueString;
     }
 
     protected boolean isSubmitted(FacesContext facesContext, UIComponent uiComponent)
