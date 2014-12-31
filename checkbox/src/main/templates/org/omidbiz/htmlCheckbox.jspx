@@ -19,6 +19,7 @@
 	
 	<c:set var="value" value="#{component.attributes['value']}"/>
 	<c:set var="checked" value="#{component.attributes['checked']}"/>
+	<c:set var="disabled" value="#{component.attributes['disabled']}"/>
 	<c:set var="change" value="#{component.attributes['onchange']}"/>
 	<c:set var="forceId" value="#{component.attributes['forceId']}"/>
 	<c:set var="onText" value="#{component.attributes['onText']}"/>
@@ -28,38 +29,82 @@
 <![CDATA[ 
 			String value = (String) variables.getVariable("value");
 			Boolean checked = (Boolean) variables.getVariable("checked");
+			Boolean disabled = (Boolean) variables.getVariable("disabled");
 ]]>
 	</jsp:scriptlet>
 	
-	<p class="field switch">	
-	<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y") || checked ) { ]]></jsp:scriptlet>
-		<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
-		<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
-		<input type="checkbox" onchange="#{change}" name="#{clientId}-chk" style="display: none;" value="Y" id="#{clientId}-chk" checked="checked" class="#{forceId}-chk"/>
-	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-		<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
-		<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
-		<input type="checkbox" value="N" onchange="#{change}" style="display: none;" name="#{clientId}-chk" id="#{clientId}-chk" class="#{forceId}-chk"/>
-		
-	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+	<p class="field switch">		   
+		<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("Y")) { ]]></jsp:scriptlet>
+			<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
+			<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"
+					disabled="disabled"		 
+					style="display: none;" value="Y" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+					style="display: none;" value="Y" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+		<jsp:scriptlet><![CDATA[ } else if(value != null && !"".equals(value.trim()) && value.equalsIgnoreCase("N")){  ]]></jsp:scriptlet>
+			<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
+			<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"
+					disabled="disabled"		 
+					style="display: none;" value="N" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+					style="display: none;" value="N" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+			<jsp:scriptlet><![CDATA[ if(checked != null && checked){  ]]></jsp:scriptlet>
+			<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
+			<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"
+					disabled="disabled"		 
+					style="display: none;" value="Y" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+					style="display: none;" value="Y" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+			<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
+			<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"
+					disabled="disabled"		 
+					style="display: none;" value="N" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+					style="display: none;" value="N" id="#{clientId}-chk" class="#{forceId}-chk"/>
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+			<jsp:scriptlet><![CDATA[ }]]></jsp:scriptlet>
+		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>		
+	
 	</p>
 	<script type="text/javascript">
 	jQuery(document).ready( function(){ 
 		jQuery(".cb-enable.#{forceId}").click(function(){
 			var parent = jQuery(this).parents('.switch');
-			jQuery(".#{forceId}",parent).removeClass('selected');
-			jQuery(this).addClass('selected');
-			jQuery(".#{forceId}-chk",parent).val('Y');
-			jQuery( ".#{forceId}-chk" ).click();
-	      
-	              
+			var attr =jQuery(".#{forceId}-chk",parent).attr('disabled');
+			if(typeof attr == 'undefined' || attr == false){
+				jQuery(".#{forceId}",parent).removeClass('selected');
+				jQuery(this).addClass('selected');
+				jQuery(".#{forceId}-chk",parent).val('Y');
+				jQuery( ".#{forceId}-chk" ).click();
+			}
 		});
 		jQuery(".cb-disable.#{forceId}").click(function(){
 			var parent = jQuery(this).parents('.switch');
-			jQuery('.#{forceId}',parent).removeClass('selected');
-			jQuery(this).addClass('selected');
-			jQuery(".#{forceId}-chk",parent).val('N');
-			jQuery( ".#{forceId}-chk" ).click();
+			var attr =jQuery(".#{forceId}-chk",parent).attr('disabled');
+			if(typeof attr == 'undefined'  || attr == false){
+				jQuery('.#{forceId}',parent).removeClass('selected');
+				jQuery(this).addClass('selected');
+				jQuery(".#{forceId}-chk",parent).val('N');
+				jQuery( ".#{forceId}-chk" ).click();
+			}
+
 		});
 	});
 

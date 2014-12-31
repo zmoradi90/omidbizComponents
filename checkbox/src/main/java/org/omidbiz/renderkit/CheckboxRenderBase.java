@@ -42,14 +42,7 @@ public class CheckboxRenderBase extends HeaderResourcesRendererBase
 		UICheckbox checkBox = (UICheckbox) component;
 		String clientId = checkBox.getClientId(context);
 		String submittedValue = (String) requestParams.get(clientId + "-chk");
-		if (submittedValue == null)
-		{
-			checkBox.setSubmittedValue("N");
-		}
-		else
-		{
-			checkBox.setSubmittedValue("Y");
-		}
+		checkBox.setSubmittedValue(submittedValue);
 	}
 
 	@Override

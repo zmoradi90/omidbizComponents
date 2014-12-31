@@ -49,11 +49,16 @@
 			<name>checked</name>
 			<classname>boolean</classname>
 			<description>
-			</description>					
+			</description>		
+			<defaultvalue>false</defaultvalue>			
 		</property>
 		<property>
 			<name>onchange</name>
 			<classname>java.lang.String</classname>
+		</property>
+		<property>
+			<name>disabled</name>
+			<classname>java.lang.Boolean</classname>
 		</property>
 		<property>
 			<name>forceId</name>
