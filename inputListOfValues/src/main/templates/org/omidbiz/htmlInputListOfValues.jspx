@@ -40,6 +40,7 @@
 	<c:set var="onComplete" value="#{component.attributes['onComplete']}"/>
 	<c:set var="onCleanup" value="#{component.attributes['onCleanup']}"/>
 	<c:set var="onClosed" value="#{component.attributes['onClosed']}"/>
+	<c:set var="onchange" value="#{component.attributes['onchange']}"/>
 	
 	<c:set var="autocompleteUrl" value="#{component.attributes['autocompleteUrl']}"/>
 	
@@ -79,7 +80,8 @@ jQuery(document).ready(function(){
 		});
 });
 </script>
-<input class="#{objectName}Name" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<input class="#{objectName}Name" title="#{component.attributes['title']}" 
+	onchange="#{onchange}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 	<script type="text/javascript">
  
@@ -97,7 +99,7 @@ jQuery(document).ready(function(){
 	
 });
 </script>
-<input readonly="readonly" disabled="disabled" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<input readonly="readonly" onchange="#{onchange}" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueForId(context, component)}"/>
