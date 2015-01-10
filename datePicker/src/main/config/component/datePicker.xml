@@ -49,6 +49,18 @@
 			</description>
 		</property>
 		<property>
+			<name>removeCallback</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
+			<name>onSelect</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
 			<name>disabled</name>
 			<classname>java.lang.Boolean</classname>
 			<description>
