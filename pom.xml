@@ -137,5 +137,7 @@
     <module>gauge</module>
     <module>inputFilter</module>
     <module>tipsy</module>
+    <module>tabs</module>
+    <module>tooltip</module>
   </modules>
 </project>

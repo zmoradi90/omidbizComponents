@@ -19,9 +19,10 @@ Richfaces.colorboxControl.getParameters = function getParameters(){
     return settingsObject;
 }
 
-Richfaces.colorboxControl.extendedClose = function extendedClose(id, value, obj){		
+Richfaces.colorboxControl.extendedClose = function extendedClose(id, value, obj, extraInfo){		
 	parent.document.getElementById(obj+"Id").value = id
 	parent.document.getElementById(obj+"Name").value = value;
+	parent.document.getElementById(obj+"Name").title = extraInfo;
 	parent.jQuery.fn.colorbox.close();
 	
 }

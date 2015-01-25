@@ -49,6 +49,13 @@
 			</description>			
 		</property>
 		<property>
+			<name>extraInfo</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>			
+		</property>
+		<property>
 			<name>sendRequestToServer</name>
 			<classname>java.lang.Boolean</classname>
 			<description>

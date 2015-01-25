@@ -16,6 +16,7 @@
 package org.omidbiz.renderkit;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -25,6 +26,7 @@ import javax.faces.convert.ConverterException;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIInputListOfValues;
+import org.omidbiz.component.UITooltip;
 
 /**
  * 
@@ -35,80 +37,100 @@ import org.omidbiz.component.UIInputListOfValues;
 public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 {
 
-	@Override
-	public void decode(FacesContext context, UIComponent component)
-	{
-		ExternalContext external = context.getExternalContext();
-		Map requestParams = external.getRequestParameterMap();
-		UIInputListOfValues inputLov = (UIInputListOfValues) component;
-		String clientId = inputLov.getClientId(context);
-		String id = (String) inputLov.getAttributes().get("objectName");
-		String nameId = clientId;
-		if (id != null)
-		{
-			clientId = id + "Id";
-			nameId = id + "Name";
-		}
+    @Override
+    public void decode(FacesContext context, UIComponent component)
+    {
+        ExternalContext external = context.getExternalContext();
+        Map requestParams = external.getRequestParameterMap();
+        UIInputListOfValues inputLov = (UIInputListOfValues) component;
+        String clientId = inputLov.getClientId(context);
+        String id = (String) inputLov.getAttributes().get("objectName");
+        String nameId = clientId;
+        if (id != null)
+        {
+            clientId = id + "Id";
+            nameId = id + "Name";
+        }
 
-		String submittedValue = (String) requestParams.get(clientId);
-		String nameValue = (String) requestParams.get(nameId);
+        String submittedValue = (String) requestParams.get(clientId);
+        String nameValue = (String) requestParams.get(nameId);
 
-		if (submittedValue != null && submittedValue.length() < 1)
-		{
-			inputLov.setNameValue(nameValue);
-			inputLov.setSubmittedValue(submittedValue);
-		}
-	}
+        if (submittedValue != null && submittedValue.length() < 1)
+        {
+            inputLov.setNameValue(nameValue);
+            inputLov.setSubmittedValue(submittedValue);
+        }
+    }
 
-	protected String getValueForName(FacesContext context, UIComponent component) throws IOException
-	{
+    protected String getValueForName(FacesContext context, UIComponent component) throws IOException
+    {
 
-		UIInputListOfValues inputLov = (UIInputListOfValues) component;
-		String value = (String) inputLov.getAttributes().get("valueName");
+        UIInputListOfValues inputLov = (UIInputListOfValues) component;
+        String value = (String) inputLov.getAttributes().get("valueName");
 
-		if (value == null)
-		{
-			Object valueString = inputLov.getNameValue();
-			if (valueString != null)
-			{
-				value = valueString.toString();
-			}
-		}
+        if (value == null)
+        {
+            Object valueString = inputLov.getNameValue();
+            if (valueString != null)
+            {
+                value = valueString.toString();
+            }
+        }
 
-		return value;
-	}
+        return value;
+    }
 
-	@Override
-	protected Class<? extends UIComponent> getComponentClass()
-	{
-		return UIInputListOfValues.class;
-	}
+    @Override
+    protected Class<? extends UIComponent> getComponentClass()
+    {
+        return UIInputListOfValues.class;
+    }
 
-	@Override
-	public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue)
-			throws ConverterException
-	{
-		return super.getConvertedValue(context, component, submittedValue);
-	}
+    @Override
+    public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue)
+            throws ConverterException
+    {
+        return super.getConvertedValue(context, component, submittedValue);
+    }
 
-	protected Object getValueForId(FacesContext context, UIComponent component) throws IOException
-	{
+    protected Object getValueForId(FacesContext context, UIComponent component) throws IOException
+    {
 
-		UIInputListOfValues inputLov = (UIInputListOfValues) component;
-		Object value = inputLov.getAttributes().get("valueId");
+        UIInputListOfValues inputLov = (UIInputListOfValues) component;
+        Object value = inputLov.getAttributes().get("valueId");
 
-		if (value == null)
-			value = inputLov.getSubmittedValue();
+        if (value == null)
+            value = inputLov.getSubmittedValue();
 
-		return value;
-	}
+        return value;
+    }
 
-	@Override
-	public boolean getRendersChildren()
-	{
-		return true;
-	}
-	
-	
+    @Override
+    public boolean getRendersChildren()
+    {
+        return true;
+    }
+
+    @Override
+    public void encodeChildren(FacesContext context, UIComponent component) throws IOException
+    {
+        if (component.getChildCount() > 0)
+        {
+
+            if (component.getRendersChildren())
+            {
+                Iterator<UIComponent> iterator = component.getChildren().iterator();
+                while (iterator.hasNext())
+                {
+                    UIComponent uiComponent = (UIComponent) iterator.next();
+                    if (uiComponent instanceof UITooltip)
+                    {
+                        uiComponent.encodeBegin(context);
+                    }
+                }
+            }
+
+        }
+    }
 
 }

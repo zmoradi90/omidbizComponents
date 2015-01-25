@@ -30,20 +30,25 @@
 		<property>
 			<name>datePattern</name>
 			<classname>java.lang.String</classname>
-			<description>
-				Default is : %Y/%m/%d
-				other options :
-				%Y-%m-%d
-				%Y-%m-%d %I:%M %P
-				%Y-%m-%d %H:%M
-				%A, %e %B %Y
-				%A, %e %B %Y %H:%M
+			<description>				
 			</description>
-			<defaultvalue>"%Y/%m/%d"</defaultvalue>
+			<defaultvalue>"YYYY/MM/DD"</defaultvalue>
 			<required>true</required>
 		</property>
 		<property>
 			<name>valuePattern</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
+			<name>removeCallback</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		<property>
+			<name>onSelect</name>
 			<classname>java.lang.String</classname>
 			<description>
 			</description>

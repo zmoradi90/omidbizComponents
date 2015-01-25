@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd" >
+<components>
+    <component>
+        <name>org.omidbiz.Tabs</name>
+        <family>org.omidbiz.Tabs</family>
+        <classname>org.omidbiz.component.html.HtmlTabs</classname>
+        <superclass>org.omidbiz.component.UITabs</superclass>
+        <test/>
+        <description>
+         
+        </description>
+
+        <renderer>
+            <name>org.omidbiz.TabsRenderer</name>
+            <classname>org.omidbiz.renderkit.html.TabsRendererBase</classname>
+        </renderer>
+        <tag>
+            <name>tabs</name>
+            <classname>org.richfaces.taglib.TabsTag</classname>
+            <superclass>
+                org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+            </superclass>
+			<test/>
+        </tag>
+        <property>
+            <name>active</name>
+            <classname>int</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
+            <name>keepState</name>
+            <classname>boolean</classname>
+            <description>
+                
+            </description>
+            <defaultvalue>false</defaultvalue>
+        </property>
+      
+    </component>
+    <component>
+        <name>org.omidbiz.TabPanel</name>
+        <family>org.omidbiz.TabPanel</family>
+        <classname>org.omidbiz.component.html.HtmlTabPanel</classname>
+        <superclass>org.omidbiz.component.UITabPanel</superclass>
+        <test/>
+        <description>
+         
+        </description>
+
+        <renderer>
+            <name>org.omidbiz.TabPanelRenderer</name>
+            <classname>org.omidbiz.renderkit.html.TabPanelRendererBase</classname>
+        </renderer>
+        <tag>
+            <name>tabPanel</name>
+            <classname>org.richfaces.taglib.TabPanelTag</classname>
+            <superclass>
+                org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+            </superclass>
+			<test/>
+        </tag>
+      <property>
+            <name>title</name>
+            <classname>java.lang.Object</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
+            <name>content</name>
+            <classname>java.lang.Object</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
+            <name>includePageParams</name>
+            <classname>boolean</classname>
+            <defaultvalue>true</defaultvalue>
+        </property>
+        
+        <property>
+            <name>link</name>
+            <classname>java.lang.Object</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
+            <name>disabled</name>
+            <classname>boolean</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+    </component>
+</components>
