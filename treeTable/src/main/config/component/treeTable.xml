@@ -51,5 +51,111 @@
 			<classname>java.lang.Object</classname>
 			<description>The current value for this component</description>
 		</property>
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<description>The current value for this component</description>
+		</property>
+		
 	</component>
+	
+	
+	<component>
+		<name>org.omidbiz.TreeColumn</name>
+		<family>org.omidbiz.TreeColumn</family>
+		<classname>org.omidbiz.component.html.HtmlTreeColumn</classname>
+		<superclass>org.omidbiz.component.UITreeColumn</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<facet>
+		   <name>header</name>
+		   <description>Defines the </description>
+		</facet>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.TreeColumnRenderer</name>
+			<classname>org.omidbiz.component.TreeColumnRenderer</classname>			
+		</renderer>
+		<tag>
+			<name>treeColumn</name>
+			<classname>org.omidbiz.taglib.TreeColumnTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&attributes;
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+		
+		<property>
+			<name>dataId</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>dataParentId</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+        
+
+	</component>
+	
+	
+	<component>
+		<name>org.omidbiz.TreeCell</name>
+		<family>org.omidbiz.TreeCell</family>
+		<classname>org.omidbiz.component.html.HtmlTreeCell</classname>
+		<superclass>org.omidbiz.component.UITreeCell</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.TreeCellRenderer</name>
+		</renderer>
+		<tag>
+			<name>treeCell</name>
+			<classname>org.omidbiz.taglib.TreeCellTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&attributes;
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<defaultvalue>"default"</defaultvalue>
+		</property>
+        
+
+	</component>
+	
+	
 </components>
