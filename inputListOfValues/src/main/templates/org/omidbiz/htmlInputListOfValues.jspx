@@ -13,7 +13,7 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js, /org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
 	
 	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
 	
