@@ -41,6 +41,7 @@ public abstract class UIInputListOfValues extends UIInput
 		this.nameValue = nameValue;
 	}
 
+	
 	@Override
 	public Object saveState(FacesContext context)
 	{
@@ -56,6 +57,12 @@ public abstract class UIInputListOfValues extends UIInput
 		Object values[] = (Object[]) state;
 		super.restoreState(context, values[0]);
 		nameValue = (String) values[1];
+	}
+	
+	@Override
+	public boolean getRendersChildren()
+	{
+	    return true;
 	}
 
 }

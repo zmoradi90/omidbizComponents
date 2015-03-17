@@ -16,9 +16,9 @@
 package org.omidbiz.renderkit;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -35,105 +35,76 @@ import org.omidbiz.component.UIPersianDateLabelConvertor;
 public abstract class PersianDateLabelRendererBase extends HeaderResourcesRendererBase
 {
 
-    PersianCalendar pc = new PersianCalendar();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
-    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    SimpleDateFormat dayTimeFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
-    //Thu May 16 20:35:07 IRDT 2013 pure Date format
-    SimpleDateFormat pureDate = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
-    
+    private String[] formats = { "yyyy/MM/dd", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm:ss",
+            "EEE, d MMM yyyy HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", };
 
     protected Object getSolarValueAsString(FacesContext context, UIComponent component) throws IOException
     {
 
         UIPersianDateLabelConvertor inputDate = (UIPersianDateLabelConvertor) component;
         Object valueString = (Object) inputDate.getAttributes().get("value");
-
-        if (valueString != null)
+        ReturnValue returnValue = parseValue(valueString);
+        if (returnValue != null)
         {
-            String gDate = null;
-            if (valueString instanceof Timestamp)
+            PersianCalendar pc = new PersianCalendar();
+            Date d = returnValue.getDate();
+            String datePattern = (String) inputDate.getAttributes().get("datePattern");
+            if (datePattern == null)
             {
-                gDate = valueString.toString();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd"); 
+                return pc.GregorianToSolar(sdf.format(d));
             }
             else
             {
-                gDate = valueString.toString();
+                SimpleDateFormat formatter = new SimpleDateFormat(datePattern);
+                return pc.GregorianToSolar(formatter.format(d));
             }
-
-            try
-            {
-                valueString = pc.GregorianToSolar(sdf.format(sdf.parse(gDate)));
-            }
-            catch (ParseException e)
-            {
-                try
-                {
-                    valueString = pc.GregorianToSolar(sdf.format(dateFormat.parse(gDate)));
-                }
-                catch (ParseException e1)
-                {
-                    try
-                    {
-                        valueString = pc.GregorianToSolar(sdf.format(dateTimeFormat.parse(gDate)));
-                    }
-                    catch (ParseException e2)
-                    {
-                        try
-                        {
-                            valueString = pc.GregorianToSolar(sdf.format(dayTimeFormat.parse(gDate)));
-                        }
-                        catch (ParseException e3)
-                        {
-                            try
-                            {
-                                valueString = pc.GregorianToSolar(sdf.format(pureDate.parse(gDate)));
-                            }
-                            catch (ParseException e4)
-                            {
-                                //DO NOTHING
-                            }
-                        }
-                    }
-                }
-
-            }
-
         }
 
-        String datePattern = (String) inputDate.getAttributes().get("datePattern");
+        return null;
+    }
 
-        if (datePattern != null)
+    private ReturnValue parseValue(Object val)
+    {
+        if (val == null)
+            return null;
+        for (String format : formats)
         {
-            SimpleDateFormat formatter = new SimpleDateFormat(datePattern);
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
             try
             {
-                String gregorianDate = pc.SolarToGregorian(valueString.toString());
-                valueString = pc.GregorianToSolar(formatter.format(formatter.parse(gregorianDate)));
+                Date dateValue = sdf.parse(val.toString());
+                return new ReturnValue(sdf, dateValue);
             }
             catch (ParseException e)
             {
                 // DO NOTHING
             }
         }
-
-        return valueString;
+        return null;
     }
-    
-    public static void main(String[] args)
+
+    public class ReturnValue
     {
-        //Thu May 16 20:35:07 IRDT 2013
-        SimpleDateFormat ii = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
-        try
+        private SimpleDateFormat sdf;
+        private Date date;
+
+        public ReturnValue(SimpleDateFormat sdf, Date date)
         {
-            System.out.println(ii.parse("Thu May 16 20:35:07 IRDT 2013"));
-            
+            this.sdf = sdf;
+            this.date = date;
         }
-        catch (ParseException e)
+
+        public SimpleDateFormat getSdf()
         {
-            e.printStackTrace();
+            return sdf;
         }
+
+        public Date getDate()
+        {
+            return date;
+        }
+
     }
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <f:root xmlns:f="http://ajax4jsf.org/cdk/template"
 	xmlns:c=" http://java.sun.com/jsf/core"
+	xmlns:vcp=" http://jsf.exadel.com/vcp"
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
@@ -12,7 +13,7 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js, /org/omidbiz/renderkit/html/script/jquery-ui-1.9.2.auto.min.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
 	
 	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
 	
@@ -40,6 +41,8 @@
 	<c:set var="onComplete" value="#{component.attributes['onComplete']}"/>
 	<c:set var="onCleanup" value="#{component.attributes['onCleanup']}"/>
 	<c:set var="onClosed" value="#{component.attributes['onClosed']}"/>
+	<c:set var="onchange" value="#{component.attributes['onchange']}"/>
+	<c:set var="extraInfo" value="#{component.attributes['extraInfo']}"/>
 	
 	<c:set var="autocompleteUrl" value="#{component.attributes['autocompleteUrl']}"/>
 	
@@ -79,7 +82,8 @@ jQuery(document).ready(function(){
 		});
 });
 </script>
-<input class="#{objectName}Name" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<input class="#{objectName}Name" title="#{component.attributes['title']}" 
+	onchange="#{onchange}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 	<script type="text/javascript">
  
@@ -97,7 +101,7 @@ jQuery(document).ready(function(){
 	
 });
 </script>
-<input readonly="readonly" disabled="disabled" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
+<input readonly="readonly" onchange="#{onchange}" class="#{objectName}Name" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{this:getValueForName(context, component)}"/>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{this:getValueForId(context, component)}"/>
@@ -112,7 +116,8 @@ jQuery(document).ready(function(){
 	<jsp:scriptlet><![CDATA[ if (sendRequestToServer) { ]]></jsp:scriptlet>
 		<a href="#" onclick="Richfaces.colorboxControl.extendedRequestClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{view}');">#{component.attributes['selectedText']}</a>
 	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-		<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}');">#{component.attributes['selectedText']}</a>
+		<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{extraInfo}');">#{component.attributes['selectedText']}</a>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+<vcp:body />
 </f:root>

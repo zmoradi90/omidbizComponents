@@ -1,308 +1,473 @@
 /*
- * jQuery treeTable Plugin VERSION
- * http://ludo.cubicphuse.nl/jquery-plugins/treeTable/doc/
+ * jQuery treeTable Plugin 3.0.0
+ * http://ludo.cubicphuse.nl/jquery-treetable
  *
- * Copyright 2011, Ludo van den Boom
+ * Copyright 2013, Ludo van den Boom
  * Dual licensed under the MIT or GPL Version 2 licenses.
  */
-(function($) {
-  // Helps to make options available to all functions
-  // TODO: This gives problems when there are both expandable and non-expandable
-  // trees on a page. The options shouldn't be global to all these instances!
-  var options;
-  var defaultPaddingLeft;
-  var persistStore;
+(function() {
+  var $, Node, Tree, methods;
 
-  $.fn.treeTable = function(opts) {
-    options = $.extend({}, $.fn.treeTable.defaults, opts);
+  $ = jQuery;
 
-    if(options.persist) {
-      persistStore = new Persist.Store(options.persistStoreName);
-    }
+  Node = (function() {
+    function Node(row, tree, settings) {
+      var parentId;
 
-    return this.each(function() {
-      $(this).addClass("treeTable").find("tbody tr").each(function() {
-        // Skip initialized nodes.
-        if (!$(this).hasClass('initialized')) {
-          var isRootNode = ($(this)[0].className.search(options.childPrefix) == -1);
+      this.row = row;
+      this.tree = tree;
+      this.settings = settings;
 
-          // To optimize performance of indentation, I retrieve the padding-left
-          // value of the first root node. This way I only have to call +css+
-          // once.
-          if (isRootNode && isNaN(defaultPaddingLeft)) {
-            defaultPaddingLeft = parseInt($($(this).children("td")[options.treeColumn]).css('padding-left'), 10);
-          }
+      // TODO Ensure id/parentId is always a string (not int)
+      this.id = this.row.data(this.settings.nodeIdAttr);
 
-          // Set child nodes to initial state if we're in expandable mode.
-          if(!isRootNode && options.expandable && options.initialState == "collapsed") {
-            $(this).addClass('ui-helper-hidden');
-          }
-
-          // If we're not in expandable mode, initialize all nodes.
-          // If we're in expandable mode, only initialize root nodes.
-          if(!options.expandable || isRootNode) {
-            initialize($(this));
-          }
-        }
-      });
-    });
-  };
-
-  $.fn.treeTable.defaults = {
-    childPrefix: "child-of-",
-    clickableNodeNames: false,
-    expandable: true,
-    indent: 19,
-    initialState: "collapsed",
-    onNodeShow: null,
-    onNodeHide: null,
-    treeColumn: 0,
-    persist: false,
-    persistStoreName: 'treeTable',
-    stringExpand: "Expand",
-    stringCollapse: "Collapse"
-  };
-
-  //Expand all nodes
-  $.fn.expandAll = function() {
-    $(this).find("tr").each(function() {
-      $(this).expand();
-    });
-  };
-
-  //Collapse all nodes
-  $.fn.collapseAll = function() {
-    $(this).find("tr").each(function() {
-      $(this).collapse();
-    });
-  };
-
-  // Recursively hide all node's children in a tree
-  $.fn.collapse = function() {
-    return this.each(function() {
-      $(this).removeClass("expanded").addClass("collapsed");
-
-      if (options.persist) {
-        persistNodeState($(this));
+      // TODO Move this to a setParentId function?
+      parentId = this.row.data(this.settings.parentIdAttr);
+      if (parentId != null && parentId !== "") {
+        this.parentId = parentId;
       }
 
-      childrenOf($(this)).each(function() {
-        if(!$(this).hasClass("collapsed")) {
-          $(this).collapse();
-        }
+      this.treeCell = $(this.row.children(this.settings.columnElType)[this.settings.column]);
+      this.expander = $(this.settings.expanderTemplate);
+      this.indenter = $(this.settings.indenterTemplate);
+      this.children = [];
+      this.initialized = false;
+      this.treeCell.prepend(this.indenter);
+    }
 
-        $(this).addClass('ui-helper-hidden');
+    Node.prototype.addChild = function(child) {
+      return this.children.push(child);
+    };
 
-        if($.isFunction(options.onNodeHide)) {
-          options.onNodeHide.call(this);
-        }
+    Node.prototype.ancestors = function() {
+      var ancestors, node;
+      node = this;
+      ancestors = [];
+      while (node = node.parentNode()) {
+        ancestors.push(node);
+      }
+      return ancestors;
+    };
 
-      });
-    });
-  };
+    Node.prototype.collapse = function() {
+      this._hideChildren();
+      this.row.removeClass("expanded").addClass("collapsed");
+      this.expander.attr("title", this.settings.stringExpand);
 
-  // Recursively show all node's children in a tree
-  $.fn.expand = function() {
-    return this.each(function() {
-      $(this).removeClass("collapsed").addClass("expanded");
-
-      if (options.persist) {
-        persistNodeState($(this));
+      if (this.initialized && this.settings.onNodeCollapse != null) {
+        this.settings.onNodeCollapse.apply(this);
       }
 
-      childrenOf($(this)).each(function() {
-        initialize($(this));
+      return this;
+    };
 
-        if($(this).is(".expanded.parent")) {
-          $(this).expand();
-        }
+    // TODO destroy: remove event handlers, expander, indenter, etc.
 
-        $(this).removeClass('ui-helper-hidden');
-
-        if($.isFunction(options.onNodeShow)) {
-          options.onNodeShow.call(this);
-        }
-      });
-    });
-  };
-
-  // Reveal a node by expanding all ancestors
-  $.fn.reveal = function() {
-    $(ancestorsOf($(this)).reverse()).each(function() {
-      initialize($(this));
-      $(this).expand().show();
-    });
-
-    return this;
-  };
-
-  // Add an entire branch to +destination+
-  $.fn.appendBranchTo = function(destination) {
-    var node = $(this);
-    var parent = parentOf(node);
-
-    var ancestorNames = $.map(ancestorsOf($(destination)), function(a) { return a.id; });
-
-    // Conditions:
-    // 1: +node+ should not be inserted in a location in a branch if this would
-    //    result in +node+ being an ancestor of itself.
-    // 2: +node+ should not have a parent OR the destination should not be the
-    //    same as +node+'s current parent (this last condition prevents +node+
-    //    from being moved to the same location where it already is).
-    // 3: +node+ should not be inserted as a child of +node+ itself.
-    if($.inArray(node[0].id, ancestorNames) == -1 && (!parent || (destination.id != parent[0].id)) && destination.id != node[0].id) {
-      indent(node, ancestorsOf(node).length * options.indent * -1); // Remove indentation
-
-      if(parent) { node.removeClass(options.childPrefix + parent[0].id); }
-
-      node.addClass(options.childPrefix + destination.id);
-      move(node, destination); // Recursively move nodes to new location
-      indent(node, ancestorsOf(node).length * options.indent);
-    }
-
-    return this;
-  };
-
-  // Add reverse() function from JS Arrays
-  $.fn.reverse = function() {
-    return this.pushStack(this.get().reverse(), arguments);
-  };
-
-  // Toggle an entire branch
-  $.fn.toggleBranch = function() {
-    if($(this).hasClass("collapsed")) {
-      $(this).expand();
-    } else {
-      $(this).collapse();
-    }
-
-    return this;
-  };
-
-  // === Private functions
-
-  function ancestorsOf(node) {
-    var ancestors = [];
-    while(node = parentOf(node)) {
-      ancestors[ancestors.length] = node[0];
-    }
-    return ancestors;
-  };
-
-  function childrenOf(node) {
-    return $(node).siblings("tr." + options.childPrefix + node[0].id);
-  };
-
-  function getPaddingLeft(node) {
-    var paddingLeft = parseInt(node[0].style.paddingLeft, 10);
-    return (isNaN(paddingLeft)) ? defaultPaddingLeft : paddingLeft;
-  }
-
-  function indent(node, value) {
-    var cell = $(node.children("td")[options.treeColumn]);
-    cell[0].style.paddingLeft = getPaddingLeft(cell) + value + "px";
-
-    childrenOf(node).each(function() {
-      indent($(this), value);
-    });
-  };
-
-  function initialize(node) {
-    if(!node.hasClass("initialized")) {
-      node.addClass("initialized");
-
-      var childNodes = childrenOf(node);
-
-      if(!node.hasClass("parent") && childNodes.length > 0) {
-        node.addClass("parent");
+    Node.prototype.expand = function() {
+      if (this.initialized && this.settings.onNodeExpand != null) {
+        this.settings.onNodeExpand.apply(this);
       }
 
-      if(node.hasClass("parent")) {
-        var cell = $(node.children("td")[options.treeColumn]);
-        var padding = getPaddingLeft(cell) + options.indent;
+      this.row.removeClass("collapsed").addClass("expanded");
+      this._showChildren();
+      this.expander.attr("title", this.settings.stringCollapse);
 
-        childNodes.each(function() {
-          $(this).children("td")[options.treeColumn].style.paddingLeft = padding + "px";
+      return this;
+    };
+
+    Node.prototype.expanded = function() {
+      return this.row.hasClass("expanded");
+    };
+
+    Node.prototype.hide = function() {
+      this._hideChildren();
+      this.row.hide();
+      return this;
+    };
+
+    Node.prototype.isBranchNode = function() {
+      if(this.children.length > 0 || this.row.data(this.settings.branchAttr) === true) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    Node.prototype.level = function() {
+      return this.ancestors().length;
+    };
+
+    Node.prototype.parentNode = function() {
+      if (this.parentId != null) {
+        return this.tree[this.parentId];
+      } else {
+        return null;
+      }
+    };
+
+    Node.prototype.removeChild = function(child) {
+      var i = $.inArray(child, this.children);
+      return this.children.splice(i, 1)
+    };
+
+    Node.prototype.render = function() {
+      var settings = this.settings, target;
+
+      if (settings.expandable === true && this.isBranchNode()) {
+        this.indenter.html(this.expander);
+        target = settings.clickableNodeNames === true ? this.treeCell : this.expander;
+        target.unbind("click.treetable").bind("click.treetable", function(event) {
+          $(this).parents("table").treetable("node", $(this).parents("tr").data(settings.nodeIdAttr)).toggle();
+          return event.preventDefault();
         });
+      }
 
-        if(options.expandable) {
-          var newLink = '<a href="#" title="' + options.stringExpand + '" style="margin-left: -' + options.indent + 'px; padding-left: ' + options.indent + 'px" class="expander"></a>';
+      if (settings.expandable === true && settings.initialState === "collapsed") {
+        this.collapse();
+      } else {
+        this.expand();
+      }
 
-          if(options.clickableNodeNames) {
-            cell.wrapInner(newLink);
-          } else {
-            cell.html(newLink+cell.html());
-          }
+      this.indenter[0].style.paddingLeft = "" + (this.level() * settings.indent) + "px";
 
-          $(cell[0].firstChild).click(function() { node.toggleBranch(); return false; }).mousedown(function() { return false; });
-          $(cell[0].firstChild).keydown(function(e) { if(e.keyCode == 13) { node.toggleBranch(); return false; }});
+      return this;
+    };
 
-          if(options.clickableNodeNames) {
-            cell[0].style.cursor = "pointer";
-            $(cell).click(function(e) {
-              // Don't double-toggle if the click is on the existing expander icon
-              if (e.target.className != 'expander') {
-                node.toggleBranch();
-              }
-            });
-          }
+    Node.prototype.reveal = function() {
+      if (this.parentId != null) {
+        this.parentNode().reveal();
+      }
+      return this.expand();
+    };
 
-          if (options.persist && getPersistedNodeState(node)) {
-            node.addClass('expanded');
-          }
+    Node.prototype.setParent = function(node) {
+      if (this.parentId != null) {
+        this.tree[this.parentId].removeChild(this);
+      }
+      this.parentId = node.id;
+      this.row.data(this.settings.parentIdAttr, node.id);
+      return node.addChild(this);
+    };
 
-          // Check for a class set explicitly by the user, otherwise set the default class
-          if(!(node.hasClass("expanded") || node.hasClass("collapsed"))) {
-            node.addClass(options.initialState);
-          }
+    Node.prototype.show = function() {
+      if (!this.initialized) {
+        this._initialize();
+      }
+      this.row.show();
+      if (this.expanded()) {
+        this._showChildren();
+      }
+      return this;
+    };
 
-          if(node.hasClass("expanded")) {
-            node.expand();
+    Node.prototype.toggle = function() {
+      if (this.expanded()) {
+        this.collapse();
+      } else {
+        this.expand();
+      }
+      return this;
+    };
+
+    Node.prototype._hideChildren = function() {
+      var child, _i, _len, _ref, _results;
+      _ref = this.children;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        _results.push(child.hide());
+      }
+      return _results;
+    };
+
+    Node.prototype._initialize = function() {
+      this.render();
+      if (this.settings.onNodeInitialized != null) {
+        this.settings.onNodeInitialized.apply(this);
+      }
+      return this.initialized = true;
+    };
+
+    Node.prototype._showChildren = function() {
+      var child, _i, _len, _ref, _results;
+      _ref = this.children;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        _results.push(child.show());
+      }
+      return _results;
+    };
+
+    return Node;
+  })();
+
+  Tree = (function() {
+    function Tree(table, settings) {
+      this.table = table;
+      this.settings = settings;
+      this.tree = {};
+
+      // Cache the nodes and roots in simple arrays for quick access/iteration
+      this.nodes = [];
+      this.roots = [];
+    }
+
+    Tree.prototype.collapseAll = function() {
+      var node, _i, _len, _ref, _results;
+      _ref = this.nodes;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        node = _ref[_i];
+        _results.push(node.collapse());
+      }
+      return _results;
+    };
+
+    Tree.prototype.expandAll = function() {
+      var node, _i, _len, _ref, _results;
+      _ref = this.nodes;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        node = _ref[_i];
+        _results.push(node.expand());
+      }
+      return _results;
+    };
+
+    Tree.prototype.loadRows = function(rows) {
+      var node, row, i;
+
+      if (rows != null) {
+        for (i = 0; i < rows.length; i++) {
+          row = $(rows[i]);
+
+          if (row.data(this.settings.nodeIdAttr) != null) {
+            node = new Node(row, this.tree, this.settings);
+            this.nodes.push(node);
+            this.tree[node.id] = node;
+
+            if (node.parentId != null) {
+              this.tree[node.parentId].addChild(node);
+            } else {
+              this.roots.push(node);
+            }
           }
         }
       }
+
+      return this;
+    };
+
+    Tree.prototype.move = function(node, destination) {
+      // Conditions:
+      // 1: +node+ should not be inserted as a child of +node+ itself.
+      // 2: +destination+ should not be the same as +node+'s current parent (this
+      //    prevents +node+ from being moved to the same location where it already
+      //    is).
+      // 3: +node+ should not be inserted in a location in a branch if this would
+      //    result in +node+ being an ancestor of itself.
+      if (node !== destination && destination.id !== node.parentId && $.inArray(node, destination.ancestors()) === -1) {
+        node.setParent(destination);
+        this._moveRows(node, destination);
+
+        // Re-render parentNode if this is its first child node, and therefore
+        // doesn't have the expander yet.
+        if (node.parentNode().children.length === 1) {
+          node.parentNode().render();
+        }
+      }
+      return this;
+    };
+
+    Tree.prototype.render = function() {
+      var root, _i, _len, _ref;
+      _ref = this.roots;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        root = _ref[_i];
+
+        // Naming is confusing (show/render). I do not call render on node from
+        // here.
+        root.show();
+      }
+      return this;
+    };
+
+    Tree.prototype._moveRows = function(node, destination) {
+      var child, _i, _len, _ref, _results;
+      node.row.insertAfter(destination.row);
+      node.render();
+      _ref = node.children;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        _results.push(this._moveRows(child, node));
+      }
+      return _results;
+    };
+
+    Tree.prototype.unloadBranch = function(node) {
+      var child, children, i;
+
+      for (i = 0; i < node.children.length; i++) {
+        child = node.children[i];
+
+        // Recursively remove all descendants of +node+
+        this.unloadBranch(child);
+
+        // Remove child from DOM (<tr>)
+        child.row.remove();
+
+        // Clean up Tree object (so Node objects are GC-ed)
+        delete this.tree[child.id];
+        this.nodes.splice($.inArray(child, this.nodes), 1)
+      }
+
+      // Reset node's collection of children
+      node.children = [];
+
+      return this;
+    };
+
+
+    return Tree;
+  })();
+
+  // jQuery Plugin
+  methods = {
+    init: function(options) {
+      var settings;
+
+      settings = $.extend({
+        branchAttr: "ttBranch",
+        clickableNodeNames: false,
+        column: 0,
+        columnElType: "td", // i.e. 'td', 'th' or 'td,th'
+        expandable: false,
+        expanderTemplate: "<a href='#'>&nbsp;</a>",
+        indent: 19,
+        indenterTemplate: "<span class='indenter'></span>",
+        initialState: "collapsed",
+        nodeIdAttr: "ttId", // maps to data-tt-id
+        parentIdAttr: "ttParentId", // maps to data-tt-parent-id
+        stringExpand: "Expand",
+        stringCollapse: "Collapse",
+
+        // Events
+        onInitialized: null,
+        onNodeCollapse: null,
+        onNodeExpand: null,
+        onNodeInitialized: null
+      }, options);
+
+      return this.each(function() {
+        var el, tree;
+
+        tree = new Tree(this, settings);
+        tree.loadRows(this.rows).render();
+
+        el = $(this).addClass("treetable").data("treetable", tree);
+
+        if (settings.onInitialized != null) {
+          settings.onInitialized.apply(tree);
+        }
+
+        return el;
+      });
+    },
+
+    destroy: function() {
+      return this.each(function() {
+        return $(this).removeData("treetable").removeClass("treetable");
+      });
+    },
+
+    collapseAll: function() {
+      this.data("treetable").collapseAll();
+      return this;
+    },
+
+    collapseNode: function(id) {
+      var node = this.data("treetable").tree[id];
+
+      if (node) {
+        node.collapse();
+      } else {
+        throw new Error("Unknown node '" + id + "'");
+      }
+
+      return this;
+    },
+
+    expandAll: function() {
+      this.data("treetable").expandAll();
+      return this;
+    },
+
+    expandNode: function(id) {
+      var node = this.data("treetable").tree[id];
+
+      if (node) {
+        node.expand();
+      } else {
+        throw new Error("Unknown node '" + id + "'");
+      }
+
+      return this;
+    },
+
+    loadBranch: function(node, rows) {
+      rows = $(rows);
+      rows.insertAfter(node.row);
+      this.data("treetable").loadRows(rows);
+
+      return this;
+    },
+
+    move: function(nodeId, destinationId) {
+      var destination, node;
+
+      node = this.data("treetable").tree[nodeId];
+      destination = this.data("treetable").tree[destinationId];
+      this.data("treetable").move(node, destination);
+
+      return this;
+    },
+
+    node: function(id) {
+      return this.data("treetable").tree[id];
+    },
+
+    reveal: function(id) {
+      var node = this.data("treetable").tree[id];
+
+      if (node) {
+        node.reveal();
+      } else {
+        throw new Error("Unknown node '" + id + "'");
+      }
+
+      return this;
+    },
+
+    unloadBranch: function(node) {
+      this.data("treetable").unloadBranch(node);
+      return this;
     }
   };
 
-  function move(node, destination) {
-    node.insertAfter(destination);
-    childrenOf(node).reverse().each(function() { move($(this), node[0]); });
-  };
-
-  function parentOf(node) {
-    var classNames = node[0].className.split(' ');
-
-    for(var key=0; key<classNames.length; key++) {
-      if(classNames[key].match(options.childPrefix)) {
-        return $(node).siblings("#" + classNames[key].substring(options.childPrefix.length));
-      }
-    }
-
-    return null;
-  };
-
-  //saving state functions, not critical, so will not generate alerts on error
-  function persistNodeState(node) {
-    if(node.hasClass('expanded')) {
-      try {
-         persistStore.set(node.attr('id'), '1');
-      } catch (err) {
-
-      }
+  $.fn.treetable = function(method) {
+    if (methods[method]) {
+      return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+    } else if (typeof method === 'object' || !method) {
+      return methods.init.apply(this, arguments);
     } else {
-      try {
-        persistStore.remove(node.attr('id'));
-      } catch (err) {
-
-      }
+      return $.error("Method " + method + " does not exist on jQuery.treetable");
     }
-  }
+  };
 
-  function getPersistedNodeState(node) {
-    try {
-      return persistStore.get(node.attr('id')) == '1';
-    } catch (err) {
-      return false;
-    }
-  }
-})(jQuery);
+  // Expose classes to world
+  this.TreeTable || (this.TreeTable = {});
+  this.TreeTable.Node = Node;
+  this.TreeTable.Tree = Tree;
+}).call(this);

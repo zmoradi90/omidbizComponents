@@ -121,6 +121,8 @@
 
   <modules>
     <module>datePicker</module>
+    <module>tooltip</module>
+    <module>tipsy</module>
     <module>inputListOfValues</module>
     <module>persianDateLabelConvertor</module>
     <module>pager</module>
@@ -136,6 +138,8 @@
     <module>treeTable</module>
     <module>gauge</module>
     <module>inputFilter</module>
-    <module>tipsy</module>
+    
+    <module>tabs</module>
+    
   </modules>
 </project>

@@ -13,18 +13,63 @@
 	<jsp:directive.page import="javax.faces.context.FacesContext,javax.faces.component.UIComponent"/>
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript()</h:scripts>
 	<f:clientid var="clientId"/>	
-	<script type="text/javascript">
-function runScript(event) {
-    if (event.keyCode == 13) {
-    	#{this:getOnClick(context,component)}
-    }
-}
-</script>
+	
+
+<c:set var="forceId" value="#{component.attributes['forceId']}"/>
+<jsp:scriptlet>
+<![CDATA[ 
+			String forceId = (String) variables.getVariable("forceId");
+]]>
+</jsp:scriptlet>
+	
+	
+	<jsp:scriptlet><![CDATA[ if (forceId != null && "".equals(forceId.trim()) == false ) { ]]></jsp:scriptlet>	
+	<script>
+		jQuery(document).ready(function(){
+			document.getElementById("#{forceId}").focus();
+		});
+		function runScript(event) {
+		    if (event.keyCode == 13) {
+		        var compValue = document.getElementById("#{forceId}").value;
+		        if( compValue != null)
+			    {
+				    if(compValue != "")
+		        		#{this:getOnClick(context,component)}   
+				}		    	
+
+		    }
+		}
+	</script>
+	<input type="text" id="#{forceId}" class="#{component.attributes['styleClass']}"
+		value="#{this:getValue(component)}"
+		name="#{forceId}" onkeypress="return runScript(event)" >
+		
+	</input>
+	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+	<script>
+		jQuery(document).ready(function(){
+			document.getElementById("#{clientId}").focus();
+		});
+		function runScript(event) {
+		    if (event.keyCode == 13) {
+		        var compValue = document.getElementById("#{clientId}").value;
+		        if(compValue != null)
+			    {
+				    if(compValue != "")
+		        		#{this:getOnClick(context,component)}   
+				}		    	
+
+		    }
+		}
+	</script>
 	<input type="text" id="#{clientId}" class="#{component.attributes['styleClass']}"
-		name="#{clientId}" onkeypress="return runScript(event)" value="#{this:getValue(component)}">
+		value="#{this:getValue(component)}"
+		name="#{clientId}" onkeypress="return runScript(event)" >
+		
+	</input>
+	<jsp:scriptlet><![CDATA[ }  ]]></jsp:scriptlet>
+	
 		<vcp:body>
 		<f:call name="renderChildren" />
 		</vcp:body>
-	</input>
-	
 </f:root>

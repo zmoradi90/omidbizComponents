@@ -5,12 +5,12 @@
   <parent>
     <artifactId>omidbizComponents</artifactId>
     <groupId>org.omidbiz</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
   <groupId>org.omidbiz</groupId>
-  <artifactId>inputListOfValues</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>inputListOfValues</name>
+  <artifactId>tooltip</artifactId>
+  <version>1.0</version>
+  <name>tooltip</name>
   <build>
     <plugins>
       <plugin>
@@ -29,7 +29,7 @@
           <library>
             <prefix>org.omidbiz</prefix>
             <taglib>
-              <shortName>inputListOfValues</shortName>
+              <shortName>tooltip</shortName>
             </taglib>
           </library>
         </configuration>
@@ -47,7 +47,6 @@
         <target>1.5</target>
 
     </configuration>
-
 </plugin>
     </plugins>
   </build>
