@@ -138,7 +138,7 @@
     <module>treeTable</module>
     <module>gauge</module>
     <module>inputFilter</module>
-    
+    <module>placeholder</module>
     <module>tabs</module>
     
   </modules>
