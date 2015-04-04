@@ -1,4 +1,7 @@
-
+@font-face{
+font-family: 'Yekan';
+src: url('fonts/BYekan.ttf') format('truetype');
+}
 @keyframes start {
     from {
         transform: scale(.5);
@@ -20,9 +23,15 @@
 .pdp-default {
     position: absolute;    
     direction: rtl;    
-    color: #555;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.19);
-    z-index: 1000;
+    
+    
+    font-family: 'Yekan';
+    background-color: #F5F5F5;
+    background-image: linear-gradient(#FFFFFF, #F5F5F5 80%, #F5F5F5);
+    background-repeat: no-repeat;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    
+    z-index: 9999 !important;
 }
 
 .pdp-default ::-webkit-scrollbar-track
@@ -46,13 +55,12 @@
 }
 
 .pdp-default .header{
-    background-color: #ffffff;
-    border-top: 2px solid #999;
-    border-left: 1px solid #999;
-    border-right: 1px solid #999;
-    border-bottom: none;   
+    
     padding: 2px;
     font-weight: bold;
+
+    background-color: #111111 !important;
+    color: #FFFFFF;
 }
 
 .pdp-default .yearSelect{
@@ -98,15 +106,18 @@
 
 .pdp-default .nextArrow{
     right:0;
+    cursor: pointer;
 }
 .pdp-default .prevArrow{
     left:0;    
+    cursor: pointer;
 }
 .pdp-default .monthYear{
     width: 80%;
     margin: 0 auto;
     text-align: center;
     cursor: pointer;
+
 }
 
 .pdp-default .nextArrow, .pdp-default .prevArrow{
@@ -130,17 +141,20 @@
 .pdp-default .dows {  
     background: #5F5D5D;/*#006fe0;*/
     color: #fff;    
+    font-family: 'Yekan';
 }
 .pdp-default .dow {            
-    font: bold 14px 'helvetica';
+    font-family: 'Yekan';
     border: 1px solid #5F5D5D;
+    margin-bottom: 2px;
 }
 
 .pdp-default .days{
     background-color: #ffffff;
     border: 1px solid #999;
     border-top: none;
-    font: normal 12px Tahoma;   
+    font-size: 12px;
+    font-family: 'Yekan';
 }
 
 .pdp-default .day{
@@ -177,7 +191,8 @@
 
 .pdp-default .footer{    
     background: #999;
-    font: normal 12px Tahoma;   
+    font-family: 'Yekan';
+    font-size: 12px; 
     text-align: center;
     height: 17px;
 }
