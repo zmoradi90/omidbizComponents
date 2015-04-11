@@ -5,11 +5,11 @@
   <parent>
     <artifactId>omidbizComponents</artifactId>
     <groupId>org.omidbiz</groupId>
-    <version>1.0</version>
+    <version>1.1</version>
   </parent>
   <groupId>org.omidbiz</groupId>
   <artifactId>gauge</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <name>gauge</name>
   <build>
     <plugins>
