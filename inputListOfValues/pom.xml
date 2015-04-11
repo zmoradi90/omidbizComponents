@@ -5,11 +5,11 @@
   <parent>
     <artifactId>omidbizComponents</artifactId>
     <groupId>org.omidbiz</groupId>
-    <version>1.1</version>
+    <version>2.2</version>
   </parent>
   <groupId>org.omidbiz</groupId>
   <artifactId>inputListOfValues</artifactId>
-  <version>1.1</version>
+  <version>2.2</version>
   <name>inputListOfValues</name>
   <build>
     <plugins>
