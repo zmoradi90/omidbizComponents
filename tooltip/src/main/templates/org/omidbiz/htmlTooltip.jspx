@@ -10,10 +10,12 @@
 	component="org.omidbiz.component.UITooltip" 
 	>
 	
+	<f:resource name="/org/omidbiz/renderkit/html/css/images/tipsy.gif" var="bg" />
+	
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/jquery.tipsy.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/js/jquery.tipsy.js</h:scripts>
 	<h:styles>/org/omidbiz/renderkit/html/css/tipsy.css</h:styles>
 	
 	
