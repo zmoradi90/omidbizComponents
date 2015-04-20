@@ -1,5 +1,5 @@
-.tipsy { font-family: BKoodakBold; padding: 5px; font-size: 10px; opacity: 0.8; filter: alpha(opacity=80); background-repeat: no-repeat;  background-image: url(images/tipsy.gif); }
-  .tipsy-inner { padding: 5px 8px 4px 8px; background-color: black; color: white; max-width: 250px; text-align: center; }
+.tipsy { font-family: Yekan, BKoodakBold; padding: 5px; font-size: 12px; opacity: 0.8; filter: alpha(opacity=80); background-repeat: no-repeat;  background-image: url(images/tipsy.gif); }
+  .tipsy-inner {  font-family: Yekan, BKoodakBold; font-size: 12px; padding: 5px 8px 4px 8px; background-color: black; color: white; max-width: 250px; text-align: center; }
   .tipsy-inner { -moz-border-radius:3px; -webkit-border-radius:3px; }
   .tipsy-north { background-position: top center; }
   .tipsy-south { background-position: bottom center; }
