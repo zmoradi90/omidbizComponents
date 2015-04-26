@@ -17,7 +17,7 @@
         </renderer>
         <tag>
             <name>tabs</name>
-            <classname>org.richfaces.taglib.TabsTag</classname>
+            <classname>org.omidbiz.taglib.TabsTag</classname>
             <superclass>
                 org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
             </superclass>
@@ -57,7 +57,7 @@
         </renderer>
         <tag>
             <name>tabPanel</name>
-            <classname>org.richfaces.taglib.TabPanelTag</classname>
+            <classname>org.omidbiz.taglib.TabPanelTag</classname>
             <superclass>
                 org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
             </superclass>

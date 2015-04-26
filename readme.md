@@ -36,3 +36,9 @@ Provides components enhancements to the RichFaces Tag library for using in JBoss
 <a:loadStyle src="resource://org/omidbiz/ui.styles.css" />
 <a:loadScript src="resource://org/omidbiz/ui.scripts.js"></a:loadScript>
 ```
+
++ Add following namespace
+
+```
+xmlns:seam="http://omidbiz.com/fanpardaz"
+```

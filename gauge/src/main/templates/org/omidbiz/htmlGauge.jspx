@@ -6,9 +6,9 @@
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
-	class="ir.sapp.renderkit.html.GaugeRenderer"
+	class="org.omidbiz.renderkit.html.GaugeRenderer"
 	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
-	component="ir.sapp.component.UIGauge" >
+	component="org.omidbiz.component.UIGauge" >
 	<f:clientid var="clientId"/>
 	<f:resource name="/ir/sapp/renderkit/html/css/images/true.png" var="bg" />
 	<c:set var="gvalue" value="#{component.attributes['gvalue']}"/>
@@ -24,7 +24,7 @@
 		x:passThruWithExclusions="value,name,type,id">
 
 
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/ir/sapp/renderkit/html/script/raphael.2.1.0.min.js,/ir/sapp/renderkit/html/script/justgage.1.0.1.min.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/org/omidbiz/renderkit/html/script/raphael.2.1.0.min.js,/org/omidbiz/renderkit/html/script/justgage.1.0.1.min.js</h:scripts>
 
 	
 

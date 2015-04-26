@@ -3,21 +3,21 @@
 
 <components>
 	<component>
-		<name>ir.sapp.Gauge</name>
-		<family>ir.sapp.Gauge</family>
-		<classname>ir.sapp.component.html.HtmlGauge</classname>
-		<superclass>ir.sapp.component.UIGauge</superclass>
+		<name>org.omidbiz.Gauge</name>
+		<family>org.omidbiz.Gauge</family>
+		<classname>org.omidbiz.component.html.HtmlGauge</classname>
+		<superclass>org.omidbiz.component.UIGauge</superclass>
 		<description>
 			<![CDATA[
     ]]>
 		</description>
 		<renderer generate="true" override="true">
-			<name>ir.sapp.GaugeRenderer</name>
-			<template>ir/sapp/htmlGauge.jspx</template>
+			<name>org.omidbiz.GaugeRenderer</name>
+			<template>org/omidbiz/htmlGauge.jspx</template>
 		</renderer>
 		<tag>
 			<name>gauge</name>
-			<classname>ir.sapp.taglib.GaugeTag</classname>
+			<classname>org.omidbiz.taglib.GaugeTag</classname>
 			<superclass>
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
