@@ -5,5 +5,10 @@
 		<path>org/omidbiz/ui.scripts.js</path>
 		<renderer class="org.ajax4jsf.resource.CompressedScriptRenderer"/>
 	</resource>
+	<resource >
+		<name>/org/omidbiz/ui.styles.css</name>
+		<path>org/omidbiz/ui.styles.css</path>
+		<renderer class="org.ajax4jsf.resource.StyleRenderer"/>
+	</resource>
 	
 </resource-config>
