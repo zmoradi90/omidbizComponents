@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-config>
+	<resource >
+		<name>/org/omidbiz/ui.scripts.js</name>
+		<path>org/omidbiz/ui.scripts.js</path>
+		<renderer class="org.ajax4jsf.resource.CompressedScriptRenderer"/>
+	</resource>
+	
+</resource-config>
