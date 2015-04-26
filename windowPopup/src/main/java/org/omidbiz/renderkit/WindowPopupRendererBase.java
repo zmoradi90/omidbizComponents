@@ -17,7 +17,7 @@ package org.omidbiz.renderkit;
 
 import javax.faces.component.UIComponent;
 
-import org.ajax4jsf.renderkit.AjaxCommandRendererBase;
+import org.ajax4jsf.renderkit.AjaxComponentRendererBase;
 import org.omidbiz.component.UIWindowPopup;
 
 /**
@@ -26,14 +26,12 @@ import org.omidbiz.component.UIWindowPopup;
  * @version $Revision: 1.0
  * 
  */
-public class WindowPopupRendererBase extends AjaxCommandRendererBase
-{
+public class WindowPopupRendererBase extends AjaxComponentRendererBase {
 
-	@Override
-	protected Class<? extends UIComponent> getComponentClass()
-	{
-
-		return UIWindowPopup.class;
-	}
+    @Override
+    protected Class<? extends UIComponent> getComponentClass()
+    {
+        return UIWindowPopup.class;
+    }
 
 }

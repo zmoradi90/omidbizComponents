@@ -22,6 +22,7 @@
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
 		</tag>
+		
 		<taghandler>
 			<classname>org.ajax4jsf.webapp.taglib.AjaxComponentHandler</classname>
 		</taghandler>
@@ -31,6 +32,7 @@
 		&html_anchor_attributes;
 		&html_style_attributes;
 		&ajax_component_attributes;
+		<!-- -->
 		<property>
 			<name>view</name>
 			<classname>java.lang.String</classname>
@@ -182,6 +184,8 @@
 			</description>
 			<defaultvalue>"85%"</defaultvalue>
 		</property>
-
+		
+		
+        
 	</component>
 </components>

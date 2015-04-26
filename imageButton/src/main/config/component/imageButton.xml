@@ -22,42 +22,6 @@
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
 		</tag>
-		
-		<taghandler>
-			<classname>org.ajax4jsf.webapp.taglib.AjaxComponentHandler</classname>
-		</taghandler>
-		&ui_command_attributes;
-		&html_events;
-		&html_universal_attributes;
-		&html_anchor_attributes;
-		&html_style_attributes;
-		&ajax_component_attributes;
-		<!-- -->
-		<property>
-			<name>url</name>
-			<classname>java.lang.String</classname>
-			<description>
-				image url
-			</description>
-			<required>true</required>
-		</property>
-		
-		<property>
-			<name>alt</name>
-			<classname>java.lang.String</classname>
-			<description>
-			</description>
-			
-		</property>
-		
-		<property>
-			<name>title</name>
-			<classname>java.lang.String</classname>
-			<description>
-			</description>
-		</property>
-		
-		
-        
+	
 	</component>
 </components>

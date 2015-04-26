@@ -3,21 +3,16 @@
 	xmlns:f="http://ajax4jsf.org/cdk/template" 
 	xmlns:c=" http://java.sun.com/jsf/core" 
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
-	xmlns:vcp="http://ajax4jsf.org/vcp"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"	
 	class="org.omidbiz.renderkit.html.ImageButtonRenderer"
 	baseclass="org.omidbiz.renderkit.ImageButtonRendererBase"
-	component="org.omidbiz.component.UIImageButton" 
-	>
-	<f:clientid var="clientId"/>
-	<c:set var="src" value="#{component.attributes['url']}" />
-	<img id="#{clientId}"  style="border: 0px;" src="#{src}"  alt="#{alt}" title="#{title}" onclick="#{this:getOnClick(context,component)}">
-		
-		<vcp:body>
-		<f:call name="renderChildren" />
-		</vcp:body>
+	component="org.omidbiz.component.UIImageButton">
 	
-	</img>
+	<f:clientid var="clientId" />
+	
+	
 	
 </f:root>

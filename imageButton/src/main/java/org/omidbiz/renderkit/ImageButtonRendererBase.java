@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package org.omidbiz.renderkit;
 
-import javax.faces.component.UIComponent;
 
-import org.ajax4jsf.renderkit.AjaxCommandRendererBase;
+import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+
+import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+
 import org.omidbiz.component.UIImageButton;
 
 /**
@@ -27,13 +31,16 @@ import org.omidbiz.component.UIImageButton;
  * @version $Revision: 1.0
  * 
  */
-public class ImageButtonRendererBase extends AjaxCommandRendererBase
+public class ImageButtonRendererBase extends HeaderResourcesRendererBase
 {
 
-	@Override
-	protected Class<? extends UIComponent> getComponentClass()
-	{
-		return UIImageButton.class;
-	}
+    
+
+    protected Class<? extends UIComponent> getComponentClass()
+    {
+        return UIImageButton.class;
+    }
+
+    
 
 }
