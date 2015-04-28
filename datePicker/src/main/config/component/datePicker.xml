@@ -32,7 +32,7 @@
 			<classname>java.lang.String</classname>
 			<description>				
 			</description>
-			<defaultvalue>"YYYY/MM/DD"</defaultvalue>
+			<defaultvalue>"yy/mm/dd"</defaultvalue>
 			<required>true</required>
 		</property>
 		<property>

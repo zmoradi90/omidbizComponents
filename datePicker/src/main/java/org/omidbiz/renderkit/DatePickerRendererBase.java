@@ -82,6 +82,9 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 
     protected String getClientIdValue(FacesContext context, UIDatePicker component)
     {
+        Object idname = component.getAttributes().get("idname");
+        if (idname != null)
+            return "#" + idname;
         String jQueryClientId = component.getClientId(context);
         jQueryClientId = jQueryClientId.replace(":", "\\\\:");
         return "#" + jQueryClientId;

@@ -14,12 +14,15 @@
 	<f:clientid var="clientId" />
 	
 	<h:scripts>
-		script/persianDatePicker.min.js,
+		script/jquery.ui.core.js,
+		script/jquery.ui.datepicker-cc.js,
+		script/calendar.js,
+		script/jquery.ui.datepicker-cc-fa.js,
 		script/calendarUtil.js				
 	</h:scripts>
 	
 	<h:styles>
-		css/persianDatePicker-default.css		
+		css/jquery-ui-1.8.14.css		
 	</h:styles>
 	
 	<f:resource name="images/inputDate.png" var="icon" />
@@ -54,10 +57,13 @@
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
 			jQuery(document).ready(function(){
-				jQuery(".#{idname}_inp").persianDatepicker({
-					formatDate: '#{datePattern}'
+				jQuery('#{this:getClientIdValue(context, component)}').datepicker({
+					dateFormat: '#{datePattern}',
+					showButtonPanel: true,
+					changeMonth: true,
+					changeYear: true
 						<jsp:scriptlet><![CDATA[ if (onSelect != null ) { ]]></jsp:scriptlet>		
-						, onSelect: function () { #{onSelect} }
+						, onSelect: function(v, c){ #{onSelect} }
 						<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 				});
 			});			
@@ -69,8 +75,11 @@
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
 			jQuery(document).ready(function(){
-				jQuery('#{this:getClientIdValue(context, component)}_date').persianDatepicker({
-					formatDate: '#{datePattern}', onSelect: function () { }
+				jQuery('#{this:getClientIdValue(context, component)}_date').datepicker({
+					dateFormat: '#{datePattern}', 
+					showButtonPanel: true,
+					changeMonth: true,
+					changeYear: true
 				});
 			});			
 			</script>

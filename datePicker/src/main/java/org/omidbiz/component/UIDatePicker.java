@@ -25,8 +25,8 @@ import javax.faces.component.UIInput;
 public abstract class UIDatePicker extends UIInput
 {
 
-	public static final String COMPONENT_TYPE = "org.omidbiz.DatePicker";
+    public static final String COMPONENT_TYPE = "org.omidbiz.DatePicker";
 
-	public static final String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.DatePicker";
 
 }
