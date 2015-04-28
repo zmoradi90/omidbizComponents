@@ -47,12 +47,21 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 
 		if (parentComponent != null && funcName != null)
 		{
-			StringBuilder sb = new StringBuilder("function show_");
+			StringBuilder sb = new StringBuilder();
+			String varName = forAttr + "_" + funcName;
+			sb.append("var ").append(varName).append("; ");
+			sb.append(" function show_");
 			sb.append(funcName.replace(":", "\\\\:"));
 			sb.append("(){");
-			sb.append("var spin_target = document.getElementById('"+forAttr+"');");
-			sb.append("new Spinner(opts).spin(spin_target);");
-			sb.append("}");			
+			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
+			sb.append(varName).append(" = new Spinner(opts).spin(spin_target); ");
+			sb.append("}");
+			//stop function			
+			sb.append(" function stop_");
+			sb.append(funcName.replace(":", "\\\\:"));
+			sb.append("(){ ");
+			sb.append(varName).append(".stop(); ");			
+			sb.append(" } ");
 			getUtils().writeScript(context, component, sb.toString());						
 		}
 		writer.startElement("div", component);
