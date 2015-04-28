@@ -34,6 +34,9 @@
 	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_35_222222_1x100.png" var="ui-bg_highlight-soft_35_222222_1x100" />
 	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_80_eeeeee_1x100.png" var="ui-bg_highlight-soft_80_eeeeee_1x100" />
 	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_33_003147_1x100.png" var="ui-bg_highlight-soft_33_003147_1x100" />
+	<f:resource name="org/omidbiz/images/ui-bg_glass_55_fbf9ee_1x400.png"  />
+	<f:resource name="org/omidbiz/images/ui-icons_222222_256x240.png"  />
+	<f:resource name="org/omidbiz/images/ui-icons_454545_256x240.png"  />
 	
 	
 	

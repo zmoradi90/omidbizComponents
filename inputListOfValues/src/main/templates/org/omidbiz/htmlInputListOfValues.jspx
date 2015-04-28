@@ -19,10 +19,10 @@
 	
 	<f:clientid var="clientId" />
 	
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/loading_background.png" var="bg" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/loading.gif" var="loader" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/controls.png" var="controls" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/border.png" var="border" />
+	<f:resource name="org/omidbiz/images/loading_background.png" var="bg" />
+	<f:resource name="org/omidbiz/images/loading.gif" var="loader" />
+	<f:resource name="org/omidbiz/images/controls.png" var="controls" />
+	<f:resource name="org/omidbiz/images/border.png" var="border" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/lovicon.png" var="icon" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/remove.png" var="removeIcon" />
 	

@@ -15,10 +15,10 @@
 	
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
 	
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/loading_background.png" var="bg" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/loading.gif" var="loader" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/controls.png" var="controls" />
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/border.png" var="border" />
+	<f:resource name="org/omidbiz/images/loading_background.png" var="bg" />
+	<f:resource name="org/omidbiz/images/loading.gif" var="loader" />
+	<f:resource name="org/omidbiz/images/controls.png" var="controls" />
+	<f:resource name="org/omidbiz/images/border.png" var="border" />
 	
 	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
 	

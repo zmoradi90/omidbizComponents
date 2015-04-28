@@ -10,7 +10,7 @@
 	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
 	component="org.omidbiz.component.UIGauge" >
 	<f:clientid var="clientId"/>
-	<f:resource name="/ir/sapp/renderkit/html/css/images/true.png" var="bg" />
+	
 	<c:set var="gvalue" value="#{component.attributes['gvalue']}"/>
 	<c:set var="gmin" value="#{component.attributes['gmin']}"/>
 	<c:set var="gmax" value="#{component.attributes['gmax']}"/>
@@ -20,32 +20,32 @@
 	<c:set var="gid" value="#{component.attributes['gid']}"/>
 	
 	
-	<div id="#{clientId}"
+
+<div id="#{clientId}"
 		x:passThruWithExclusions="value,name,type,id">
 
-
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/org/omidbiz/renderkit/html/script/raphael.2.1.0.min.js,/org/omidbiz/renderkit/html/script/justgage.1.0.1.min.js</h:scripts>
+	<h:scripts>/org/omidbiz/renderkit/html/script/raphael.js,/org/omidbiz/renderkit/html/script/justgage.1.0.1.js</h:scripts>
 
 	
 
 		<div id="#{gid}" />
     
     <script>
-	    var g = new JustGage({
-	    id: "#{gid}",
-	    value: #{gvalue},
-	    min: #{gmin},
-	    max: #{gmax},
-	    gaugeWidthScale: #{gwidthscale},
-	    title: "#{gtitle}",
-	    label: "#{glabel}",
-	    levelColorsGradient: true
-	    });
-	    
+		window.onload = function(){
+			var g_#{gid} = new JustGage({
+				id: "#{gid}",
+				value: #{gvalue},
+				min: #{gmin},
+				max: #{gmax},
+				gaugeWidthScale: #{gwidthscale},
+				title: "#{gtitle}",
+				label: "#{glabel}",
+				levelColorsGradient: true
+			});
+		};	    	   
     </script>	
 		
+</div>		
 		
-		
-		
-	</div>
+	
 </f:root>

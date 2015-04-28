@@ -18,12 +18,33 @@ import org.omidbiz.component.UITabs;
 public class TabsRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] resource = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js") };
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js"), 
+            getResource("/org/omidbiz/renderkit/html/script/jquery-ui.js"),
+            getResource("/org/omidbiz/renderkit/html/script/jquery.ui.widget.js"),
+            getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js")
+            };
+    
+    
+    InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/jquery-ui.css"), 
+            getResource("/org/omidbiz/renderkit/html/css/jquery.ui.theme.css"),
+            getResource("/org/omidbiz/renderkit/html/css/jquery.ui.tabs.css"),
+            getResource("org/omidbiz/images/ui-bg_highlight-soft_75_cccccc_1x100.png"),
+            getResource("org/omidbiz/images/ui-bg_flat_75_ffffff_40x100.png"),
+            getResource("org/omidbiz/images/ui-bg_glass_75_e6e6e6_1x400.png"),
+            getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"),
+            getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png")
+            };
 
     @Override
     protected InternetResource[] getScripts()
     {
-        return resource;
+        return jsResources;
+    }
+    
+    @Override
+    protected InternetResource[] getStyles()
+    {
+        return cssResources;
     }
 
     @Override
