@@ -28,6 +28,14 @@
 	<f:resource name="images/inputDate.png" var="icon" />
 	<f:resource name="images/remove.png" var="removeIcon" />
 	
+	<f:resource name="org/omidbiz/images/ui-bg_loop_25_000000_21x21.png" var="bg_loop_25_000000_21x21" />
+	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_44_444444_1x100.png" var="ui-bg_highlight-soft_44_444444_1x100" />
+	<f:resource name="org/omidbiz/images/ui-icons_ffffff_256x240.png" var="ui-icons_ffffff_256x240" />
+	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_35_222222_1x100.png" var="ui-bg_highlight-soft_35_222222_1x100" />
+	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_80_eeeeee_1x100.png" var="ui-bg_highlight-soft_80_eeeeee_1x100" />
+	<f:resource name="org/omidbiz/images/ui-bg_highlight-soft_33_003147_1x100.png" var="ui-bg_highlight-soft_33_003147_1x100" />
+	
+	
 	
 	<c:set var="datePattern" value="#{component.attributes['datePattern']}" />
 	<c:set var="weekNumbers" value="#{component.attributes['weekNumbers']}" />
