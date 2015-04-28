@@ -19,7 +19,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
 {
 
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js"), 
-            getResource("/org/omidbiz/renderkit/html/script/jquery-ui.js"),
+            getResource("/org/omidbiz/renderkit/html/script/jquery.ui.core.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.widget.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js")
             };

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.StatusModal</name>
+		<family>org.omidbiz.StatusModal</family>
+		<classname>org.omidbiz.component.html.HtmlStatusModal</classname>
+		<superclass>org.omidbiz.component.UIStatusModal</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.StatusModalRenderer</name>
+			<template>org/omidbiz/htmlStatusModal.jspx</template>
+		</renderer>
+		<tag>
+			<name>statusModal</name>
+			<classname>org.omidbiz.taglib.StatusModalTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		
+		
+		<property>
+			<name>funcName</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		
+		<property>
+			<name>for</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+		
+		<property>
+			<name>text</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+		</property>
+        
+	</component>
+</components>

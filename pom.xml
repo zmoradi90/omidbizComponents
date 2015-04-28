@@ -116,6 +116,7 @@
     <module>gauge</module>
     <module>inputFilter</module>    
     <module>tabs</module>
+    <module>statusModal</module>
     
   </modules>
   <build>

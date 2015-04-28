@@ -116,6 +116,7 @@
 							<!-- files to exclude, path relative to output's directory -->
 							<excludes>
 								<exclude>**/*.scripts.js</exclude>
+								
 								<!--
 									<exclude>
 									${project.build.directory}/compressed/org/richfaces/renderkit/html/scripts/jquery.jcarousel-min.js
@@ -128,6 +129,7 @@
 								
 								<exclude>**/scriptaculo*</exclude>
 								<exclude>**/scriptaculo*/**</exclude>
+								
 							</excludes>
 						</aggregation>
 						<aggregation>
