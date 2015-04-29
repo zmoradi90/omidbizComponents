@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.DivRenderer"
+	baseclass="org.omidbiz.renderkit.DivRenderBase"
+	component="org.omidbiz.component.UIDiv" 
+	>
+
+	
+	
+	
+	
+	<f:clientid var="clientId"/>
+	<f:call name="initializeMask">
+	
+		<vcp:body></vcp:body>
+	
+	</f:call>
+	
+</f:root>

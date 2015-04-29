@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.Div</name>
+		<family>org.omidbiz.Div</family>
+		<classname>org.omidbiz.component.html.HtmlDiv</classname>
+		<superclass>org.omidbiz.component.UIDiv</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.DivRenderer</name>
+			<template>org/omidbiz/htmlDiv.jspx</template>
+		</renderer>
+		<tag>
+			<name>div</name>
+			<classname>org.omidbiz.taglib.DivTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				Must be unique in each page
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+</components>
