@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.Placeholder</name>
+		<family>org.omidbiz.Placeholder</family>
+		<classname>org.omidbiz.component.html.HtmlPlaceholder</classname>
+		<superclass>org.omidbiz.component.UIPlaceholder</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.PlaceholderRenderer</name>
+			<template>org/omidbiz/htmlPlaceholder.jspx</template>
+		</renderer>
+		<tag>
+			<name>Placeholder</name>
+			<classname>org.omidbiz.taglib.PlaceholderTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+</components>

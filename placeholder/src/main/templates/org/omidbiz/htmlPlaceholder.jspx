@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	class="org.omidbiz.renderkit.html.PlaceholderRenderer"
+	baseclass="org.omidbiz.renderkit.PlaceholderRenderBase"
+	component="org.omidbiz.component.UIPlaceholder" 
+	>
+
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript()</h:scripts>
+	
+	
+	
+	<f:clientid var="clientId"/>
+	<f:call name="initializeMask" />
+	
+</f:root>
