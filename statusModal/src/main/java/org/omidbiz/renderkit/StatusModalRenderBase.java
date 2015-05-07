@@ -42,10 +42,10 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 		String text = (String) component.getAttributes().get("text");
 		String forAttr = (String) component.getAttributes().get("for");
 
-		UIComponent parentComponent = component.getParent();
+		
 		ResponseWriter writer = context.getResponseWriter();
 
-		if (parentComponent != null && funcName != null)
+		if (forAttr != null && funcName != null)
 		{
 			StringBuilder sb = new StringBuilder();
 			String varName = forAttr + "_" + funcName;
@@ -54,6 +54,7 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			sb.append(funcName.replace(":", "\\\\:"));
 			sb.append("(){");
 			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
+			sb.append(" spin_target.style.display = 'block';");
 			sb.append(varName).append(" = new Spinner(opts).spin(spin_target); ");
 			sb.append("}");
 			//stop function			
@@ -63,10 +64,13 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			sb.append(varName).append(".stop(); ");			
 			sb.append(" } ");
 			getUtils().writeScript(context, component, sb.toString());						
+			//
+			writer.startElement("div", component);
+			getUtils().writeAttribute(writer, "id", forAttr);		
+			getUtils().writeAttribute(writer, "style", "display:none; width: 100%; height: 100%; top: 0px; left: 0px;position: fixed;opacity: 0.7;background: rgba(255,255,255,1);z-index: 99;text-align: center;");
+			writer.endElement("div");
 		}
-		writer.startElement("div", component);
-		getUtils().writeAttribute(writer, "id", forAttr);		
-		writer.endElement("div");
+		
 	}
 
 	@Override
