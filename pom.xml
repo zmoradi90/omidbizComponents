@@ -99,6 +99,7 @@
 	</properties>	
 
   <modules>
+	<module>util</module>  
     <module>datePicker</module>
     <module>tooltip</module>
     <module>tipsy</module>
@@ -119,6 +120,7 @@
     <module>statusModal</module>
     <module>placeholder</module>
     <module>div</module>
+    <module>loop</module>
     
   </modules>
   <build>

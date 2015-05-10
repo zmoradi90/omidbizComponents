@@ -58,9 +58,7 @@ public class DivRenderBase extends HeaderResourcesRendererBase
     @Override
     protected void doDecode(FacesContext context, UIComponent component)
     {
-        String forceId = (String) component.getAttributes().get("forceId");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println(forceId);
+        String forceId = (String) component.getAttributes().get("forceId");       
         if (forceId != null)
         {
             AjaxContext ajaxContext = AjaxContext.getCurrentInstance();

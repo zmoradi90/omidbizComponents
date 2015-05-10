@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.Loop</name>
+		<family>org.omidbiz.Loop</family>
+		<classname>org.omidbiz.component.html.HtmlLoop</classname>
+		<superclass>org.omidbiz.component.UILoop</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer>
+			<name>org.omidbiz.LoopRenderer</name>
+			<classname>org.omidbiz.renderkit.html.LoopRenderer</classname>
+		</renderer>
+		<tag>
+			<name>loop</name>
+			<classname>org.omidbiz.taglib.LoopTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>begin</name>
+			<classname>int</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>end</name>
+			<classname>int</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>var</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+</components>
