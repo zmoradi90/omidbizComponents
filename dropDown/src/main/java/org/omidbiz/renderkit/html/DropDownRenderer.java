@@ -18,8 +18,10 @@ package org.omidbiz.renderkit.html;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -35,6 +37,26 @@ import org.omidbiz.component.UIDropDownItems;
  */
 public class DropDownRenderer extends HeaderResourcesRendererBase
 {
+
+    @Override
+    protected void doDecode(FacesContext context, UIComponent component)
+    {
+        ExternalContext external = context.getExternalContext();
+        Map requestParams = external.getRequestParameterMap();
+        UIDropDown dd = (UIDropDown) component;
+        Object id = dd.getAttributes().get("forceId");
+        if (id != null)
+        {
+            String submittedValue = (String) requestParams.get((String) id);
+
+            if (submittedValue != null && submittedValue.length() < 1)
+            {
+                dd.setSubmittedValue(submittedValue);
+                dd.setValid(true);
+            }
+        }
+
+    }
 
     @Override
     protected void doEncodeBegin(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
