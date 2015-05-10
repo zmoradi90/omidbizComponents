@@ -161,6 +161,28 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
             if (itemValue != null)
                 getUtils().writeAttribute(writer, "value", itemValue);
             // value can be object or primitive
+            // this code is ugly but what can you do
+            try
+            {
+                if (itemValue instanceof Number && value != null)
+                {
+                    long val;
+                    if (value instanceof String)
+                        val = new Long(String.valueOf(value));
+                    else
+                        val = (Long) value;
+                    if (((Number) itemValue).longValue() == val)
+                        getUtils().writeAttribute(writer, "selected", "selected");
+                }
+            }
+            catch (NumberFormatException e)
+            {
+                // DO NOTHING
+            }
+            catch (ClassCastException cce)
+            {
+                // DO NOTHING
+            }
             if (item.equals(value) || (itemValue != null && itemValue.equals(value)))
             {
                 getUtils().writeAttribute(writer, "selected", "selected");
@@ -185,6 +207,19 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
     protected Class<? extends UIComponent> getComponentClass()
     {
         return UIDropDown.class;
+    }
+
+    public static void main(String[] args)
+    {
+        Object str = "50000";
+        try
+        {
+            System.out.println(new Long(String.valueOf(str)));
+        }
+        catch (NumberFormatException e)
+        {
+        }
+        System.out.println(str.getClass().isAssignableFrom(Number.class));
     }
 
 }
