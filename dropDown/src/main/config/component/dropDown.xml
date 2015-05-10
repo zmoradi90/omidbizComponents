@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.DropDown</name>
+		<family>org.omidbiz.DropDown</family>
+		<classname>org.omidbiz.component.html.HtmlDropDown</classname>
+		<superclass>org.omidbiz.component.UIDropDown</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer>
+			<name>org.omidbiz.DropDownRenderer</name>
+			<classname>org.omidbiz.renderkit.html.DropDownRenderer</classname>
+		</renderer>
+		<tag>
+			<name>dropDown</name>
+			<classname>org.omidbiz.taglib.DropDownTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>items</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>onchange</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>disabled</name>
+			<classname>boolean</classname>
+			<description>
+				 disable all dropDown
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>noSelection</name>
+			<classname>java.lang.String</classname>
+			<description>
+				 
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>var</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+        
+	</component>
+	
+	<component>
+		<name>org.omidbiz.DropDownItems</name>
+		<family>org.omidbiz.DropDownItems</family>
+		<classname>org.omidbiz.component.html.HtmlDropDownItems</classname>
+		<superclass>org.omidbiz.component.UIDropDownItems</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer>
+			<name>org.omidbiz.DropDownItemsRenderer</name>
+			<classname>org.omidbiz.renderkit.html.DropDownItemsRenderer</classname>
+		</renderer>
+		<tag>
+			<name>dropDownItems</name>
+			<classname>org.omidbiz.taglib.DropDownItemsTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>itemLabel</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>itemValue</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>disabled</name>
+			<classname>boolean</classname>
+			<description>
+				can refference the var attribute
+			</description>
+			
+		</property>
+		
+		
+        
+	</component>
+</components>

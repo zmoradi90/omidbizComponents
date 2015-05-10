@@ -121,6 +121,7 @@
     <module>placeholder</module>
     <module>div</module>
     <module>loop</module>
+    <module>dropDown</module>
     
   </modules>
   <build>

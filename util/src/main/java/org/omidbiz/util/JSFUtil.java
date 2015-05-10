@@ -1,5 +1,9 @@
 package org.omidbiz.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;
@@ -48,6 +52,63 @@ public class JSFUtil
             throw new ClassCastException("The value received through expression \"" + expression.getExpressionString()
                     + "\" of component with id=\"" + component.getId() + "\" should be of type \"" + expectedClass.getName()
                     + "\" but was of type: \"" + valueClass.getName() + "\"");
+    }
+
+    public static List<Long> convertStringToLong(String commaSeparated)
+    {
+        List<Long> longList = new ArrayList<Long>();
+        if (commaSeparated.contains(","))
+        {
+            String[] split = commaSeparated.split(",");
+            if (split != null && split.length > 0)
+            {
+                for (int i = 0; i < split.length; i++)
+                {
+                    String val = split[i].trim().replace(" ", "");
+                    if (isNotEmpty(val))
+                        longList.add(Long.valueOf(val));
+                }
+
+            }
+        }
+        else
+        {
+            if (isNotEmpty(commaSeparated))
+            {
+                try
+                {
+                    longList.add(Long.valueOf(commaSeparated.trim().replace(" ", "")));
+                }
+                catch (Exception e)
+                {
+                }
+            }
+        }
+        return longList;
+    }
+
+    public static boolean isNotEmpty(String input)
+    {
+        return (input != null && input.length() > 0);
+    }
+
+    public static boolean isEmpty(String input)
+    {
+        if (input == null)
+        {
+            return true;
+        }
+        return input.trim().length() == 0;
+    }
+
+    public static boolean isNotEmpty(Collection<?> input)
+    {
+        return input != null && input.size() > 0;
+    }
+
+    public static boolean isEmpty(Collection<?> input)
+    {
+        return isNotEmpty(input) == false;
     }
 
 }
