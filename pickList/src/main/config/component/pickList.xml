@@ -124,6 +124,12 @@
 						
 		</property>
 		
+		<property>
+			<name>buttonStyleClass</name>
+			<classname>java.lang.String</classname>
+						
+		</property>
+		
         
 	</component>
 	

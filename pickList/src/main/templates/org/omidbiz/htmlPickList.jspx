@@ -21,6 +21,7 @@
 	<c:set var="removeText" value="#{component.attributes['removeText']}"/>
 	<c:set var="removeAllText" value="#{component.attributes['removeAllText']}"/>
 	<c:set var="styleClass" value="#{component.attributes['styleClass']}"/>
+	<c:set var="buttonStyleClass" value="#{component.attributes['buttonStyleClass']}"/>
 	<c:set var="disableControlsButton" value="#{component.attributes['disableControlsButton']}"/>
 	
 	<jsp:scriptlet>
@@ -42,10 +43,10 @@
 			<jsp:scriptlet><![CDATA[ if (disableControlsButton == false ) { ]]></jsp:scriptlet>
 			<td>			
 			<table border="0" cellpadding="0" cellspacing="0">
-<tr><td><input type="button" id="#{clientId}_copy" value="#{copyText}" /></td></tr>
-<tr><td> <input type="button" id="#{clientId}_remove" value="#{removeText}" /></td></tr>
-<tr><td><input type="button" id="#{clientId}_copyall" value="#{copyAllText}" /></td></tr>
-<tr><td><input type="button" id="#{clientId}_removeall" value="#{removeAllText}" /></td></tr>
+<tr><td><button type="button" id="#{clientId}_copy" class="#{buttonStyleClass}">#{copyText}</button></td></tr>
+<tr><td> <button type="button" id="#{clientId}_remove" class="#{buttonStyleClass}">#{removeText}</button></td></tr>
+<tr><td><button type="button" id="#{clientId}_copyall" class="#{buttonStyleClass}">#{copyAllText}</button></td></tr>
+<tr><td><button type="button" id="#{clientId}_removeall" class="#{buttonStyleClass}">#{removeAllText}</button></td></tr>
 </table>
 	<script type="text/javascript">
 	jQuery(document).ready(function () {
