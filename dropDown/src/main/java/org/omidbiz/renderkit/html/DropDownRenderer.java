@@ -209,17 +209,6 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
         return UIDropDown.class;
     }
 
-    public static void main(String[] args)
-    {
-        Object str = "50000";
-        try
-        {
-            System.out.println(new Long(String.valueOf(str)));
-        }
-        catch (NumberFormatException e)
-        {
-        }
-        System.out.println(str.getClass().isAssignableFrom(Number.class));
-    }
+    
 
 }

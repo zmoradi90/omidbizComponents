@@ -122,6 +122,7 @@
     <module>div</module>
     <module>loop</module>
     <module>dropDown</module>
+    <module>pickList</module>
     
   </modules>
   <build>

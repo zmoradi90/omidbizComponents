@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.PickList</name>
+		<family>org.omidbiz.PickList</family>
+		<classname>org.omidbiz.component.html.HtmlPickList</classname>
+		<superclass>org.omidbiz.component.UIPickList</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.PickListRenderer</name>
+			<template>org/omidbiz/htmlPickList.jspx</template>
+		</renderer>
+		<tag>
+			<name>pickList</name>
+			<classname>org.omidbiz.taglib.PickListTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<required>true</required>			
+		</property>
+		
+		<property>
+			<name>onClickSwitch</name>
+			<classname>boolean</classname>
+			<defaultvalue>false</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>items</name>
+			<classname>java.lang.Object</classname>
+						
+		</property>
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+						
+		</property>
+		
+		<property>
+			<name>itemValue</name>
+			<classname>java.lang.Object</classname>
+						
+		</property>
+		
+		<property>
+			<name>itemLabel</name>
+			<classname>java.lang.Object</classname>
+						
+		</property>
+		
+		<property>
+			<name>var</name>
+			<classname>java.lang.String</classname>
+						
+		</property>
+		
+        
+	</component>
+	
+	
+</components>
