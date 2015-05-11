@@ -20,6 +20,7 @@
 	<c:set var="copyAllText" value="#{component.attributes['copyAllText']}"/>
 	<c:set var="removeText" value="#{component.attributes['removeText']}"/>
 	<c:set var="removeAllText" value="#{component.attributes['removeAllText']}"/>
+	<c:set var="styleClass" value="#{component.attributes['styleClass']}"/>
 	<c:set var="disableControlsButton" value="#{component.attributes['disableControlsButton']}"/>
 	
 	<jsp:scriptlet>
@@ -31,7 +32,7 @@
 	
 	<input name="#{forceId}" id="#{forceId}" type="hidden" />
 	
-	<table border="0" cellpadding="2" cellspacing="2">
+	<table border="0" cellpadding="2" cellspacing="2" class="#{styleClass}">
 		<tr>
 			<td>
 		<jsp:scriptlet><![CDATA[

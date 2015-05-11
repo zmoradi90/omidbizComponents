@@ -90,7 +90,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
                 switchType,
                 String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", sourceId.replace(":", "\\\\:"),
                         targetId.replace(":", "\\\\:"), forceId));
-        getUtils().writeAttribute(writer, "style", "width:80px; height: 140px;");
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("width:%s; height: %s;", component.getAttributes().get("sourceWidth"),
+                        component.getAttributes().get("sourceHeight")));
         //
         Object items = component.getAttributes().get("items");
         Object value = component.getAttributes().get("value");
@@ -163,7 +167,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
                 switchType,
                 String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", targetId.replace(":", "\\\\:"),
                         sourceId.replace(":", "\\\\:"), forceId));
-        getUtils().writeAttribute(writer, "style", "width:80px; height: 140px;");
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("width:%s; height: %s;", component.getAttributes().get("targetWidth"),
+                        component.getAttributes().get("targetHeight")));
         //
         Object value = component.getAttributes().get("value");
         if (value != null)
@@ -190,7 +198,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
 
     public String getJQueryId(FacesContext context, UIComponent component)
     {
-        return "#"+component.getClientId(context).replace(":", "\\\\:");
+        return "#" + component.getClientId(context).replace(":", "\\\\:");
     }
 
     @Override

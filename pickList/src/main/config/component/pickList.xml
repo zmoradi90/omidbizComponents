@@ -94,6 +94,36 @@
 			<classname>boolean</classname>					
 		</property>
 		
+		<property>
+			<name>sourceWidth</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"80px"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>sourceHeight</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"140px"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>targetWidth</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"80px"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>targetHeight</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"140px"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+						
+		</property>
+		
         
 	</component>
 	
