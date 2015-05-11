@@ -65,6 +65,35 @@
 						
 		</property>
 		
+		<property>
+			<name>copyText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Copy"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>copyAllText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Copy All"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>removeText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Remove"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>removeAllText</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Remove All"</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>disableControlsButton</name>
+			<classname>boolean</classname>					
+		</property>
+		
         
 	</component>
 	

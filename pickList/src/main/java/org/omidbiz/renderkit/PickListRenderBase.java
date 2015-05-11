@@ -85,12 +85,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         {
             switchType = "onclick";
         }
-        getUtils()
-                .writeAttribute(
-                        writer,
-                        switchType,
-                        String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", sourceId.replace(":", "\\\\:"),
-                                targetId.replace(":", "\\\\:"), forceId));
+        getUtils().writeAttribute(
+                writer,
+                switchType,
+                String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", sourceId.replace(":", "\\\\:"),
+                        targetId.replace(":", "\\\\:"), forceId));
         getUtils().writeAttribute(writer, "style", "width:80px; height: 140px;");
         //
         Object items = component.getAttributes().get("items");
@@ -159,12 +158,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         {
             switchType = "onclick";
         }
-        getUtils()
-                .writeAttribute(
-                        writer,
-                        switchType,
-                        String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", targetId.replace(":", "\\\\:"),
-                                sourceId.replace(":", "\\\\:"), forceId));
+        getUtils().writeAttribute(
+                writer,
+                switchType,
+                String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", targetId.replace(":", "\\\\:"),
+                        sourceId.replace(":", "\\\\:"), forceId));
         getUtils().writeAttribute(writer, "style", "width:80px; height: 140px;");
         //
         Object value = component.getAttributes().get("value");
@@ -188,6 +186,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         }
         //
         writer.endElement("select");
+    }
+
+    public String getJQueryId(FacesContext context, UIComponent component)
+    {
+        return "#"+component.getClientId(context).replace(":", "\\\\:");
     }
 
     @Override
