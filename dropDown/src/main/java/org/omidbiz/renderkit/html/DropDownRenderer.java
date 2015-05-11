@@ -21,8 +21,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.component.UISelectItem;
-import javax.faces.component.UISelectItems;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -30,6 +30,7 @@ import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIDropDown;
 import org.omidbiz.component.UIDropDownItems;
+import org.omidbiz.util.JSFUtil;
 
 /**
  * 
@@ -51,10 +52,19 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
         {
             String submittedValue = (String) requestParams.get((String) id);
 
-            if (submittedValue != null && submittedValue.length() < 1)
+            if (JSFUtil.isNotEmpty(submittedValue))
             {
                 dd.setSubmittedValue(submittedValue);
                 dd.setValid(true);
+            }
+            else
+            {
+                boolean required = dd.getAttributes().get("required") != null ? (Boolean) dd.getAttributes().get("required") : false;
+                if (required)
+                {
+                    dd.setValid(false);
+                    dd.setRequiredMessage(UIInput.REQUIRED_MESSAGE_ID);
+                }
             }
         }
 
@@ -78,16 +88,18 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
             Object noSelection = component.getAttributes().get("noSelection");
             if (noSelection != null)
             {
-                writeOption(writer, null, (String) noSelection);
+                writeOption(writer, " ", (String) noSelection, true);
             }
         }
     }
 
-    private void writeOption(ResponseWriter writer, Object val, String text) throws IOException
+    private void writeOption(ResponseWriter writer, Object val, String text, boolean selected) throws IOException
     {
         writer.startElement("option", null);
         if (val != null)
             getUtils().writeAttribute(writer, "value", val);
+        if (selected)
+            getUtils().writeAttribute(writer, "selected", "selected");
         writer.write(text);
         writer.endElement("option");
     }
@@ -120,7 +132,9 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
                 else if (kid instanceof UISelectItem)
                 {
                     UISelectItem selectItem = (UISelectItem) kid;
-                    writeOption(writer, selectItem.getItemValue(), selectItem.getItemLabel());
+                    boolean selected = selectItem.getAttributes().get("selected") == null ? false : (Boolean) selectItem.getAttributes()
+                            .get("selected");
+                    writeOption(writer, selectItem.getItemValue(), selectItem.getItemLabel(), selected);
                 }
                 else
                 {
@@ -130,8 +144,6 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
 
         }
     }
-
-    
 
     private void encodeOptions(UIDropDownItems ddi, Collection<?> itemList, Object value, ResponseWriter writer, UIDropDown dropDown)
             throws IOException

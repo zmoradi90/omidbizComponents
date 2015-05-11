@@ -89,7 +89,7 @@ public class JSFUtil
 
     public static boolean isNotEmpty(String input)
     {
-        return (input != null && input.length() > 0);
+        return (input != null && input.trim().length() > 0);
     }
 
     public static boolean isEmpty(String input)
