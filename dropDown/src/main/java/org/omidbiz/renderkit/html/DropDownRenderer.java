@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UISelectItem;
+import javax.faces.component.UISelectItems;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -115,38 +117,21 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
                     if (items != null && items instanceof Collection<?>)
                         encodeOptions(ddi, (Collection<?>) items, value, writer, (UIDropDown) component);
                 }
-                // else if (kid instanceof UISelectItems)
-                // {
-                // UISelectItems selectitems = (UISelectItems) kid;
-                // Object selectItemValue = selectitems.getValue();
-                // if (selectItemValue != null && selectItemValue instanceof
-                // Collection)
-                // encodeOptions((Collection<?>) items, value, writer,
-                // (UIDropDown) component, disabled);
-                // }
-                // else
-                // {
-                // kid.encodeAll(context);
-                // }
+                else if (kid instanceof UISelectItem)
+                {
+                    UISelectItem selectItem = (UISelectItem) kid;
+                    writeOption(writer, selectItem.getItemValue(), selectItem.getItemLabel());
+                }
+                else
+                {
+                    kid.encodeAll(context);
+                }
             }
 
         }
     }
 
-    // private void encodeOptions(Collection<?> items, Object value,
-    // ResponseWriter writer, UIDropDown component, Object disabled) throws
-    // IOException
-    // {
-    // for (Iterator iterator = items.iterator(); iterator.hasNext();)
-    // {
-    // javax.faces.model.SelectItem selectItem = (javax.faces.model.SelectItem)
-    // iterator.next();
-    // writer.startElement("option", null);
-    // getUtils().writeAttribute(writer, "value", selectItem.getValue());
-    // writer.write(selectItem.getLabel());
-    // writer.endElement("option");
-    // }
-    // }
+    
 
     private void encodeOptions(UIDropDownItems ddi, Collection<?> itemList, Object value, ResponseWriter writer, UIDropDown dropDown)
             throws IOException
@@ -208,7 +193,5 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
     {
         return UIDropDown.class;
     }
-
-    
 
 }
