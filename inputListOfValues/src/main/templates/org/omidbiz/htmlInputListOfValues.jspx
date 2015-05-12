@@ -13,9 +13,17 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/inputListUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,
+	/org/omidbiz/renderkit/html/script/inputListUtil.js,
+	/org/omidbiz/renderkit/html/script/jquery.ui.core.js,
+	/org/omidbiz/renderkit/html/script/jquery.ui.widget.js,
+	/org/omidbiz/renderkit/html/script/jquery.ui.position.js,
+	/org/omidbiz/renderkit/html/script/jquery.ui.autocomplete.js,
+	/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
 	
-	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
+	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css,
+	/org/omidbiz/renderkit/html/css/jquery.ui.autocomplete.css
+	</h:styles>
 	
 	<f:clientid var="clientId" />
 	
@@ -23,8 +31,14 @@
 	<f:resource name="org/omidbiz/images/loading.gif" var="loader" />
 	<f:resource name="org/omidbiz/images/controls.png" var="controls" />
 	<f:resource name="org/omidbiz/images/border.png" var="border" />
+	<f:resource name="org/omidbiz/images/ui-anim_basic_16x16.png" var="anim"/>
+	<f:resource name="org/omidbiz/images/transparent_1x1.png" var="transparent"/>
+	<f:resource name="org/omidbiz/images/sizzlejs_32x32.png" var="sizz"/>
+	<f:resource name="org/omidbiz/images/jqueryui_32x32.png" var="jqui"/>
+	<f:resource name="org/omidbiz/images/jquery_32x32.png" var="jq"/>
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/lovicon.png" var="icon" />
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/remove.png" var="removeIcon" />
+	
 	
 	<c:set var="view" value="#{component.attributes['view']}"/>	
 	<c:set var="valueName" value="#{component.attributes['valueName']}"/>
