@@ -1613,9 +1613,9 @@ jQuery.extend(Datepicker.prototype, {
 				var years = this._get(inst, 'yearRange').split(':');
 				var thisYear = new this.CDate().getFullYear();//[CC]
 				var determineYear = function(value) {
-					var year = (value.match(/c[+-].*/) ? drawYear + parseInt(value.substring(1), 10) :
-						(value.match(/[+-].*/) ? thisYear + parseInt(value, 10) :
-						parseInt(value, 10)));
+					var year = (value.match(/c[+-].*/) ? drawYear + parseInt(value.substring(1), 20) :
+						(value.match(/[+-].*/) ? thisYear + parseInt(value, 20) :
+						parseInt(value, 20)));
 					return (isNaN(year) ? thisYear : year);
 				};
 				var year = determineYear(years[0]);
