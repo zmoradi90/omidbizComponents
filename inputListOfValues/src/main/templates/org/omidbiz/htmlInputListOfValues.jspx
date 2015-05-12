@@ -116,7 +116,7 @@ jQuery(document).ready(function(){
 	<jsp:scriptlet><![CDATA[ if (sendRequestToServer) { ]]></jsp:scriptlet>
 		<a href="#" onclick="Richfaces.colorboxControl.extendedRequestClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{view}');">#{component.attributes['selectedText']}</a>
 	<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-		<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{extraInfo}');">#{component.attributes['selectedText']}</a>
+		<a href="#" onclick="Richfaces.colorboxControl.extendedClose(#{component.attributes['pid']},'#{component.attributes['pValueText']}','#{objectName}', '#{extraInfo}');">#{this:getSelectedTextConvertedValue(context, component)}</a>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <vcp:body />

@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.ConverterException;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIInputListOfValues;
 import org.omidbiz.component.UITooltip;
 
@@ -87,10 +88,17 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     }
 
     @Override
-    public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue)
-            throws ConverterException
+    public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException
     {
         return super.getConvertedValue(context, component, submittedValue);
+    }
+
+    public Object getSelectedTextConvertedValue(FacesContext context, UIComponent component)
+    {
+        Object selectValue = component.getAttributes().get("selectedText");
+        if (selectValue == null)
+            return selectValue;
+        return InputUtils.getConvertedValue(context, component, selectValue);
     }
 
     protected Object getValueForId(FacesContext context, UIComponent component) throws IOException
