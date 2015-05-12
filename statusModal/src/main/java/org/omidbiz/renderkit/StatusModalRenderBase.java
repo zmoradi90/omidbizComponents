@@ -49,10 +49,10 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 		{
 			StringBuilder sb = new StringBuilder();
 			String varName = forAttr + "_" + funcName;
-			sb.append("var ").append(varName).append("; ");
+			sb.append("var ").append(varName).append("; ");			
 			sb.append(" function show_");
 			sb.append(funcName.replace(":", "\\\\:"));
-			sb.append("(){");
+			sb.append("(){");			
 			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
 			sb.append(" spin_target.style.display = 'block';");
 			sb.append(varName).append(" = new Spinner(opts).spin(spin_target); ");
@@ -62,6 +62,8 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			sb.append(funcName.replace(":", "\\\\:"));
 			sb.append("(){ ");
 			sb.append(varName).append(".stop(); ");			
+			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
+			sb.append(" spin_target.style.display = 'none';");
 			sb.append(" } ");
 			getUtils().writeScript(context, component, sb.toString());						
 			//
