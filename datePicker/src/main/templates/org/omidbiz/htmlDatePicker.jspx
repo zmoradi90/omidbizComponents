@@ -59,7 +59,7 @@
 </jsp:scriptlet>
 	
 		<jsp:scriptlet><![CDATA[ if (idname != null ) { ]]></jsp:scriptlet>	 		
-			<input type="text" readonly="readonly" style="#{component.attributes['style']}" class="#{idname}_inp" onblur="#{onblur}" value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
+			<input type="text"  style="#{component.attributes['style']}" class="#{idname}_inp" onblur="#{onblur}" value="#{this:getConvertedStringValue(context, component)}" id="#{component.attributes['idname']}" name="#{component.attributes['idname']}" onchange="#{component.attributes['onchange']}"/>
 			<jsp:scriptlet><![CDATA[ if (removeCallback != null ) { ]]></jsp:scriptlet>
 				<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" class="#{idname}_btn_remove" onclick="Richfaces.calendarControl.removeValue('#{idname}'); #{removeCallback};"/>
 			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
@@ -77,11 +77,12 @@
 						, onSelect: function(v, c){ #{onSelect} }
 						<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 				});
+				jQuery('#{this:getClientIdValue(context, component)}').mask('9999/99/99');
 			});			
 			</script>
 			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-			<input type="text" readonly="readonly" style="#{component.attributes['style']}" onblur="#{onblur}" class="#{clientId}_inp" value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" onchange="#{component.attributes['onchange']}"/>
+			<input type="text"  style="#{component.attributes['style']}" onblur="#{onblur}" class="#{clientId}_inp" value="#{this:getConvertedStringValue(context, component)}" id="#{clientId}_date" name="#{clientId}_date" onchange="#{component.attributes['onchange']}"/>
 			<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" class="#{clientId}_btn_remove" onclick="Richfaces.calendarControl.removeValue('#{clientId}_date');"/>
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
@@ -92,6 +93,7 @@
 					changeMonth: true,
 					changeYear: true
 				});
+				jQuery('#{this:getClientIdValue(context, component)}_date').mask('9999/99/99');
 			});			
 			</script>
 			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
