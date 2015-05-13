@@ -10,9 +10,7 @@
 	baseclass="org.omidbiz.renderkit.InputListOfValuesRendererBase"
 	component="org.omidbiz.component.UIInputListOfValues">
 	
-	<script type="text/javascript">
-		jQuery.noConflict();
-	</script>
+	
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,
 	/org/omidbiz/renderkit/html/script/inputListUtil.js,
 	/org/omidbiz/renderkit/html/script/jquery.ui.core.js,
