@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.omidbiz.component;
 
+import javax.el.MethodExpression;
+
 import org.ajax4jsf.component.AjaxActionComponent;
 
 /**
@@ -26,6 +28,20 @@ public abstract class UIWindowPopup extends AjaxActionComponent {
 	public static final String COMPONENT_TYPE = "org.omidbiz.WindowPopup";
 	
 	public static final String COMPONENT_FAMILY = "org.omidbiz.WindowPopup";
+	
+	private  MethodExpression atCloseAction = null;
+
+    public MethodExpression getAtCloseAction()
+    {
+        return atCloseAction;
+    }
+
+    public void setAtCloseAction(MethodExpression atCloseAction)
+    {
+        this.atCloseAction = atCloseAction;
+    }
+
+    
 	
 	
 	

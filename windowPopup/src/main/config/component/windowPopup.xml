@@ -24,7 +24,7 @@
 		</tag>
 		
 		<taghandler>
-			<classname>org.ajax4jsf.webapp.taglib.AjaxComponentHandler</classname>
+			<classname>org.omidbiz.handler.WindowPopupTagHandler</classname>
 		</taghandler>
 		&ui_command_attributes;
 		&html_events;
@@ -66,6 +66,12 @@
 			<description>
 			</description>
 			<required>true</required>
+		</property>
+		<property>
+			<name>render</name>
+			<classname>java.lang.String</classname>
+			<description>
+			</description>
 		</property>
 
 		<property>
@@ -184,6 +190,17 @@
 			</description>
 			<defaultvalue>"85%"</defaultvalue>
 		</property>
+		
+		<property elonly="true">
+            <name>atClose</name>
+            <classname>javax.el.MethodExpression</classname>            
+            <returntype>
+                void
+            </returntype>
+            <description>
+                <![CDATA[Method calls an expression to get a collection of suggestion data on request. It must have one parameter with a type of Object with content of input component and must return any type allowed for <h:datatable> ]]>
+            </description>
+        </property>
 		
 		
         

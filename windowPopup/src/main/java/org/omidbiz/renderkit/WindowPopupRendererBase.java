@@ -16,8 +16,11 @@
 package org.omidbiz.renderkit;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
-import org.ajax4jsf.renderkit.AjaxComponentRendererBase;
+import org.ajax4jsf.context.AjaxContext;
+import org.ajax4jsf.renderkit.AjaxRendererUtils;
+import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.omidbiz.component.UIWindowPopup;
 
 /**
@@ -26,12 +29,47 @@ import org.omidbiz.component.UIWindowPopup;
  * @version $Revision: 1.0
  * 
  */
-public class WindowPopupRendererBase extends AjaxComponentRendererBase {
+public class WindowPopupRendererBase extends HeaderResourcesRendererBase
+{
+    
+    @Override
+    protected void doDecode(FacesContext context, UIComponent component)
+    {
+        String reRender = (String) component.getAttributes().get("render");       
+        if (reRender != null)
+        {
+            AjaxContext ajaxContext = AjaxContext.getCurrentInstance();
+            ajaxContext.addRegionsFromComponent(component);
+            ajaxContext.addComponentToAjaxRender(component);
+            ajaxContext.addRegionsFromComponent(component);
+            
+            ajaxContext.addRenderedArea(reRender);
+        }
+    }
 
     @Override
     protected Class<? extends UIComponent> getComponentClass()
     {
         return UIWindowPopup.class;
     }
-
+    
+    
+    public String getOnClick(FacesContext context, UIComponent component)
+    {
+        StringBuffer onClick;
+        if (!getUtils().isBooleanAttribute(component, "disabled"))
+        {
+            onClick = AjaxRendererUtils.buildOnClick(component, context);
+            if (!"reset".equals(component.getAttributes().get("type")))
+            {
+                onClick.append(";return false;");
+            }
+        }
+        else
+        {
+            onClick = new StringBuffer("return false;");
+        }
+        return onClick.toString();
+    }
+    
 }

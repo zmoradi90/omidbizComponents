@@ -15,14 +15,17 @@
  ******************************************************************************/
 package org.omidbiz.handler;
 
-import javax.faces.event.ActionEvent;
-
 import org.ajax4jsf.webapp.taglib.AjaxComponentHandler;
+import org.omidbiz.component.UIWindowPopup;
 
+import com.sun.facelets.FaceletContext;
+import com.sun.facelets.tag.MetaRule;
 import com.sun.facelets.tag.MetaRuleset;
+import com.sun.facelets.tag.Metadata;
+import com.sun.facelets.tag.MetadataTarget;
 import com.sun.facelets.tag.MethodRule;
+import com.sun.facelets.tag.TagAttribute;
 import com.sun.facelets.tag.jsf.ComponentConfig;
-import com.sun.facelets.tag.jsf.ComponentHandler;
 
 /**
  * 
@@ -30,9 +33,12 @@ import com.sun.facelets.tag.jsf.ComponentHandler;
  * @version $Revision: 1.0
  * 
  */
-public class WindowPopupTagHandler extends ComponentHandler
+public class WindowPopupTagHandler extends AjaxComponentHandler
 {
 
+    private static final WindowPopupTagHandlerMetaRule metaRule =
+            new WindowPopupTagHandlerMetaRule();
+    
 	public WindowPopupTagHandler(ComponentConfig config)
 	{
 		super(config);
@@ -41,9 +47,79 @@ public class WindowPopupTagHandler extends ComponentHandler
 	@Override
 	protected MetaRuleset createMetaRuleset(Class type)
 	{
-
-		return super.createMetaRuleset(type).addRule(
-				new MethodRule("atMin", Void.class, new Class<?>[] { ActionEvent.class }));
+	    MetaRuleset metaRuleset = super.createMetaRuleset(type);
+	    metaRuleset.addRule(metaRule);
+		return metaRuleset;
 	}
+	
+	static class WindowPopupTagHandlerMetaRule extends MetaRule {
+
+        /**
+         * Apply rule.
+         *
+         * @param name rule name
+         * @param attribute {@link com.sun.facelets.tag.TagAttribute}
+         * @param meta {@link com.sun.facelets.tag.TagAttribute}
+         * @return metadata {@link com.sun.facelets.tag.Metadata}
+         *
+         * @see {@link com.sun.facelets.tag.MetaRule#applyRule(String,
+         *      com.sun.facelets.tag.TagAttribute,
+         *      com.sun.facelets.tag.MetadataTarget)}
+         */
+        public Metadata applyRule(final String name,
+                                  final TagAttribute attribute,
+                                  final MetadataTarget meta) {
+            if (meta.isTargetInstanceOf(UIWindowPopup.class)) {
+                if ("atClose".equals(name)) {
+                    return new WindowPopupActionMapper(attribute);
+                }
+
+            }
+            return null;
+        }
+
+        
+    }
+	
+	/**
+     * Meta data implementation.
+     */
+    static class WindowPopupActionMapper extends Metadata {
+        /**
+         * Signature.
+         */
+        private static final Class[] SIGNATURE =
+                new Class[]{};
+
+        /**
+         * Action attribute.
+         */
+        private final TagAttribute action;
+
+        /**
+         * Sets attribute.
+         *
+         * @param attribute {@link com.sun.facelets.tag.TagAttribute}
+         */
+        public WindowPopupActionMapper(final TagAttribute attribute) {
+            action = attribute;
+        }
+
+        /**
+         * Apply metadata.
+
+         * @param context {@link javax.faces.context.FacesContext}
+         * @param instance {@link java.lang.Object}
+         *
+         * @see {@link com.sun.facelets.tag.Metadata#applyMetadata(
+         *      com.sun.facelets.FaceletContext, Object)}
+         */
+        public void applyMetadata(final FaceletContext context,
+                                  final Object instance) {
+            ((UIWindowPopup) instance)
+                    .setAtCloseAction(this.action
+                            .getMethodExpression(context, null, SIGNATURE));
+        }
+    }
 
 }
