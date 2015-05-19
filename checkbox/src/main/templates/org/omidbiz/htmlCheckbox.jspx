@@ -15,7 +15,7 @@
 	<f:clientid var="clientId"/>
 	<f:resource name="org/omidbiz/switch.gif"  />
 	<h:styles>/org/omidbiz/renderkit/html/css/checkBox.css</h:styles>
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/checkBox.js</h:scripts>
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js</h:scripts>
 	
 	<c:set var="value" value="#{component.attributes['value']}"/>
 	<c:set var="checked" value="#{component.attributes['checked']}"/>
@@ -91,8 +91,8 @@
 			if(typeof attr == 'undefined' || attr == false){
 				jQuery(".#{forceId}",parent).removeClass('selected');
 				jQuery(this).addClass('selected');
-				jQuery(".#{forceId}-chk",parent).val('Y');
-				jQuery( ".#{forceId}-chk" ).click();
+				jQuery(".#{forceId}-chk",parent).val('Y');				
+				jQuery( ".#{forceId}-chk" ).trigger('onchange');
 			}
 		});
 		jQuery(".cb-disable.#{forceId}").click(function(){
@@ -102,7 +102,7 @@
 				jQuery('.#{forceId}',parent).removeClass('selected');
 				jQuery(this).addClass('selected');
 				jQuery(".#{forceId}-chk",parent).val('N');
-				jQuery( ".#{forceId}-chk" ).click();
+				jQuery( ".#{forceId}-chk" ).trigger('onchange');
 			}
 
 		});
