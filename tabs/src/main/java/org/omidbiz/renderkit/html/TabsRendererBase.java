@@ -18,29 +18,25 @@ import org.omidbiz.component.UITabs;
 public class TabsRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js"), 
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.core.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.widget.js"),
-            getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js")
-            };
-    
-    
-    InternetResource[] cssResources = { 
-            getResource("/org/omidbiz/renderkit/html/css/jquery.ui.theme.css"),
+            getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js") };
+
+    InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/jquery.ui.theme.css"),
             getResource("/org/omidbiz/renderkit/html/css/jquery.ui.tabs.css"),
             getResource("org/omidbiz/images/ui-bg_highlight-soft_75_cccccc_1x100.png"),
             getResource("org/omidbiz/images/ui-bg_flat_75_ffffff_40x100.png"),
             getResource("org/omidbiz/images/ui-bg_glass_75_e6e6e6_1x400.png"),
             getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"),
-            getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png")
-            };
+            getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png") };
 
     @Override
     protected InternetResource[] getScripts()
     {
         return jsResources;
     }
-    
+
     @Override
     protected InternetResource[] getStyles()
     {
@@ -84,6 +80,8 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                     writer.startElement("li", null);
                     writer.startElement("a", null);
                     String title = (String) tp.getTitle();
+                    String imageSrc = (String) tp.getImageSrc();
+                    String imageOnClick = (String) tp.getImageOnClick();
                     String link = (String) tp.getLink();
                     if (tp.isDisabled())
                     {
@@ -128,6 +126,17 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         getUtils().writeAttribute(writer, "href", "#tabs-" + i);
                     }
                     writer.append(title == null ? "" : title);
+                    //
+                    if (imageSrc != null && imageSrc.trim().length() > 0)
+                    {
+                        writer.startElement("img", null);
+                        getUtils().writeAttribute(writer, "src", imageSrc);
+                        getUtils().writeAttribute(writer, "alt", title);
+                        if(imageOnClick != null)
+                            getUtils().writeAttribute(writer, "onclick", imageOnClick);
+                        getUtils().writeAttribute(writer, "class", "tab-image");
+                        writer.endElement("img");
+                    }
                     writer.endElement("a");
                     writer.endElement("li");
                 }
@@ -174,8 +183,8 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         // $('.tabs-container ul.tabs').tabs('option','disabled', [0, 1,2]);
         if (disabledTabs != null && disabledTabs.length() > 0)
         {
-            js.append("jQuery('#").append(jQueryClientId).append("').tabs('option','disabled', [")
-                    .append(disabledTabs.toString()).append("]);");
+            js.append("jQuery('#").append(jQueryClientId).append("').tabs('option','disabled', [").append(disabledTabs.toString())
+                    .append("]);");
         }
         js.append("});");
         writer.write(js.toString());

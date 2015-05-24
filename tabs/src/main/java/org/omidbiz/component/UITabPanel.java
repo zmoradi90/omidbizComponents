@@ -25,9 +25,13 @@ public abstract class UITabPanel extends UIComponentBase
 
     private Object title;
 
+    private Object imageSrc;
+
     private Object link;
 
     private Object content;
+
+    private Object imageOnClick;
 
     private boolean disabled;
 
@@ -180,6 +184,93 @@ public abstract class UITabPanel extends UIComponentBase
         {
             this.content = content;
         }
+    }
+
+    public Object getImageSrc()
+    {
+        ValueExpression ve = getValueExpression("imageSrc");
+        if (ve != null)
+        {
+            String value = null;
+            try
+            {
+                value = (String) ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return imageSrc;
+        }
+    }
+
+    public void setImageSrc(Object imageSrc)
+    {
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("imageSrc");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                ve.setValue(context, imageSrc);
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.imageSrc = imageSrc;
+        }
+    }
+
+    public Object getImageOnClick()
+    {
+        ValueExpression ve = getValueExpression("imageOnClick");
+        if (ve != null)
+        {
+            String value = null;
+            try
+            {
+                value = (String) ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return imageOnClick;
+        }
+    }
+
+    public void setImageOnClick(Object imageOnClick)
+    {
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("imageOnClick");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                ve.setValue(context, imageOnClick);
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.imageOnClick = imageOnClick;
+        }
+
     }
 
 }

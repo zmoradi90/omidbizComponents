@@ -80,6 +80,22 @@
         </property>
         
         <property>
+            <name>imageSrc</name>
+            <classname>java.lang.Object</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
+            <name>imageOnClick</name>
+            <classname>java.lang.Object</classname>
+            <description>
+                
+            </description>
+        </property>
+        
+        <property>
             <name>includePageParams</name>
             <classname>boolean</classname>
             <defaultvalue>true</defaultvalue>
