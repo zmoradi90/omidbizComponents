@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.ClickableButton</name>
+		<family>org.omidbiz.ClickableButton</family>
+		<classname>org.omidbiz.component.html.HtmlClickableButton</classname>
+		<superclass>org.omidbiz.component.UIClickableButton</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer>
+			<name>org.omidbiz.ClickableButtonRenderer</name>
+			<classname>org.omidbiz.renderkit.html.ClickableButtonRenderer</classname>
+		</renderer>
+		<tag>
+			<name>clickableButton</name>
+			<classname>org.omidbiz.taglib.ClickableButtonTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>forClientId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>textMessage</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		
+        
+	</component>
+</components>

@@ -123,6 +123,7 @@
     <module>loop</module>
     <module>dropDown</module>
     <module>pickList</module>
+    <module>clickableButton</module>
     
   </modules>
   <build>
