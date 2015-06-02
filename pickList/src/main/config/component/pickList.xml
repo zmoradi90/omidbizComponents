@@ -97,25 +97,25 @@
 		<property>
 			<name>sourceWidth</name>
 			<classname>java.lang.String</classname>
-			<defaultvalue>"80px"</defaultvalue>			
+			<defaultvalue>"120px"</defaultvalue>			
 		</property>
 		
 		<property>
 			<name>sourceHeight</name>
 			<classname>java.lang.String</classname>
-			<defaultvalue>"140px"</defaultvalue>			
+			<defaultvalue>"142px"</defaultvalue>			
 		</property>
 		
 		<property>
 			<name>targetWidth</name>
 			<classname>java.lang.String</classname>
-			<defaultvalue>"80px"</defaultvalue>			
+			<defaultvalue>"120px"</defaultvalue>			
 		</property>
 		
 		<property>
 			<name>targetHeight</name>
 			<classname>java.lang.String</classname>
-			<defaultvalue>"140px"</defaultvalue>			
+			<defaultvalue>"142px"</defaultvalue>			
 		</property>
 		
 		<property>

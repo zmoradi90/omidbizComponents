@@ -36,9 +36,9 @@
 	<table border="0" cellpadding="2" cellspacing="2" class="#{styleClass}">
 		<tr>
 			<td>
-		<jsp:scriptlet><![CDATA[
-								encodePickListSource(context, component);
-							]]></jsp:scriptlet>
+					<jsp:scriptlet><![CDATA[
+									encodePickListSource(context, component);
+					]]></jsp:scriptlet>
 			</td>
 			<jsp:scriptlet><![CDATA[ if (disableControlsButton == false ) { ]]></jsp:scriptlet>
 			<td>			
@@ -70,9 +70,9 @@
 </td>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 			<td>
-<jsp:scriptlet><![CDATA[
-								encodePickListTarget(context, component);
-							]]></jsp:scriptlet>
+						<jsp:scriptlet><![CDATA[
+									encodePickListTarget(context, component);
+						]]></jsp:scriptlet>
 			</td>
 		</tr>
 	</table>

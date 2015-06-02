@@ -1,0 +1,9 @@
+.pick-list-selection{
+	overflow: auto;
+	direction: rtl;	
+}
+
+.pick-list-select-scroll{
+	direction: ltr !important;
+	text-align: right;
+}

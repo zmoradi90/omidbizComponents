@@ -75,8 +75,21 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         String sourceId = clientId + "_source";
         String targetId = clientId + "_target";
         ResponseWriter writer = context.getResponseWriter();
+        //
+        writer.startElement("div", null);
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("width:%s;", component.getAttributes().get("sourceWidth")));
+        getUtils().writeAttribute(writer, "class", "pick-list-selection");
+        //
         writer.startElement("select", component);
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("height:%s;min-width: %s;", component.getAttributes().get("sourceHeight"), component.getAttributes().get("sourceWidth")));
         getUtils().writeAttribute(writer, "id", sourceId);
+        getUtils().writeAttribute(writer, "class", "pick-list-select-scroll");
         getUtils().writeAttribute(writer, "multiple", "multiple");
         //
         Object onclickSwitch = component.getAttributes().get("onClickSwitch");
@@ -90,11 +103,8 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
                 switchType,
                 String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", sourceId.replace(":", "\\\\:"),
                         targetId.replace(":", "\\\\:"), forceId));
-        getUtils().writeAttribute(
-                writer,
-                "style",
-                String.format("width:%s; height: %s;", component.getAttributes().get("sourceWidth"),
-                        component.getAttributes().get("sourceHeight")));
+        
+        
         //
         Object items = component.getAttributes().get("items");
         Object value = component.getAttributes().get("value");
@@ -140,6 +150,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         }
 
         writer.endElement("select");
+        writer.endElement("div");
 
     }
 
@@ -152,8 +163,21 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         String sourceId = clientId + "_source";
         String targetId = clientId + "_target";
         ResponseWriter writer = context.getResponseWriter();
+        //
+        writer.startElement("div", null);
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("width:%s;", component.getAttributes().get("targetWidth")));
+        getUtils().writeAttribute(writer, "class", "pick-list-selection");
+        //
         writer.startElement("select", component);
         getUtils().writeAttribute(writer, "id", targetId);
+        getUtils().writeAttribute(
+                writer,
+                "style",
+                String.format("height:%s; min-width:%s", component.getAttributes().get("targetHeight"), component.getAttributes().get("targetWidth")));
+        getUtils().writeAttribute(writer, "class", "pick-list-select-scroll");
         getUtils().writeAttribute(writer, "multiple", "multiple");
         //
         Object onclickSwitch = component.getAttributes().get("onClickSwitch");
@@ -167,11 +191,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
                 switchType,
                 String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", targetId.replace(":", "\\\\:"),
                         sourceId.replace(":", "\\\\:"), forceId));
-        getUtils().writeAttribute(
-                writer,
-                "style",
-                String.format("width:%s; height: %s;", component.getAttributes().get("targetWidth"),
-                        component.getAttributes().get("targetHeight")));
+        
         //
         Object value = component.getAttributes().get("value");
         if (value != null)
@@ -194,6 +214,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         }
         //
         writer.endElement("select");
+        writer.endElement("div");
     }
 
     public String getJQueryId(FacesContext context, UIComponent component)
