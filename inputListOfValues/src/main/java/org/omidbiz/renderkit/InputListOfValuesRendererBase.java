@@ -55,10 +55,12 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
+        inputLov.setValueName(nameValue);
+        inputLov.setValueId(submittedValue);
 
         if (submittedValue != null && submittedValue.length() < 1)
         {
-            inputLov.setNameValue(nameValue);
+            inputLov.setValid(true);
             inputLov.setSubmittedValue(submittedValue);
         }
     }
@@ -71,7 +73,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         if (value == null)
         {
-            Object valueString = inputLov.getNameValue();
+            Object valueString = inputLov.getValueName();
             if (valueString != null)
             {
                 value = valueString.toString();

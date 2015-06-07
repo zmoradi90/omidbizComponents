@@ -29,25 +29,39 @@ public abstract class UIInputListOfValues extends UIInput
 
 	public static final String COMPONENT_FAMILY = "org.omidbiz.InputListOfValues";
 
-	private Object nameValue;
+	private Object valueName;
 
-	public Object getNameValue()
-	{
-		return nameValue;
-	}
-
-	public void setNameValue(Object nameValue)
-	{
-		this.nameValue = nameValue;
-	}
-
+	private Object valueId;
 	
-	@Override
+	public Object getValueName()
+    {
+        return valueName;
+    }
+
+    public void setValueName(Object valueName)
+    {
+        this.valueName = valueName;
+    }
+    
+    
+
+    public Object getValueId()
+    {
+        return valueId;
+    }
+
+    public void setValueId(Object valueId)
+    {
+        this.valueId = valueId;
+    }
+
+    @Override
 	public Object saveState(FacesContext context)
 	{
 		Object values[] = new Object[3];
 		values[0] = super.saveState(context);
-		values[1] = nameValue;
+		values[1] = valueName;
+		values[2] = valueId;
 		return values;
 	}
 
@@ -56,7 +70,8 @@ public abstract class UIInputListOfValues extends UIInput
 	{
 		Object values[] = (Object[]) state;
 		super.restoreState(context, values[0]);
-		nameValue = (String) values[1];
+		valueName = (String) values[1];
+		valueId = (String) values[2];
 	}
 	
 	@Override
