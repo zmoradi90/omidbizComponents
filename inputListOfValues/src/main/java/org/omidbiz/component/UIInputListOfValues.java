@@ -15,8 +15,14 @@
  ******************************************************************************/
 package org.omidbiz.component;
 
+import javax.el.ELContext;
+import javax.el.ELException;
+import javax.el.ValueExpression;
+import javax.faces.FacesException;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+
+import org.omidbiz.util.JSFUtil;
 
 /**
  * JSF component class
@@ -35,24 +41,92 @@ public abstract class UIInputListOfValues extends UIInput
 	
 	public Object getValueName()
     {
-        return valueName;
+	    ValueExpression ve = getValueExpression("valueName");
+        if (ve != null)
+        {
+            Object value = null;
+            try
+            {
+                value = ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return valueName;
+        }
     }
 
     public void setValueName(Object valueName)
     {
-        this.valueName = valueName;
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("valueName");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                Class<?> type = ve.getType(context);                
+                ve.setValue(context, JSFUtil.castTo(type, valueName));
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.valueName = valueName;
+        }
     }
     
     
 
     public Object getValueId()
     {
-        return valueId;
+        ValueExpression ve = getValueExpression("valueId");
+        if (ve != null)
+        {
+            Object value = null;
+            try
+            {
+                value = ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return valueId;
+        }
     }
 
     public void setValueId(Object valueId)
     {
-        this.valueId = valueId;
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("valueId");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                Class<?> type = ve.getType(context);
+                ve.setValue(context, JSFUtil.castTo(type, valueId));
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.valueId = valueId;
+        }
     }
 
     @Override

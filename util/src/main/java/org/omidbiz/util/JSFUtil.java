@@ -1,7 +1,9 @@
 package org.omidbiz.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.el.ELContext;
@@ -109,6 +111,31 @@ public class JSFUtil
     public static boolean isEmpty(Collection<?> input)
     {
         return isNotEmpty(input) == false;
+    }
+    
+    public static Object castTo(Class clazz, Object value)
+    {
+        if (Boolean.class == clazz || boolean.class == clazz)
+            return (Boolean) value;
+        if (Date.class == clazz)
+            return (Date) value;
+        if (Byte.class == clazz || byte.class == clazz)
+            return Byte.parseByte(String.valueOf(value));
+        if (Short.class == clazz || short.class == clazz)
+            return Short.parseShort(String.valueOf(value));
+        if (BigDecimal.class == clazz)
+            return new BigDecimal(String.valueOf(value));
+        if (Integer.class == clazz || int.class == clazz)
+            return Integer.parseInt(String.valueOf(value));
+        if (Long.class == clazz || long.class == clazz)
+            return Long.parseLong(String.valueOf(value));
+        if (Float.class == clazz || float.class == clazz)
+            return Float.parseFloat(String.valueOf(value));
+        if (Double.class == clazz || double.class == clazz)
+            return Double.parseDouble(String.valueOf(value));
+        if (String.class == clazz)
+            return String.valueOf(value);
+        return value;
     }
 
 }
