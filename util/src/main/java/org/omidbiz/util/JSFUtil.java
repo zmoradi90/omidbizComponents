@@ -112,9 +112,17 @@ public class JSFUtil
     {
         return isNotEmpty(input) == false;
     }
-    
+
     public static Object castTo(Class clazz, Object value)
     {
+        if (value == null)
+            return null;
+        if (value instanceof String)
+        {
+            String val = (String) value;
+            if (isEmpty(val))
+                return null;
+        }
         if (Boolean.class == clazz || boolean.class == clazz)
             return (Boolean) value;
         if (Date.class == clazz)

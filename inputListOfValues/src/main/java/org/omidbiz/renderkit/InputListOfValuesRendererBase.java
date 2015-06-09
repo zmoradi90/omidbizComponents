@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.ConverterException;
@@ -28,6 +29,7 @@ import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIInputListOfValues;
 import org.omidbiz.component.UITooltip;
+import org.omidbiz.util.JSFUtil;
 
 /**
  * 
@@ -55,32 +57,25 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
-        inputLov.setValueName(nameValue);
-        inputLov.setValueId(submittedValue);
 
-        if (submittedValue != null && submittedValue.length() < 1)
+        if (JSFUtil.isNotEmpty(submittedValue))
         {
+            inputLov.setValueName(nameValue);
+            inputLov.setValueId(submittedValue);
             inputLov.setValid(true);
             inputLov.setSubmittedValue(submittedValue);
         }
-    }
-
-    protected String getValueForName(FacesContext context, UIComponent component) throws IOException
-    {
-
-        UIInputListOfValues inputLov = (UIInputListOfValues) component;
-        String value = (String) inputLov.getAttributes().get("valueName");
-
-        if (value == null)
+        else
         {
-            Object valueString = inputLov.getValueName();
-            if (valueString != null)
+            Boolean required = (Boolean) inputLov.getAttributes().get("required");
+            if (required != null && required.booleanValue())
             {
-                value = valueString.toString();
+                inputLov.setValid(false);
+                inputLov.setRequiredMessage(UIInput.REQUIRED_MESSAGE_ID);
+                inputLov.setValueName(null);
+                inputLov.setValueId(null);
             }
         }
-
-        return value;
     }
 
     @Override
@@ -101,18 +96,6 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         if (selectValue == null)
             return selectValue;
         return InputUtils.getConvertedValue(context, component, selectValue);
-    }
-
-    protected Object getValueForId(FacesContext context, UIComponent component) throws IOException
-    {
-
-        UIInputListOfValues inputLov = (UIInputListOfValues) component;
-        Object value = inputLov.getAttributes().get("valueId");
-
-        if (value == null)
-            value = inputLov.getSubmittedValue();
-
-        return value;
     }
 
     @Override
