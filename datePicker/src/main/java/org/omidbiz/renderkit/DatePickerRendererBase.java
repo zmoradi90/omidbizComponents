@@ -80,17 +80,23 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
     }
 
-    protected String getClientIdValue(FacesContext context, UIDatePicker component)
+    public String getClientScriptIdName(FacesContext context, UIDatePicker component)
     {
         Object idname = component.getAttributes().get("idname");
         if (idname != null)
-            return "#" + idname;
-        String jQueryClientId = component.getClientId(context);
-        jQueryClientId = jQueryClientId.replace(":", "\\\\:");
-        return "#" + jQueryClientId;
+            return "'#" + idname + "'";
+        else
+            return null;
     }
 
-    protected String getConvertedStringValue(FacesContext context, UIDatePicker component)
+    public String getJsfScriptIdName(FacesContext context, UIDatePicker component)
+    {
+        String jQueryClientId = component.getClientId(context);
+        jQueryClientId = jQueryClientId.replace(":", "\\\\:");
+        return "'#" + jQueryClientId + "_date'";
+    }
+
+    public String getConvertedStringValue(FacesContext context, UIDatePicker component)
     {
         UIDatePicker inputDate = (UIDatePicker) component;
 
