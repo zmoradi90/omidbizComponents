@@ -66,7 +66,7 @@
 		imgError: "This image failed to load.",
 
 		// accessbility
-		returnFocus: true,
+		returnFocus: false,
 		trapFocus: true,
 
 		// callbacks

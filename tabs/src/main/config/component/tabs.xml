@@ -39,6 +39,9 @@
             </description>
             <defaultvalue>false</defaultvalue>
         </property>
+        
+        
+       
       
     </component>
     <component>
@@ -115,6 +118,15 @@
             <description>
                 
             </description>
+        </property>
+        
+         <property>
+            <name>useIframe</name>
+            <classname>boolean</classname>
+            <description>
+                
+            </description>
+            <defaultvalue>false</defaultvalue>
         </property>
         
     </component>

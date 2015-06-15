@@ -18,7 +18,7 @@ import org.omidbiz.component.UITabs;
 public class TabsRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tab_cookie.js"),
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/tabManager.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.core.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.widget.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js") };
@@ -28,7 +28,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             getResource("org/omidbiz/images/ui-bg_highlight-soft_75_cccccc_1x100.png"),
             getResource("org/omidbiz/images/ui-bg_flat_75_ffffff_40x100.png"),
             getResource("org/omidbiz/images/ui-bg_glass_75_e6e6e6_1x400.png"),
-            getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"),
+            getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"), getResource("org/omidbiz/images/loading.gif"),
             getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png") };
 
     @Override
@@ -56,8 +56,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         if (tab.isKeepState())
         {
             js.append(" select: function (e, ui) { ");
-            js.append(" cookieManager.write('" + tabCookieName + "', ui.index); } ");
-            // js.append(" active: 2");
+            js.append(" tabManager.writeCookie('" + tabCookieName + "', ui.index); } ");
         }
         else
         {
@@ -69,6 +68,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         writer.startElement("ul", component);
         int i = 0;
         boolean addLoading = false;
+        boolean hasIframe = false;
         while (childIterator.hasNext())
         {
             UIComponent comp = (UIComponent) childIterator.next();
@@ -83,6 +83,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                     String imageSrc = (String) tp.getImageSrc();
                     String imageOnClick = (String) tp.getImageOnClick();
                     String link = (String) tp.getLink();
+                    boolean useIframe = tp.isUseIframe();
                     if (tp.isDisabled())
                     {
                         if (i > 0)
@@ -99,27 +100,25 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                             addLoading = true;
                         }
                     }
-                    if (link != null && link.trim().length() > 0)
+                    if ((link != null && link.trim().length() > 0) && useIframe == false)
                     {
                         StringBuilder linkWithparams = new StringBuilder(link);
                         if (tp.isIncludePageParams())
                         {
-                            ExternalContext external = context.getExternalContext();
-                            Map<String, String> requestParams = external.getRequestParameterMap();
-                            if (requestParams != null && requestParams.size() > 0)
-                            {
-                                linkWithparams.append("?");
-                                int cnt = 0;
-                                for (Map.Entry<String, String> entry : requestParams.entrySet())
-                                {
-                                    if (cnt > 0)
-                                        linkWithparams.append("&");
-                                    linkWithparams.append(entry.getKey()).append("=").append(entry.getValue());
-                                    cnt++;
-                                }
-                            }
+                            addParametersToLink(context, linkWithparams);
                         }
-                        getUtils().writeAttribute(writer, "href", linkWithparams);
+                        getUtils().writeAttribute(writer, "href", linkWithparams.toString());
+                    }
+                    else if ((link != null && link.trim().length() > 0) && useIframe)
+                    {
+                        StringBuilder linkWithparams = new StringBuilder(link);
+                        if (tp.isIncludePageParams())
+                        {
+                            addParametersToLink(context, linkWithparams);
+                        }
+                        getUtils().writeAttribute(writer, "href", "#tabs-iframe-" + i);
+                        getUtils().writeAttribute(writer, "rel", linkWithparams.toString());
+                        getUtils().writeAttribute(writer, "class", "iframe-tab");
                     }
                     else
                     {
@@ -132,7 +131,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         writer.startElement("img", null);
                         getUtils().writeAttribute(writer, "src", imageSrc);
                         getUtils().writeAttribute(writer, "alt", title);
-                        if(imageOnClick != null)
+                        if (imageOnClick != null)
                             getUtils().writeAttribute(writer, "onclick", imageOnClick);
                         getUtils().writeAttribute(writer, "class", "tab-image");
                         writer.endElement("img");
@@ -165,6 +164,16 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                             writer.append(tp.getContent() == null ? "" : String.valueOf(tp.getContent()));
                         writer.endElement("div");
                     }
+                    else
+                    {
+                        if (tp.isUseIframe())
+                        {
+                            hasIframe = true;
+                            writer.startElement("div", null);
+                            getUtils().writeAttribute(writer, "id", "tabs-iframe-" + i);
+                            writer.endElement("div");
+                        }
+                    }
                 }
             }
             i++;
@@ -174,11 +183,19 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         writer.startElement("script", null);
         getUtils().writeAttribute(writer, "type", "text/javascript");
         js.append("});");// tab options
-        // $( ".selector" ).tabs( "option", "active", 1 );
         if (tab.isKeepState())
         {
             js.append("jQuery('#").append(jQueryClientId)
-                    .append("').tabs('option','selected', parseInt(cookieManager.read('" + tabCookieName + "')));\n\r");
+                    .append("').tabs('option','selected', parseInt(tabManager.readCookie('" + tabCookieName + "')));\n\r");
+        }
+        //
+        if (hasIframe)
+        {
+            js.append(String.format(" var tabIndexActive = jQuery('#%s').tabs('option', 'selected'); ", jQueryClientId));
+            js.append(String.format("beginTab = jQuery('#%s ul li:eq('+%s+')').find('a');", jQueryClientId, "tabIndexActive"));
+            js.append(" tabManager.loadTabFrame(jQuery(beginTab).attr('href'), jQuery(beginTab).attr('rel')); ");
+            js.append("jQuery('a.iframe-tab').click(function() { tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'));});");
+
         }
         // $('.tabs-container ul.tabs').tabs('option','disabled', [0, 1,2]);
         if (disabledTabs != null && disabledTabs.length() > 0)
@@ -189,6 +206,24 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         js.append("});");
         writer.write(js.toString());
         writer.endElement("script");
+    }
+
+    private void addParametersToLink(FacesContext context, StringBuilder originalLink)
+    {
+        ExternalContext external = context.getExternalContext();
+        Map<String, String> requestParams = external.getRequestParameterMap();
+        if (requestParams != null && requestParams.size() > 0)
+        {
+            originalLink.append("?");
+            int cnt = 0;
+            for (Map.Entry<String, String> entry : requestParams.entrySet())
+            {
+                if (cnt > 0)
+                    originalLink.append("&");
+                originalLink.append(entry.getKey()).append("=").append(entry.getValue());
+                cnt++;
+            }
+        }
     }
 
     @Override

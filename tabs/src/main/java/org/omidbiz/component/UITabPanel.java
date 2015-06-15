@@ -37,6 +37,18 @@ public abstract class UITabPanel extends UIComponentBase
 
     private boolean includePageParams;
 
+    private boolean useIframe;
+
+    public boolean isUseIframe()
+    {
+        return useIframe;
+    }
+
+    public void setUseIframe(boolean useIframe)
+    {
+        this.useIframe = useIframe;
+    }
+
     public boolean isIncludePageParams()
     {
         return includePageParams;
