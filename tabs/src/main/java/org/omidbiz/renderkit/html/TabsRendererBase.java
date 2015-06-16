@@ -192,8 +192,10 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         if (hasIframe)
         {
             js.append(String.format(" var tabIndexActive = jQuery('#%s').tabs('option', 'selected'); ", jQueryClientId));
-            js.append(String.format("beginTab = jQuery('#%s ul li:eq('+%s+')').find('a');", jQueryClientId, "tabIndexActive"));
+            js.append(String.format(" beginTab = jQuery('#%s ul li:eq('+%s+')').find('a'); ", jQueryClientId, "tabIndexActive"));
+            js.append(" if(jQuery(beginTab).attr('rel')) { ");
             js.append(" tabManager.loadTabFrame(jQuery(beginTab).attr('href'), jQuery(beginTab).attr('rel')); ");
+            js.append(" } ");
             js.append("jQuery('a.iframe-tab').click(function() { tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'));});");
 
         }
