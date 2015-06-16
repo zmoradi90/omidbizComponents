@@ -57,7 +57,11 @@ public abstract class UIInputListOfValues extends UIInput
             }
             catch (ELException e)
             {
-                throw new FacesException(e);
+                //TODO : DO nothing //FIXME: throw new FacesException(e);
+            }
+            catch (Exception e)
+            {
+
             }
 
             return value;
@@ -89,7 +93,11 @@ public abstract class UIInputListOfValues extends UIInput
             }
             catch (ELException e)
             {
-                throw new FacesException(e);
+                //TODO : DO nothing //FIXME: throw new FacesException(e);
+            }
+            catch (Exception e)
+            {
+
             }
 
             return value;
