@@ -31,6 +31,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"), getResource("org/omidbiz/images/loading.gif"),
             getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png") };
 
+
     @Override
     protected InternetResource[] getScripts()
     {
@@ -119,6 +120,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         getUtils().writeAttribute(writer, "href", "#tabs-iframe-" + i);
                         getUtils().writeAttribute(writer, "rel", linkWithparams.toString());
                         getUtils().writeAttribute(writer, "class", "iframe-tab");
+                        getUtils().writeAttribute(writer, "data-tabindex", i);
                     }
                     else
                     {
@@ -192,12 +194,13 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         if (hasIframe)
         {
             js.append(String.format(" var tabIndexActive = jQuery('#%s').tabs('option', 'selected'); ", jQueryClientId));
-            js.append(String.format(" beginTab = jQuery('#%s ul li:eq('+%s+')').find('a'); ", jQueryClientId, "tabIndexActive"));
+            js.append(String.format(" var beginTab = jQuery('#%s ul li:eq('+%s+')').find('a'); ", jQueryClientId, "tabIndexActive"));
+            js.append(" var dataTabIndex = jQuery(beginTab).data( 'tabindex'); ");
             js.append(" if(jQuery(beginTab).attr('rel')) { ");
-            js.append(" tabManager.loadTabFrame(jQuery(beginTab).attr('href'), jQuery(beginTab).attr('rel')); ");
+            js.append(" tabManager.loadTabFrame(jQuery(beginTab).attr('href'), jQuery(beginTab).attr('rel'), dataTabIndex); ");
             js.append(" } ");
-            js.append("jQuery('a.iframe-tab').click(function() { tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'));});");
-
+            js.append(" jQuery('a.iframe-tab').click(function() { ");
+            js.append(" tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex')); }); "                    );
         }
         // $('.tabs-container ul.tabs').tabs('option','disabled', [0, 1,2]);
         if (disabledTabs != null && disabledTabs.length() > 0)
