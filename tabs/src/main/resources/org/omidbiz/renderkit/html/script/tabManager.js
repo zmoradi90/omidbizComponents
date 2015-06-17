@@ -1,4 +1,5 @@
 "use strict";
+var tabFunc;
 var tabManager = {
 		writeCookie: function(cname, cvalue){
 			document.cookie = cname + "=" + cvalue + "; "
@@ -15,6 +16,10 @@ var tabManager = {
 		},
 		loadTabFrame: function(tab, url, uid) {
             if (jQuery(tab).find("iframe").length == 0) {
+            	if(typeof tabFunc !== 'undefined')
+            	{
+            		clearTimeout(tabFunc);
+            	}
                 var html = [];
                 var iframeContent = '<iframe name="_iframeTab_%UID%" id="_iframeTab_%UID%" scrolling="no" onload="javascript:tabManager.onIframeLoadComplete();" frameborder="0" class="ui-tabs-iframe" src="' + url + '">Load Failed?</iframe>';
                 html.push('<div class="ui-iframe-holder">');
@@ -22,7 +27,7 @@ var tabManager = {
                 html.push('</div>');
                 jQuery(tab).append(html.join(''));
                 jQuery(tab).find("iframe").height(jQuery(window).height()-120);
-                window.setInterval(function(){tabManager.resizeMonitoring(uid)}, 1000);
+                tabManager.resizeMonitoring(uid);
             }
             return false;
         },
@@ -37,9 +42,15 @@ var tabManager = {
         		if(typeof document.getElementById(elementFrame) !== 'undefined')
        			{
         			if(window.frames[elementFrame].document.body !== 'undefined' && window.frames[elementFrame].document.body != null)
-        				document.getElementById(elementFrame).style.height=window.frames[elementFrame].document.body.scrollHeight + 'px';
+        			{
+        				if(window.frames[elementFrame].document.body.scrollHeight > (jQuery(window).height()-120))
+        				{
+        					document.getElementById(elementFrame).style.height=window.frames[elementFrame].document.body.scrollHeight + 'px';
+        				}
+        			}
        			}
         	}
+        	tabFunc = setTimeout(function(){tabManager.resizeMonitoring(uid)}, 250);
         }
 
 };  
