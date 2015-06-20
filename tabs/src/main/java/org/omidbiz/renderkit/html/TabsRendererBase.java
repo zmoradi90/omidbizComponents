@@ -121,6 +121,8 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         getUtils().writeAttribute(writer, "rel", linkWithparams.toString());
                         getUtils().writeAttribute(writer, "class", "iframe-tab");
                         getUtils().writeAttribute(writer, "data-tabindex", i);
+                        //register onclick with page load using jquery
+//                        getUtils().writeAttribute(writer, "onclick", "tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex'));");
                     }
                     else
                     {

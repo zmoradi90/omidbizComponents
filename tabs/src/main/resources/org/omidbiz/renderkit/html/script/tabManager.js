@@ -29,6 +29,17 @@ var tabManager = {
                 jQuery(tab).find("iframe").height(jQuery(window).height()-120);
                 tabManager.resizeMonitoring(uid);
             }
+            //document.getElementById(frameElm).contentDocument.location.reload();
+            var frameId = '_iframeTab_%UID%';
+            var frameElm = frameId.replace('%UID%', uid);
+            var iframe = document.getElementById(frameElm);
+            if(typeof iframe !== 'undefined')
+            {
+            	//reload iframe with each onclick
+            	var tmp_src = iframe.src; 
+            	iframe.src = ''; 
+            	iframe.src = tmp_src;
+            }
             return false;
         },
         onIframeLoadComplete: function(){
