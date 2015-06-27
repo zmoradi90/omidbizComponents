@@ -1,0 +1,54 @@
+.tab-nav-window{
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+    /*width: 500px;*/
+}
+.ui-widget-header {
+    width: 100000px;
+    left: 10px;
+   	position: relative;
+}
+.ui-tabs .ui-tabs-nav {
+    margin: 0;
+    padding: 3px 50px 0 0;
+}
+.tab-nav-btn{	
+	width:30px;
+	height:50px;
+	background-color: #CCC;
+	position: absolute;
+	z-index: 1000000000;
+	display: none;
+}
+.tab-nav-next-btn{
+	left: 0px;
+	box-shadow:1px 1px 5px #AAA;
+	cursor: pointer;
+}
+.tab-nav-next-btn:after{
+	content: '';
+    border-bottom: 7px solid transparent;
+    border-right: 6px solid rgb(102, 102, 102);
+    border-top: 7px solid transparent;
+    content: "";
+    position: absolute;
+    right: 11px;
+    top: 17px;
+}
+.tab-nav-prev-btn{
+	right:0px;
+	box-shadow:1px 16px 5px #AAA;
+	opacity:0.2;
+	cursor: auto;
+}
+.tab-nav-prev-btn:after{
+	content: '';
+    border-bottom: 7px solid transparent;
+    border-left: 6px solid rgb(102, 102, 102);
+    border-top: 7px solid transparent;
+    content: "";
+    position: absolute;
+    right: 11px;
+    top: 17px;
+}

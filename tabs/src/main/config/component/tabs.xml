@@ -40,6 +40,15 @@
             <defaultvalue>false</defaultvalue>
         </property>
         
+        <property>
+            <name>scrollWidth</name>
+            <classname>java.lang.String</classname>
+            <description>
+                
+            </description>
+            <defaultvalue>"100%"</defaultvalue>
+        </property>
+        
         
        
       

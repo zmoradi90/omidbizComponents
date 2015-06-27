@@ -25,12 +25,12 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
 
     InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/jquery.ui.theme.css"),
             getResource("/org/omidbiz/renderkit/html/css/jquery.ui.tabs.css"),
+            getResource("/org/omidbiz/renderkit/html/css/scrollableTab.css"),
             getResource("org/omidbiz/images/ui-bg_highlight-soft_75_cccccc_1x100.png"),
             getResource("org/omidbiz/images/ui-bg_flat_75_ffffff_40x100.png"),
             getResource("org/omidbiz/images/ui-bg_glass_75_e6e6e6_1x400.png"),
             getResource("org/omidbiz/images/ui-bg_glass_75_dadada_1x400.png"), getResource("org/omidbiz/images/loading.gif"),
             getResource("org/omidbiz/images/ui-bg_glass_65_ffffff_1x400.png") };
-
 
     @Override
     protected InternetResource[] getScripts()
@@ -65,6 +65,20 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         }
         writer.startElement("div", component);
         getUtils().writeAttribute(writer, "id", clientId);
+        // scrollable tab
+        writer.startElement("div", null);
+        String scrollWidth = (String) tab.getAttributes().get("scrollWidth");
+        getUtils().writeAttribute(writer, "style", String.format("width:%s;", scrollWidth));
+        getUtils().writeAttribute(writer, "class", "tab-nav-window");
+
+        writer.startElement("div", null);
+        getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-next-btn");
+        writer.endElement("div");
+
+        writer.startElement("div", null);
+        getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-prev-btn");
+        writer.endElement("div");
+        //
         Iterator childIterator = component.getChildren().iterator();
         writer.startElement("ul", component);
         int i = 0;
@@ -121,8 +135,9 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         getUtils().writeAttribute(writer, "rel", linkWithparams.toString());
                         getUtils().writeAttribute(writer, "class", "iframe-tab");
                         getUtils().writeAttribute(writer, "data-tabindex", i);
-                        //register onclick with page load using jquery
-//                        getUtils().writeAttribute(writer, "onclick", "tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex'));");
+                        // register onclick with page load using jquery
+                        // getUtils().writeAttribute(writer, "onclick",
+                        // "tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex'));");
                     }
                     else
                     {
@@ -147,6 +162,10 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             i++;
         }
         writer.endElement("ul");
+        //
+        writer.endElement("div");
+        // end of scrollable tab
+
         Iterator tabIterator = component.getChildren().iterator();
         i = 0;
         while (tabIterator.hasNext())
@@ -187,6 +206,8 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         writer.startElement("script", null);
         getUtils().writeAttribute(writer, "type", "text/javascript");
         js.append("});");// tab options
+        // responsive tabs
+        js.append(String.format(" tabManager.responsiveTabs(%s); ", "jQuery('#" + jQueryClientId + "')"));
         if (tab.isKeepState())
         {
             js.append("jQuery('#").append(jQueryClientId)
@@ -202,7 +223,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             js.append(" tabManager.loadTabFrame(jQuery(beginTab).attr('href'), jQuery(beginTab).attr('rel'), dataTabIndex); ");
             js.append(" } ");
             js.append(" jQuery('a.iframe-tab').click(function() { ");
-            js.append(" tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex')); }); "                    );
+            js.append(" tabManager.loadTabFrame(jQuery(this).attr('href'),jQuery(this).attr('rel'), jQuery(this).data( 'tabindex')); }); ");
         }
         // $('.tabs-container ul.tabs').tabs('option','disabled', [0, 1,2]);
         if (disabledTabs != null && disabledTabs.length() > 0)
