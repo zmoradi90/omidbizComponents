@@ -61,6 +61,8 @@
 	<c:set var="autocompleteUrl" value="#{component.attributes['autocompleteUrl']}"/>
 	<c:set var="valueId" value="#{component.attributes['valueId']}"/>
 	<c:set var="valueName" value="#{component.attributes['valueName']}"/>
+	<c:set var="fastIframe" value="#{component.attributes['fastIframe']}"/>
+	<c:set var="overlayClose" value="#{component.attributes['overlayClose']}"/>
 	
 
 		<jsp:scriptlet>
@@ -85,7 +87,7 @@ jQuery(document).ready(function(){
 		onComplete:function(){ #{onComplete} },
 		onCleanup:function(){ #{onCleanup} },
 		onClosed:function(){ #{onClosed} },
-		width:'#{width}', height:'#{height}', iframe:#{iframe}
+		width:'#{width}', height:'#{height}', iframe:#{iframe}, fastIframe:#{fastIframe}, overlayClose:#{overlayClose}
 		}, Richfaces.colorboxControl.getParameters()));
 	
 	jQuery( '.#{objectName}Name' ).autocomplete({
@@ -111,7 +113,7 @@ jQuery(document).ready(function(){
 		onComplete:function(){ #{onComplete} },
 		onCleanup:function(){ #{onCleanup} },
 		onClosed:function(){ #{onClosed} },
-		width:'#{width}', height:'#{height}', iframe:#{iframe}
+		width:'#{width}', height:'#{height}', iframe:#{iframe}, fastIframe:#{fastIframe}, overlayClose:#{overlayClose}
 		}, Richfaces.colorboxControl.getParameters()));
 	
 	

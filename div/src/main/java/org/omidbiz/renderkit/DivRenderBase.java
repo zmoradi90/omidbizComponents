@@ -45,7 +45,16 @@ public class DivRenderBase extends HeaderResourcesRendererBase
         {
             writer.startElement("div", component);
             getUtils().writeAttribute(writer, "id", forceId);
-
+            String style = (String) component.getAttributes().get("style");
+            if (style != null)
+            {
+                getUtils().writeAttribute(writer, "style", style);
+            }
+            String styleClass = (String) component.getAttributes().get("styleClass");
+            if (styleClass != null)
+            {
+                getUtils().writeAttribute(writer, "class", style);
+            }
         }
     }
 
@@ -58,14 +67,14 @@ public class DivRenderBase extends HeaderResourcesRendererBase
     @Override
     protected void doDecode(FacesContext context, UIComponent component)
     {
-        String forceId = (String) component.getAttributes().get("forceId");       
+        String forceId = (String) component.getAttributes().get("forceId");
         if (forceId != null)
         {
             AjaxContext ajaxContext = AjaxContext.getCurrentInstance();
             ajaxContext.addRegionsFromComponent(component);
             ajaxContext.addComponentToAjaxRender(component);
             ajaxContext.addRegionsFromComponent(component);
-            
+
             ajaxContext.addRenderedArea(forceId);
         }
     }

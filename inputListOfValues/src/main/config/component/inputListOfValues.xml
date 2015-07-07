@@ -217,6 +217,24 @@
 			<defaultvalue>true</defaultvalue>
 		</property>
 		
+		<property>
+			<name>fastIframe</name>
+			<classname>boolean</classname>
+			<description>
+					If false, the loading graphic removal and onComplete event will be delayed until iframe's content has completely loaded. 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		
+		<property>
+			<name>overlayClose</name>
+			<classname>boolean</classname>
+			<description>
+					If false, disables closing Colorbox by clicking on the background overlay. 
+			</description>
+			<defaultvalue>true</defaultvalue>
+		</property>
+		
 		
 		
 		

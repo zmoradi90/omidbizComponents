@@ -120,7 +120,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         StringBuilder linkWithparams = new StringBuilder(link);
                         if (tp.isIncludePageParams())
                         {
-                            addParametersToLink(context, linkWithparams);
+                            addParametersToLink(context, linkWithparams, tp.isJoin());
                         }
                         getUtils().writeAttribute(writer, "href", linkWithparams.toString());
                     }
@@ -129,7 +129,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         StringBuilder linkWithparams = new StringBuilder(link);
                         if (tp.isIncludePageParams())
                         {
-                            addParametersToLink(context, linkWithparams);
+                            addParametersToLink(context, linkWithparams, tp.isJoin());
                         }
                         getUtils().writeAttribute(writer, "href", "#tabs-iframe-" + i);
                         getUtils().writeAttribute(writer, "rel", linkWithparams.toString());
@@ -236,7 +236,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         writer.endElement("script");
     }
 
-    private void addParametersToLink(FacesContext context, StringBuilder originalLink)
+    private void addParametersToLink(FacesContext context, StringBuilder originalLink, boolean joinConversation)
     {
         ExternalContext external = context.getExternalContext();
         Map<String, String> requestParams = external.getRequestParameterMap();
@@ -246,6 +246,13 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             int cnt = 0;
             for (Map.Entry<String, String> entry : requestParams.entrySet())
             {
+                if (joinConversation == false)
+                {
+                    if ("cid".equals(entry.getKey()))
+                    {
+                        continue;
+                    }
+                }
                 if (cnt > 0)
                     originalLink.append("&");
                 originalLink.append(entry.getKey()).append("=").append(entry.getValue());

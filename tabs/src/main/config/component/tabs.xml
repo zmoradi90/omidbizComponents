@@ -138,5 +138,15 @@
             <defaultvalue>false</defaultvalue>
         </property>
         
+        <property>
+            <name>join</name>
+            <classname>boolean</classname>
+            <description>
+                whether to join tab request with Seam conversation or not.
+                only supports cid as conversation id
+            </description>
+            <defaultvalue>false</defaultvalue>
+        </property>
+        
     </component>
 </components>

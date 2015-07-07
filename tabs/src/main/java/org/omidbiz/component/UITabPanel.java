@@ -39,6 +39,18 @@ public abstract class UITabPanel extends UIComponentBase
 
     private boolean useIframe;
 
+    private boolean join;
+
+    public boolean isJoin()
+    {
+        return join;
+    }
+
+    public void setJoin(boolean join)
+    {
+        this.join = join;
+    }
+
     public boolean isUseIframe()
     {
         return useIframe;

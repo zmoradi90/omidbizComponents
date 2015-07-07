@@ -32,6 +32,22 @@
 			</description>
 			<required>true</required>
 		</property>
+		
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+		</property>
         
 	</component>
 </components>
