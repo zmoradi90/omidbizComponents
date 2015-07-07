@@ -4,8 +4,8 @@
     position: relative;
     /*width: 500px;*/
 }
-.ui-widget-header {
-    width: 100000px;
+.tab-nav-window .ui-widget-header {
+    width: 100000px !important;
     left: 10px;
    	position: relative;
 }
