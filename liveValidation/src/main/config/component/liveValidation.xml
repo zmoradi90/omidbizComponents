@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.LiveValidation</name>
+		<family>org.omidbiz.LiveValidation</family>
+		<classname>org.omidbiz.component.html.HtmlLiveValidation</classname>
+		<superclass>org.omidbiz.component.UILiveValidation</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.LiveValidationRenderer</name>
+			<template>org/omidbiz/htmlLiveValidation.jspx</template>
+		</renderer>
+		<tag>
+			<name>liveValidation</name>
+			<classname>org.omidbiz.taglib.LiveValidationTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		
+		
+		<property>
+			<name>type</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be Presence, Email
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>onlyOnSubmit</name>
+			<classname>boolean</classname>
+			<description>
+				
+			</description>
+			<defaultvalue>true</defaultvalue>
+		</property>
+		
+		<property>
+			<name>failureMessage</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		
+        
+	</component>
+</components>

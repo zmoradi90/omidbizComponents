@@ -124,6 +124,7 @@
     <module>dropDown</module>
     <module>pickList</module>
     <module>clickableButton</module>
+    <module>liveValidation</module>
     
   </modules>
   <build>
