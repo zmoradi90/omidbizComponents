@@ -31,7 +31,7 @@
 		<div id="#{gid}" />
     
     <script>
-		window.onload = function(){
+		jQuery(window).load(function(){
 			var g_#{gid} = new JustGage({
 				id: "#{gid}",
 				value: #{gvalue},
@@ -41,8 +41,8 @@
 				title: "#{gtitle}",
 				label: "#{glabel}",
 				levelColorsGradient: true
-			});
-		};	    	   
+			});		
+		});	    	   
     </script>	
 		
 </div>		

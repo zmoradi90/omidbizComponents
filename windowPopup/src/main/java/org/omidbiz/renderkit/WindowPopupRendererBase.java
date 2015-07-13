@@ -15,8 +15,11 @@
  ******************************************************************************/
 package org.omidbiz.renderkit;
 
+import java.io.IOException;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 
 import org.ajax4jsf.context.AjaxContext;
 import org.ajax4jsf.renderkit.AjaxRendererUtils;
@@ -31,18 +34,18 @@ import org.omidbiz.component.UIWindowPopup;
  */
 public class WindowPopupRendererBase extends HeaderResourcesRendererBase
 {
-    
+
     @Override
     protected void doDecode(FacesContext context, UIComponent component)
     {
-        String reRender = (String) component.getAttributes().get("render");       
+        String reRender = (String) component.getAttributes().get("render");
         if (reRender != null)
         {
             AjaxContext ajaxContext = AjaxContext.getCurrentInstance();
             ajaxContext.addRegionsFromComponent(component);
             ajaxContext.addComponentToAjaxRender(component);
             ajaxContext.addRegionsFromComponent(component);
-            
+
             ajaxContext.addRenderedArea(reRender);
         }
     }
@@ -52,8 +55,7 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
     {
         return UIWindowPopup.class;
     }
-    
-    
+
     public String getOnClick(FacesContext context, UIComponent component)
     {
         StringBuffer onClick;
@@ -71,5 +73,80 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
         }
         return onClick.toString();
     }
-    
+
+    public void initializeMask(FacesContext context, UIWindowPopup component) throws IOException
+    {
+
+        ResponseWriter writer = context.getResponseWriter();
+        Object t = component.getAttributes().get("type");
+        String id = (String) component.getAttributes().get("id");
+        Boolean iframe = (Boolean) component.getAttributes().get("iframe");
+        if (t != null && id != null)
+        {
+            String type = (String) t;
+            if ("dialog".equals(type) || "button".equals(type))
+            {
+                writer.startElement("a", component);
+                getUtils().writeAttribute(writer, "rel", String.format("rel_%s", id));
+                getUtils().writeAttribute(writer, "id", id);
+                getUtils().writeAttribute(writer, "href", component.getAttributes().get("view"));
+                getUtils().writeAttribute(writer, "title", component.getAttributes().get("title"));
+                Object useImage = component.getAttributes().get("useImage");
+                if (useImage != null && (Boolean) useImage)
+                {
+                    writer.startElement("img", null);
+                    getUtils().writeAttribute(writer, "border", "0");
+                    getUtils().writeAttribute(writer, "src", component.getAttributes().get("imageSrc"));
+                    getUtils().writeAttribute(writer, "title", component.getAttributes().get("title"));
+                    writer.endElement("img");
+                }
+                else
+                {
+                    writer.startElement("button", null);
+                    getUtils().writeAttribute(writer, "class", String.format("wbtn %s", component.getAttributes().get("styleClass")));
+                    writer.startElement("span", null);
+                    getUtils().writeAttribute(writer, "class", "wpopup");
+                    writer.write((String) component.getAttributes().get("openText"));
+                    writer.endElement("span");
+                    writer.endElement("button");
+                }
+                renderChildren(context, component);
+                writer.endElement("a");
+                //javascript
+                StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
+                sb.append("jQuery(\"a[rel=rel_"+id+"]\").colorbox({width:\"80%\", height:\"80%\", iframe:"+iframe+"});");
+                sb.append("jQuery(\"a[rel=rel_"+id+"]\").colorbox(jQuery.extend({");
+                sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
+                sb.append(String.format("onLoad:function(){ %s },", component.getAttributes().get("onLoad")));
+                sb.append(String.format("onComplete:function(){ %s },", component.getAttributes().get("onComplete")));
+                sb.append(String.format("onClosed:function(){ %s },", component.getAttributes().get("onClosed")));
+                sb.append("width:\""+component.getAttributes().get("width")+"\", height:\""+component.getAttributes().get("height")+"\", speed:0, iframe:"+iframe+"");
+                sb.append("}, Richfaces.colorboxControl.getParameters()));");
+                sb.append("});");
+                getUtils().writeScript(context, component, sb.toString());
+            }
+            // generate close link
+            if ("link".equals(type))
+            {
+                writer.startElement("a", component);
+                getUtils().writeAttribute(writer, "href", "");                
+                if (iframe)
+                {
+                    String onclickAction = "parent.jQuery.fn.colorbox.close();"+getOnClick(context, component);
+                    getUtils().writeAttribute(writer, "onclick", onclickAction);    
+                    
+                }
+                else
+                {
+                    String onclickAction = "jQuery.fn.colorbox.close();"+getOnClick(context, component);
+                    getUtils().writeAttribute(writer, "onclick", onclickAction);
+                }
+                writer.write((String)component.getAttributes().get("closeText"));
+                writer.endElement("a");
+            }
+        }
+
+    }
+ 
+
 }
