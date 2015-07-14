@@ -41,7 +41,7 @@ public abstract class UIWindowPopup extends AjaxActionComponent {
         this.atCloseAction = atCloseAction;
     }
 
-    
+  
 	
 	
 	

@@ -16,7 +16,6 @@
 package org.omidbiz.renderkit;
 
 import java.io.IOException;
-import java.util.Random;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -75,22 +74,37 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
         return onClick.toString();
     }
 
-    public void initializeMask(FacesContext context, UIWindowPopup component) throws IOException
+    @Override
+    protected void doEncodeBegin(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
-
-        ResponseWriter writer = context.getResponseWriter();
         Object t = component.getAttributes().get("type");
         String id = (String) component.getAttributes().get("forceId");
-        if(id != null)
+        if (id != null)
             component.setId(id);
         String jsfId = component.getClientId(context);
         id = id == null ? jsfId : id;
-        Boolean iframe = (Boolean) component.getAttributes().get("iframe");        
+        Boolean iframe = (Boolean) component.getAttributes().get("iframe");
         if (t != null && id != null)
         {
             String type = (String) t;
             if ("dialog".equals(type) || "button".equals(type))
             {
+
+                // javascript
+                StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({width:\"80%\", height:\"80%\", iframe:"
+                        + iframe + "});");
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox(jQuery.extend({");
+                sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
+                sb.append(String.format("onLoad:function(){ %s },", component.getAttributes().get("onLoad")));
+                sb.append(String.format("onComplete:function(){ %s },", component.getAttributes().get("onComplete")));
+                sb.append(String.format("onClosed:function(){ %s },", component.getAttributes().get("onClosed")));
+                sb.append("width:\"" + component.getAttributes().get("width") + "\", height:\"" + component.getAttributes().get("height")
+                        + "\", speed:0, iframe:" + iframe + "");
+                sb.append("}, Richfaces.colorboxControl.getParameters()));");
+                sb.append("});");
+                getUtils().writeScript(context, component, sb.toString());
+                // javascript
                 writer.startElement("a", component);
                 getUtils().writeAttribute(writer, "rel", String.format("rel_%s", id));
                 getUtils().writeAttribute(writer, "id", id);
@@ -102,7 +116,6 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                     writer.startElement("img", null);
                     getUtils().writeAttribute(writer, "border", "0");
                     getUtils().writeAttribute(writer, "src", component.getAttributes().get("imageSrc"));
-                    getUtils().writeAttribute(writer, "title", component.getAttributes().get("title"));
                     writer.endElement("img");
                 }
                 else
@@ -121,21 +134,7 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                         writer.endElement("button");
                     }
                 }
-                renderChildren(context, component);
-                writer.endElement("a");
-                // javascript
-                StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
-                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({width:\"80%\", height:\"80%\", iframe:" + iframe + "});");
-                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox(jQuery.extend({");
-                sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
-                sb.append(String.format("onLoad:function(){ %s },", component.getAttributes().get("onLoad")));
-                sb.append(String.format("onComplete:function(){ %s },", component.getAttributes().get("onComplete")));
-                sb.append(String.format("onClosed:function(){ %s },", component.getAttributes().get("onClosed")));
-                sb.append("width:\"" + component.getAttributes().get("width") + "\", height:\"" + component.getAttributes().get("height")
-                        + "\", speed:0, iframe:" + iframe + "");
-                sb.append("}, Richfaces.colorboxControl.getParameters()));");
-                sb.append("});");
-                getUtils().writeScript(context, component, sb.toString());
+
             }
             // generate close link
             if ("link".equals(type))
@@ -154,10 +153,21 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                     getUtils().writeAttribute(writer, "onclick", onclickAction);
                 }
                 writer.write((String) component.getAttributes().get("closeText"));
-                writer.endElement("a");
+
             }
         }
+    }
 
+    @Override
+    protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
+    {
+        renderChildren(context, component);
+    }
+
+    @Override
+    protected void doEncodeEnd(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
+    {
+        writer.endElement("a");
     }
 
 }

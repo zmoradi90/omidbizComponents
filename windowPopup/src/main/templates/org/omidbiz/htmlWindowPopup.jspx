@@ -29,11 +29,6 @@
 	<f:resource name="/org/omidbiz/renderkit/html/css/images/remove.png" var="removeIcon" />
 	
 	
-	<f:call name="initializeMask">
-	
-		
-	
-	</f:call>
 	
 	
 	

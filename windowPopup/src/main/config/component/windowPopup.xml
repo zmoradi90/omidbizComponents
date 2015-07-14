@@ -51,7 +51,7 @@
 			<classname>java.lang.String</classname>
 			<description>
 			</description>
-			<defaultvalue>"Open"</defaultvalue>
+			<defaultvalue>""</defaultvalue>
 		</property>
 		<property>
 			<name>closeText</name>
