@@ -115,6 +115,9 @@
 			<classname>boolean</classname>
 			<description>If true, disable this component on page.</description>
 		</property>
+		
+		
+		
 		<property>
 			<name>ignoreDupResponses</name>
 			<classname>boolean</classname>
@@ -130,6 +133,15 @@
 
 <property>
 			<name>onOpen</name>
+			<classname>java.lang.String</classname>
+			<description>
+					
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>forceId</name>
 			<classname>java.lang.String</classname>
 			<description>
 					

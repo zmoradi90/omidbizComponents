@@ -16,6 +16,7 @@
 package org.omidbiz.renderkit;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -79,8 +80,12 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
 
         ResponseWriter writer = context.getResponseWriter();
         Object t = component.getAttributes().get("type");
-        String id = (String) component.getAttributes().get("id");
-        Boolean iframe = (Boolean) component.getAttributes().get("iframe");
+        String id = (String) component.getAttributes().get("forceId");
+        if(id != null)
+            component.setId(id);
+        String jsfId = component.getClientId(context);
+        id = id == null ? jsfId : id;
+        Boolean iframe = (Boolean) component.getAttributes().get("iframe");        
         if (t != null && id != null)
         {
             String type = (String) t;
@@ -102,25 +107,32 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                 }
                 else
                 {
-                    writer.startElement("button", null);
-                    getUtils().writeAttribute(writer, "class", String.format("wbtn %s", component.getAttributes().get("styleClass")));
+                    if ("button".equals(type))
+                    {
+                        writer.startElement("button", null);
+                        getUtils().writeAttribute(writer, "class", String.format("wbtn %s", component.getAttributes().get("styleClass")));
+                    }
                     writer.startElement("span", null);
                     getUtils().writeAttribute(writer, "class", "wpopup");
                     writer.write((String) component.getAttributes().get("openText"));
                     writer.endElement("span");
-                    writer.endElement("button");
+                    if ("button".equals(type))
+                    {
+                        writer.endElement("button");
+                    }
                 }
                 renderChildren(context, component);
                 writer.endElement("a");
-                //javascript
+                // javascript
                 StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
-                sb.append("jQuery(\"a[rel=rel_"+id+"]\").colorbox({width:\"80%\", height:\"80%\", iframe:"+iframe+"});");
-                sb.append("jQuery(\"a[rel=rel_"+id+"]\").colorbox(jQuery.extend({");
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({width:\"80%\", height:\"80%\", iframe:" + iframe + "});");
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox(jQuery.extend({");
                 sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
                 sb.append(String.format("onLoad:function(){ %s },", component.getAttributes().get("onLoad")));
                 sb.append(String.format("onComplete:function(){ %s },", component.getAttributes().get("onComplete")));
                 sb.append(String.format("onClosed:function(){ %s },", component.getAttributes().get("onClosed")));
-                sb.append("width:\""+component.getAttributes().get("width")+"\", height:\""+component.getAttributes().get("height")+"\", speed:0, iframe:"+iframe+"");
+                sb.append("width:\"" + component.getAttributes().get("width") + "\", height:\"" + component.getAttributes().get("height")
+                        + "\", speed:0, iframe:" + iframe + "");
                 sb.append("}, Richfaces.colorboxControl.getParameters()));");
                 sb.append("});");
                 getUtils().writeScript(context, component, sb.toString());
@@ -129,24 +141,23 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
             if ("link".equals(type))
             {
                 writer.startElement("a", component);
-                getUtils().writeAttribute(writer, "href", "");                
+                getUtils().writeAttribute(writer, "href", "");
                 if (iframe)
                 {
-                    String onclickAction = "parent.jQuery.fn.colorbox.close();"+getOnClick(context, component);
-                    getUtils().writeAttribute(writer, "onclick", onclickAction);    
-                    
+                    String onclickAction = "parent.jQuery.fn.colorbox.close();" + getOnClick(context, component);
+                    getUtils().writeAttribute(writer, "onclick", onclickAction);
+
                 }
                 else
                 {
-                    String onclickAction = "jQuery.fn.colorbox.close();"+getOnClick(context, component);
+                    String onclickAction = "jQuery.fn.colorbox.close();" + getOnClick(context, component);
                     getUtils().writeAttribute(writer, "onclick", onclickAction);
                 }
-                writer.write((String)component.getAttributes().get("closeText"));
+                writer.write((String) component.getAttributes().get("closeText"));
                 writer.endElement("a");
             }
         }
 
     }
- 
 
 }
