@@ -105,7 +105,7 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                 sb.append("});");
                 getUtils().writeScript(context, component, sb.toString());
                 // javascript
-                writer.startElement("a", component);
+                writer.startElement("a", null);
                 getUtils().writeAttribute(writer, "rel", String.format("rel_%s", id));
                 getUtils().writeAttribute(writer, "id", id);
                 getUtils().writeAttribute(writer, "href", component.getAttributes().get("view"));
@@ -134,6 +134,8 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                         writer.endElement("button");
                     }
                 }
+                renderWindowPopupChildren(context, component);
+                writer.endElement("a");
 
             }
             // generate close link
@@ -153,21 +155,39 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
                     getUtils().writeAttribute(writer, "onclick", onclickAction);
                 }
                 writer.write((String) component.getAttributes().get("closeText"));
-
+                writer.endElement("a");
             }
         }
+    }
+
+    private void renderWindowPopupChildren(FacesContext context, UIComponent component) throws IOException
+    {
+        int tpCnt = component.getChildCount();
+        if (tpCnt > 0)
+            renderChildren(context, component);
     }
 
     @Override
     protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
-        renderChildren(context, component);
+
     }
 
     @Override
     protected void doEncodeEnd(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
-        writer.endElement("a");
+
+    }
+
+    @Override
+    public boolean getRendersChildren()
+    {
+        return false;
+    }
+
+    @Override
+    public void encodeChildren(FacesContext context, UIComponent component) throws IOException
+    {
     }
 
 }

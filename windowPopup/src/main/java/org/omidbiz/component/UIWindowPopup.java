@@ -42,7 +42,17 @@ public abstract class UIWindowPopup extends AjaxActionComponent {
     }
 
   
+	@Override
+	public boolean getRendersChildren()
+	{
+	    return true;
+	}
 	
+	@Override
+	public String getFamily()
+	{
+	    return COMPONENT_FAMILY;
+	}
 	
 	
 }

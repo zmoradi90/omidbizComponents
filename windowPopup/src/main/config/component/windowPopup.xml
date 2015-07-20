@@ -11,7 +11,7 @@
 			<![CDATA[
     ]]>
 		</description>
-		<renderer generate="true" override="true">
+		<renderer generate="true" override="false">
 			<name>org.omidbiz.WindowPopupRenderer</name>
 			<template>org/omidbiz/htmlWindowPopup.jspx</template>
 		</renderer>

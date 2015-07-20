@@ -57,25 +57,24 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
+        inputLov.setSubmittedValue(submittedValue);
 
         if (JSFUtil.isNotEmpty(submittedValue))
         {
             inputLov.setValueName(nameValue);
             inputLov.setValueId(submittedValue);
             inputLov.setValid(true);
-            inputLov.setSubmittedValue(submittedValue);
         }
-        else
-        {
-            Boolean required = (Boolean) inputLov.getAttributes().get("required");
-            if (required != null && required.booleanValue())
-            {
-                inputLov.setValid(false);
-                inputLov.setRequiredMessage(UIInput.REQUIRED_MESSAGE_ID);
-                inputLov.setValueName(null);
-                inputLov.setValueId(null);
-            }
-        }
+//        else
+//        {
+//            Boolean required = (Boolean) inputLov.getAttributes().get("required");
+//            if (required != null && required.booleanValue())
+//            {
+//                inputLov.setValid(false);
+//                inputLov.setValueName(null);
+//                inputLov.setValueId(null);
+//            }
+//        }
     }
 
     @Override
