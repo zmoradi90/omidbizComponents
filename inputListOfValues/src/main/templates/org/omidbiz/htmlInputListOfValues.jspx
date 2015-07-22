@@ -125,9 +125,9 @@ jQuery(document).ready(function(){
 	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{valueId}"/>
 	
 	<a rel="rel#{objectName}" class="#{objectName}lovClass" href="#{view}">
-		<img alt="Open Colorbox" src="#{icon}" style="border: 0;vertical-align: middle;"/>
+		<img alt="Open Colorbox" src="#{icon}" style="border: 0;vertical-align: middle;cursor: pointer;"/>
 	</a>
-	<img style="border: 0;vertical-align: middle;" alt="clear" src="#{removeIcon}" onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"/>
+	<img style="border: 0;vertical-align: middle;cursor: pointer;" alt="clear" src="#{removeIcon}" onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"/>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
 <jsp:scriptlet><![CDATA[ if (! "".equals(type.trim()) && type.equalsIgnoreCase("link") ) { ]]></jsp:scriptlet>
