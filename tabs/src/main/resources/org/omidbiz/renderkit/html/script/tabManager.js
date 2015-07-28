@@ -26,7 +26,7 @@ var tabManager = {
                 html.push(iframeContent.replace(new RegExp('%UID%', 'g'), uid));
                 html.push('</div>');
                 jQuery(tab).append(html.join(''));
-                jQuery(tab).find("iframe").height(jQuery(window).height()-180);
+                jQuery(tab).find("iframe").height(jQuery(window).innerHeight()-200);
                 tabManager.resizeMonitoring(uid);
             }
             //document.getElementById(frameElm).contentDocument.location.reload();
@@ -54,7 +54,7 @@ var tabManager = {
        			{
         			if(window.frames[elementFrame].document.body !== 'undefined' && window.frames[elementFrame].document.body != null)
         			{
-        				if(window.frames[elementFrame].document.body.scrollHeight > (jQuery(window).height()-180))
+        				if(window.frames[elementFrame].document.body.scrollHeight > (jQuery(window).innerHeight()-200))
         				{
         					document.getElementById(elementFrame).style.height=window.frames[elementFrame].document.body.scrollHeight + 'px';
         				}
@@ -75,8 +75,7 @@ var tabManager = {
     		var limitWidth=tabNavWindow.width();
     		var totalWidthTabs=0;
     		var navPaddingRight=uiTabNav.css('padding-right');
-    		tabs.each(function(){
-    			console.log(jQuery(this).width());
+    		tabs.each(function(){    			
     			itemWidths.push(jQuery(this).width());
     			totalWidthTabs+=jQuery(this).width();
     		});

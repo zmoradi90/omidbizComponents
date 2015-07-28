@@ -43,9 +43,9 @@
 			<jsp:scriptlet><![CDATA[ if (disableControlsButton == false ) { ]]></jsp:scriptlet>
 			<td>			
 			<table border="0" cellpadding="0" cellspacing="0">
+<tr><td><button type="button" id="#{clientId}_copyall" class="#{buttonStyleClass}">#{copyAllText}</button></td></tr>				
 <tr><td><button type="button" id="#{clientId}_copy" class="#{buttonStyleClass}">#{copyText}</button></td></tr>
 <tr><td> <button type="button" id="#{clientId}_remove" class="#{buttonStyleClass}">#{removeText}</button></td></tr>
-<tr><td><button type="button" id="#{clientId}_copyall" class="#{buttonStyleClass}">#{copyAllText}</button></td></tr>
 <tr><td><button type="button" id="#{clientId}_removeall" class="#{buttonStyleClass}">#{removeAllText}</button></td></tr>
 </table>
 	<script type="text/javascript">
