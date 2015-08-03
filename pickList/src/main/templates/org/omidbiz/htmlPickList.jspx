@@ -50,19 +50,19 @@
 </table>
 	<script type="text/javascript">
 	jQuery(document).ready(function () {
-		jQuery('#{this:getJQueryId(context, component)}_copy').click(function () {
+		jQuery('#{this:getJQueryId(context, component)}_remove').click(function () {
 			Fanpardaz.pickList.moveItems('#{this:getJQueryId(context, component)}_target', '#{this:getJQueryId(context, component)}_source');
 		});
 		 
-		jQuery('#{this:getJQueryId(context, component)}_remove').on('click', function () {
+		jQuery('#{this:getJQueryId(context, component)}_copy').on('click', function () {
 			Fanpardaz.pickList.moveItems('#{this:getJQueryId(context, component)}_source', '#{this:getJQueryId(context, component)}_target');
 		});
 		 
-		jQuery('#{this:getJQueryId(context, component)}_copyall').on('click', function () {
+		jQuery('#{this:getJQueryId(context, component)}_removeall').on('click', function () {
 			Fanpardaz.pickList.moveAllItems('#{this:getJQueryId(context, component)}_target', '#{this:getJQueryId(context, component)}_source');
 		});
 		 
-		jQuery('#{this:getJQueryId(context, component)}_removeall').on('click', function () {
+		jQuery('#{this:getJQueryId(context, component)}_copyall').on('click', function () {
 			Fanpardaz.pickList.moveAllItems('#{this:getJQueryId(context, component)}_source', '#{this:getJQueryId(context, component)}_target');
 		});
 	}); 
