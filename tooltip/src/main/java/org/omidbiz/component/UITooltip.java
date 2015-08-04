@@ -24,9 +24,9 @@ import javax.faces.component.UIComponentBase;
 public abstract class UITooltip extends UIComponentBase
 {
 
-    public static final String COMPONENT_TYPE = "org.omidbiz.InputExtra";
+    public static final String COMPONENT_TYPE = "org.omidbiz.Tooltip";
 
-    public static final String COMPONENT_FAMILY = "org.omidbiz.InputExtra";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.Tooltip";
 
     private boolean html;
 

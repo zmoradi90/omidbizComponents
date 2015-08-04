@@ -13,9 +13,9 @@ import javax.faces.component.UIComponentBase;
 public abstract class UITabs extends UIComponentBase
 {
 
-    public static final String COMPONENT_TYPE = "org.omidbiz.UITabs";
+    public static final String COMPONENT_TYPE = "org.omidbiz.Tabs";
 
-    public static final String COMPONENT_FAMILY = "org.omidbiz.UITabs";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.Tabs";
 
     @Override
     public boolean getRendersChildren()

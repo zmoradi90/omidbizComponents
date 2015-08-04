@@ -27,9 +27,9 @@ import javax.faces.context.FacesContext;
 public class UIClickableButton extends UIComponentBase
 {
 
-    public static final String COMPONENT_TYPE = "org.omidbiz.UIClickableButton";
+    public static final String COMPONENT_TYPE = "org.omidbiz.ClickableButton";
 
-    public static final String COMPONENT_FAMILY = "org.omidbiz.UIClickableButton";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.ClickableButton";
 
     @Override
     public String getFamily()

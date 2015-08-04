@@ -27,9 +27,9 @@ import javax.faces.context.FacesContext;
 public class UILoop extends UIComponentBase
 {
 
-    public static final String COMPONENT_TYPE = "org.omidbiz.UILoop";
+    public static final String COMPONENT_TYPE = "org.omidbiz.Loop";
 
-    public static final String COMPONENT_FAMILY = "org.omidbiz.UILoop";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.Loop";
 
     @Override
     public String getFamily()

@@ -9,7 +9,7 @@ import javax.faces.component.UIComponentBase;
 public abstract class UITabPanel extends UIComponentBase
 {
 
-    public static final String COMPONENT_FAMILY = "org.omidbiz.UITabPanel";
+    public static final String COMPONENT_FAMILY = "org.omidbiz.TabPanel";
 
     @Override
     public boolean getRendersChildren()
