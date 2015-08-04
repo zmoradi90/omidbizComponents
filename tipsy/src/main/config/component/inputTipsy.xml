@@ -28,7 +28,13 @@
 		</taghandler>
 		-->
 		&ui_component_attributes;
-		
+		<property>
+			<name>html</name>
+			<classname>boolean</classname>
+			<description>
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
 		
         
 	</component>
