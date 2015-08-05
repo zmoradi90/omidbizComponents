@@ -101,8 +101,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(
                 writer,
                 switchType,
-                String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", sourceId.replace(":", "\\\\:"),
-                        targetId.replace(":", "\\\\:"), forceId));
+                String.format("Fanpardaz.pickList.sourceClickManager('#%s', '#%s')", clientId.replace(":", "\\\\:"), forceId));
         
         
         //
@@ -189,8 +188,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(
                 writer,
                 switchType,
-                String.format("Fanpardaz.pickList.moveItems('#%s', '#%s', '#%s')", targetId.replace(":", "\\\\:"),
-                        sourceId.replace(":", "\\\\:"), forceId));
+                String.format("Fanpardaz.pickList.targetClickManager('#%s', '#%s')", clientId.replace(":", "\\\\:"), forceId));
         
         //
         Object value = component.getAttributes().get("value");

@@ -140,7 +140,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 String view = (String) component.getAttributes().get("view");
                 String onclick = String.format("Richfaces.colorboxControl.extendedRequestClose(%s, '%s', '%s', '%s');", parentId, pValueText, objectName, view);
                 getUtils().writeAttribute(writer, "onclick", onclick);
-                writer.write((String)getSelectedTextConvertedValue(context, component));
+                getUtils().writeAttribute(writer, "style", "cursor:pointer;");
+                writer.write(String.valueOf(getSelectedTextConvertedValue(context, component)));
                 writer.endElement("a");
 
             }
@@ -149,7 +150,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 writer.startElement("a", component);
                 String onclick = String.format("Richfaces.colorboxControl.extendedClose(%s, '%s', '%s', '%s');", parentId, pValueText, objectName, extraInfo);
                 getUtils().writeAttribute(writer, "onclick", onclick);
-                writer.write((String)getSelectedTextConvertedValue(context, component));
+                getUtils().writeAttribute(writer, "style", "cursor:pointer;");
+                writer.write(String.valueOf(getSelectedTextConvertedValue(context, component)));
                 writer.endElement("a");
             }
         }
