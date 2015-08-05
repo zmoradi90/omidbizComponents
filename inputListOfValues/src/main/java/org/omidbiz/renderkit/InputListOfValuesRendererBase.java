@@ -23,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
@@ -65,16 +66,17 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             inputLov.setValueId(submittedValue);
             inputLov.setValid(true);
         }
-//        else
-//        {
-//            Boolean required = (Boolean) inputLov.getAttributes().get("required");
-//            if (required != null && required.booleanValue())
-//            {
-//                inputLov.setValid(false);
-//                inputLov.setValueName(null);
-//                inputLov.setValueId(null);
-//            }
-//        }
+        // else
+        // {
+        // Boolean required = (Boolean)
+        // inputLov.getAttributes().get("required");
+        // if (required != null && required.booleanValue())
+        // {
+        // inputLov.setValid(false);
+        // inputLov.setValueName(null);
+        // inputLov.setValueId(null);
+        // }
+        // }
     }
 
     @Override
@@ -95,6 +97,62 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         if (selectValue == null)
             return selectValue;
         return InputUtils.getConvertedValue(context, component, selectValue);
+    }
+
+    public String getViewObjectName(FacesContext context, UIComponent component)
+    {
+        Object viewAttr = component.getAttributes().get("view");
+        Object objectName = component.getAttributes().get("objectName");
+        if (viewAttr == null)
+            return "#";
+        String view = (String) viewAttr;
+        if (view.contains("?"))
+        {
+            view = view + "&objectName=" + objectName;
+        }
+        else
+        {
+            view = view + "?objectName=" + objectName;
+        }
+        return view;
+    }
+
+    public void initializeCloseLink(FacesContext context, UIInputListOfValues component) throws IOException
+    {
+        String type = (String) component.getAttributes().get("type");
+        Boolean srts = (Boolean) component.getAttributes().get("sendRequestToServer");
+        Object parentId =  component.getAttributes().get("pid");
+        Object pValueText =  component.getAttributes().get("pValueText");
+        Object objectNameAttr =  component.getAttributes().get("objectName");
+        Object extraInfo =  component.getAttributes().get("extraInfo");
+        extraInfo = extraInfo == null ? "" : extraInfo;
+        if (type != null && "link".equalsIgnoreCase(type))
+        {
+            ExternalContext external = context.getExternalContext();
+            Map requestParams = external.getRequestParameterMap();
+            String objectName = (String) requestParams.get("objectName");
+            if(objectName == null)
+                objectName = (String)objectNameAttr;
+            ResponseWriter writer = context.getResponseWriter();
+            if(srts != null && srts)
+            {
+                writer.startElement("a", component);
+                String view = (String) component.getAttributes().get("view");
+                String onclick = String.format("Richfaces.colorboxControl.extendedRequestClose(%s, '%s', '%s', '%s');", parentId, pValueText, objectName, view);
+                getUtils().writeAttribute(writer, "onclick", onclick);
+                writer.write((String)getSelectedTextConvertedValue(context, component));
+                writer.endElement("a");
+
+            }
+            if(objectName != null && objectName.trim().length() > 0)
+            {
+                writer.startElement("a", component);
+                String onclick = String.format("Richfaces.colorboxControl.extendedClose(%s, '%s', '%s', '%s');", parentId, pValueText, objectName, extraInfo);
+                getUtils().writeAttribute(writer, "onclick", onclick);
+                writer.write((String)getSelectedTextConvertedValue(context, component));
+                writer.endElement("a");
+            }
+        }
     }
 
     @Override
