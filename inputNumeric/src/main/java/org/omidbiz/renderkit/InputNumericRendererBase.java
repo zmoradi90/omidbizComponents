@@ -35,56 +35,68 @@ import org.omidbiz.component.UIInputNumeric;
 public class InputNumericRendererBase extends HeaderResourcesRendererBase
 {
 
-	@Override
-	public void decode(FacesContext context, UIComponent component)
-	{
-		ExternalContext external = context.getExternalContext();
-		Map requestParams = external.getRequestParameterMap();
-		UIInputNumeric inputDate = (UIInputNumeric) component;
-		String clientId = inputDate.getClientId(context);
-		String submittedValue = (String) requestParams.get(clientId);
+    @Override
+    public void decode(FacesContext context, UIComponent component)
+    {
+        ExternalContext external = context.getExternalContext();
+        Map requestParams = external.getRequestParameterMap();
+        UIInputNumeric inputDate = (UIInputNumeric) component;
+        String forceId = (String) inputDate.getAttributes().get("forceId");
+        String clientId = inputDate.getClientId(context);
+        if (forceId != null && forceId.length() > 0)
+            clientId = forceId;
+        String submittedValue = (String) requestParams.get(clientId);
 
-		if (submittedValue != null)
-		{
-			Converter converter = inputDate.getConverter();
-			if (converter != null)
-				inputDate.setSubmittedValue(converter.getAsObject(context, component, submittedValue));
-			else
-				inputDate.setSubmittedValue(submittedValue);
-		}
-	}
+        if (submittedValue != null)
+        {
+            Converter converter = inputDate.getConverter();
+            if (converter != null)
+                inputDate.setSubmittedValue(converter.getAsObject(context, component, submittedValue));
+            else
+            {
+                if (submittedValue.indexOf(",") > 0)
+                {
+                    inputDate.setSubmittedValue(submittedValue.replaceAll(",", ""));
+                }
+                else
+                {
+                    inputDate.setSubmittedValue(submittedValue);
+                }
+            }
+        }
+    }
 
-	@Override
-	protected Class<? extends UIComponent> getComponentClass()
-	{
-		return UIInputNumeric.class;
-	}
+    @Override
+    protected Class<? extends UIComponent> getComponentClass()
+    {
+        return UIInputNumeric.class;
+    }
 
-	@Override
-	public boolean getRendersChildren()
-	{
-		return true;
-	}
+    @Override
+    public boolean getRendersChildren()
+    {
+        return true;
+    }
 
-	protected String getValueAsString(FacesContext context, UIComponent component) throws IOException
-	{
+    protected String getValueAsString(FacesContext context, UIComponent component) throws IOException
+    {
 
-		UIInputNumeric inputDate = (UIInputNumeric) component;
-		String valueString = (String) inputDate.getSubmittedValue();
+        UIInputNumeric inputDate = (UIInputNumeric) component;
+        String valueString = (String) inputDate.getSubmittedValue();
 
-		if (valueString == null)
-		{
-			Object value = inputDate.getValue();
-			if (value != null)
-			{
-				Converter converter = inputDate.getConverter();
-				if (converter != null)
-					valueString = converter.getAsString(context, component, String.valueOf(value));
-				else
-					valueString = value.toString();
-			}
-		}
-		return valueString;
-	}
+        if (valueString == null)
+        {
+            Object value = inputDate.getValue();
+            if (value != null)
+            {
+                Converter converter = inputDate.getConverter();
+                if (converter != null)
+                    valueString = converter.getAsString(context, component, String.valueOf(value));
+                else
+                    valueString = value.toString();
+            }
+        }
+        return valueString;
+    }
 
 }
