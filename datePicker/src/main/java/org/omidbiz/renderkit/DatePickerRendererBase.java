@@ -61,6 +61,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
         String submittedValue = (String) requestParams.get(clientId);
         boolean required = (Boolean) inputDate.getAttributes().get("required");
+//        Object convertedDate = InputUtils.getConvertedValue(context, inputDate, submittedValue);
         Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
         if (required && convertedDate == null)
         {
@@ -133,6 +134,10 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
     // TODO:Null Object doesn't cause update component
     protected Object getConvertedDateValue(String gregorianDate, FacesContext context, UIDatePicker component)
     {
+        if (gregorianDate == null)
+        {
+            return null;
+        }
         if (gregorianDate.length() > 0)
         {
             String gDate = pc.SolarToGregorian(gregorianDate);

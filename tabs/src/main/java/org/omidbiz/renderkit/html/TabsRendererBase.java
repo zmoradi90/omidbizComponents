@@ -153,6 +153,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         if (imageOnClick != null)
                             getUtils().writeAttribute(writer, "onclick", imageOnClick);
                         getUtils().writeAttribute(writer, "class", "tab-image");
+                        getUtils().writeAttribute(writer, "style", "cursor:pointer;");
                         writer.endElement("img");
                     }
                     writer.endElement("a");
