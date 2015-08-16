@@ -8,8 +8,8 @@
   .tipsy-west { background-position: left center; }
 */
   
-  .tipsy { font-family: Yekan, BKoodakBold; padding: 5px; font-size: 12px; position: absolute; z-index: 100000; }
-  .tipsy-inner { font-family: Yekan, BKoodakBold; font-size: 12px; padding: 5px 8px 4px 8px; background-color: black; color: white; max-width: 200px; text-align: center; }
+  .tipsy { font-family: Yekan, BKoodakBold; padding: 5px; font-size: 12px; position: absolute; z-index: 100000;direction:rtl; }
+  .tipsy-inner { font-family: Yekan, BKoodakBold; font-size: 12px; padding: 5px 8px 4px 8px; background-color: black; color: white; max-width: 200px; text-align: center; direction:rtl;}
   .tipsy-inner { border-radius: 3px; -moz-border-radius:3px; -webkit-border-radius:3px; }
   .tipsy-arrow { position: absolute; width: 9px; height: 5px; }
   .tipsy-n .tipsy-arrow { top: 0; left: 50%; margin-left: -4px; }
