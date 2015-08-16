@@ -71,29 +71,51 @@ var tabManager = {
     		var tabs=jQuery("#"+id+" .ui-corner-top");
     		var itemWidths=[];
     		var numberOfTabs=tabs.length;
+    		var mainIndex=0;
     		var counter=0;
+    		var limitIndex=0;
+    		var setLimitIndex=true;
+    		var limitIndexTabFinder=0;
     		var limitWidth=tabNavWindow.width();
     		var totalWidthTabs=0;
     		var navPaddingRight=uiTabNav.css('padding-right');
-    		tabs.each(function(){    			
-    			itemWidths.push(jQuery(this).width());
-    			totalWidthTabs+=jQuery(this).width();
+    		tabs.each(function(){
+    			if(limitIndexTabFinder==0)
+				{
+    				itemWidths.push(jQuery(this).width()+parseInt(jQuery(this).css("margin-right"))+parseInt(navPaddingRight));
+    				limitIndexTabFinder++;
+				}
+    			else
+    			{
+    				limitIndexTabFinder++;
+    				itemWidths.push(jQuery(this).width()+parseInt(jQuery(this).css("margin-right")));
+    				totalWidthTabs+=jQuery(this).width()+parseInt(jQuery(this).css("margin-right"));
+    				if(totalWidthTabs>limitWidth && setLimitIndex)
+    				{
+    					limitIndex=limitIndexTabFinder;
+    					setLimitIndex=false;
+    				}
+    			}
     		});
     		totalWidthTabs=parseInt(totalWidthTabs)+parseInt(navPaddingRight);
-    		if(totalWidthTabs>limitWidth)
+    		if(limitIndex!=0)
     			{
     				navButtons.show();
     			}
+    		// set tab main index for scrolling size
+    		mainIndex = numberOfTabs - limitIndex +2;
+
+
     		//next btn click
     				navButtons.first().click(function(){
-    					if(counter<numberOfTabs-1)
+    					if(counter<mainIndex)
     					{
     						navButtons.last().css({"opacity":"1.0","cursor": "pointer"});
+    						var shiftForward="+="+(itemWidths[counter]);
     						counter++;
-    						var shiftForward="+="+itemWidths[counter-1];
     						uiTabNav.animate({left:shiftForward},500);
     					}
-    					if(counter==numberOfTabs-1)
+    					if(counter==mainIndex)
     						{
     						    jQuery(this).css({"opacity":"0.2","cursor": "auto"});
     						}
@@ -104,7 +126,7 @@ var tabManager = {
     					{
     						navButtons.first().css({"opacity":"1.0","cursor": "pointer"});
     						counter--;
-    						var shiftbackward='-='+itemWidths[counter];
+    						var shiftbackward='-='+(itemWidths[counter]);
     						uiTabNav.animate({left:shiftbackward},500);
     					}
     					if(counter==0)
