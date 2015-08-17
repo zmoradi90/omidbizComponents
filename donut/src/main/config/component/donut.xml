@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.Donut</name>
+		<family>org.omidbiz.Donut</family>
+		<classname>org.omidbiz.component.html.HtmlDonut</classname>
+		<superclass>org.omidbiz.component.UIDonut</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.DonutRenderer</name>
+			<template>org/omidbiz/htmlDonut.jspx</template>
+		</renderer>
+		<tag>
+			<name>donut</name>
+			<classname>org.omidbiz.taglib.DonutTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>onLoad</name>
+			<classname>boolean</classname>
+			<defaultvalue>true</defaultvalue>
+			<description>
+				can be true or false
+			</description>
+		</property>
+		
+		<property>
+			<name>mode</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"normal"</defaultvalue>
+			<description>
+				can be normal or reverse
+			</description>
+		</property>
+		
+		<property>
+			<name>value</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				is percentage
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+				is a string 
+			</description>
+		</property>
+        
+	</component>
+</components>

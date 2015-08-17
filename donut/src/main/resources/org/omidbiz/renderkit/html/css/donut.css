@@ -1,0 +1,41 @@
+.donut-window{
+    height: 92px;
+    margin: auto;
+    position: relative;
+    width: 110px;
+}
+.donut-frame{
+	padding:5px;
+	box-sizing:border-box;
+}
+.donut-panel-up{
+    box-sizing: border-box;
+    clear: both;
+    height: 60%;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    width: 100%;
+}
+.donut-panel-down{
+	position: relative;
+	clear: both;
+	height: 60%;
+	width: 100%
+}
+.donut-title{
+    box-sizing: border-box;
+    font-size: 11pt;
+    padding: 5px;
+    text-align: center;
+}
+.donut-value{
+    box-sizing: border-box;
+    font-family: "BKoodak" !important;
+    font-size: 11pt;
+    padding-bottom: 9px;
+    padding-left: 6px;
+    padding-top: 12px;
+    position: absolute;
+    top: 9px;
+}
