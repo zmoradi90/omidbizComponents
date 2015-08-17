@@ -118,7 +118,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         Boolean srts = (Boolean) component.getAttributes().get("sendRequestToServer");
         Object parentId = component.getAttributes().get("pid");
         Object pValueText = component.getAttributes().get("pValueText");
-        String styleClass = (String)component.getAttributes().get("styleClass");
+        String styleClass = (String) component.getAttributes().get("styleClass");
         Object objectNameAttr = component.getAttributes().get("objectName");
         Object extraInfo = component.getAttributes().get("extraInfo");
         extraInfo = extraInfo == null ? "" : extraInfo;
@@ -127,6 +127,10 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             ExternalContext external = context.getExternalContext();
             Map requestParams = external.getRequestParameterMap();
             String objectName = (String) requestParams.get("objectName");
+            if (JSFUtil.isNotEmpty(objectName))
+            {
+                //create hidden input for paginaion
+            }
             if (objectName == null)
                 objectName = (String) objectNameAttr;
             ResponseWriter writer = context.getResponseWriter();
@@ -138,7 +142,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                         pValueText, objectName, view);
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
-                if(JSFUtil.isNotEmpty(styleClass))
+                if (JSFUtil.isNotEmpty(styleClass))
                     getUtils().writeAttribute(writer, "class", styleClass);
                 writer.write(String.valueOf(getSelectedTextConvertedValue(context, component)));
                 writer.endElement("a");
@@ -151,7 +155,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                         objectName, extraInfo);
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
-                if(JSFUtil.isNotEmpty(styleClass))
+                if (JSFUtil.isNotEmpty(styleClass))
                     getUtils().writeAttribute(writer, "class", styleClass);
                 writer.write(String.valueOf(getSelectedTextConvertedValue(context, component)));
                 writer.endElement("a");
