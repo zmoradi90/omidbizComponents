@@ -45,10 +45,11 @@ public class InputTipsyRenderBase extends HeaderResourcesRendererBase
 		{
 			StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){");
 			Boolean html = (Boolean)component.getAttributes().get("html");
+			String gravity = (String)component.getAttributes().get("gravity");
 			if(html != null && html)
-				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: 'n', html: true})");
+				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"', html: true})");
 			else	
-				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: 'n'})");
+				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"'})");
 			sb.append("});");
 			getUtils().writeScript(context, component, sb.toString());
 		}

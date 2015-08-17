@@ -100,8 +100,7 @@
 
   <modules>
 	<module>util</module>  
-    <module>datePicker</module>
-    <module>tooltip</module>
+    <module>datePicker</module>   
     <module>tipsy</module>
     <module>inputListOfValues</module>
     <module>persianDateLabelConvertor</module>

@@ -36,6 +36,15 @@
 			<defaultvalue>false</defaultvalue>
 		</property>
 		
+		<property>
+			<name>gravity</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be n (North), e, w, s
+			</description>
+			<defaultvalue>"n"</defaultvalue>
+		</property>
+		
         
 	</component>
 </components>

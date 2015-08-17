@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -29,7 +28,7 @@ import javax.faces.convert.ConverterException;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIInputListOfValues;
-import org.omidbiz.component.UITooltip;
+import org.omidbiz.component.UIInputTipsy;
 import org.omidbiz.util.JSFUtil;
 
 /**
@@ -181,7 +180,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 while (iterator.hasNext())
                 {
                     UIComponent uiComponent = (UIComponent) iterator.next();
-                    if (uiComponent instanceof UITooltip)
+                    if (uiComponent instanceof UIInputTipsy)
                     {
                         uiComponent.encodeBegin(context);
                     }

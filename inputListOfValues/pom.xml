@@ -55,7 +55,7 @@
    
     <dependency>
 		<groupId>org.omidbiz</groupId>
-		<artifactId>tooltip</artifactId>
+		<artifactId>tipsy</artifactId>
 		<version>${project.version}</version>
 	
     </dependency>
