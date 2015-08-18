@@ -15,7 +15,7 @@
 	</script>
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,new org.ajax4jsf.javascript.PrototypeScript(),new org.ajax4jsf.javascript.AjaxScript(),/org/omidbiz/renderkit/html/script/jquery.tipsy.js</h:scripts>
 	<h:styles>/org/omidbiz/renderkit/html/css/tipsy.css</h:styles>
-	<f:resource name="/org/omidbiz/renderkit/html/css/images/tipsy.gif" var="ticon" />
+	<f:resource name="org/omidbiz/images/tipsy.gif" var="tipsyIcon" />
 	
 	
 	
