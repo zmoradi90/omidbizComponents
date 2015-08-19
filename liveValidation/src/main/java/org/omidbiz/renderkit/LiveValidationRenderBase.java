@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
@@ -56,21 +57,34 @@ public class LiveValidationRenderBase extends HeaderResourcesRendererBase
     {
 
         String type = (String) component.getAttributes().get("type");
+        String forComponent = (String) component.getAttributes().get("for");
         UIComponent parent = component.getParent();
 
 
-        if (type != null && parent != null)
+        if (type != null)
         {
-           Boolean onlyOnSubmit = (Boolean) component.getAttributes().get("onlyOnSubmit");
-           String failureMessage = (String) component.getAttributes().get("failureMessage");
-           failureMessage = failureMessage == null ? "Invalid":failureMessage;
-           Random rand = new Random();	
-           String lvId = "lv_"+ rand.nextInt(100);
-           StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){");
-           sb.append(String.format(" var %s = new LiveValidation('%s', {onlyOnSubmit: true}); ", lvId, parent.getClientId(context)));
-           sb.append(lvId).append(".add( Validate.").append(type).append(String.format(" , {failureMessage: '%s'}); ", failureMessage));
-           sb.append("});");
-           getUtils().writeScript(context, component, sb.toString());
+           if(parent != null || forComponent != null)
+           {
+               String componentId = null;
+               if(forComponent != null && forComponent.trim().length() > 0)
+                   componentId = forComponent;
+               else
+                   componentId = parent.getClientId(context);
+               Boolean onlyOnSubmit = (Boolean) component.getAttributes().get("onlyOnSubmit");
+               String failureMessage = (String) component.getAttributes().get("failureMessage");
+               failureMessage = failureMessage == null ? "Invalid":failureMessage;
+               Random rand = new Random();	
+               String lvId = "lv_"+ rand.nextInt(100);
+               StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){");
+               sb.append(String.format(" var %s = new LiveValidation('%s', {onlyOnSubmit: true}); ", lvId, componentId));
+               sb.append(lvId).append(".add( Validate.").append(type).append(String.format(" , {failureMessage: '%s'}); ", failureMessage));
+               //customFunction
+               String cf = (String) component.getAttributes().get("customFunction");
+               if(cf != null)
+                   sb.append(lvId).append(".add( Validate.").append(cf).append(String.format(" , {failureMessage: '%s'}); ", failureMessage));
+               sb.append("});");
+               getUtils().writeScript(context, component, sb.toString());
+           }
         }
     }
 
