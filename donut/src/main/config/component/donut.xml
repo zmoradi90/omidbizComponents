@@ -50,12 +50,18 @@
 		</property>
 		
 		<property>
+			<name>caption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				under donut titles 
+			</description>
+		</property>
+        <property>
 			<name>title</name>
 			<classname>java.lang.String</classname>
 			<description>
-				is a string 
+				using for tipsy 
 			</description>
 		</property>
-        
 	</component>
 </components>

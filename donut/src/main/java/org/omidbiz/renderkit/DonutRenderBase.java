@@ -45,31 +45,39 @@ public class DonutRenderBase extends HeaderResourcesRendererBase
         		writer.startElement("div", null);
         			getUtils().writeAttribute(writer, "class", "donut-panel-up");
         				writer.startElement("canvas", null);
-        					getUtils().writeAttribute(writer, "width", "60");
-        					getUtils().writeAttribute(writer, "height", "60");
-        					getUtils().writeAttribute(writer, "id",clientId);
+        					getUtils().writeAttribute(writer, "width", "50");
+        					getUtils().writeAttribute(writer, "height", "50");
+        					getUtils().writeAttribute(writer, "id",clientId+"_cv");
         				writer.endElement("canvas");
         				writer.startElement("div", null);
     						getUtils().writeAttribute(writer, "class", "donut-value");
     							Object value = (Object) component.getAttributes().get("value");
     							if(value != null)
-    								writer.writeText(String.valueOf(value), null);
+    								writer.writeText("%"+String.valueOf(value), null);
+    				        	if(component.getAttributes().get("title")!=null)
+    				        	{
+    				        		writer.startElement("div", null);
+    				        		getUtils().writeAttribute(writer, "id",clientId);
+    				        		getUtils().writeAttribute(writer, "class","donut-title");
+    				        		getUtils().writeAttribute(writer, "title",component.getAttributes().get("title"));
+    				        		
+    				        		writer.endElement("div");
+    				        	}
         				writer.endElement("div");
         		writer.endElement("div");
         		writer.startElement("div", null);
     				getUtils().writeAttribute(writer, "class", "donut-panel-down");
     					writer.startElement("div", null);
-    						getUtils().writeAttribute(writer, "class", "donut-title");
-    						Object title = (Object) component.getAttributes().get("title");
-							if(title != null)
-								writer.writeText(String.valueOf(title), null);
+    						getUtils().writeAttribute(writer, "class", "donut-caption");
+    						Object caption = (Object) component.getAttributes().get("caption");
+							if(caption != null)
+								writer.writeText(String.valueOf(caption), null);
 							else
 								writer.writeText("بدون عنوان", null);
     					writer.endElement("div");
     			writer.endElement("div");
 
         	writer.endElement("div");
-
     	writer.endElement("div");
     	
     }

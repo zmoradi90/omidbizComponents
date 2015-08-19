@@ -25,16 +25,16 @@ Richfaces.donut.customDonut = function customDonut(id,value,mode){
 
 Richfaces.donut.setColor=function setColor(value, mode) {
 
-	if (value > 0 && value <= 20 && mode === 'normal') {
+	if (value > 0 && value <= 20 && mode === 'reverse') {
 		return "#2EA00B";
-	} else if (value > 0 && value <= 20 && mode === 'reverse') {
+	} else if (value > 0 && value <= 20 && mode === 'normal') {
 		return "#F7464A";
 	} else if (value > 20 && value <= 50) {
 		console.log("hell");
 		return "#DDDD88";
-	} else if ((value > 50 && value < 100) && mode === 'normal') {
+	} else if ((value > 50 && value <= 100) && mode === 'normal') {
 		return "#2EA00B";
-	} else if ((value > 50 && value < 100) && mode === 'reverse') {
+	} else if ((value > 50 && value <= 100) && mode === 'reverse') {
 		return "#F7464A";
 	} else {
 		return "#000000";
