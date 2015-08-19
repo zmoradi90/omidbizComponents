@@ -42,6 +42,12 @@
 		</property>
 		
 		<property>
+			<name>itemsValue</name>
+			<classname>java.lang.Object</classname>
+						
+		</property>
+		
+		<property>
 			<name>value</name>
 			<classname>java.lang.Object</classname>
 						

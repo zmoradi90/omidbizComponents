@@ -48,12 +48,8 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         if (forceId != null)
         {
             String submittedValue = (String) requestParams.get((String) forceId);
-
-            if (submittedValue != null && submittedValue.length() < 1)
-            {
-                pickList.setSubmittedValue(submittedValue);
-                pickList.setValid(true);
-            }
+            pickList.setSubmittedValue(submittedValue);
+            pickList.setValid(true);
         }
     }
 
@@ -77,17 +73,15 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         ResponseWriter writer = context.getResponseWriter();
         //
         writer.startElement("div", null);
-        getUtils().writeAttribute(
-                writer,
-                "style",
-                String.format("width:%s;", component.getAttributes().get("sourceWidth")));
+        getUtils().writeAttribute(writer, "style", String.format("width:%s;", component.getAttributes().get("sourceWidth")));
         getUtils().writeAttribute(writer, "class", "pick-list-selection");
         //
         writer.startElement("select", component);
         getUtils().writeAttribute(
                 writer,
                 "style",
-                String.format("height:%s;min-width: %s;", component.getAttributes().get("sourceHeight"), component.getAttributes().get("sourceWidth")));
+                String.format("height:%s;min-width: %s;", component.getAttributes().get("sourceHeight"),
+                        component.getAttributes().get("sourceWidth")));
         getUtils().writeAttribute(writer, "id", sourceId);
         getUtils().writeAttribute(writer, "class", "pick-list-select-scroll");
         getUtils().writeAttribute(writer, "multiple", "multiple");
@@ -98,15 +92,12 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         {
             switchType = "onclick";
         }
-        getUtils().writeAttribute(
-                writer,
-                switchType,
+        getUtils().writeAttribute(writer, switchType,
                 String.format("Fanpardaz.pickList.sourceClickManager('#%s', '#%s')", clientId.replace(":", "\\\\:"), forceId));
-        
-        
+
         //
         Object items = component.getAttributes().get("items");
-        Object value = component.getAttributes().get("value");
+        Object value = component.getAttributes().get("itemsValue");
         Collection<?> valueList = null;
         if (value != null)
         {
@@ -164,10 +155,7 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         ResponseWriter writer = context.getResponseWriter();
         //
         writer.startElement("div", null);
-        getUtils().writeAttribute(
-                writer,
-                "style",
-                String.format("width:%s;", component.getAttributes().get("targetWidth")));
+        getUtils().writeAttribute(writer, "style", String.format("width:%s;", component.getAttributes().get("targetWidth")));
         getUtils().writeAttribute(writer, "class", "pick-list-selection");
         //
         writer.startElement("select", component);
@@ -175,7 +163,8 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(
                 writer,
                 "style",
-                String.format("height:%s; min-width:%s", component.getAttributes().get("targetHeight"), component.getAttributes().get("targetWidth")));
+                String.format("height:%s; min-width:%s", component.getAttributes().get("targetHeight"),
+                        component.getAttributes().get("targetWidth")));
         getUtils().writeAttribute(writer, "class", "pick-list-select-scroll");
         getUtils().writeAttribute(writer, "multiple", "multiple");
         //
@@ -185,13 +174,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
         {
             switchType = "onclick";
         }
-        getUtils().writeAttribute(
-                writer,
-                switchType,
+        getUtils().writeAttribute(writer, switchType,
                 String.format("Fanpardaz.pickList.targetClickManager('#%s', '#%s')", clientId.replace(":", "\\\\:"), forceId));
-        
+
         //
-        Object value = component.getAttributes().get("value");
+        Object value = component.getAttributes().get("itemsValue");
         if (value != null)
         {
             if (value instanceof Collection<?>)
