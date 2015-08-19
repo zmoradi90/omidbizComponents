@@ -105,11 +105,12 @@
 							</output>
 							<!-- files to include, path relative to output's directory or absolute path-->
 							<includes>
-								<!--
 								<include>
-									${project.build.directory}/compressed/org/omidbiz/renderkit/html/script/colorbox-min.js
+									${project.basedir}/jqueryui/jquery.ui.core-min.js
 								</include>
-								-->
+								<include>
+									${project.basedir}/jqueryui/jquery.ui.widget-min.js
+								</include>
 								
 								<include>**/*-min.js</include>
 							</includes>
@@ -147,11 +148,9 @@
 							</output>
 							<!-- files to include, path relative to output's directory or absolute path-->
 							<includes>
-								<!--
-								<include>
-									${project.build.directory}/compressed/org/omidbiz/renderkit/html/script/colorbox-min.css
-								</include>
-								-->
+								<!---->
+								
+								
 								
 								<include>**/*-min.css</include>
 							</includes>
