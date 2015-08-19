@@ -28,9 +28,30 @@
 			<name>type</name>
 			<classname>java.lang.String</classname>
 			<description>
-				can be Presence, Email
+				
 			</description>
 			<required>true</required>
+		</property>
+		
+		<property>
+			<name>customFunction</name>
+			<classname>java.lang.String</classname>
+			<description>
+				Validate.Username = function(value, message){
+					Validate.fail(message);
+				    return false;
+				}
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>for</name>
+			<classname>java.lang.String</classname>
+			<description>
+				used for html input	
+			</description>
+			
 		</property>
 		
 		<property>
