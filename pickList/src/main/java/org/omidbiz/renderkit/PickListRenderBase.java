@@ -206,6 +206,11 @@ public class PickListRenderBase extends HeaderResourcesRendererBase
     {
         return "#" + component.getClientId(context).replace(":", "\\\\:");
     }
+    
+    public String getJQueryForceId(FacesContext context, UIComponent component)
+    {
+        return "#" + ((String)component.getAttributes().get("forceId")).replace(":", "\\\\:");
+    }
 
     @Override
     protected Class<? extends UIComponent> getComponentClass()

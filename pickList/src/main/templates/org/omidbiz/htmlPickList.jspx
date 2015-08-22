@@ -51,6 +51,7 @@
 	<script type="text/javascript">
 	jQuery(document).ready(function () {
 
+		Fanpardaz.pickList.updateTargetValues('#{this:getJQueryForceId(context, component)}', '#{this:getJQueryId(context, component)}_target');
 
 		jQuery('#{this:getJQueryId(context, component)}_source').click(function(){
 			if(jQuery(this).find(":selected").size()===0)
