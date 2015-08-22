@@ -24,6 +24,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
@@ -100,13 +101,17 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         if (viewAttr == null)
             return "#";
         String view = (String) viewAttr;
-        if (view.contains("?"))
+        if (objectName != null)
         {
-            view = view + "&objectName=" + objectName;
-        }
-        else
-        {
-            view = view + "?objectName=" + objectName;
+
+            if (view.contains("?"))
+            {
+                view = view + "&objectName=" + objectName;
+            }
+            else
+            {
+                view = view + "?objectName=" + objectName;
+            }
         }
         return view;
     }
@@ -123,16 +128,12 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         extraInfo = extraInfo == null ? "" : extraInfo;
         if (type != null && "link".equalsIgnoreCase(type))
         {
+            ResponseWriter writer = context.getResponseWriter();
             ExternalContext external = context.getExternalContext();
             Map requestParams = external.getRequestParameterMap();
             String objectName = (String) requestParams.get("objectName");
-            if (JSFUtil.isNotEmpty(objectName))
-            {
-                //create hidden input for paginaion
-            }
             if (objectName == null)
                 objectName = (String) objectNameAttr;
-            ResponseWriter writer = context.getResponseWriter();
             if (srts != null && srts)
             {
                 writer.startElement("a", component);

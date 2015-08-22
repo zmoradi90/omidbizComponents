@@ -22,10 +22,10 @@
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
 		</tag>
-		<!--<taghandler>
-			<classname>org.omidbiz.LovTagHandler</classname>
-		</taghandler>
-		-->
+		<taghandler generate="true">
+            <classname>org.omidbiz.handler.LovTagHandler</classname>
+        	<superclass>org.omidbiz.handler.LovTagHandlerBase</superclass>
+        </taghandler>
 		&ui_component_attributes;
 		&ui_input_attributes;
 		&html_style_attributes;

@@ -37,7 +37,19 @@ public abstract class UIInputListOfValues extends UIInput
 
     private Object valueName;
 
+    private String objectName;
+
     private Object valueId;
+
+    public String getObjectName()
+    {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName)
+    {
+        this.objectName = objectName;
+    }
 
     public Object getValueName()
     {
@@ -57,7 +69,7 @@ public abstract class UIInputListOfValues extends UIInput
             }
             catch (ELException e)
             {
-                //TODO : DO nothing //FIXME: throw new FacesException(e);
+                // TODO : DO nothing //FIXME: throw new FacesException(e);
             }
             catch (Exception e)
             {
@@ -93,7 +105,7 @@ public abstract class UIInputListOfValues extends UIInput
             }
             catch (ELException e)
             {
-                //TODO : DO nothing //FIXME: throw new FacesException(e);
+                // TODO : DO nothing //FIXME: throw new FacesException(e);
             }
             catch (Exception e)
             {
@@ -115,10 +127,11 @@ public abstract class UIInputListOfValues extends UIInput
     @Override
     public Object saveState(FacesContext context)
     {
-        Object values[] = new Object[3];
+        Object values[] = new Object[4];
         values[0] = super.saveState(context);
         values[1] = valueName;
         values[2] = valueId;
+        values[3] = objectName;
         return values;
     }
 
@@ -129,6 +142,7 @@ public abstract class UIInputListOfValues extends UIInput
         super.restoreState(context, values[0]);
         valueName = values[1];
         valueId = values[2];
+        objectName = (String) values[3];
     }
 
     @Override
