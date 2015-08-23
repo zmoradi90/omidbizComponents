@@ -77,31 +77,24 @@ var tabManager = {
     		var setLimitIndex=true;
     		var limitIndexTabFinder=0;
     		var limitWidth=tabNavWindow.width();
-    		var totalWidthTabs=0;
-    		var navPaddingRight=uiTabNav.css('padding-right');
-    		tabs.each(function(){
-    			if(limitIndexTabFinder==0)
-				{
-    				itemWidths.push(jQuery(this).width()+parseInt(jQuery(this).css("margin-right"))+parseInt(navPaddingRight));
+    		var totalWidthTabs=0;    		
+    		tabs.each(function(){    			
     				limitIndexTabFinder++;
-				}
-    			else
-    			{
-    				limitIndexTabFinder++;
-    				itemWidths.push(jQuery(this).width()+parseInt(jQuery(this).css("margin-right")));
-    				totalWidthTabs+=jQuery(this).width()+parseInt(jQuery(this).css("margin-right"));
+    				var tabWidth = jQuery(this).width()+parseInt(jQuery(this).css("margin-right"));
+    				itemWidths.push(tabWidth);
+    				totalWidthTabs+=tabWidth;    				
     				if(totalWidthTabs>limitWidth && setLimitIndex)
-    				{
-    					limitIndex=limitIndexTabFinder;
+    				{										
+    					limitIndex=limitIndexTabFinder;    				
     					setLimitIndex=false;
     				}
-    			}
+    			
     		});
-    		totalWidthTabs=parseInt(totalWidthTabs)+parseInt(navPaddingRight);
+    				
     		if(limitIndex!=0)
-    			{
-    				navButtons.show();
-    			}
+    		{				
+    			navButtons.show();
+    		}
     		// set tab main index for scrolling size
     		mainIndex = numberOfTabs - limitIndex +2;
 
