@@ -76,8 +76,13 @@ public class ClickableButtonRenderer extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "style", (String) style);
         }
         //
+        Boolean disabled = (Boolean) component.getAttributes().get("disabled");
+        if(disabled != null && disabled)
+			getUtils().writeAttribute(writer, "disabled", "disabled");
+        //
         Object msg = component.getAttributes().get("textMessage");
-        writer.write((String) msg);
+        if(msg != null)
+			writer.write((String) msg);		
         writer.endElement("button");
     }
 

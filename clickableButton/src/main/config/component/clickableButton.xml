@@ -60,6 +60,15 @@
 			
 		</property>
 		
+		<property>
+			<name>disabled</name>
+			<classname>boolean</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
 		
         
 	</component>
