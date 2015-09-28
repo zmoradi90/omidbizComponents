@@ -14,7 +14,7 @@
 	
 	
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/org/omidbiz/renderkit/html/script/colorboxUtil.js,/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
-	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css</h:styles>
+	<h:styles>/org/omidbiz/renderkit/html/css/popupBox.css</h:styles>
 	
 	<f:resource name="org/omidbiz/images/loading_background.png" var="bg" />
 	<f:resource name="org/omidbiz/images/loading.gif" var="loader" />

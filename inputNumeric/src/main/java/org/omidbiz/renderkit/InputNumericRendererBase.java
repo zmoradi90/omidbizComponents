@@ -98,5 +98,12 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         }
         return valueString;
     }
+    
+    
+    public String getJQueryId(FacesContext context, UIComponent component)
+    {
+        String clientId = component.getClientId(context);
+        return "#"+clientId.replace(":", "\\\\:");
+    }
 
 }
