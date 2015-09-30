@@ -1359,6 +1359,8 @@
     * Use jQuery's $.extend method - great way to pass ASP.NET current culture settings
     */
     $.fn.autoNumeric.defaults = {
+		aNum: '0123456789',
+
         /** allowed thousand separator characters
          * comma = ','
          * period "full stop" = '.'
@@ -1397,12 +1399,12 @@
          * value must be enclosed in quotes and use the period for the decimal point
          * value must be larger than vMin
          */
-        vMax: '9999999999999.99',
+        vMax: '9999999999999',
         /** minimum possible value
          * value must be enclosed in quotes and use the period for the decimal point
          * value must be smaller than vMax
          */
-        vMin: '-9999999999999.99',
+        vMin: '-9999999999999',
         /** max number of decimal places = used to override decimal places set by the vMin & vMax values
          * value must be enclosed in quotes example mDec: '3',
          * This can also set the value via a call back function mDec: 'css:#

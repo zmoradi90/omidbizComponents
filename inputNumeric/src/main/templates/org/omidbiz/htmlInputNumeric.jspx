@@ -37,7 +37,7 @@
 
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
-			 jQuery('#{this:getJQueryId(context, component)}').autoNumeric('init', {aSep: '#{component.attributes["separator"]}', vMax: '999999999999999999999999999.99',vMin: '0000000000000000000000000.00'});			
+			 jQuery('#{this:getJQueryId(context, component)}').autoNumeric('init', {aSep: '#{component.attributes["separator"]}', vMax: '999999999999999999999999999',vMin: '0000000000000000000000000'});			
 		  }); 
 	</script>
 
