@@ -100,8 +100,11 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
     }
     
     
-    public String getJQueryId(FacesContext context, UIComponent component)
+    public String getInputId(FacesContext context, UIComponent component)
     {
+        String forceId = (String) component.getAttributes().get("forceId");
+        if(forceId != null)
+            return "#"+forceId;
         String clientId = component.getClientId(context);
         return "#"+clientId.replace(":", "\\\\:");
     }
