@@ -60,6 +60,13 @@
 			</description>
 		</property>
 		<property>
+			<name>unitLabel</name>
+			<classname>java.lang.String</classname>
+			<description>
+				Rial unit
+			</description>
+		</property>
+		<property>
 			<name>title</name>
 			<classname>java.lang.String</classname>
 			<description>
