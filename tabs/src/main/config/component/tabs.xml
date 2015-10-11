@@ -139,6 +139,14 @@
         </property>
         
         <property>
+            <name>labelClass</name>
+            <classname>java.lang.String</classname>
+            <description>
+                label class
+            </description>
+        </property>
+        
+        <property>
             <name>join</name>
             <classname>boolean</classname>
             <description>
