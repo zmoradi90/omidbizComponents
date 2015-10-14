@@ -49,6 +49,7 @@
 <tr><td><button type="button" disabled="disabled" id="#{clientId}_removeall" class="#{buttonStyleClass}">#{removeAllText}</button></td></tr>
 </table>
 	<script type="text/javascript">
+
 	jQuery(document).ready(function () {
 
 		Fanpardaz.pickList.updateTargetValues('#{this:getJQueryForceId(context, component)}', '#{this:getJQueryId(context, component)}_target');
@@ -70,7 +71,17 @@
 		
 		jQuery('#{this:getJQueryId(context, component)}_remove').click(function () {
 			Fanpardaz.pickList.moveItems('#{this:getJQueryId(context, component)}_target', '#{this:getJQueryId(context, component)}_source');
-			jQuery('#{this:getJQueryId(context, component)}_copyall').attr('disabled',false);
+			if(jQuery('#{this:getJQueryId(context, component)}_target').children('option').length==0)
+			{
+				jQuery('#{this:getJQueryId(context, component)}_copyall').attr('disabled',false);
+				jQuery('#{this:getJQueryId(context, component)}_remove').attr('disabled',true);
+				jQuery('#{this:getJQueryId(context, component)}_removeall').attr('disabled',true);
+				
+			}
+			if(jQuery('#{this:getJQueryId(context, component)}_target').children('option').length>0)
+				{
+					jQuery('#{this:getJQueryId(context, component)}_target').children('option').last().attr("selected",true);
+				}
 		});
 		 
 		jQuery('#{this:getJQueryId(context, component)}_copy').on('click', function () {
@@ -80,6 +91,10 @@
 			{
 				jQuery('#{this:getJQueryId(context, component)}_copyall').attr('disabled',true);
 				jQuery('#{this:getJQueryId(context, component)}_copy').attr('disabled',true);
+			}
+			if(jQuery('#{this:getJQueryId(context, component)}_source').children('option').length>0)
+			{
+				jQuery('#{this:getJQueryId(context, component)}_source').children('option').last().attr("selected",true);
 			}
 		});
 		 

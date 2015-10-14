@@ -28,7 +28,8 @@ Fanpardaz.pickList.moveAllItems = function moveAllItems(origin, dest, updatedInp
 
 Fanpardaz.pickList.moveItems = function moveItems(origin, dest, updatedInputId) {
 	var opt = jQuery(origin).find(':selected');
-	opt.removeAttr('selected');
+	var settledOpts=jQuery(dest).find(':selected');
+	settledOpts.removeAttr('selected');
 	opt.appendTo(dest);
 	//
 	Fanpardaz.pickList.updateTargetValues(updatedInputId, dest);
@@ -37,7 +38,8 @@ Fanpardaz.pickList.moveItems = function moveItems(origin, dest, updatedInputId) 
 Fanpardaz.pickList.sourceClickManager = function sourceClickManager(clientId, forceId){
 	Fanpardaz.pickList.moveItems(clientId+'_source', clientId+'_target', forceId);
 	var sourceListItems=jQuery(clientId+'_source');
-	if(sourceListItems.children().size()===1)
+	sourceListItems.attr('selected',true);
+	if(sourceListItems.children("option").size()===0)
 	{
 		jQuery(clientId+'_copyall').attr('disabled',true);
 		jQuery(clientId+'_copy').attr('disabled',true);
@@ -47,6 +49,7 @@ Fanpardaz.pickList.sourceClickManager = function sourceClickManager(clientId, fo
 	{
 		jQuery(clientId+'_copy').attr('disabled',false);
 		jQuery(clientId+'_removeall').attr('disabled',false);
+		jQuery(clientId+'_remove').attr('disabled',false);
 	}
 	//
 	
@@ -56,7 +59,7 @@ Fanpardaz.pickList.targetClickManager = function targetClickManager(clientId, fo
 	Fanpardaz.pickList.moveItems(clientId + "_target",clientId+"_source",forceId);
 	var targetId = clientId + "_target";
 	var targetListItems=jQuery(targetId);
-	if(targetListItems.children().size()===1)
+	if(targetListItems.children("option").size()===0)
 	{
 		jQuery(clientId+'_remove').attr('disabled',true);
 		jQuery(clientId+'_removeall').attr('disabled',true);
@@ -66,6 +69,8 @@ Fanpardaz.pickList.targetClickManager = function targetClickManager(clientId, fo
 	{
 		jQuery(clientId+'_removeall').attr('disabled',false);
 		jQuery(clientId+'_copyall').attr('disabled',false);
+		jQuery(clientId+'_copy').attr('disabled',false);
+
 	}
 	
 }
