@@ -51,6 +51,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         StringBuilder disabledTabs = new StringBuilder();
         StringBuilder js = new StringBuilder("jQuery(document).ready(function(){");
         UITabs tab = ((UITabs) component);
+
         String jQueryClientId = clientId.replace(":", "\\\\:");
         js.append("jQuery('#").append(jQueryClientId).append("').tabs({");
         String tabCookieName = "selected-tab_" + jQueryClientId;
@@ -90,9 +91,14 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             if (comp instanceof UITabPanel)
             {
                 UITabPanel tp = ((UITabPanel) comp);
+                Object labelClass = (Object) tp.getAttributes().get("labelClass");
                 if (tp.isRendered())
                 {
                     writer.startElement("li", null);
+                    if (labelClass != null)
+                    {
+                        getUtils().writeAttribute(writer, "class", labelClass);
+                    }
                     writer.startElement("a", null);
                     String title = (String) tp.getTitle();
                     String imageSrc = (String) tp.getImageSrc();

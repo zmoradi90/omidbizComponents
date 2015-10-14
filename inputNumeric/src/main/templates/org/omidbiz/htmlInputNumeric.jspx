@@ -9,11 +9,15 @@
 	class="org.omidbiz.renderkit.html.InputNumericRenderer"
 	baseclass="org.omidbiz.renderkit.InputNumericRendererBase"
 	component="org.omidbiz.component.UIInputNumeric">
+	<h:styles>
+		css/inputNumeric.css
+	</h:styles>
 	<f:clientid var="clientId" />
 
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,/org/omidbiz/renderkit/html/script/autoNumeric.js</h:scripts>
 
 	<c:set var="forceId" value="#{component.attributes['forceId']}"/>
+	<c:set var="unitLabel" value="#{component.attributes['unitLabel']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -27,17 +31,19 @@
 	<input id="#{forceId}" name="#{forceId}" type="text"
 		value="#{this:getValueAsString(context, component)}"
 		class="myAutoNumeric" style="#{component.attributes['inputStyle']}" />
+		<div class="rial-unit-label">#{unitLabel}</div>
 		
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 
 <input id="#{clientId}" name="#{clientId}" type="text"
 		value="#{this:getValueAsString(context, component)}"
 		class="myAutoNumeric" style="#{component.attributes['inputStyle']}" />
+		<div class="rial-unit-label">#{unitLabel}</div>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>				
 
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
-			 jQuery('#{this:getJQueryId(context, component)}').autoNumeric('init', {aSep: '#{component.attributes["separator"]}', vMax: '999999999999999999999999999',vMin: '0000000000000000000000000'});			
+			 jQuery('#{this:getInputId(context, component)}').autoNumeric('init', {aSep: '#{component.attributes["separator"]}', vMax: '999999999999999999999999999.99',vMin: '0000000000000000000000000.00'});			
 		  }); 
 	</script>
 

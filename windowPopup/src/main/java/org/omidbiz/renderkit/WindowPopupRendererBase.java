@@ -92,7 +92,7 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
 
                 // javascript
                 StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
-                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({width:\"80%\", height:\"80%\", iframe:"
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({fastIframe:false, width:\"80%\", height:\"80%\", iframe:"
                         + iframe + "});");
                 sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox(jQuery.extend({");
                 sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
