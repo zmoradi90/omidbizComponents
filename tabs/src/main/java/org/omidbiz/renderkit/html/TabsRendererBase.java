@@ -249,7 +249,10 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         Map<String, String> requestParams = external.getRequestParameterMap();
         if (requestParams != null && requestParams.size() > 0)
         {
-            originalLink.append("?");
+            if(originalLink.toString().contains("?"))
+                originalLink.append("&");
+            else
+                originalLink.append("?");
             int cnt = 0;
             for (Map.Entry<String, String> entry : requestParams.entrySet())
             {
