@@ -110,6 +110,14 @@
 			</description>
 		</property>
 		<property>
+			<name>calculator</name>
+			<classname>boolean</classname>
+			<description>
+				insert a nice calculator 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		<property>
 			<name>captionClass</name>
 			<classname>java.lang.String</classname>
 			<description>
