@@ -511,7 +511,9 @@
 				inst.options.onOpen.apply((inst._input ? inst._input[0] : null),  // trigger custom callback
 					[(inst._inline ? inst.curValue : inst._input.val().replace(/\,/g,'')), inst]);
 			}
-			plugin._reset(inst, inst._input.val().replace(/\,/g,''));
+			var tempStr =inst._input.val().replace(/\,/g,'');
+			inst._input.val("");
+			plugin._reset(inst, tempStr);
 			plugin._updateCalculator(inst);
 			// and adjust position before showing
 			offset = plugin._checkOffset(inst, offset, isFixed);
@@ -999,6 +1001,7 @@
 		_binaryOp: function(inst, op, label) {
 			if (!inst._newValue && inst._pendingOp) {
 				inst._pendingOp(inst);
+				inst._input.val("");
 				inst.curValue = (inst.options.base === 10 ? inst.curValue : Math.floor(inst.curValue));
 				inst.dispValue = this._setDisplay(inst);
 			}
@@ -1340,8 +1343,8 @@
 		['_.', '.', plugin.digit, null, 'decimal', 'DECIMAL', '.'],
 		['_+', '+', plugin.binary, plugin._add, 'arith add', 'ADD', '+'],
 		['_-', '-', plugin.binary, plugin._subtract, 'arith subtract', 'SUBTRACT', '-'],
-		['_*', '*', plugin.binary, plugin._multiply, 'arith multiply', 'MULTIPLY', '*'],
-		['_/', '/', plugin.binary, plugin._divide, 'arith divide', 'DIVIDE', '/'],
+		['_*', '×', plugin.binary, plugin._multiply, 'arith multiply', 'MULTIPLY', '*'],
+		['_/', '÷', plugin.binary, plugin._divide, 'arith divide', 'DIVIDE', '/'],
 		['_%', '%', plugin.unary, plugin._percent, 'arith percent', 'PERCENT', '%'],
 		['_=', '=', plugin.unary, plugin._equals, 'arith equals', 'EQUALS', '='],
 		['+-', '±', plugin.unary, plugin._plusMinus, 'arith plus-minus', 'PLUS_MINUS', '#'],

@@ -53,7 +53,7 @@
 		jQuery(document).ready(function(){
 					var tempId = '#{this:getInputId(context, component)}';
 					jQuery.calculator.setDefaults({showOn: 'both', buttonImageOnly: true, buttonImage: "#{btnImage}"});
-					jQuery(tempId).calculator();
+					jQuery(tempId).calculator({showOn: 'button'});
 					 jQuery(tempId).autoNumeric('init', {aSep: '#{component.attributes["separator"]}', vMax: '999999999999999999999999999.99',vMin: '0000000000000000000000000.00'});			
 		  }); 
 	</script>

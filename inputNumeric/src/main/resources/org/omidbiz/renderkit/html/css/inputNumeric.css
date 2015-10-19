@@ -13,16 +13,16 @@ button.calculator-trigger {
 	padding: 0px;
 }
 img.calculator-trigger {
-    height: 20px;
-    width: 20px;
-	vertical-align: middle;
-    background-color: #ddd;
-   box-sizing: border-box;
-   cursor: pointer;
-   float: right;
-   height: 29px;
-   padding: 5px;
-   width: 32px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px #ccc inset;
+    box-sizing: border-box;
+    cursor: pointer;
+    float: right;
+    height: 29px;
+    padding: 5px;
+    vertical-align: middle;
+    width: 32px;
 }
 .calculator-popup {
 	display: none;
