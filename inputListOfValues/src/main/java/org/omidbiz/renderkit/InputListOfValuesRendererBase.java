@@ -26,6 +26,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.ajax4jsf.renderkit.ComponentVariables;
+import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIInputListOfValues;
@@ -91,7 +93,18 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         Object selectValue = component.getAttributes().get("selectedText");
         if (selectValue == null)
             return selectValue;
-        return InputUtils.getConvertedValue(context, component, selectValue);
+        return InputUtils.getConvertedStringValue(context, component, String.valueOf(selectValue));
+    }
+
+    public Object getValueName(FacesContext context, UIComponent component)
+    {
+        UIInputListOfValues lov = (UIInputListOfValues) component;
+        Object valueName = lov.getValueName();
+
+        if (valueName == null)
+            return valueName;
+
+        return InputUtils.getConvertedStringValue(context, component, String.valueOf(valueName));
     }
 
     public String getViewObjectName(FacesContext context, UIComponent component)
@@ -116,6 +129,96 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         return view;
     }
 
+    public void initializeAutoNumeric(FacesContext context, UIInputListOfValues component) throws IOException
+    {
+        String type = (String) component.getAttributes().get("type");
+        Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
+        Object objectNameAttr = component.getAttributes().get("objectName");
+        if (type != null && "dialog".equalsIgnoreCase(type))
+        {
+            if (autoNumeric)
+            {
+                String script = "jQuery(document).ready(function(){";
+                script += String
+                        .format("jQuery('%s').autoNumeric('init', {aSep: ',', vMax: '999999999999999999999999999.99',vMin: '0000000000000000000000000.00'});",
+                                "#"+objectNameAttr + "Name");
+                script += "});";
+                getUtils().writeScript(context, component, script);
+            }
+        }
+    }
+
+    public void initializeLovInput(FacesContext context, UIInputListOfValues component) throws IOException
+    {
+        String type = (String) component.getAttributes().get("type");
+        String styleClass = (String) component.getAttributes().get("styleClass");
+        Object objectNameAttr = component.getAttributes().get("objectName");
+        Object autocompleteUrl = component.getAttributes().get("autocompleteUrl");
+        Object onchange = component.getAttributes().get("onchange");
+        Object title = component.getAttributes().get("title");
+        ComponentVariables variables = ComponentsVariableResolver.getVariables(this, component);
+        if (type != null && "dialog".equalsIgnoreCase(type))
+        {
+            ResponseWriter writer = context.getResponseWriter();
+            // <input type="hidden" name="#{objectName}Id" id="#{objectName}Id"
+            // value="#{valueId}"/>
+            writer.startElement("input", null);
+            getUtils().writeAttribute(writer, "type", "hidden");
+            getUtils().writeAttribute(writer, "name", objectNameAttr + "Id");
+            getUtils().writeAttribute(writer, "id", objectNameAttr + "Id");
+            getUtils().writeAttribute(writer, "value", component.getValueId());
+            writer.endElement("input");
+            /*
+             * <input readonly="readonly" onchange="#{onchange}"
+             * class="#{objectName}Name"
+             * title="#{component.attributes['title']}" type="text"
+             * name="#{objectName}Name" id="#{objectName}Name"
+             * value="#{this:getValueName(context, component)}"/>
+             */
+            writer.startElement("input", null);
+            if (autocompleteUrl == null)
+                getUtils().writeAttribute(writer, "readonly", "readonly");
+            if (onchange != null)
+                getUtils().writeAttribute(writer, "onchange", onchange);
+            getUtils().writeAttribute(writer, "class", objectNameAttr + "Name");
+            if (title != null)
+                getUtils().writeAttribute(writer, "title", title);
+            getUtils().writeAttribute(writer, "type", "text");
+            getUtils().writeAttribute(writer, "name", objectNameAttr + "Name");
+            getUtils().writeAttribute(writer, "id", objectNameAttr + "Name");
+            getUtils().writeAttribute(writer, "value", getValueName(context, component));
+            writer.endElement("input");
+            //
+            
+            // <a rel="rel#{objectName}" class="#{objectName}lovClass"
+            // href='#{this:getViewObjectName(context, component)}'>
+            writer.startElement("a", null);
+            getUtils().writeAttribute(writer, "rel", "rel" + objectNameAttr);
+            getUtils().writeAttribute(writer, "class", objectNameAttr + "lovClass");
+            getUtils().writeAttribute(writer, "href", getViewObjectName(context, component));
+            // <img alt="Open Colorbox" src="#{icon}"
+            // style="border: 0;vertical-align: middle;cursor: pointer;"/>
+            writer.startElement("img", null);
+            getUtils().writeAttribute(writer, "src", variables.getVariable("icon"));
+            getUtils().writeAttribute(writer, "alt", "open");
+            getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;cursor: pointer;");
+            writer.endElement("img");
+            writer.endElement("a");
+            /*
+             * <img style="border: 0;vertical-align: middle;cursor: pointer;"
+             * alt="clear" src="#{removeIcon}"
+             * onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"
+             * />
+             */
+            writer.startElement("img", null);
+            getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;cursor: pointer;");
+            getUtils().writeAttribute(writer, "alt", "clear");
+            getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon"));
+            getUtils().writeAttribute(writer, "onclick", String.format("Richfaces.colorboxControl.removeValue('%s');", objectNameAttr));
+            writer.endElement("img");
+        }
+    }
+
     public void initializeCloseLink(FacesContext context, UIInputListOfValues component) throws IOException
     {
         String type = (String) component.getAttributes().get("type");
@@ -125,6 +228,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         String styleClass = (String) component.getAttributes().get("styleClass");
         Object objectNameAttr = component.getAttributes().get("objectName");
         Object extraInfo = component.getAttributes().get("extraInfo");
+        Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
         extraInfo = extraInfo == null ? "" : extraInfo;
         if (type != null && "link".equalsIgnoreCase(type))
         {
@@ -139,7 +243,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 writer.startElement("a", component);
                 String view = (String) component.getAttributes().get("view");
                 String onclick = String.format("Richfaces.colorboxControl.extendedRequestClose(%s, '%s', '%s', '%s');", parentId,
-                        pValueText, objectName, view);
+                        pValueText, objectName, view);                
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
                 if (JSFUtil.isNotEmpty(styleClass))
@@ -153,6 +257,9 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 writer.startElement("a", component);
                 String onclick = String.format("Richfaces.colorboxControl.extendedClose(%s, '%s', '%s', '%s');", parentId, pValueText,
                         objectName, extraInfo);
+                if (autoNumeric)
+                    onclick += String.format("Richfaces.colorboxControl.applyAutoNumeric('%s');", objectNameAttr);
+                onclick += "Richfaces.colorboxControl.extendedCloseBox();";
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
                 if (JSFUtil.isNotEmpty(styleClass))
@@ -184,7 +291,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                     if (uiComponent instanceof UIInputTipsy)
                     {
                         uiComponent.encodeBegin(context);
-                    }
+                    }              
                 }
             }
 

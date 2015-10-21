@@ -82,6 +82,16 @@
 			</description>			
 			<required>true</required>
 		</property>
+		
+		<property>
+			<name>autoNumeric</name>
+			<classname>boolean</classname>
+			<description>
+				insert spareateor between digits
+			</description>
+			<defaultvalue>false</defaultvalue>			
+		</property>
+				
 		<!-- autocomplete -->
 		<property>
 			<name>autocompleteUrl</name>
@@ -89,7 +99,6 @@
 			<description>
 			</description>			
 		</property>
-		
 		<property>
 			<name>title</name>
 			<classname>java.lang.String</classname>

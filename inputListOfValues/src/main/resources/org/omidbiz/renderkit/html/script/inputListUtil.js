@@ -22,9 +22,16 @@ Richfaces.colorboxControl.getParameters = function getParameters(){
 Richfaces.colorboxControl.extendedClose = function extendedClose(id, value, obj, extraInfo){		
 	parent.document.getElementById(obj+"Id").value = id;
 	parent.document.getElementById(obj+"Name").value = value;
-	parent.document.getElementById(obj+"Name").title = extraInfo;
+	parent.document.getElementById(obj+"Name").title = extraInfo;	
+}
+
+Richfaces.colorboxControl.extendedCloseBox = function extendedCloseBox(){
 	parent.jQuery.fn.colorbox.close();
-	
+}
+
+Richfaces.colorboxControl.applyAutoNumeric = function applyAutoNumeric(obj){			
+	jQuery('#'+obj+"Name",window.parent.document).autoNumeric('init', {aSep: ',', vMax: '999999999999999999999999999.99',vMin: '0000000000000000000000000.00'});
+	jQuery('#'+obj+"Name",window.parent.document).autoNumeric('set', parent.document.getElementById(obj+"Name").value);	
 }
 
 

@@ -15,7 +15,6 @@
 	<f:clientid var="clientId" />
 
 	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,
-	/org/omidbiz/renderkit/html/script/autoNumeric.js,
 	/org/omidbiz/renderkit/html/script/jquery.plugin.js,
 	/org/omidbiz/renderkit/html/script/jquery.calculator.js,
 	</h:scripts>

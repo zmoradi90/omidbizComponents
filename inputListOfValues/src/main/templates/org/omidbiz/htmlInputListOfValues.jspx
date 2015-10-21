@@ -75,9 +75,7 @@
 	
 <jsp:scriptlet><![CDATA[ if (! "".equals(type) && type.equalsIgnoreCase("dialog") ) { ]]></jsp:scriptlet>
 
-<jsp:scriptlet><![CDATA[ if (autocompleteUrl != null && !"".equals(autocompleteUrl.trim()) ) { ]]></jsp:scriptlet>
-
-	<script type="text/javascript">
+<script type="text/javascript">
  
 jQuery(document).ready(function(){	
 	jQuery(".#{objectName}lovClass").colorbox({width:"80%", height:"80%", iframe:true});
@@ -90,6 +88,15 @@ jQuery(document).ready(function(){
 		width:'#{width}', height:'#{height}', iframe:#{iframe}, fastIframe:#{fastIframe}, overlayClose:#{overlayClose}
 		}, Richfaces.colorboxControl.getParameters()));
 	
+	
+});
+</script>
+<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+
+<jsp:scriptlet><![CDATA[ if (autocompleteUrl != null && !"".equals(autocompleteUrl.trim()) ) { ]]></jsp:scriptlet>
+
+<script>
+jQuery(document).ready(function(){
 	jQuery( '.#{objectName}Name' ).autocomplete({
 		source: "#{autocompleteUrl}",
 		minLength: 2,
@@ -100,38 +107,14 @@ jQuery(document).ready(function(){
 		});
 });
 </script>
-<input class="#{objectName}Name" title="#{component.attributes['title']}" 
-	onchange="#{onchange}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{valueName}"/>
-<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-	<script type="text/javascript">
- 
-jQuery(document).ready(function(){	
-	jQuery(".#{objectName}lovClass").colorbox({width:"80%", height:"80%", iframe:true});
-	jQuery('a[rel=rel#{objectName}]').colorbox(jQuery.extend({
-		onOpen:function(){ #{onOpen} },
-		onLoad:function(){ #{onLoad} },
-		onComplete:function(){ #{onComplete} },
-		onCleanup:function(){ #{onCleanup} },
-		onClosed:function(){ #{onClosed} },
-		width:'#{width}', height:'#{height}', iframe:#{iframe}, fastIframe:#{fastIframe}, overlayClose:#{overlayClose}
-		}, Richfaces.colorboxControl.getParameters()));
 	
-	
-});
-</script>
-<input readonly="readonly" onchange="#{onchange}" class="#{objectName}Name" title="#{component.attributes['title']}" type="text" name="#{objectName}Name" id="#{objectName}Name" value="#{valueName}"/>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 
-	<input type="hidden" name="#{objectName}Id" id="#{objectName}Id" value="#{valueId}"/>
-	
-	<a rel="rel#{objectName}" class="#{objectName}lovClass" href='#{this:getViewObjectName(context, component)}'>
-		<img alt="Open Colorbox" src="#{icon}" style="border: 0;vertical-align: middle;cursor: pointer;"/>
-	</a>
-	<img style="border: 0;vertical-align: middle;cursor: pointer;" alt="clear" src="#{removeIcon}" onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"/>
-<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+<f:call name="initializeAutoNumeric" />
 
+<f:call name="initializeLovInput" />
 
-		<f:call name="initializeCloseLink" />
+<f:call name="initializeCloseLink" />
 
 
 </f:root>
