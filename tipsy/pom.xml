@@ -51,6 +51,10 @@
     </plugins>
   </build>
   <dependencies>
-    
+    <dependency>
+    	<groupId>org.omidbiz</groupId>
+		<artifactId>inputListOfValues</artifactId>
+		<version>2.2</version>
+    </dependency>
   </dependencies>
 </project>

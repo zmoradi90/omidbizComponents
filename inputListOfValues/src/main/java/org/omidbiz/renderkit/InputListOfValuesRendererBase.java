@@ -290,7 +290,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                     UIComponent uiComponent = (UIComponent) iterator.next();
                     if (uiComponent instanceof UIInputTipsy)
                     {
-                        uiComponent.encodeBegin(context);
+                        uiComponent.encodeAll(context);
                     }              
                 }
             }

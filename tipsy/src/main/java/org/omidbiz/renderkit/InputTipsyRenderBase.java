@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.omidbiz.component.UIInputListOfValues;
 import org.omidbiz.component.UIInputTipsy;
 
 /**
@@ -43,13 +44,19 @@ public class InputTipsyRenderBase extends HeaderResourcesRendererBase
 
 		if (parentComponent != null)
 		{
+		    String tipsyClientId = parentComponent.getClientId(context);
+		    if(parentComponent instanceof UIInputListOfValues)
+		    {
+		        UIInputListOfValues lovParent = (UIInputListOfValues)parentComponent;
+		        tipsyClientId = lovParent.getObjectName() + "Name";
+		    }
 			StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){");
 			Boolean html = (Boolean)component.getAttributes().get("html");
 			String gravity = (String)component.getAttributes().get("gravity");
 			if(html != null && html)
-				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"', html: true})");
+				sb.append(" jQuery(\"#" + tipsyClientId.replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"', html: true})");
 			else	
-				sb.append(" jQuery(\"#" + parentComponent.getClientId(context).replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"'})");
+				sb.append(" jQuery(\"#" + tipsyClientId.replace(":", "\\\\:") + "\").tipsy({fade: true, gravity: '"+gravity+"'})");
 			sb.append("});");
 			getUtils().writeScript(context, component, sb.toString());
 		}
