@@ -31,7 +31,6 @@ import org.ajax4jsf.renderkit.ComponentsVariableResolver;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIInputListOfValues;
-import org.omidbiz.component.UIInputTipsy;
 import org.omidbiz.util.JSFUtil;
 
 /**
@@ -288,10 +287,10 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 while (iterator.hasNext())
                 {
                     UIComponent uiComponent = (UIComponent) iterator.next();
-                    if (uiComponent instanceof UIInputTipsy)
-                    {
+                    //if (uiComponent instanceof UIInputTipsy)
+                    //{
                         uiComponent.encodeAll(context);
-                    }              
+                    //}              
                 }
             }
 
