@@ -82,6 +82,14 @@
 			</description>
 		</property>
 		<property>
+			<name>onCloseCal</name>
+			<classname>java.lang.String</classname>
+			<description>
+				run a function when calculator is closing - u can use two parameters inst and value
+			</description>
+			<defaultvalue>"''"</defaultvalue>
+		</property>
+		<property>
 			<name>inputStyle</name>
 			<classname>java.lang.String</classname>
 			<description>
