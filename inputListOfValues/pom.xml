@@ -53,12 +53,7 @@
   </build>
   <dependencies>
    
-    <dependency>
-		<groupId>org.omidbiz</groupId>
-		<artifactId>tipsy</artifactId>
-		<version>${project.version}</version>
-	
-    </dependency>
+    
     <dependency>
 		<groupId>org.omidbiz</groupId>
 		<artifactId>util</artifactId>
