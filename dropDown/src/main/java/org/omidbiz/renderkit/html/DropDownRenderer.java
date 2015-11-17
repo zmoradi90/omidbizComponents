@@ -26,8 +26,10 @@ import javax.faces.component.UISelectItem;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.convert.ConverterException;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIDropDown;
 import org.omidbiz.component.UIDropDownItems;
 import org.omidbiz.util.JSFUtil;
@@ -54,7 +56,8 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
 
             if (JSFUtil.isNotEmpty(submittedValue))
             {
-                dd.setSubmittedValue(submittedValue);
+                Object convertedValue = InputUtils.getConvertedValue(context, component, submittedValue);
+                dd.setSubmittedValue(convertedValue);
                 dd.setValid(true);
             }
             else
@@ -134,6 +137,13 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
                     UISelectItem selectItem = (UISelectItem) kid;
                     boolean selected = selectItem.getAttributes().get("selected") == null ? false : (Boolean) selectItem.getAttributes()
                             .get("selected");
+                    if (value != null)
+                    {
+                        Object castValue = JSFUtil.castTo(value.getClass(), selectItem.getItemValue());
+                        if (value.equals(castValue))
+                            selected = true;
+                    }
+
                     writeOption(writer, selectItem.getItemValue(), selectItem.getItemLabel(), selected);
                 }
                 else
