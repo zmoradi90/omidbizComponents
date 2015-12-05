@@ -39,14 +39,14 @@ public class ClickableButtonRenderer extends HeaderResourcesRendererBase
     {
         Object forClientId = component.getAttributes().get("forClientId");
         if (forClientId != null)
-        {
-            String functionName = "clickOn" + (String) forClientId + "()";
-            createButton(context.getResponseWriter(), component, context, functionName);
+        {            
             //
             UIComponent result = RendererUtils.getInstance().findComponentFor(component, (String) forClientId);
             if (result != null)
             {
                 String clientId = result.getClientId(context);
+                String functionName = "clickOn" + (String) forClientId + "()";
+				createButton(context.getResponseWriter(), component, context, functionName, clientId);
                 // result.setRendered(false);
                 String jQueryClientId = "#" + clientId.replace(":", "\\\\:");
                 StringBuilder sb = new StringBuilder("function ").append(functionName).append("{");
@@ -58,10 +58,11 @@ public class ClickableButtonRenderer extends HeaderResourcesRendererBase
         }
     }
 
-    private void createButton(ResponseWriter writer, UIComponent component, FacesContext context, String fname) throws IOException
+    private void createButton(ResponseWriter writer, UIComponent component, FacesContext context, String fname, String clientId) throws IOException
     {
         writer.startElement("button", null);
         getUtils().writeAttribute(writer, "type", "button");
+        getUtils().writeAttribute(writer, "id", clientId+"_helper");
         getUtils().writeAttribute(writer, "onclick", fname);
         //
         Object styleClass = component.getAttributes().get("styleClass");
