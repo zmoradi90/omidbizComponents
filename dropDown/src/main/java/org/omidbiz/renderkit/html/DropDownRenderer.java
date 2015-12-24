@@ -16,6 +16,9 @@
 package org.omidbiz.renderkit.html;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -131,6 +134,16 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
                     UIDropDownItems ddi = (UIDropDownItems) kid;
                     if (items != null && items instanceof Collection<?>)
                         encodeOptions(ddi, (Collection<?>) items, value, writer, (UIDropDown) component);
+                    if (items != null && items.getClass().isArray())
+                    {
+                        Collection arrList = new ArrayList();
+                        int length = Array.getLength(items);
+                        for ( int i=0; i<length; i++ )
+                        {
+                            arrList.add(Array.get(items, i));
+                        }
+                        encodeOptions(ddi, arrList, value, writer, (UIDropDown) component);
+                    }
                 }
                 else if (kid instanceof UISelectItem)
                 {
@@ -189,6 +202,11 @@ public class DropDownRenderer extends HeaderResourcesRendererBase
             catch (ClassCastException cce)
             {
                 // DO NOTHING
+            }
+            if(item.getClass().isEnum())
+            {
+                if(((Enum)item).name().equals(value))
+                    getUtils().writeAttribute(writer, "selected", "selected");
             }
             if (item.equals(value) || (itemValue != null && itemValue.equals(value)))
             {
