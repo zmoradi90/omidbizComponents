@@ -51,12 +51,14 @@
                         tip.css({top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}).addClass('tipsy-west');
                         break;
                 }
-
-                if (opts.fade) {
-                    tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.8});
-                } else {
-                    tip.css({visibility: 'visible'});
-                }
+		if($(this).attr('title')!="" || $(this).attr('original-title')!="")
+		{
+		        if (opts.fade) {
+		            tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.8});
+		        } else {
+		            tip.css({visibility: 'visible'});
+		        }
+		}
 
             }, function() {
                 $.data(this, 'cancel.tipsy', false);
