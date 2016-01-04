@@ -3,7 +3,6 @@ package org.omidbiz.renderkit.html;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
@@ -217,8 +216,16 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         js.append(String.format(" tabManager.responsiveTabs(%s); ", "jQuery('#" + jQueryClientId + "')"));
         if (tab.isKeepState())
         {
-            js.append("jQuery('#").append(jQueryClientId)
-                    .append("').tabs('option','selected', parseInt(tabManager.readCookie('" + tabCookieName + "')));\n\r");
+            if (tab.getActive() == 0)
+            {
+                js.append("jQuery('#").append(jQueryClientId)
+                        .append("').tabs('option','selected', parseInt(tabManager.readCookie('" + tabCookieName + "')));\n\r");
+            }
+            else
+            {
+                js.append("jQuery('#").append(jQueryClientId)
+                        .append("').tabs('option','selected', parseInt(" + tab.getActive() + "));\n\r");
+            }
         }
         //
         if (hasIframe)
@@ -249,7 +256,7 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         Map<String, String> requestParams = external.getRequestParameterMap();
         if (requestParams != null && requestParams.size() > 0)
         {
-            if(originalLink.toString().contains("?"))
+            if (originalLink.toString().contains("?"))
                 originalLink.append("&");
             else
                 originalLink.append("?");

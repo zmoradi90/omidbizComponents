@@ -4,6 +4,10 @@
 
 package org.omidbiz.component;
 
+import javax.el.ELContext;
+import javax.el.ELException;
+import javax.el.ValueExpression;
+import javax.faces.FacesException;
 import javax.faces.component.UIComponentBase;
 
 /**
@@ -44,12 +48,45 @@ public abstract class UITabs extends UIComponentBase
 
     public int getActive()
     {
-        return active;
+        ValueExpression ve = getValueExpression("active");
+        if (ve != null)
+        {
+            Integer value = null;
+            try
+            {
+                value = (Integer) ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return active;
+        }
     }
 
     public void setActive(int active)
     {
-        this.active = active;
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("active");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                ve.setValue(context, active);
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.active = active;
+        }
     }
 
 }
