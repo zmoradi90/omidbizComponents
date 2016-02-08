@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd" >
+<components>
+    <component>
+        <name>org.omidbiz.Suggestion</name>
+        <family>org.omidbiz.Suggestion</family>
+        <classname>org.omidbiz.component.html.HtmlSuggestion</classname>
+        <superclass>org.omidbiz.component.UISuggestion</superclass>
+        <test/>
+        <description>
+         
+        </description>
+
+        <renderer>
+            <name>org.omidbiz.SuggestionRenderer</name>
+            <classname>org.omidbiz.renderkit.html.SuggestionRendererBase</classname>
+        </renderer>
+        <tag>
+            <name>suggestion</name>
+            <classname>org.omidbiz.taglib.SuggestionTag</classname>
+            <superclass>
+                org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+            </superclass>
+			<test/>
+        </tag>
+        
+        <property>
+			<name>view</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				used when type is dialog to define which page should load in iframe
+			</description>			
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				used when type is dialog to define which page should load in iframe
+			</description>			
+			<required>true</required>
+		</property>
+        
+       
+      
+    </component>
+    
+</components>
