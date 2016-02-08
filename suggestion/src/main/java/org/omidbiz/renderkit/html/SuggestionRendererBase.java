@@ -1,7 +1,6 @@
 package org.omidbiz.renderkit.html;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +13,12 @@ import javax.faces.context.ResponseWriter;
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.ajax4jsf.resource.InternetResource;
 import org.omidbiz.component.UISuggestion;
+import org.omidbiz.util.JSFUtil;
 
 public class SuggestionRendererBase extends HeaderResourcesRendererBase
 {
+
+    private static final String HIDDEN_COMP = "_hidden";
 
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
             getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
@@ -36,39 +38,65 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
     }
 
     @Override
+    protected void doDecode(FacesContext context, UIComponent component)
+    {
+        ExternalContext external = context.getExternalContext();
+        Map requestParams = external.getRequestParameterMap();
+        UISuggestion sugesstion = (UISuggestion) component;
+        String componentId = (String) sugesstion.getForceId();
+        String hiddenComponentId = componentId + HIDDEN_COMP;
+        String valueName = (String) requestParams.get(componentId);
+        String valueId = (String) requestParams.get(hiddenComponentId);
+        sugesstion.setSubmittedValue(valueName);
+        if (sugesstion.isRequired() && (JSFUtil.isEmpty(valueName) || JSFUtil.isEmpty(valueId)))
+        {
+            sugesstion.setValueName(null);
+            sugesstion.setValueId(null);
+            sugesstion.setValid(false);
+        }
+        else
+        {
+            
+            sugesstion.setValueName(valueName);
+            sugesstion.setValueId(valueId);
+            sugesstion.setValid(true);
+        }
+    }
+
+    @Override
     protected void doEncodeBegin(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
         String clientId = component.getClientId(context);
         UISuggestion sugesstion = (UISuggestion) component;
-        String forceId = (String) sugesstion.getForceId();//(String) component.getAttributes().get("forceId");
+        String forceId = (String) sugesstion.getForceId();
         String componentId = clientId.replace(":", "\\\\:");
         componentId = forceId.replace(":", "\\\\:");
-        String view = (String) sugesstion.getView();//(String) component.getAttributes().get("view");
+        String view = (String) sugesstion.getView();
         encodeInput(writer, context, component, componentId);
         generateScripts(context, component, componentId, view);
     }
 
     private String generateQueryStrings(UIComponent component)
-    {        
+    {
         List<UIComponent> children = component.getChildren();
         StringBuilder params = null;
-        if(children != null && children.size() > 0)
+        if (children != null && children.size() > 0)
         {
             params = new StringBuilder("?");
-            int i =0;
+            int i = 0;
             for (UIComponent uiComponent : children)
             {
-                if(uiComponent instanceof UIParameter)
+                if (uiComponent instanceof UIParameter)
                 {
-                    if(i > 0)
+                    if (i > 0)
                         params.append("&");
                     UIParameter param = (UIParameter) uiComponent;
-                    //TODO : urlencode
+                    // TODO : urlencode
                     params.append(param.getName()).append("=").append(param.getValue());
                     i++;
                 }
             }
-        }        
+        }
         return params == null ? "" : params.toString();
     }
 
@@ -82,16 +110,16 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId));
         script.append("if (timer) {clearTimeout(timer);}");
         script.append("var par = {};");
-//        script.append("var baseUrl ='").append(baseUrl).append("';");
+        // script.append("var baseUrl ='").append(baseUrl).append("';");
         List<UIComponent> children = component.getChildren();
-        if(children != null && children.size() > 0)
+        if (children != null && children.size() > 0)
         {
             for (UIComponent uiComponent : children)
             {
-                if(uiComponent instanceof UIParameter)
+                if (uiComponent instanceof UIParameter)
                 {
-                    UIParameter par = (UIParameter)uiComponent;
-                    if(par.getValue() instanceof String)
+                    UIParameter par = (UIParameter) uiComponent;
+                    if (par.getValue() instanceof String)
                         script.append("par[\"").append(par.getName()).append("\"]").append("='").append(par.getValue()).append("'; ");
                     else
                         script.append("par[\"").append(par.getName()).append("\"]").append("=").append(par.getValue()).append("; ");
@@ -99,7 +127,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
             }
         }
         script.append("par[\"").append(componentId).append("\"]").append("=").append("jQuery(this).val();");
-        script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl+"?"));
+        script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
         script.append("});});");
         getUtils().writeScript(context, component, script);
     }
@@ -112,7 +140,11 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "name", componentId);
         writer.endElement("input");
         //
-        
+        writer.startElement("input", null);
+        getUtils().writeAttribute(writer, "type", "hidden");
+        getUtils().writeAttribute(writer, "id", componentId + HIDDEN_COMP);
+        getUtils().writeAttribute(writer, "name", componentId + HIDDEN_COMP);
+        writer.endElement("input");
     }
 
     @Override

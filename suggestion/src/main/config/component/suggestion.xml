@@ -41,6 +41,33 @@
 			</description>			
 			<required>true</required>
 		</property>
+		
+		<property>
+			<name>required</name>
+			<classname>boolean</classname>
+			<description>
+				
+			</description>
+			<defaultvalue>false</defaultvalue>			
+		</property>
+		
+		<property>
+			<name>valueId</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+						
+		</property>
+		
+		<property>
+			<name>valueName</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+						
+		</property>
         
        
       
