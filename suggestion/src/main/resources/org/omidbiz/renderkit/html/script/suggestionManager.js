@@ -10,8 +10,10 @@ var sm = {
 			    },position: {
 							at: 'bottom right',
 							my: 'top right'
-						},show: 'click',
-						hide: 'unfocus'
+						},
+						show: 'click',
+						hide: 'unfocus',
+						style: 'qtip-light'
 						
 				});
 		},
