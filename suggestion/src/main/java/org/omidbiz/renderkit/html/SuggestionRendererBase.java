@@ -18,8 +18,10 @@ import org.omidbiz.util.JSFUtil;
 public class SuggestionRendererBase extends HeaderResourcesRendererBase
 {
 
-    private static final String HIDDEN_COMP = "_hidden";
+    public static final String HIDDEN_COMP = "_hidden";
 
+    public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
+    
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
             getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
@@ -56,7 +58,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         }
         else
         {
-            
+
             sugesstion.setValueName(valueName);
             sugesstion.setValueId(valueId);
             sugesstion.setValid(true);
@@ -76,24 +78,20 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         generateScripts(context, component, componentId, view);
     }
 
-    private String generateQueryStrings(UIComponent component)
+    private String generateQueryStrings(UIComponent component, String compId)
     {
         List<UIComponent> children = component.getChildren();
-        StringBuilder params = null;
+        StringBuilder params = new StringBuilder("?").append(SUGGESTION_NAME_PARAM).append("=").append(compId);
         if (children != null && children.size() > 0)
         {
-            params = new StringBuilder("?");
-            int i = 0;
             for (UIComponent uiComponent : children)
             {
                 if (uiComponent instanceof UIParameter)
                 {
-                    if (i > 0)
-                        params.append("&");
+                    params.append("&");
                     UIParameter param = (UIParameter) uiComponent;
                     // TODO : urlencode
                     params.append(param.getName()).append("=").append(param.getValue());
-                    i++;
                 }
             }
         }
@@ -105,7 +103,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         StringBuffer script = new StringBuffer();
         script.append("jQuery(document).ready(function(){");
         script.append("var timer =0;");
-        String url = baseUrl + generateQueryStrings(component);
+        String url = baseUrl + generateQueryStrings(component, componentId);
         script.append(String.format("sm.createQtip('%s', '%s');", componentId, url));
         script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId));
         script.append("if (timer) {clearTimeout(timer);}");
@@ -127,6 +125,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
             }
         }
         script.append("par[\"").append(componentId).append("\"]").append("=").append("jQuery(this).val();");
+        script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");
         script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
         script.append("});});");
         getUtils().writeScript(context, component, script);

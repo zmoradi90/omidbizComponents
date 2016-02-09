@@ -73,4 +73,72 @@
       
     </component>
     
+    <component>
+        <name>org.omidbiz.SuggestionButton</name>
+        <family>org.omidbiz.SuggestionButton</family>
+        <classname>org.omidbiz.component.html.HtmlSuggestionButton</classname>
+        <superclass>org.omidbiz.component.UISuggestionButton</superclass>
+        <test/>
+        <description>
+         
+        </description>
+
+        <renderer>
+            <name>org.omidbiz.SuggestionButtonRenderer</name>
+            <classname>org.omidbiz.renderkit.html.SuggestionButtonRendererBase</classname>
+        </renderer>
+        <tag>
+            <name>suggestionButton</name>
+            <classname>org.omidbiz.taglib.SuggestionButtonTag</classname>
+            <superclass>
+                org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+            </superclass>
+			<test/>
+        </tag>
+        
+        <taghandler generate="true">
+            <classname>org.omidbiz.handler.SuggestionTagHandler</classname>
+        	<superclass>org.omidbiz.handler.SuggestionTagHandlerBase</superclass>
+        </taghandler>
+        
+        <property>
+			<name>valueId</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+						
+		</property>
+		
+		<property>
+			<name>valueName</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				
+			</description>
+			<required>true</required>			
+		</property>
+		
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				
+			</description>			
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>textMessage</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				
+			</description>			
+			
+		</property>
+        
+       
+      
+    </component>
+    
 </components>

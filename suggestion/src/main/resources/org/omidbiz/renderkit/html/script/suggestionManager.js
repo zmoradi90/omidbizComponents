@@ -17,8 +17,7 @@ var sm = {
 		},
 		searchAndReload : function(compId, baseUrl, mapParam)
 		{					
-			var frame_url = baseUrl + sm.serialize(mapParam);
-			console.log(frame_url);
+			var frame_url = baseUrl + sm.serialize(mapParam);			
 			jQuery("#"+compId+"_iframe").attr('src', frame_url);
 		},
 		serialize : function(mapObj) {
