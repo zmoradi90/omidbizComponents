@@ -9,6 +9,7 @@ import javax.el.ELException;
 import javax.el.ValueExpression;
 import javax.faces.FacesException;
 import javax.faces.component.UIOutput;
+import javax.faces.context.FacesContext;
 
 import org.omidbiz.util.JSFUtil;
 
@@ -160,7 +161,7 @@ public abstract class UISuggestionButton extends UIOutput
         }
         else
         {
-            return forceId;
+            return this.forceId;
         }
     }
 
@@ -183,6 +184,25 @@ public abstract class UISuggestionButton extends UIOutput
         {
             this.forceId = forceId;
         }
+    }
+    
+    @Override
+    public Object saveState(FacesContext context)
+    {
+        Object superState = super.saveState(context);
+        return new Object[] { superState, forceId, valueId, valueName, textMessage };
+    }
+
+    @Override
+    public void restoreState(FacesContext context, Object stateObj)
+    {
+        Object[] state = (Object[]) stateObj;
+        int i = 0;
+        super.restoreState(context, state[i++]);
+        forceId = (String) state[i++];
+        valueId = (Object) state[i++];
+        valueName = (Object) state[i++];
+        textMessage = (Object) state[i++];
     }
 
 }

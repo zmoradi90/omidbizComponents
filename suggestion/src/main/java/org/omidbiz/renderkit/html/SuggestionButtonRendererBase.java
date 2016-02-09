@@ -48,6 +48,7 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
 
         writer.startElement("span", null);
         getUtils().writeAttribute(writer, "onclick", onclick.toString());
+        getUtils().writeAttribute(writer, "style", "cursor:pointer;");
         String txt = (String) sbutton.getTextMessage();
         if(JSFUtil.isNotEmpty(txt))
             writer.write(txt);

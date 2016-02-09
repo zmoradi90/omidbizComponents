@@ -21,7 +21,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
     public static final String HIDDEN_COMP = "_hidden";
 
     public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
-    
+
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
             getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
@@ -105,8 +105,12 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         script.append("var timer =0;");
         String url = baseUrl + generateQueryStrings(component, componentId);
         script.append(String.format("sm.createQtip('%s', '%s');", componentId, url));
-        script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId));
-        script.append("if (timer) {clearTimeout(timer);}");
+        UISuggestion suggestion = (UISuggestion) component;
+        if (suggestion.isSearchByEnter() == false)
+        {
+            script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId));
+            script.append("if (timer) {clearTimeout(timer);}");
+        }
         script.append("var par = {};");
         // script.append("var baseUrl ='").append(baseUrl).append("';");
         List<UIComponent> children = component.getChildren();
@@ -126,7 +130,15 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         }
         script.append("par[\"").append(componentId).append("\"]").append("=").append("jQuery(this).val();");
         script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");
-        script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
+        if (suggestion.isSearchByEnter() == false)
+            script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
+        if(suggestion.isSearchByEnter())
+        {
+            script.append(String.format("jQuery(\"#%s\").keyup(function(e){", componentId));
+            script.append("if (e.which == 13) {");
+            script.append(String.format("sm.searchAndReload('%s', '%s', par)", componentId, baseUrl + "?"));           
+            script.append("}");            
+        }
         script.append("});});");
         getUtils().writeScript(context, component, script);
     }

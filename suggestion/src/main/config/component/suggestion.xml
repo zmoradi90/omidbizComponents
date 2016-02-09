@@ -68,6 +68,15 @@
 			</description>
 						
 		</property>
+		
+		<property>
+			<name>searchByEnter</name>
+			<classname>boolean</classname>
+			<description>
+				define wheter search while user is typing or use enter 
+			</description>
+			<defaultvalue>true</defaultvalue>			
+		</property>
         
        
       

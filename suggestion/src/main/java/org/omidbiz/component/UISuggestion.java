@@ -46,6 +46,33 @@ public abstract class UISuggestion extends UIInput
 
     private Object valueId;
 
+    private boolean searchByEnter;
+
+    public boolean isSearchByEnter()
+    {
+        ValueExpression ve = getValueExpression("searchByEnter");
+        if (ve != null)
+        {
+            try
+            {
+                return (Boolean.TRUE.equals(ve.getValue(getFacesContext().getELContext())));
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            return this.searchByEnter;
+        }
+    }
+
+    public void setSearchByEnter(boolean searchByEnter)
+    {
+        this.searchByEnter = searchByEnter;
+    }
+
     public Object getValueName()
     {
         if (this.valueName != null)
@@ -222,17 +249,17 @@ public abstract class UISuggestion extends UIInput
         valueId = (Object) state[i++];
         valueName = (Object) state[i++];
     }
-    
+
     @Override
     public void processDecodes(FacesContext context)
     {
         if (!this.isRendered())
             return;
         Map requestParams = context.getExternalContext().getRequestParameterMap();
-//        String clientId = getClientId(context);
+        // String clientId = getClientId(context);
         String val = (String) requestParams.get(getForceId());
         setValue(val);
-        
+
     }
 
 }
