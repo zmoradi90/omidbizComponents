@@ -18,7 +18,7 @@ import org.omidbiz.util.JSFUtil;
 public class SuggestionRendererBase extends HeaderResourcesRendererBase
 {
 
-    public static final String HIDDEN_COMP = "_hidden";
+    public static final String HIDDEN_COMP = "Id";
 
     public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
 
