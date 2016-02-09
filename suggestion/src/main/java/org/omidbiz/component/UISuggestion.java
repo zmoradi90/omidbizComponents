@@ -46,33 +46,6 @@ public abstract class UISuggestion extends UIInput
 
     private Object valueId;
 
-    private boolean searchByEnter;
-
-    public boolean isSearchByEnter()
-    {
-        ValueExpression ve = getValueExpression("searchByEnter");
-        if (ve != null)
-        {
-            try
-            {
-                return (Boolean.TRUE.equals(ve.getValue(getFacesContext().getELContext())));
-            }
-            catch (ELException e)
-            {
-                throw new FacesException(e);
-            }
-        }
-        else
-        {
-            return this.searchByEnter;
-        }
-    }
-
-    public void setSearchByEnter(boolean searchByEnter)
-    {
-        this.searchByEnter = searchByEnter;
-    }
-
     public Object getValueName()
     {
         if (this.valueName != null)

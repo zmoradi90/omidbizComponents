@@ -63,7 +63,10 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         script.append("{").append(String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId));
         if (valueId != null)
             script.append(String.format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
+        //
         script.append("}");
+        //
+        
         getUtils().writeScript(context, component, script.toString());
 
     }

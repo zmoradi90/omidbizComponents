@@ -1,8 +1,8 @@
-var sm = {
+var sm = {		
 		createQtip : function(compId, url) {
-			jQuery('#'+compId).qtip({
+			var tooltip = jQuery('#'+compId).qtip({
 			    content: {
-			        text: '<iframe src="%URL%" width="1000" height="600" frameborder="0" id="%UUID%"></iframe>'.replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
+			        text: '<iframe src="%URL%" frameborder="0" id="%UUID%"></iframe>'.replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
 							title: {
 								text: '  ',
 								button: true
@@ -15,7 +15,9 @@ var sm = {
 						hide: 'unfocus',
 						style: 'qtip-light'
 						
-				});
+				}).qtip('api');
+			
+			return tooltip;
 		},
 		searchAndReload : function(compId, baseUrl, mapParam)
 		{					
