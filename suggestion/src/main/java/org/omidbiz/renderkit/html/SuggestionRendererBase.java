@@ -100,7 +100,6 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
 
     private void generateScripts(FacesContext context, UIComponent component, String componentId, String baseUrl) throws IOException
     {
-        UISuggestion suggestion = (UISuggestion) component;
         StringBuffer script = new StringBuffer();
         script.append(" jQuery(document).ready(function(){");
         script.append("var timer =0;"); 
@@ -134,10 +133,13 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
 
     private void encodeInput(ResponseWriter writer, FacesContext context, UIComponent component, String componentId) throws IOException
     {
+        UISuggestion suggestion = (UISuggestion) component;
         writer.startElement("input", null);
         getUtils().writeAttribute(writer, "type", "text");
         getUtils().writeAttribute(writer, "id", componentId);
         getUtils().writeAttribute(writer, "name", componentId);
+        if(suggestion.getStyleClass() != null)
+            getUtils().writeAttribute(writer, "class", suggestion.getStyleClass());
         writer.endElement("input");
         //
         writer.startElement("input", null);

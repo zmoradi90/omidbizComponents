@@ -45,6 +45,8 @@ public abstract class UISuggestion extends UIInput
     private Object valueName;
 
     private Object valueId;
+    
+    private Object styleClass;
 
     public Object getValueName()
     {
@@ -201,6 +203,49 @@ public abstract class UISuggestion extends UIInput
         else
         {
             this.forceId = forceId;
+        }
+    }
+    
+    public Object getStyleClass()
+    {
+        ValueExpression ve = getValueExpression("styleClass");
+        if (ve != null)
+        {
+            String value = null;
+            try
+            {
+                value = (String) ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return this.styleClass;
+        }
+    }
+
+    public void setStyleClass(Object styleClass)
+    {
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("styleClass");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                ve.setValue(context, styleClass);
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.styleClass = styleClass;
         }
     }
 
