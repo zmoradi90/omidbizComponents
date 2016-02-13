@@ -59,5 +59,10 @@
 			<artifactId>util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.omidbiz</groupId>
+			<artifactId>inputListOfValues</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
