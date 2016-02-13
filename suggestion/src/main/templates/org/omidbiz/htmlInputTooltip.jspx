@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	class="org.omidbiz.renderkit.html.InputTooltipRenderer"
+	baseclass="org.omidbiz.renderkit.InputTooltipRenderBase"
+	component="org.omidbiz.component.UIInputTooltip" 
+	>
+	
+	
+	<script type="text/javascript">
+		jQuery.noConflict();
+	</script>
+	<h:scripts>/org/omidbiz/renderkit/html/script/jquery.qtip.js</h:scripts>
+	<h:styles>/org/omidbiz/renderkit/html/css/jquery.qtip.css</h:styles>
+	
+	
+	
+	<f:clientid var="clientId"/>
+	<f:call name="initializeMask" />
+	
+</f:root>

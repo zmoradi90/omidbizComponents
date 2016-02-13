@@ -147,4 +147,56 @@
       
     </component>
     
+    <component>
+		<name>org.omidbiz.InputTooltip</name>
+		<family>org.omidbiz.InputTooltip</family>
+		<classname>org.omidbiz.component.html.HtmlInputTooltip</classname>
+		<superclass>org.omidbiz.component.UIInputTooltip</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputTooltipRenderer</name>
+			<template>org/omidbiz/htmlInputTooltip.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputTooltip</name>
+			<classname>org.omidbiz.taglib.InputTooltipTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<!--
+		<taghandler>
+			<classname>org.ajax4jsf.tag.TestHandler</classname>
+		</taghandler>
+		-->
+		&ui_component_attributes;
+		<property>
+			<name>openMode</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be click or mouseenter
+			</description>
+			<defaultvalue>"mouseenter"</defaultvalue>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be click or qtip-tipsy, qtip-bootstrap, jTools
+			</description>
+			<defaultvalue>"qtip-tipsy"</defaultvalue>
+		</property> 
+		<property>
+			<name>direction</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be right or left
+			</description>
+			<defaultvalue>"left"</defaultvalue>
+		</property>        
+	</component>
+    
 </components>
