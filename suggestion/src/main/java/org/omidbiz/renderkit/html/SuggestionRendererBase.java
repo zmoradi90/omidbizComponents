@@ -22,7 +22,8 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
 
     public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js") };
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
+										getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
     InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/qtip.css") };
 
