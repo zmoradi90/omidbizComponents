@@ -45,7 +45,7 @@ public abstract class UISuggestion extends UIInput
     private Object valueName;
 
     private Object valueId;
-    
+
     private Object styleClass;
 
     public Object getValueName()
@@ -205,7 +205,7 @@ public abstract class UISuggestion extends UIInput
             this.forceId = forceId;
         }
     }
-    
+
     public Object getStyleClass()
     {
         ValueExpression ve = getValueExpression("styleClass");
@@ -266,18 +266,6 @@ public abstract class UISuggestion extends UIInput
         forceId = (String) state[i++];
         valueId = (Object) state[i++];
         valueName = (Object) state[i++];
-    }
-
-    @Override
-    public void processDecodes(FacesContext context)
-    {
-        if (!this.isRendered())
-            return;
-        Map requestParams = context.getExternalContext().getRequestParameterMap();
-        // String clientId = getClientId(context);
-        String val = (String) requestParams.get(getForceId());
-        setValue(val);
-
     }
 
 }

@@ -138,6 +138,9 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "type", "text");
         getUtils().writeAttribute(writer, "id", componentId);
         getUtils().writeAttribute(writer, "name", componentId);
+        Object valueName = suggestion.getValueName();
+        if(valueName != null)
+            getUtils().writeAttribute(writer, "value", valueName);
         if(suggestion.getStyleClass() != null)
             getUtils().writeAttribute(writer, "class", suggestion.getStyleClass());
         writer.endElement("input");
@@ -145,6 +148,9 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         writer.startElement("input", null);
         getUtils().writeAttribute(writer, "type", "hidden");
         getUtils().writeAttribute(writer, "id", componentId + HIDDEN_COMP);
+        Object valueId = suggestion.getValueId();
+        if(valueId != null)
+            getUtils().writeAttribute(writer, "value", valueId);
         getUtils().writeAttribute(writer, "name", componentId + HIDDEN_COMP);
         writer.endElement("input");
     }
