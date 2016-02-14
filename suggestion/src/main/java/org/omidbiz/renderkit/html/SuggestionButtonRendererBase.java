@@ -19,7 +19,7 @@ import org.omidbiz.util.JSFUtil;
 public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js") };
 
     @Override
     protected InternetResource[] getScripts()
