@@ -132,5 +132,17 @@
 				Style Class attribute for the Caption facet
 			</description>
 		</property>
+		<property>
+			<name>digit</name>
+			<classname>java.lang.Integer</classname>
+			<description>
+			</description>
+		</property>
+		<property>
+			<name>decimalDigit</name>
+			<classname>java.lang.Integer</classname>
+			<description>
+			</description>
+		</property>
 	</component>
 </components>
