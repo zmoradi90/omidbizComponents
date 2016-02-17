@@ -138,7 +138,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         Object digitObject = component.getAttributes().get("digit");
         Object digitDecimalObject = component.getAttributes().get("decimalDigit");
         if (digitObject == null && digitDecimalObject == null)
-            return "999999999999999999999999999.99";
+            return "000000000000000000000000000.00";
         Integer digit = (Integer) digitObject;
         Integer decimalDigit = (Integer) digitDecimalObject;
         String num = "";
