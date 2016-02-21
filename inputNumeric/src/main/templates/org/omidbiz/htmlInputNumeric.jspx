@@ -14,9 +14,8 @@
 	</h:styles>
 	<f:clientid var="clientId" />
 
-	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,
-	/org/omidbiz/renderkit/html/script/jquery.plugin.js,
-	/org/omidbiz/renderkit/html/script/jquery.calculator.js,
+	<h:scripts>/org/richfaces/renderkit/html/scripts/jquery/jquery.js,	
+	/org/omidbiz/renderkit/html/script/jquery.calculator.js
 	</h:scripts>
 	
 	<c:set var="forceId" value="#{component.attributes['forceId']}"/>

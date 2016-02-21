@@ -14,8 +14,8 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
-	<h:scripts>/org/omidbiz/renderkit/html/script/jquery.qtip.js</h:scripts>
-	<h:styles>/org/omidbiz/renderkit/html/css/jquery.qtip.css</h:styles>
+	<h:scripts>/org/omidbiz/renderkit/html/script/qtip.js</h:scripts>
+	<h:styles>/org/omidbiz/renderkit/html/css/qtip.css</h:styles>
 	
 	
 	
