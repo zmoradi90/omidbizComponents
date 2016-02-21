@@ -98,15 +98,64 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         }
         return valueString;
     }
-    
-    
+
     public String getInputId(FacesContext context, UIComponent component)
     {
         String forceId = (String) component.getAttributes().get("forceId");
-        if(forceId != null)
-            return "#"+forceId;
+        if (forceId != null)
+            return "#" + forceId;
         String clientId = component.getClientId(context);
-        return "#"+clientId.replace(":", "\\\\:");
+        return "#" + clientId.replace(":", "\\\\:");
+    }
+
+    public String getMaxDigit(FacesContext context, UIComponent component)
+    {
+        Object digitObject = component.getAttributes().get("digit");
+        Object digitDecimalObject = component.getAttributes().get("decimalDigit");
+        if (digitObject == null && digitDecimalObject == null)
+            return "999999999999999999999999999.99";
+        Integer digit = (Integer) digitObject;
+        Integer decimalDigit = (Integer) digitDecimalObject;
+        String num = "";
+        if (digit == null)
+            digit = 10;
+        if (decimalDigit == null)
+            decimalDigit = 2;
+        for (int i = 0; i < digit; i++)
+        {
+            num = num + "9";
+        }
+        num = num + ".";
+        for (int i = 0; i < decimalDigit; i++)
+        {
+            num = num + "9";
+        }
+        return num;
+    }
+
+    public String getMinDigit(FacesContext context, UIComponent component)
+    {
+        Object digitObject = component.getAttributes().get("digit");
+        Object digitDecimalObject = component.getAttributes().get("decimalDigit");
+        if (digitObject == null && digitDecimalObject == null)
+            return "999999999999999999999999999.99";
+        Integer digit = (Integer) digitObject;
+        Integer decimalDigit = (Integer) digitDecimalObject;
+        String num = "";
+        if (digit == null)
+            digit = 10;
+        if (decimalDigit == null)
+            decimalDigit = 2;
+        for (int i = 0; i < digit; i++)
+        {
+            num = num + "0";
+        }
+        num = num + ".";
+        for (int i = 0; i < decimalDigit; i++)
+        {
+            num = num + "0";
+        }
+        return num;
     }
 
 }

@@ -57,9 +57,9 @@ public class InputTooltipRenderBase extends HeaderResourcesRendererBase
 			//jQuery("#"+id)
 			String jQueryId = String.format("jQuery(\"#%s\")", tipsyClientId.replace(":", "\\\\:"));
 			if(openMode != null && openMode.equals("mouseenter"))
-			    sb.append(" jQuery(\"#" + tipsyClientId.replace(":", "\\\\:") + "\").qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }})");
+			    sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			else if(openMode != null && openMode.equals("click"))
-	             sb.append(" jQuery(\"#" + tipsyClientId.replace(":", "\\\\:") + "\").qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }})");
+	             sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			sb.append("});");
 			getUtils().writeScript(context, component, sb.toString());
 		}
