@@ -45,9 +45,10 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         else
             onclick.append(valueName);
         onclick.append(")");
-
+        String spanId = component.getClientId(context);
         writer.startElement("span", null);
         getUtils().writeAttribute(writer, "onclick", onclick.toString());
+        getUtils().writeAttribute(writer, "id", spanId);
         getUtils().writeAttribute(writer, "style", "cursor:pointer;");
         String txt = (String) sbutton.getTextMessage();
         if(JSFUtil.isNotEmpty(txt))
@@ -64,7 +65,7 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         if (valueId != null)
             script.append(String.format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
         //
-        script.append("}");
+        script.append("var qtipNum = jQuery('#"+forceId.replace(":", "\\\\:")+"',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();};");
         //
         
         getUtils().writeScript(context, component, script.toString());
