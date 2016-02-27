@@ -83,7 +83,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
     {
 
         UIInputNumeric inputDate = (UIInputNumeric) component;
-        String valueString = String.valueOf(inputDate.getSubmittedValue());
+        Object valueString = inputDate.getSubmittedValue();
 
         if (valueString == null)
         {
@@ -97,7 +97,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
                     valueString = value.toString();
             }
         }
-        return valueString;
+        return valueString == null ? "" : String.valueOf(valueString);
     }
     
     public String getInputId(FacesContext context, UIComponent component)
