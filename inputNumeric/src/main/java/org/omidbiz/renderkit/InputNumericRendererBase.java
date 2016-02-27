@@ -16,6 +16,7 @@
 package org.omidbiz.renderkit;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -82,7 +83,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
     {
 
         UIInputNumeric inputDate = (UIInputNumeric) component;
-        String valueString = (String) inputDate.getSubmittedValue();
+        String valueString = String.valueOf(inputDate.getSubmittedValue());
 
         if (valueString == null)
         {
@@ -98,7 +99,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         }
         return valueString;
     }
-
+    
     public String getInputId(FacesContext context, UIComponent component)
     {
         String forceId = (String) component.getAttributes().get("forceId");
