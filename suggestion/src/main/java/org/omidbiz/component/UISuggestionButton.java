@@ -44,6 +44,18 @@ public abstract class UISuggestionButton extends UIOutput
 
     private Object textMessage;
 
+    private boolean closeOnSelect;
+
+    public boolean isCloseOnSelect()
+    {
+        return closeOnSelect;
+    }
+
+    public void setCloseOnSelect(boolean closeOnSelect)
+    {
+        this.closeOnSelect = closeOnSelect;
+    }
+
     public Object getTextMessage()
     {
         ValueExpression ve = getValueExpression("textMessage");
@@ -185,12 +197,12 @@ public abstract class UISuggestionButton extends UIOutput
             this.forceId = forceId;
         }
     }
-    
+
     @Override
     public Object saveState(FacesContext context)
     {
         Object superState = super.saveState(context);
-        return new Object[] { superState, forceId, valueId, valueName, textMessage };
+        return new Object[] { superState, forceId, valueId, valueName, textMessage, closeOnSelect };
     }
 
     @Override
@@ -203,6 +215,7 @@ public abstract class UISuggestionButton extends UIOutput
         valueId = (Object) state[i++];
         valueName = (Object) state[i++];
         textMessage = (Object) state[i++];
+        closeOnSelect = (Boolean) state[i++];
     }
 
 }

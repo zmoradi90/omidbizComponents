@@ -1,6 +1,6 @@
 var sm = {		
 		createQtip : function(compId, url) {
-			var tooltip = jQuery('#'+compId).qtip({
+			var tooltip = jQuery('#'+compId+'Name').qtip({
 			    content: {
 			        text: '<iframe src="%URL%" frameborder="0" id="%UUID%"></iframe>'.replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
 							title: {

@@ -19,7 +19,7 @@ import org.omidbiz.util.JSFUtil;
 public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js")};
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
     @Override
     protected InternetResource[] getScripts()
@@ -51,7 +51,7 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "id", spanId);
         getUtils().writeAttribute(writer, "style", "cursor:pointer;");
         String txt = (String) sbutton.getTextMessage();
-        if(JSFUtil.isNotEmpty(txt))
+        if (JSFUtil.isNotEmpty(txt))
             writer.write(txt);
         else
             writer.write("select");
@@ -61,13 +61,20 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         if (valueId != null)
             script.append("valueId").append(",");
         script.append("valueName").append(")");
-        script.append("{").append(String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId));
+        script.append("{").append(
+                String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId + SuggestionRendererBase.HIDDEN_NAME_COMP));
         if (valueId != null)
-            script.append(String.format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
+            script.append(String
+                    .format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
         //
-        script.append("var qtipNum = jQuery('#"+forceId.replace(":", "\\\\:")+"',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();};");
+        if (sbutton.isCloseOnSelect())
+        {
+            script.append("var qtipNum = jQuery('#" + forceId.replace(":", "\\\\:")
+                    + "',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();");
+        }
+        script.append("};");
         //
-        
+
         getUtils().writeScript(context, component, script.toString());
 
     }

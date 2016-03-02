@@ -142,6 +142,15 @@
 			</description>			
 			
 		</property>
+		
+		<property>
+			<name>closeOnSelect</name>
+			<classname>boolean</classname>			
+			<description>
+				whether close suggestionbox after select or not
+			</description>			
+			<defaultvalue>true</defaultvalue>
+		</property>
         
        
       
