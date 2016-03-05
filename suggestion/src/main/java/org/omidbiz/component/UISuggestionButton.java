@@ -46,6 +46,30 @@ public abstract class UISuggestionButton extends UIOutput
 
     private boolean closeOnSelect;
 
+    private String style;
+
+    private String styleClass;
+
+    public String getStyle()
+    {
+        return style;
+    }
+
+    public void setStyle(String style)
+    {
+        this.style = style;
+    }
+
+    public String getStyleClass()
+    {
+        return styleClass;
+    }
+
+    public void setStyleClass(String styleClass)
+    {
+        this.styleClass = styleClass;
+    }
+
     public boolean isCloseOnSelect()
     {
         return closeOnSelect;

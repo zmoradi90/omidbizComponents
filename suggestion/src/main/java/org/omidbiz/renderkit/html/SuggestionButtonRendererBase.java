@@ -50,6 +50,9 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "onclick", onclick.toString());
         getUtils().writeAttribute(writer, "id", spanId);
         getUtils().writeAttribute(writer, "style", "cursor:pointer;");
+        String styleClass = sbutton.getStyleClass();
+        if (styleClass != null && styleClass.trim().length() > 0)
+            getUtils().writeAttribute(writer, "class", styleClass);
         String txt = (String) sbutton.getTextMessage();
         if (JSFUtil.isNotEmpty(txt))
             writer.write(txt);
@@ -69,7 +72,7 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         //
         if (sbutton.isCloseOnSelect())
         {
-            script.append("var qtipNum = jQuery('#" + forceId.replace(":", "\\\\:")
+            script.append("var qtipNum = jQuery('#" + forceId.replace(":", "\\\\:") + SuggestionRendererBase.HIDDEN_NAME_COMP
                     + "',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();");
         }
         script.append("};");

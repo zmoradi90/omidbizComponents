@@ -1,8 +1,8 @@
 var sm = {		
-		createQtip : function(compId, url) {
+		createQtip : function(compId, url, w, h) {
 			var tooltip = jQuery('#'+compId+'Name').qtip({
 			    content: {
-			        text: '<iframe src="%URL%" frameborder="0" id="%UUID%"></iframe>'.replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
+			        text: '<iframe src="%URL%" frameborder="0" id="%UUID%" style="height: %HEIGHT%px; width:%WIDTH%px;"></iframe>'.replace(new RegExp('%HEIGHT%','g'), h).replace(new RegExp('%WIDTH%','g'), w).replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
 							title: {
 								text: '  ',
 								button: true
@@ -13,7 +13,7 @@ var sm = {
 						},
 						show: 'click',
 						hide: 'unfocus',
-						style: 'qtip-light'
+						style: {width: w, height: h, classes: 'qtip-light', def: false}
 						
 				}).qtip('api');
 			

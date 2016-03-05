@@ -104,8 +104,11 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         StringBuffer script = new StringBuffer();
         script.append(" jQuery(document).ready(function(){");
         script.append("var timer =0;");
+        UISuggestion sugesstion = (UISuggestion) component;
         String url = baseUrl + generateQueryStrings(component, componentId);
-        script.append(String.format("sm.createQtip('%s', '%s');", componentId, url));
+        int width = sugesstion.getWidth() == 0 ? 550 : sugesstion.getWidth();
+        int height = sugesstion.getHeight() == 0 ? 250 : sugesstion.getHeight();
+        script.append(String.format("sm.createQtip('%s', '%s', %s, %s);", componentId, url, width, height));
         script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId + HIDDEN_NAME_COMP));
         script.append("if (timer) {clearTimeout(timer);}");
         script.append("var par = {};");
@@ -140,6 +143,12 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "type", "text");
         getUtils().writeAttribute(writer, "id", componentId + HIDDEN_NAME_COMP);
         getUtils().writeAttribute(writer, "name", componentId + HIDDEN_NAME_COMP);
+        Object styleClass = suggestion.getStyleClass();
+        if (styleClass != null)
+            getUtils().writeAttribute(writer, "class", String.valueOf(styleClass));
+        String style = suggestion.getStyle();
+        if (style != null && style.trim().length() > 0)
+            getUtils().writeAttribute(writer, "style", style);
         Object valueName = suggestion.getValueName();
         if (valueName != null)
             getUtils().writeAttribute(writer, "value", valueName);
