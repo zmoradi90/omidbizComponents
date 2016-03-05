@@ -33,6 +33,8 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         String clientId = component.getClientId(context);
         UISuggestionButton sbutton = (UISuggestionButton) component;
         String forceId = (String) sbutton.getForceId();
+        if (forceId == null)
+            throw new IllegalArgumentException("suggestion button force id can not be empty");
         String jsFuncName = "closeSuggestion_" + forceId;
         //
         StringBuilder onclick = new StringBuilder(jsFuncName).append("(");
