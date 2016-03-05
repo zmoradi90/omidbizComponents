@@ -55,6 +55,11 @@ public class DivRenderBase extends HeaderResourcesRendererBase
             {
                 getUtils().writeAttribute(writer, "class", style);
             }
+            String title = (String) component.getAttributes().get("title");
+            if(title != null)
+            {
+                getUtils().writeAttribute(writer, "title", title);
+            }
         }
     }
 
