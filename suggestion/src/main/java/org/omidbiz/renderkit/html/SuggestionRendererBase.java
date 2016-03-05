@@ -21,7 +21,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
     public static final String HIDDEN_COMP = "Id";
     public static final String HIDDEN_NAME_COMP = "Name";
 
-    public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
+    public static final String SUGGESTION_NAME_PARAM = "forceId";
 
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
             getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
@@ -129,7 +129,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
             }
         }
         script.append("par[\"").append(componentId + HIDDEN_NAME_COMP).append("\"]").append("=").append("jQuery(this).val();");
-        script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");
+        script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");        
         script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
         script.append("});});");
         getUtils().writeScript(context, component, script);
