@@ -213,7 +213,42 @@
                 <![CDATA[Method calls an expression to get a collection of suggestion data on request. It must have one parameter with a type of Object with content of input component and must return any type allowed for <h:datatable> ]]>
             </description>
         </property>
+        
+		<property>
+			<name>autoOpen</name>
+			<classname>boolean</classname>
+			<description>
+				If true, Colorbox will immediately open. 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>		
 		
+		<property>
+			<name>overlayClose</name>
+			<classname>boolean</classname>
+			<description>
+				If false, disables closing Colorbox by clicking on the background overlay.
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		
+		<property>
+			<name>escKey</name>
+			<classname>boolean</classname>
+			<description>
+				 If false, will disable closing colorbox on 'esc' key press. 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
+		
+		<property>
+			<name>fastIframe</name>
+			<classname>boolean</classname>
+			<description>
+				 f false, the loading graphic removal and onComplete event will be delayed until iframe's content has completely loaded. 
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>
 		
         
 	</component>

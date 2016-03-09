@@ -90,10 +90,14 @@ public class WindowPopupRendererBase extends HeaderResourcesRendererBase
             if ("dialog".equals(type) || "button".equals(type))
             {
 
+                Boolean autoOpen = (Boolean) component.getAttributes().get("autoOpen");
+                autoOpen = autoOpen == null ? Boolean.FALSE : autoOpen;
+                Boolean overlayClose = (Boolean) component.getAttributes().get("overlayClose");
+                overlayClose = overlayClose == null ? Boolean.FALSE : overlayClose;
                 // javascript
                 StringBuilder sb = new StringBuilder().append("jQuery(document).ready(function(){");
-                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox({fastIframe:false, width:\"80%\", height:\"80%\", iframe:"
-                        + iframe + "});");
+                sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:")
+                        + "]\").colorbox({fastIframe:false, width:\"80%\", height:\"80%\", iframe:" + iframe + ", open:" + autoOpen + ", overlayClose:"+overlayClose+"});");
                 sb.append("jQuery(\"a[rel=rel_" + id.replace(":", "\\\\:") + "]\").colorbox(jQuery.extend({");
                 sb.append(String.format("onOpen:function(){ %s },", component.getAttributes().get("onOpen")));
                 sb.append(String.format("onLoad:function(){ %s },", component.getAttributes().get("onLoad")));
