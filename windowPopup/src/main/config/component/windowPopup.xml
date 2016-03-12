@@ -229,7 +229,7 @@
 			<description>
 				If false, disables closing Colorbox by clicking on the background overlay.
 			</description>
-			<defaultvalue>false</defaultvalue>
+			<defaultvalue>true</defaultvalue>
 		</property>
 		
 		<property>
@@ -238,7 +238,7 @@
 			<description>
 				 If false, will disable closing colorbox on 'esc' key press. 
 			</description>
-			<defaultvalue>false</defaultvalue>
+			<defaultvalue>true</defaultvalue>
 		</property>
 		
 		<property>
@@ -248,6 +248,15 @@
 				 f false, the loading graphic removal and onComplete event will be delayed until iframe's content has completely loaded. 
 			</description>
 			<defaultvalue>false</defaultvalue>
+		</property>
+		
+		<property>
+			<name>closeButton</name>
+			<classname>boolean</classname>
+			<description>
+				 Set to false to remove the close button.  
+			</description>
+			<defaultvalue>true</defaultvalue>
 		</property>
 		
         
