@@ -22,8 +22,8 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.widget.js"),
             getResource("/org/omidbiz/renderkit/html/script/jquery.ui.tabs.js") };
 
-    InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/jquery.ui.theme.css"),
-            getResource("/org/omidbiz/renderkit/html/css/jquery.ui.tabs.css"),
+    InternetResource[] cssResources = { 
+            
             getResource("/org/omidbiz/renderkit/html/css/scrollableTab.css"),
             getResource("org/omidbiz/images/ui-bg_highlight-soft_75_cccccc_1x100.png"),
             getResource("org/omidbiz/images/ui-bg_flat_75_ffffff_40x100.png"),

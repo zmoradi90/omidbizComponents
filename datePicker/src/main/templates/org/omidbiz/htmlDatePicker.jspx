@@ -22,7 +22,7 @@
 	</h:scripts>
 	
 	<h:styles>
-		css/jquery-ui-1.8.14.css		
+				
 	</h:styles>
 	
 	<f:resource name="images/inputDate.png" var="icon" />
