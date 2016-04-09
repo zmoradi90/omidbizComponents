@@ -58,11 +58,10 @@
 		cursor: pointer;
 		outline: medium none;
 
-		border: 1px solid transparent;
 	}
 
 		.qtip-titlebar .qtip-close{
-			right: 4px; top: 50%;
+			right: 4px; top: 71%;
 			margin-top: -9px;
 		}
 
@@ -127,9 +126,10 @@
 
 /*! Light tooltip style */
 .qtip-light{
-	background-color: white;
-	border-color: #E2E2E2;
-	color: #454545;
+    background-color: white;
+    border-color: #b7b7b7;
+    box-shadow: 0 0 16px 3px #ccc;
+    color: #454545;
 }
 
 	.qtip-light .qtip-titlebar{

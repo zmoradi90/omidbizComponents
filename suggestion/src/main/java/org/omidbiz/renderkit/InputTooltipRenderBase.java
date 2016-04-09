@@ -54,12 +54,26 @@ public class InputTooltipRenderBase extends HeaderResourcesRendererBase
 			String openMode = (String)component.getAttributes().get("openMode");
 			String styleClass = (String)component.getAttributes().get("styleClass");
             String direction = (String)component.getAttributes().get("direction");
+            Boolean escape = (Boolean)component.getAttributes().get("escape");
+            
 			//jQuery("#"+id)
 			String jQueryId = String.format("jQuery(\"#%s\")", tipsyClientId.replace(":", "\\\\:"));
+			sb.append("var titleValue="+jQueryId+".attr('title');");
 			if(openMode != null && openMode.equals("mouseenter"))
-			    sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
-			else if(openMode != null && openMode.equals("click"))
-	             sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			{
+			    if(escape !=null && escape)
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)}, style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			    else
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue}, style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			}
+			if(openMode != null && openMode.equals("click"))
+			{
+			    if(escape !=null && escape)
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)},style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			    else
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue},style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top right',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			}
+			
 			sb.append("});");
 			getUtils().writeScript(context, component, sb.toString());
 		}

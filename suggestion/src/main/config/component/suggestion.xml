@@ -247,7 +247,15 @@
 				can be right or left
 			</description>
 			<defaultvalue>"left"</defaultvalue>
-		</property>        
+		</property> 
+   		<property>
+			<name>escape</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+				Escape html tags by true / false value
+			</description>
+			<defaultvalue>true</defaultvalue>
+		</property> 
 	</component>
     
 </components>
