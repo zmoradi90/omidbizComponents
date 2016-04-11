@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.ProgressbarRenderer"
+	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
+	component="org.omidbiz.component.UIProgressbar" >
+	<f:clientid var="clientId"/>
+	
+	<c:set var="value" value="#{component.attributes['value']}"/>
+	<c:set var="maxFraction" value="#{component.attributes['maxFraction']}"/>
+	<c:set var="height" value="#{component.attributes['height']}"/>
+	<c:set var="width" value="#{component.attributes['width']}"/>
+	
+
+	<h:scripts>/org/omidbiz/renderkit/html/script/progressbar.js</h:scripts>
+	<h:styles>/org/omidbiz/renderkit/html/css/progressbar.css</h:styles>
+	<div id="#{clientId}" class="progressbar-wrapper" style="width: #{width}px; height: #{height}px;">
+		<div class="progressbar-bar-content">
+			<div class="progressbar-bar">
+				<div id="#{clientId}_precentage_bar_complete"
+					class="progressbar-bar-percentage-complete progressbar-bar-percentage-complete-base-color">
+					<div class="progressbar-bar-percentage-text progressbar-bar-percentage-complete-text"></div>					
+					</div>
+				<div id="#{clientId}_precentage_bar_remiand"
+					class="progressbar-bar-percentage-remiand">
+					<div class="progressbar-bar-percentage-text progressbar-bar-percentage-remiand-text"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <script>
+		jQuery(window).load(function(){
+			progressBar('#{clientId}',#{value},#{maxFraction});
+		});	    	   
+    </script>	
+		
+		
+		
+	
+</f:root>
