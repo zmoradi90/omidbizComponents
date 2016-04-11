@@ -126,6 +126,7 @@
     <module>clickableButton</module>
     <module>liveValidation</module>
     <module>suggestion</module>
+    <module>progressbar</module>
     
   </modules>
   <build>

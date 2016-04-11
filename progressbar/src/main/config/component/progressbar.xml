@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.Progressbar</name>
+		<family>org.omidbiz.Progressbar</family>
+		<classname>org.omidbiz.component.html.HtmlProgressbar</classname>
+		<superclass>org.omidbiz.component.UIProgressbar</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.ProgressbarRenderer</name>
+			<template>org/omidbiz/htmlProgressbar.jspx</template>
+		</renderer>
+		<tag>
+			<name>progressbar</name>
+			<classname>org.omidbiz.taglib.ProgressbarTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>value</name>
+			<classname>float</classname>
+			<description>
+				complete percentage of progress bar
+			</description>
+			<defaultvalue>0</defaultvalue>
+		</property>
+		<property>
+			<name>height</name>
+			<classname>int</classname>
+			<description>
+				height of progress bar
+			</description>
+			<defaultvalue>21</defaultvalue>
+		</property>
+		<property>
+			<name>width</name>
+			<classname>int</classname>
+			<description>
+				width of progress bar
+			</description>
+			<defaultvalue>140</defaultvalue>
+		</property>	
+		<property>
+			<name>maxFraction</name>
+			<classname>int</classname>
+			<description>
+				number of decimal digits
+			</description>
+			<defaultvalue>2</defaultvalue>
+		</property>
+		
+	</component>
+</components>

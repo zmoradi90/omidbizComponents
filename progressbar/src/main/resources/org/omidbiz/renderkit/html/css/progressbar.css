@@ -1,0 +1,86 @@
+.progressbar-wrapper {
+	float: right;
+}
+.progressbar-bar-wapper {
+    height: 17px;
+    width: 150px;
+}
+
+.progressbar-expanded .progressbar-bar-content{
+	height: 49%!important;
+}
+.progressbar-expanded .progressbar-bar-percentage-text{
+	bottom:-7!important;
+}
+.progressbar-bar-content {
+    box-sizing: border-box;
+    height: 100%;
+    margin-top: 4px;
+    position: relative;
+    width: 100%;
+}
+.progressbar-bar {
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 100%;
+}
+.progressbar-bar-percentage-complete {
+    height: 100%;
+    width: 0%;
+    float: left;
+}
+.progressbar-bar-percentage-complete-base-color{
+    background-color: #00494F;
+}
+.progressbar-bar-percentage-complete-base-color-full{
+    background-color: #4e9a06;
+}
+.progressbar-bar-percentage-remiand {
+    float: right;
+    height: 100%;
+    width: 100%;
+}
+.progressbar-bar-indicator {
+    background-color: #ccc;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+.progressbar-bar-end-indicator {
+    right:-2px;
+}
+
+.progressbar-bar-percentage-complete-text{
+	text-align: right;
+	color:#FFF;
+	display: none;
+	float: right;
+}
+
+.progressbar-bar-percentage-text {
+    font-size: 10pt;
+    position: relative;
+    height: 100%;
+    line-height: 19px;
+}
+.progressbar-bar-duration-text {
+    font-size: 9pt;
+    width: 100%;
+    text-align: center;
+    direction: rtl;
+}
+.progressbar-time-wrapper {
+    font-size: 8pt;
+    height: 50%;
+    width: 100%;
+}
+.progressbar-time-start-text {
+    float: left;
+    width: 50%;
+}
+.progressbar-time-end-text{
+	float: right;
+    width: 50%;
+   	text-align: right;
+}
