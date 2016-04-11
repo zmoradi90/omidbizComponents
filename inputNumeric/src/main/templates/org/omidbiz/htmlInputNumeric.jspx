@@ -22,6 +22,7 @@
 	<c:set var="unitLabel" value="#{component.attributes['unitLabel']}"/>
 	<c:set var="calculator" value="#{component.attributes['calculator']}"/>
 	<c:set var="onCloseCal" value="#{component.attributes['onCloseCal']}"/>
+	<c:set var="inputClass" value="#{component.attributes['inputClass']}"/>
 	<f:resource name="org/omidbiz/images/calculator.svg" var="btnImage" />
 	
 	<jsp:scriptlet>
@@ -36,14 +37,14 @@
 	
 	<input id="#{forceId}" name="#{forceId}" type="text"
 		value="#{this:getValueAsString(context, component)}"
-		class="myAutoNumeric" style="#{component.attributes['inputStyle']}" />
+		class="myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
 		<div class="rial-unit-label">#{unitLabel}</div>
 		
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 
 <input id="#{clientId}" name="#{clientId}" type="text"
 		value="#{this:getValueAsString(context, component)}"
-		class="myAutoNumeric" style="#{component.attributes['inputStyle']}" />
+		class="myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
 		<div class="rial-unit-label">#{unitLabel}</div>
 <jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>				
 
