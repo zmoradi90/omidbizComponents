@@ -19,8 +19,8 @@
 	/org/omidbiz/renderkit/html/script/jquery.ui.autocomplete.js,
 	/org/omidbiz/renderkit/html/script/colorbox.js</h:scripts>
 	
-	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css,
-	/org/omidbiz/renderkit/html/css/jquery.ui.autocomplete.css
+	<h:styles>/org/omidbiz/renderkit/html/css/colorbox.css
+	
 	</h:styles>
 	
 	<f:clientid var="clientId" />

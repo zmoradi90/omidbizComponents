@@ -19,7 +19,7 @@ import org.omidbiz.util.JSFUtil;
 public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
 {
 
-    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js")};
+    InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
     @Override
     protected InternetResource[] getScripts()
@@ -33,6 +33,8 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         String clientId = component.getClientId(context);
         UISuggestionButton sbutton = (UISuggestionButton) component;
         String forceId = (String) sbutton.getForceId();
+        if (forceId == null)
+            throw new IllegalArgumentException("suggestion button force id can not be empty");
         String jsFuncName = "closeSuggestion_" + forceId;
         //
         StringBuilder onclick = new StringBuilder(jsFuncName).append("(");
@@ -50,8 +52,11 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "onclick", onclick.toString());
         getUtils().writeAttribute(writer, "id", spanId);
         getUtils().writeAttribute(writer, "style", "cursor:pointer;");
+        String styleClass = sbutton.getStyleClass();
+        if (styleClass != null && styleClass.trim().length() > 0)
+            getUtils().writeAttribute(writer, "class", styleClass);
         String txt = (String) sbutton.getTextMessage();
-        if(JSFUtil.isNotEmpty(txt))
+        if (JSFUtil.isNotEmpty(txt))
             writer.write(txt);
         else
             writer.write("select");
@@ -61,13 +66,20 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         if (valueId != null)
             script.append("valueId").append(",");
         script.append("valueName").append(")");
-        script.append("{").append(String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId));
+        script.append("{").append(
+                String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId + SuggestionRendererBase.HIDDEN_NAME_COMP));
         if (valueId != null)
-            script.append(String.format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
+            script.append(String
+                    .format("jQuery('#%s', window.parent.document).val(valueId);", forceId + SuggestionRendererBase.HIDDEN_COMP));
         //
-        script.append("var qtipNum = jQuery('#"+forceId.replace(":", "\\\\:")+"',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();};");
+        if (sbutton.isCloseOnSelect())
+        {
+            script.append("var qtipNum = jQuery('#" + forceId.replace(":", "\\\\:") + SuggestionRendererBase.HIDDEN_NAME_COMP
+                    + "',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();");
+        }
+        script.append("};");
         //
-        
+
         getUtils().writeScript(context, component, script.toString());
 
     }

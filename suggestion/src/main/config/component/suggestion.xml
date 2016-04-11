@@ -77,6 +77,32 @@
 			</description>			
 		</property>
 		
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				
+			</description>			
+		</property>
+		
+		<property>
+			<name>width</name>
+			<classname>int</classname>			
+			<description>
+				
+			</description>		
+			<defaultvalue>550</defaultvalue>	
+		</property>
+		
+		<property>
+			<name>height</name>
+			<classname>int</classname>			
+			<description>
+				
+			</description>
+			<defaultvalue>250</defaultvalue>			
+		</property>
+		
     </component>
     
     <component>
@@ -141,6 +167,31 @@
 				
 			</description>			
 			
+		</property>
+		
+		<property>
+			<name>closeOnSelect</name>
+			<classname>boolean</classname>			
+			<description>
+				whether close suggestionbox after select or not
+			</description>			
+			<defaultvalue>true</defaultvalue>
+		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				
+			</description>			
+		</property>
+		
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				
+			</description>			
 		</property>
         
        

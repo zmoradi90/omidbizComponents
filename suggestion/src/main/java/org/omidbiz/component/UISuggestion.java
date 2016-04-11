@@ -48,6 +48,42 @@ public abstract class UISuggestion extends UIInput
 
     private Object styleClass;
 
+    private String style;
+
+    private int width;
+
+    private int height;
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(int height)
+    {
+        this.height = height;
+    }
+
+    public String getStyle()
+    {
+        return style;
+    }
+
+    public void setStyle(String style)
+    {
+        this.style = style;
+    }
+
     public Object getValueName()
     {
         if (this.valueName != null)

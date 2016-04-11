@@ -152,7 +152,9 @@
 							<includes>
 								<!---->
 								
-								
+								<include>
+									${project.basedir}/jqueryui/jquery-ui.css
+								</include>	
 								
 								<include>**/*-min.css</include>
 							</includes>

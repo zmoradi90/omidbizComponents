@@ -42,6 +42,14 @@
 		</property>
 		
 		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+		</property>
+		
+		<property>
 			<name>styleClass</name>
 			<classname>java.lang.String</classname>
 			<description>

@@ -19,11 +19,12 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
 {
 
     public static final String HIDDEN_COMP = "Id";
+    public static final String HIDDEN_NAME_COMP = "Name";
 
-    public static final String SUGGESTION_NAME_PARAM = "omidbizSuggestionFilterName";
+    public static final String SUGGESTION_NAME_PARAM = "forceId";
 
     InternetResource[] jsResources = { getResource("/org/omidbiz/renderkit/html/script/qtip.js"),
-										getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
+            getResource("/org/omidbiz/renderkit/html/script/suggestionManager.js") };
 
     InternetResource[] cssResources = { getResource("/org/omidbiz/renderkit/html/css/qtip.css") };
 
@@ -47,10 +48,10 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         UISuggestion sugesstion = (UISuggestion) component;
         String componentId = (String) sugesstion.getForceId();
         String hiddenComponentId = componentId + HIDDEN_COMP;
-        String valueName = (String) requestParams.get(componentId);
+        String valueName = (String) requestParams.get(componentId + HIDDEN_NAME_COMP);
         String valueId = (String) requestParams.get(hiddenComponentId);
         sugesstion.setSubmittedValue(valueName);
-        if (sugesstion.isRequired() && (JSFUtil.isEmpty(valueName) || JSFUtil.isEmpty(valueId)))
+        if (sugesstion.isRequired() && JSFUtil.isEmpty(valueId))
         {
             sugesstion.setValueName(null);
             sugesstion.setValueId(null);
@@ -102,10 +103,13 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
     {
         StringBuffer script = new StringBuffer();
         script.append(" jQuery(document).ready(function(){");
-        script.append("var timer =0;"); 
+        script.append("var timer =0;");
+        UISuggestion sugesstion = (UISuggestion) component;
         String url = baseUrl + generateQueryStrings(component, componentId);
-        script.append(String.format("sm.createQtip('%s', '%s');", componentId, url));
-        script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId));
+        int width = sugesstion.getWidth() == 0 ? 550 : sugesstion.getWidth();
+        int height = sugesstion.getHeight() == 0 ? 250 : sugesstion.getHeight();
+        script.append(String.format("sm.createQtip('%s', '%s', %s, %s);", componentId, url, width, height));
+        script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId + HIDDEN_NAME_COMP));
         script.append("if (timer) {clearTimeout(timer);}");
         script.append("var par = {};");
         // script.append("var baseUrl ='").append(baseUrl).append("';");
@@ -124,8 +128,8 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
                 }
             }
         }
-        script.append("par[\"").append(componentId).append("\"]").append("=").append("jQuery(this).val();");
-        script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");
+        script.append("par[\"").append(componentId + HIDDEN_NAME_COMP).append("\"]").append("=").append("jQuery(this).val();");
+        script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");        
         script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
         script.append("});});");
         getUtils().writeScript(context, component, script);
@@ -133,15 +137,22 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
 
     private void encodeInput(ResponseWriter writer, FacesContext context, UIComponent component, String componentId) throws IOException
     {
+        // String clientId = component.getClientId(context);
         UISuggestion suggestion = (UISuggestion) component;
         writer.startElement("input", null);
         getUtils().writeAttribute(writer, "type", "text");
-        getUtils().writeAttribute(writer, "id", componentId);
-        getUtils().writeAttribute(writer, "name", componentId);
+        getUtils().writeAttribute(writer, "id", componentId + HIDDEN_NAME_COMP);
+        getUtils().writeAttribute(writer, "name", componentId + HIDDEN_NAME_COMP);
+        Object styleClass = suggestion.getStyleClass();
+        if (styleClass != null)
+            getUtils().writeAttribute(writer, "class", String.valueOf(styleClass));
+        String style = suggestion.getStyle();
+        if (style != null && style.trim().length() > 0)
+            getUtils().writeAttribute(writer, "style", style);
         Object valueName = suggestion.getValueName();
-        if(valueName != null)
+        if (valueName != null)
             getUtils().writeAttribute(writer, "value", valueName);
-        if(suggestion.getStyleClass() != null)
+        if (suggestion.getStyleClass() != null)
             getUtils().writeAttribute(writer, "class", suggestion.getStyleClass());
         writer.endElement("input");
         //
@@ -149,7 +160,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "type", "hidden");
         getUtils().writeAttribute(writer, "id", componentId + HIDDEN_COMP);
         Object valueId = suggestion.getValueId();
-        if(valueId != null)
+        if (valueId != null)
             getUtils().writeAttribute(writer, "value", valueId);
         getUtils().writeAttribute(writer, "name", componentId + HIDDEN_COMP);
         writer.endElement("input");
