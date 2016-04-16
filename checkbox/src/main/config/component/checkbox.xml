@@ -75,5 +75,23 @@
 			<classname>java.lang.String</classname>
 			<defaultvalue>"Off"</defaultvalue>			
 		</property>
+		<property>
+			<name>firstSwitchVal</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"Y"</defaultvalue>			
+		</property>		
+		<property>
+			<name>secondSwitchVal</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"N"</defaultvalue>			
+		</property>	
+		<property>
+			<name>single</name>
+			<classname>boolean</classname>
+			<description>
+				true for single switch and false for double switch
+			</description>			
+			<defaultvalue>false</defaultvalue>			
+		</property>		
 	</component>
 </components>

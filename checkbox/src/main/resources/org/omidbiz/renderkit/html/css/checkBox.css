@@ -62,3 +62,18 @@ pre {
 .switch label {
 	cursor: pointer;
 }
+.switch-single {
+    background-color: #e6e6e7;
+    clear: both;
+    cursor: pointer;
+    height: 30px;
+    padding: 5px;
+    width: 30px;
+}
+.mode{
+	position: absolute;
+	display: none;
+}
+.mode.active {
+    display: block;
+}
