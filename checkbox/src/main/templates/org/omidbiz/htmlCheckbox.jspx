@@ -31,65 +31,109 @@
 	<jsp:scriptlet>
 <![CDATA[ 
 			String value = (String) variables.getVariable("value");
-			String fsv = (String) variables.getVariable("firstSwitchVal");
-			String ssv = (String) variables.getVariable("secondSwitchVal");
+			String fsv = (String) variables.getVariable("fsv");
+			String ssv = (String) variables.getVariable("ssv");
 			Boolean checked = (Boolean) variables.getVariable("checked");
 			Boolean single = (Boolean) variables.getVariable("single");
 			Boolean disabled = (Boolean) variables.getVariable("disabled");
 ]]>
 	</jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ if (single == null || single == false) { ]]></jsp:scriptlet>
-	<p class="field switch">		   
-		<jsp:scriptlet><![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase(fsv)) { ]]></jsp:scriptlet>
+	<p class="field switch">
+		<jsp:scriptlet>
+			<![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase(fsv)) { ]]>
+		</jsp:scriptlet>
 						<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
 						<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
 						
-		<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"
-					disabled="disabled"		 
-					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+						<jsp:scriptlet>
+							<![CDATA[ if (disabled != null && disabled ) { ]]>
+						</jsp:scriptlet>
+						
+								<input type="text" onchange="#{change}" name="#{clientId}-chk"
+									disabled="disabled"		 
+									style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
 					
-			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
-					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-					
-			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+						<jsp:scriptlet>
+								<![CDATA[ } else { ]]>
+						</jsp:scriptlet>
+						
+								<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+									style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+									
+						<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 			
-		<jsp:scriptlet><![CDATA[ } else if(value != null && !"".equals(value.trim()) && value.equalsIgnoreCase(ssv)){  ]]></jsp:scriptlet>
+		<jsp:scriptlet>
+			<![CDATA[ } else if(value != null && !"".equals(value.trim()) && value.equalsIgnoreCase(ssv)){  ]]>
+		</jsp:scriptlet>
 		
-			<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
-			<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
-			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"
-					disabled="disabled"		 
-					style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
-					style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
-		<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-			<jsp:scriptlet><![CDATA[ if(checked != null && checked){  ]]></jsp:scriptlet>
-			<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
-			<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
-			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"
-					disabled="disabled"		 
-					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
-					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
-			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-			<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
-			<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
-			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"
-					disabled="disabled"		 
-					style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
-					style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
-			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+						<label class="cb-enable #{forceId} "><span>#{onText}</span></label>
+						<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
+						
+						<jsp:scriptlet>
+							<![CDATA[ if (disabled != null && disabled ) { ]]>
+						</jsp:scriptlet>
+						
+										<input type="text" onchange="#{change}" name="#{clientId}-chk"
+											disabled="disabled"		 
+											style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+											
+						<jsp:scriptlet>
+							<![CDATA[ } else { ]]>
+						</jsp:scriptlet>
+						
+										<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+											style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+						<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+						
+		<jsp:scriptlet>
+			<![CDATA[ } else { ]]>
+		</jsp:scriptlet>
+		
+						<jsp:scriptlet>
+							<![CDATA[ if(checked != null && checked){  ]]>
+						</jsp:scriptlet>
+						
+							<label class="cb-enable #{forceId} selected"><span>#{onText}</span></label>
+							<label class="cb-disable #{forceId}"><span>#{offText}</span></label>
+			
+										<jsp:scriptlet>
+											<![CDATA[ if (disabled != null && disabled ) { ]]>
+										</jsp:scriptlet>
+										
+											<input type="text" onchange="#{change}" name="#{clientId}-chk"
+												disabled="disabled"		 
+												style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+												
+										<jsp:scriptlet>
+											<![CDATA[ } else { ]]>
+										</jsp:scriptlet>
+										
+											<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+												style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+										
+										<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+						
+					<jsp:scriptlet>
+						<![CDATA[ } else { ]]>
+					</jsp:scriptlet>
+					
+								<label class="cb-enable #{forceId}"><span>#{onText}</span></label>
+								<label class="cb-disable #{forceId} selected"><span>#{offText}</span></label>
+								
+								<jsp:scriptlet>
+									<![CDATA[ if (disabled != null && disabled ) { ]]>
+								</jsp:scriptlet>
+								
+											<input type="text" onchange="#{change}" name="#{clientId}-chk"
+												disabled="disabled"		 
+												style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+								<jsp:scriptlet>
+									<![CDATA[ } else { ]]>
+								</jsp:scriptlet>
+											<input type="text" onchange="#{change}" name="#{clientId}-chk"					
+												style="display: none;" value="#{ssv}" id="#{clientId}-chk" class="#{forceId}-chk"/>
+								<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 			<jsp:scriptlet><![CDATA[ }]]></jsp:scriptlet>
 		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>		
 	
@@ -123,27 +167,46 @@
 	</script>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[ else { ]]></jsp:scriptlet>
+	
+	
 		<div id="schk_#{forceId}" class="switch-single" data-mode="#{fsv}">
-			<div class="mode active">
-				<i class="icon-ok"></i>
+			<div class="mode">
+				&#8801;
 			</div>
 			<div class="mode">
-				<i class="icon-cancel"></i>
+				&#8800;
 			</div>
+		<jsp:scriptlet>
+			<![CDATA[ if (value != null && !"".equals(value.trim())) { ]]>
+		</jsp:scriptlet>
 			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
 				<input type="text" onchange="#{change}" name="#{clientId}-chk"
 					disabled="disabled"		 
 					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
 			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-				<input type="text" onchange="#{change}" name="#{clientId}-chk"					
-					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
-			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>			
+						<input type="text" onchange="#{change}" name="#{clientId}-chk"			
+							style="display: none;" value="#{value}" id="#{clientId}-chk" class="#{forceId}-chk"/>			
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+		<jsp:scriptlet>
+			} else {
+		</jsp:scriptlet>	
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+					<input type="text" onchange="#{change}" name="#{clientId}-chk"
+						disabled="disabled"		 
+						style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
+				<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+							<input type="text" onchange="#{change}" name="#{clientId}-chk"			
+								style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>			
+				<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+		<jsp:scriptlet>
+			}
+		</jsp:scriptlet>
 		</div>
 	<script type="text/javascript">
 		jQuery(document).ready( function(){ 
 			var chk = jQuery("#schk_#{forceId}");
 			var modes = chk.children(".mode");
-			var hidden = chk.find(".schk-hidden");
+			var hidden = chk.find("."+"#{forceId}-chk");
 			loadChk();
 			chk.on("click",function(){
 				modes.toggleClass("active");

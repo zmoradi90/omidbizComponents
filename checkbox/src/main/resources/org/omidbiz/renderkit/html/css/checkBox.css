@@ -64,15 +64,20 @@ pre {
 }
 .switch-single {
     background-color: #e6e6e7;
+    box-sizing: border-box;
     clear: both;
     cursor: pointer;
-    height: 30px;
-    padding: 5px;
-    width: 30px;
+    font-family: tahoma;
+    font-stretch: ultra-expanded;
+    height: 22px;
+    line-height: 21px;
+    padding: 0 8px;
+    width: 26px;
 }
-.mode{
-	position: absolute;
-	display: none;
+.mode {
+    display: none;
+    font-size: 14pt;
+    position: absolute;
 }
 .mode.active {
     display: block;
