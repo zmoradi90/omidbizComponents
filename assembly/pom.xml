@@ -112,6 +112,12 @@
 									${project.basedir}/jqueryui/jquery.ui.widget-min.js
 								</include>
 								<include>
+									${project.basedir}/jqueryui/jquery.ui.mouse-min.js
+								</include>
+								<include>
+									${project.basedir}/jqueryui/jquery.ui.draggable-min.js
+								</include>
+								<include>
 									${project.basedir}/jqueryui/autoNumeric.js
 								</include>								
 								<include>**/*-min.js</include>
