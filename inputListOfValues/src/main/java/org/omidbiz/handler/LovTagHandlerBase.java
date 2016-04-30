@@ -16,8 +16,8 @@
 package org.omidbiz.handler;
 
 import java.util.Map;
+import java.util.Random;
 
-import javax.el.ValueExpression;
 import javax.faces.context.ExternalContext;
 
 import org.omidbiz.component.UIInputListOfValues;
@@ -51,7 +51,7 @@ public class LovTagHandlerBase extends ComponentHandler
         {
             if ("objectName".equals(name))
             {
-                return new ObjectNameMapper(attribute);
+                return new ObjectNameMapper(attribute, meta);
             }
             else
             {
@@ -65,13 +65,15 @@ public class LovTagHandlerBase extends ComponentHandler
     {
 
         private final TagAttribute objectNameAttr;
+        private final MetadataTarget meta;
 
         /**
          * @param attribute
          */
-        public ObjectNameMapper(TagAttribute attribute)
+        public ObjectNameMapper(TagAttribute attribute, MetadataTarget meta)
         {
-            objectNameAttr = attribute;
+            this.objectNameAttr = attribute;
+            this.meta = meta;
         }
 
         /*
@@ -86,10 +88,14 @@ public class LovTagHandlerBase extends ComponentHandler
             ExternalContext external = ctx.getFacesContext().getExternalContext();
             Map requestParams = external.getRequestParameterMap();
             String objectName = (String) requestParams.get("objectName");
-            if(objectName == null)
-                objectName = objectNameAttr.getValue();
+            if (objectName == null)
+            {
+                objectName = String.valueOf(objectNameAttr.getObject(ctx, String.class));
+            }
             if (objectName != null && objectName.trim().length() > 0)
-                lov.setObjectName(objectName);        
+            {
+                lov.setObjectName(objectName);
+            }
         }
 
     }

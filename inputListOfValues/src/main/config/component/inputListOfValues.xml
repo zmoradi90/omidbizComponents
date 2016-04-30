@@ -76,11 +76,11 @@
 		</property>
 		<property>
 			<name>objectName</name>
-			<classname>java.lang.String</classname>
+			<classname>java.lang.Object</classname>
 			<description>
 				the most important attribute use for setting and retrieving value via javascript				
 			</description>			
-			<required>true</required>
+			
 		</property>
 		
 		<property>

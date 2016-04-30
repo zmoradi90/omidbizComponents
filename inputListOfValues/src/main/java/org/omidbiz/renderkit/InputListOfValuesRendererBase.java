@@ -109,7 +109,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     public String getViewObjectName(FacesContext context, UIComponent component)
     {
         Object viewAttr = component.getAttributes().get("view");
-        Object objectName = component.getAttributes().get("objectName");
+        Object objectName = ((UIInputListOfValues)component).getObjectName();
         if (viewAttr == null)
             return "#";
         String view = (String) viewAttr;
@@ -132,7 +132,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     {
         String type = (String) component.getAttributes().get("type");
         Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
-        Object objectNameAttr = component.getAttributes().get("objectName");
+        Object objectNameAttr = component.getObjectName();
         if (type != null && "dialog".equalsIgnoreCase(type))
         {
             if (autoNumeric)
@@ -151,7 +151,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     {
         String type = (String) component.getAttributes().get("type");
         String styleClass = (String) component.getAttributes().get("styleClass");
-        Object objectNameAttr = component.getAttributes().get("objectName");
+        Object objectNameAttr = component.getObjectName();
         Object autocompleteUrl = component.getAttributes().get("autocompleteUrl");
         Object onchange = component.getAttributes().get("onchange");
         Object title = component.getAttributes().get("title");
@@ -225,7 +225,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         Object parentId = component.getAttributes().get("pid");
         Object pValueText = component.getAttributes().get("pValueText");
         String styleClass = (String) component.getAttributes().get("styleClass");
-        Object objectNameAttr = component.getAttributes().get("objectName");
+        Object objectNameAttr = component.getObjectName();
         Object extraInfo = component.getAttributes().get("extraInfo");
         Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
         extraInfo = extraInfo == null ? "" : extraInfo;

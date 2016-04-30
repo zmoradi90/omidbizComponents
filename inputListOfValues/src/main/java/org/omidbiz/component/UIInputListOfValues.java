@@ -37,16 +37,42 @@ public abstract class UIInputListOfValues extends UIInput
 
     private Object valueName;
 
-    private String objectName;
+    private Object objectName;
 
     private Object valueId;
 
-    public String getObjectName()
+    public Object getObjectName()
     {
-        return objectName;
+        if (this.objectName != null)
+        {
+            return this.objectName;
+        }
+        ValueExpression ve = getValueExpression("objectName");
+        if (ve != null)
+        {
+            Object value = null;
+            try
+            {
+                ELContext context = getFacesContext().getELContext();
+                Class<?> type = ve.getType(context);
+                value = JSFUtil.castTo(type, ve.getValue(context));
+            }
+            catch (ELException e)
+            {
+                // TODO : DO nothing //FIXME: throw new FacesException(e);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return value;
+        }
+
+        return null;
     }
 
-    public void setObjectName(String objectName)
+    public void setObjectName(Object objectName)
     {
         this.objectName = objectName;
     }
@@ -142,7 +168,7 @@ public abstract class UIInputListOfValues extends UIInput
         super.restoreState(context, values[0]);
         valueName = values[1];
         valueId = values[2];
-        objectName = (String) values[3];
+        objectName = values[3];
     }
 
     @Override
