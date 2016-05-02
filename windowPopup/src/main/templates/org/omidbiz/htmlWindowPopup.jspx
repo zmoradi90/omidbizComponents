@@ -18,7 +18,7 @@
 	
 	<f:resource name="org/omidbiz/images/loading_background.png" var="bg" />
 	<f:resource name="org/omidbiz/images/loading.gif" var="loader" />
-	<f:resource name="org/omidbiz/images/controls.png" var="controls" />
+	<f:resource name="org/omidbiz/images/cross.png" var="cross" />
 	<f:resource name="org/omidbiz/images/border.png" var="border" />
 	<f:resource name="org/omidbiz/images/ui-anim_basic_16x16.png" var="anim"/>
 	<f:resource name="org/omidbiz/images/transparent_1x1.png" var="transparent"/>
