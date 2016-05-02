@@ -217,15 +217,7 @@
 	background-position: -50px -25px;
 }
 
-#cboxClose {
-	position: absolute;
-	top: 0; 
-	right: 0;
-	background: url(images/cross.png) no-repeat -99px 0;
-	width: 25px;
-	height: 25px;
-	text-indent: -9999px;
-}
+ #cboxClose{position:absolute; top:0; right:0; background:url(images/cross.png) no-repeat -99px 0; width:25px; height:25px; text-indent:-9999px; background-position:center;}
 /*#cboxClose:hover{background-position:-25px -25px;}*/
 
 /*
