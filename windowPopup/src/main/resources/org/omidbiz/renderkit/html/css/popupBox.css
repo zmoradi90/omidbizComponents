@@ -216,7 +216,7 @@
 	background-position: -50px -25px;
 }
 
-#cboxClose {
+/*#cboxClose {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -224,7 +224,7 @@
 	width: 25px;
 	height: 25px;
 	text-indent: -9999px;
-}
+}*/
 /*#cboxClose:hover{background-position:-25px -25px;}*/
 
 /*
