@@ -31,4 +31,8 @@ function progressBar(inputId,percentage,maxFraction)
 		completeBar.removeClass("progressbar-bar-percentage-complete-base-color");
 		completeBar.addClass("progressbar-bar-percentage-complete-base-color-full"); 
 	}
+	if(parseInt(finalNumber)>100)
+	{
+		completeBar.addClass("progressbar-bar-percentage-error-base-color-full");
+	}	
 }			

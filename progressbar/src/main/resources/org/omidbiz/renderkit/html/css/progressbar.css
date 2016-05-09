@@ -36,6 +36,9 @@
 .progressbar-bar-percentage-complete-base-color-full{
     background-color: #4e9a06;
 }
+.progressbar-bar-percentage-error-base-color-full{
+    background-color: #000000!important;
+}
 .progressbar-bar-percentage-remiand {
     float: right;
     height: 100%;
