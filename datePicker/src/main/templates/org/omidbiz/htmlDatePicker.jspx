@@ -18,11 +18,12 @@
 		script/jquery.ui.datepicker-cc.js,
 		script/calendar.js,
 		script/jquery.ui.datepicker-cc-fa.js,
+		script/jquery-ui-timepicker-addon.js,
 		script/calendarUtil.js				
 	</h:scripts>
 	
 	<h:styles>
-				
+		css/jquery-ui-timepicker-addon.css		
 	</h:styles>
 	
 	<f:resource name="images/inputDate.png" var="icon" />
@@ -45,6 +46,7 @@
 	<c:set var="showOthers" value="#{component.attributes['showOthers']}" />
 	<c:set var="dateType" value="#{component.attributes['dateType']}" />
 	<c:set var="idname" value="#{component.attributes['idname']}" />
+	<c:set var="timepicker" value="#{component.attributes['timepicker']}" />
 	<c:set var="removeCallback" value="#{component.attributes['removeCallback']}" />
 	<c:set var="disabled" value="#{component.attributes['disabled']}" />
 	<c:set var="onSelect" value="#{component.attributes['onSelect']}" />
@@ -59,6 +61,7 @@
 			Boolean disabled = (Boolean) variables.getVariable("disabled");
 			String removeCallback = (String) variables.getVariable("removeCallback");
 			String onSelect = (String) variables.getVariable("onSelect");
+			Boolean timepicker = (Boolean) variables.getVariable("timepicker");
 ]]>
 </jsp:scriptlet>
 	
@@ -71,9 +74,14 @@
 			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
-			jQuery(document).ready(function(){
-				jQuery(#{jQueryClientId}).mask('9999/99/99');
-				jQuery(#{jQueryClientId}).datepicker({
+			jQuery(document).ready(function(){				
+				<jsp:scriptlet><![CDATA[ if (timepicker != null ) { ]]></jsp:scriptlet>
+				jQuery(#{jQueryClientId}).mask('9999/99/99 99:99');
+				jQuery(#{jQueryClientId}).datetimepicker({controlType: 'select',oneLine: true, isRTL:true,
+					<jsp:scriptlet><![CDATA[ } else {]]></jsp:scriptlet>
+					jQuery(#{jQueryClientId}).mask('9999/99/99');
+					jQuery(#{jQueryClientId}).datepicker({
+					<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 					dateFormat: '#{datePattern}',
 					showButtonPanel: true,
 					changeMonth: true,
@@ -91,8 +99,13 @@
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
 			jQuery(document).ready(function(){
-				jQuery(#{jQueryJsfId}).mask('9999/99/99');
-				jQuery(#{jQueryJsfId}).datepicker({
+				<jsp:scriptlet><![CDATA[ if (timepicker != null ) { ]]></jsp:scriptlet>
+				jQuery(#{jQueryClientId}).mask('9999/99/99 99:99');
+					jQuery(#{jQueryJsfId}).datetimepicker({controlType: 'select',oneLine: true, isRTL:true,
+					<jsp:scriptlet><![CDATA[ } else {]]></jsp:scriptlet>
+					jQuery(#{jQueryClientId}).mask('9999/99/99');
+					jQuery(#{jQueryJsfId}).datepicker({
+					<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 					dateFormat: '#{datePattern}', 
 					showButtonPanel: true,
 					changeMonth: true,

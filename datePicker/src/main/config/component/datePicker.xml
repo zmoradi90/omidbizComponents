@@ -60,6 +60,12 @@
 			</description>
 		</property>
 		<property>
+			<name>timepicker</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+			</description>
+		</property>
+		<property>
 			<name>style</name>
 			<classname>java.lang.String</classname>
 			<description>
