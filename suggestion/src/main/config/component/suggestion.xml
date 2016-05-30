@@ -248,6 +248,14 @@
 			</description>
 			<defaultvalue>"left"</defaultvalue>
 		</property> 
+		<property>
+			<name>ultraRight</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+				true or false
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property> 
    		<property>
 			<name>escape</name>
 			<classname>java.lang.Boolean</classname>
