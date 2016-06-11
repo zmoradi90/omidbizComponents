@@ -1,0 +1,28 @@
+/*	$Loader Bars
+	========================================================================== */
+.loader { display: inline-block; position: absolute;top:50%; width: 50px; height: 50px; vertical-align: middle; }
+	
+/* line 253, ../sass/partials/_mixins.scss */
+.loader-bars:before, .loader-bars:after, .loader-bars span { content: ''; display: block; position: absolute; left: 0; top: 0; width: 10px; height: 30px; background-color: #fff; -o-animation: grow 1.5s linear infinite; -moz-animation: grow 1.5s linear infinite; -webkit-animation: grow 1.5s linear infinite; animation: grow 1.5s linear infinite; }
+
+/* line 266, ../sass/partials/_mixins.scss */
+.loader-bars:after { left: 15px; -o-animation: grow 1.5s linear -0.5s infinite; -moz-animation: grow 1.5s linear -0.5s infinite; -webkit-animation: grow 1.5s linear -0.5s infinite; animation: grow 1.5s linear -0.5s infinite; }
+
+/* line 271, ../sass/partials/_mixins.scss */
+.loader-bars span { left: 30px; -o-animation: grow 1.5s linear -1s infinite; -moz-animation: grow 1.5s linear -1s infinite; -webkit-animation: grow 1.5s linear -1s infinite; animation: grow 1.5s linear -1s infinite; }
+
+@-webkit-keyframes grow { 0% { -webkit-transform: scaleY(0); transform: scaleY(0); opacity: 0; }
+  50% { -webkit-transform: scaleY(1); transform: scaleY(1); opacity: 1; }
+  100% { -webkit-transform: scaleY(0); transform: scaleY(0); opacity: 0; } }
+@keyframes grow { 0% { -webkit-transform: scaleY(0); transform: scaleY(0); opacity: 0; }
+  50% { -webkit-transform: scaleY(1); transform: scaleY(1); opacity: 1; }
+  100% { -webkit-transform: scaleY(0); transform: scaleY(0); opacity: 0; } }
+@-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); tranform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); tranform: rotate(360deg); } }
+@keyframes spin { 0% { -webkit-transform: rotate(0deg); tranform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); tranform: rotate(360deg); } }
+@-webkit-keyframes spinreverse { 0% { -webkit-transform: rotate(0deg); tranform: rotate(0deg); }
+  100% { -webkit-transform: rotate(-360deg); tranform: rotate(-360deg); } }
+@keyframes spinreverse { 0% { -webkit-transform: rotate(0deg); tranform: rotate(0deg); }
+  100% { -webkit-transform: rotate(-360deg); tranform: rotate(-360deg); } }
+ 
