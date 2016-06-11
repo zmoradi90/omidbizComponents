@@ -12,11 +12,10 @@
 	
 	
 	<h:scripts>
-	/org/omidbiz/renderkit/html/spin.js,
-	/org/omidbiz/renderkit/html/spin_conf.js
 	</h:scripts>
 	
 	<h:styles>
+		css/loading.css
 	</h:styles>
 
 	

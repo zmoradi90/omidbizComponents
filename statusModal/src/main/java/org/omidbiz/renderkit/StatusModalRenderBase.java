@@ -55,13 +55,13 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			sb.append("(){");			
 			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
 			sb.append(" spin_target.style.display = 'block';");
-			sb.append(varName).append(" = new Spinner(opts).spin(spin_target); ");
+			//sb.append(varName).append(" = new Spinner(opts).spin(spin_target); ");
 			sb.append("}");
 			//stop function			
 			sb.append(" function stop_");
 			sb.append(funcName.replace(":", "\\\\:"));
 			sb.append("(){ ");
-			sb.append(varName).append(".stop(); ");			
+			//sb.append(varName).append(".stop(); ");			
 			sb.append(" var spin_target = document.getElementById('"+forAttr+"'); ");
 			sb.append(" spin_target.style.display = 'none';");
 			sb.append(" } ");
@@ -69,7 +69,12 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			//
 			writer.startElement("div", component);
 			getUtils().writeAttribute(writer, "id", forAttr);		
-			getUtils().writeAttribute(writer, "style", "display:none; width: 100%; height: 100%; top: 0px; left: 0px;position: fixed;opacity: 0.7;background: rgba(255,255,255,1);z-index: 99;text-align: center;");
+			getUtils().writeAttribute(writer, "style", "display:none; width: 100%; height: 100%; top: 0px; left: 0px;position: fixed;opacity: 0.7;background: rgba(0,0,0,1);z-index: 99;text-align: center;");
+			writer.startElement("span", null);
+			getUtils().writeAttribute(writer, "class", "loader loader-bars");	
+			writer.startElement("span", null);
+			writer.endElement("span");
+			writer.endElement("span");
 			writer.endElement("div");
 		}
 		
