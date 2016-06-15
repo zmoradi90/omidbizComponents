@@ -38,11 +38,11 @@ import org.omidbiz.component.UIDatePicker;
 public class DatePickerRendererBase extends HeaderResourcesRendererBase
 {
 
-    final PersianCalendar pc = new PersianCalendar();
-    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-    final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
-    final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    final SimpleDateFormat dateInstanceFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss z");
+    final PersianDateConverter pc = PersianDateConverter.getInstance();
+    final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd");
+    
+    private String[] formats = { "yyyy/MM/dd", "yyyy/MM/dd HH:mm", "yyyy/MM/dd HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm:ss",
+            "EEE, d MMM yyyy HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm", "yyyy-MM-dd"};
 
     public void decode(FacesContext context, UIComponent component)
     {
@@ -104,7 +104,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         Object value = inputDate.getValue();
         if (value != null && value.toString().length() > 1)
         {
-            Date gDate = (Date) value;
+            Date gDate = parseValue(value).getDate();
             String valuePattern = (String) inputDate.getAttributes().get("valuePattern");
             String solarValue = null;
             if (valuePattern != null)
@@ -140,32 +140,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
         if (gregorianDate.length() > 0)
         {
-            String gDate = pc.SolarToGregorian(gregorianDate);
-            try
-            {
-                return sdf.parse(gDate);
-            }
-            catch (ParseException e)
-            {
-                try
-                {
-                    return dateFormat.parse(gDate);
-                }
-                catch (ParseException e1)
-                {
-                    try
-                    {
-                        return dateTimeFormat.parse(gDate);
-                    }
-                    catch (ParseException e2)
-                    {
-                        DateTimeConverter datetime = new DateTimeConverter();
-                        datetime.setPattern("m/y");
-                        Date newCurrentDate = (Date) datetime.getAsObject(context, component, gregorianDate);
-                        return newCurrentDate;
-                    }
-                }
-            }
+            return pc.SolarToGregorianAsDate(gregorianDate);              
         }
         else
         {
@@ -174,6 +149,49 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
             Date newCurrentDate = (Date) datetime.getAsObject(context, component, gregorianDate);
             return newCurrentDate;
         }
+    }
+    
+    private ReturnValue parseValue(Object val)
+    {
+        if (val == null)
+            return null;
+        for (String format : formats)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            try
+            {
+                Date dateValue = sdf.parse(String.valueOf(val));
+                return new ReturnValue(sdf, dateValue);
+            }
+            catch (ParseException e)
+            {
+                // DO NOTHING
+            }
+        }
+        return null;
+    }
+    
+    private class ReturnValue
+    {
+        private SimpleDateFormat sdf;
+        private Date date;
+
+        public ReturnValue(SimpleDateFormat sdf, Date date)
+        {
+            this.sdf = sdf;
+            this.date = date;
+        }
+
+        public SimpleDateFormat getSdf()
+        {
+            return sdf;
+        }
+
+        public Date getDate()
+        {
+            return date;
+        }
+
     }
 
 }

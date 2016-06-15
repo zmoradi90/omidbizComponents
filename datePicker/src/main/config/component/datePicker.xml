@@ -30,7 +30,8 @@
 		<property>
 			<name>datePattern</name>
 			<classname>java.lang.String</classname>
-			<description>				
+			<description>		
+				this pattern is used for client-side		
 			</description>
 			<defaultvalue>"yy/mm/dd"</defaultvalue>
 			<required>true</required>
@@ -39,6 +40,7 @@
 			<name>valuePattern</name>
 			<classname>java.lang.String</classname>
 			<description>
+				this pattern is used for server-side 
 			</description>
 		</property>
 		<property>
