@@ -26,8 +26,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.DateTimeConverter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.ajax4jsf.renderkit.RendererUtils;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIDatePicker;
+import org.omidbiz.util.JSFUtil;
 
 /**
  * 
@@ -40,9 +42,9 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 
     final PersianDateConverter pc = PersianDateConverter.getInstance();
     final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd");
-    
-    private String[] formats = { "yyyy/MM/dd", "yyyy/MM/dd HH:mm", "yyyy/MM/dd HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm:ss",
-            "EEE, d MMM yyyy HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm", "yyyy-MM-dd"};
+
+    private String[] formats = { "yyyy/MM/dd", "yyyy/MM/dd HH:mm", "yyyy/MM/dd HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy",
+            "yyyy-MM-dd HH:mm:ss", "EEE, d MMM yyyy HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm", "yyyy-MM-dd" };
 
     public void decode(FacesContext context, UIComponent component)
     {
@@ -61,24 +63,43 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
         String submittedValue = (String) requestParams.get(clientId);
         boolean required = (Boolean) inputDate.getAttributes().get("required");
-//        Object convertedDate = InputUtils.getConvertedValue(context, inputDate, submittedValue);
-        Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
-        if (required && convertedDate == null)
+        if (submittedValue != null && submittedValue.trim().length() > 0)
         {
-            inputDate.setSubmittedValue("");
+            Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
+            if (convertedDate != null && convertedDate.toString().trim().length() > 0)
+            {
+                inputDate.setSubmittedValue(convertedDate);
+            }
         }
-        if (!required && convertedDate == null)
+        else
         {
-            // Null Object doesn't cause update component
-            inputDate.resetValue();
-            inputDate.setSubmittedValue(null);
-            inputDate.setValue(null);
-
+            UIComponent result = JSFUtil.getEnclosingForm(inputDate);
+            if (result != null)
+            {
+                if(inputDate.isRequired())
+                    inputDate.setSubmittedValue("");
+            }
         }
-        if (convertedDate != null && convertedDate.toString().length() > 1)
-        {
-            inputDate.setSubmittedValue(convertedDate);
-        }
+        // Object convertedDate = InputUtils.getConvertedValue(context,
+        // inputDate, submittedValue);
+        // Object convertedDate = getConvertedDateValue(submittedValue, context,
+        // inputDate);
+        // if (required && convertedDate == null)
+        // {
+        // inputDate.setSubmittedValue("");
+        // }
+        // if (!required && convertedDate == null)
+        // {
+        // // Null Object doesn't cause update component
+        // inputDate.resetValue();
+        // inputDate.setSubmittedValue(null);
+        // inputDate.setValue(null);
+        //
+        // }
+        // if (convertedDate != null && convertedDate.toString().length() > 1)
+        // {
+        // inputDate.setSubmittedValue(convertedDate);
+        // }
     }
 
     public String getClientScriptIdName(FacesContext context, UIDatePicker component)
@@ -140,7 +161,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
         if (gregorianDate.length() > 0)
         {
-            return pc.SolarToGregorianAsDate(gregorianDate);              
+            return pc.SolarToGregorianAsDate(gregorianDate);
         }
         else
         {
@@ -150,7 +171,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
             return newCurrentDate;
         }
     }
-    
+
     private ReturnValue parseValue(Object val)
     {
         if (val == null)
@@ -170,7 +191,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         }
         return null;
     }
-    
+
     private class ReturnValue
     {
         private SimpleDateFormat sdf;
