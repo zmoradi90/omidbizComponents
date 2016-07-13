@@ -228,6 +228,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         Object objectNameAttr = component.getObjectName();
         Object extraInfo = component.getAttributes().get("extraInfo");
         Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
+        Object data = component.getAttributes().get("data");
+        Object onCloseLink = component.getAttributes().get("onCloseLink");
         extraInfo = extraInfo == null ? "" : extraInfo;
         if (type != null && "link".equalsIgnoreCase(type))
         {
@@ -259,6 +261,10 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 if (autoNumeric)
                     onclick += String.format("Richfaces.colorboxControl.applyAutoNumeric('%s');", objectNameAttr);
                 onclick += "Richfaces.colorboxControl.extendedCloseBox();";
+                if(data != null && onCloseLink != null)
+                    onclick += onCloseLink+"('"+objectName+"','"+data+"');";
+                else if(onCloseLink != null)
+                    onclick += onCloseLink+"('"+objectName+"');";
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
                 if (JSFUtil.isNotEmpty(styleClass))
