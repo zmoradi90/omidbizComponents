@@ -54,7 +54,6 @@
 	<c:object var="jQueryClientId" type="java.lang.String" value="#{this:getClientScriptIdName(context, component)}" />
 	<c:object var="jQueryJsfId" type="java.lang.String" value="#{this:getJsfScriptIdName(context, component)}" />
 	
-	
 	<jsp:scriptlet>
 <![CDATA[ 
 			String idname = (String) variables.getVariable("idname");
@@ -99,11 +98,12 @@
 			<jsp:scriptlet><![CDATA[ if (disabled == null || disabled == false ) { ]]></jsp:scriptlet>
 			<script type="text/javascript">
 			jQuery(document).ready(function(){
+  				var clientId ="#{clientId}";
 				<jsp:scriptlet><![CDATA[ if (timepicker != null ) { ]]></jsp:scriptlet>
-				jQuery(#{jQueryClientId}).mask('9999/99/99 99:99');
+				jQuery(#{jQueryJsfId}).mask('9999/99/99 99:99');
 					jQuery(#{jQueryJsfId}).datetimepicker({controlType: 'select',oneLine: true, isRTL:true,
 					<jsp:scriptlet><![CDATA[ } else {]]></jsp:scriptlet>
-					jQuery(#{jQueryClientId}).mask('9999/99/99');
+					jQuery(#{jQueryJsfId}).mask('9999/99/99');
 					jQuery(#{jQueryJsfId}).datepicker({
 					<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 					dateFormat: '#{datePattern}', 
