@@ -69,7 +69,7 @@ public class StatusModalRenderBase extends HeaderResourcesRendererBase
 			//
 			writer.startElement("div", component);
 			getUtils().writeAttribute(writer, "id", forAttr);		
-			getUtils().writeAttribute(writer, "style", "display:none; width: 100%; height: 100%; top: 0px; left: 0px;position: fixed;opacity: 0.7;background: rgba(0,0,0,1);z-index: 99;text-align: center;");
+			getUtils().writeAttribute(writer, "style", "display:none; width: 100%; height: 100%; top: 0px; left: 0px;position: fixed;opacity: 0.7;background: rgba(0,0,0,1);z-index: 2147483647;text-align: center;");
 			writer.startElement("span", null);
 			getUtils().writeAttribute(writer, "class", "loader loader-bars");	
 			writer.startElement("span", null);
