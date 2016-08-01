@@ -22,37 +22,40 @@
 				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
 			</superclass>
 		</tag>
+		
+		
 		<property>
-			<name>precision</name>
-			<classname>java.lang.Object</classname>
-			<defaultvalue>2</defaultvalue>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
 			<description>
-				decimal point place (must be integer)
+				Must be unique in each page
 			</description>
-		</property>
-		<property>
-			<name>value</name>
-			<classname>java.lang.Object</classname>
 			<required>true</required>
-			<description>
-				complete precentage
-			</description>
-		</property>		
+		</property>
+		
 		<property>
-			<name>height</name>
-			<classname>java.lang.Object</classname>
-			<defaultvalue>20</defaultvalue>
+			<name>style</name>
+			<classname>java.lang.String</classname>
 			<description>
-				progress bar height
+				
 			</description>
 		</property>
-        		<property>
-			<name>width</name>
-			<classname>java.lang.Object</classname>
-			<defaultvalue>200</defaultvalue>
+		
+		<property>
+			<name>title</name>
+			<classname>java.lang.String</classname>
 			<description>
-				progress bar width
+				
 			</description>
 		</property>
+		
+		<property>
+			<name>styleClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+		</property>
+        
 	</component>
 </components>
