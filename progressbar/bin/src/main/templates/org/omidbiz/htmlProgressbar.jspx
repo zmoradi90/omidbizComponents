@@ -12,7 +12,8 @@
 	>
 
 	
-	<h:styles>/org/omidbiz/renderkit/html/css/progressbar.css</h:styles>
+	
+	
 	
 	<f:clientid var="clientId"/>
 	<f:call name="initializeMask">

@@ -1,90 +1,42 @@
-.progressbar-wrapper {
-	float: right;
+.progress-bar-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    position: relative;
 }
-.progressbar-bar-wapper {
-    height: 17px;
-    width: 150px;
-}
-
-.progressbar-expanded .progressbar-bar-content{
-	height: 49%!important;
-}
-.progressbar-expanded .progressbar-bar-percentage-text{
-	bottom:-7!important;
-}
-.progressbar-bar-content {
-    box-sizing: border-box;
+.progress-bar-percent {
+    background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAYAAACaq43EAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AcfCAkaQnk5cAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADDUlEQVRIx5WVQWscRxCF61X37Ap5QYokFCGd9uD4YojBugkR/4D85YCDETlkD3HQTWHRZQXRLrpZ0k531cvB20PvyrImAwPT01P1TVW/qoL8j2uxWLxR1fMY4w8kmVJyMxMAIiKiqhJjlOFwKO4uJMXdxd0FXz9SkktV/TP2hV5fX/+YUvo1xvgewKA4JdndAERVOxhJEZHux0IIWVWvSM57gwG8J/mO5IgkVlFIjF9dlLWZdVBV7exDCGya5h7AH4PB4J9e4Jubm9eqehZC2AYgOefOcQihi4qkmFlnZ2YSQhBVJcnHlNJfqjoREXkRPJvNhiTPAYwBNGaGlJK4u6iq5JyL8zW7kgGSNDPPOS9E5Pf9/f3bXuC2bd/GGE/NbJukpJQkpdSJqT7f+jzL/ioDD2Y2MbPLsvdd8HQ6PST5wd0PVFXNDACkaRpR1Q6ccxZ372AhBAEgABhjTKo6bZrm0+7u7rIXmOQpgJ9JbpkZVLU4FADi7h00xighhC4DK3sh+cXdL/b29q5q3/F7gnL3MwCvSjSVs7V0Fmi9D4Cq+kjyM4DJpv/4nKBijOcAxiQbM8O3arPUbZ2JCuoxxgWAjzs7O7e9wKPR6K27n5LcrjtTLZ4C3Syh8h7AQ855slwuL7/FeAK+u7s7dPcPqnrg7qqqqKOs01xnoCohxhiTiExDCJ9OTk6WvcAi0glKRFCntY58MwNFB6v1F3e/ODo6unpOQ2vg+Xz+2t3PSL6qz7Rq9E/gdRYAEMCju38uHepF8Gw2G5rZuaqORWRNUHXvLUKqVb76hqrqIrJQ1Y/Hx8e3vcC1oDbLZ7MjlWczWxMWyQd3nwC4fKkjxpXBYUrpl5zzQdu2mnNGGQQhhG4CbTYHADIYDAQASaac81REnhXUE/D9/f2pmb3LOW+1bYsyAGKMa22xjq6ceXk2s3szuxiPx1d9Jl5cLBY/tW17LiKjVYSs67OGxRi7Nlnqe/WTSwB/b21tTfrO96iqb1R1qKrz1QhjGXsFWiIv76ojQNM0IiL/AvitjLw+1389/WNr9Y8i4AAAAABJRU5ErkJggg==');
+    background-color: #1D659F;
     height: 100%;
-    margin-top: 4px;
+    width: 50%;
+    float: left;
+ }
+.progress-bar-percent-caption {
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 800;
+    height: 100%;
+    left: 27%;
+    line-height: 168%;
+    position: relative;
+    text-shadow: 2px 2px #555;
+    width: 100%;
+    z-index: 2;
+}
+.progress-bar-percent-remaind-caption {
+    color: #555;
+    font-size: 8pt;
+    height: 100%;
+    left: -32%;
+    line-height: 175%;
     position: relative;
     width: 100%;
+    z-index: 2;
 }
-.progressbar-bar {
-    border: 1px solid #ccc;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-.progressbar-bar-percentage-complete {
-    height: 100%;
-    width: 0%;
-    float: left;
-}
-.progressbar-bar-percentage-complete-base-color{
-    background-color: #00494F;
-}
-.progressbar-bar-percentage-complete-base-color-full{
-    background-color: #4e9a06;
-}
-.progressbar-bar-percentage-error-base-color-full{
-    background-color: #000000!important;
-}
-.progressbar-bar-percentage-remiand {
+.progress-bar-percent-remaind {
+    background-color: #fff;
     float: right;
     height: 100%;
-    width: 100%;
-}
-.progressbar-bar-indicator {
-    background-color: #ccc;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: 1px;
-}
-.progressbar-bar-end-indicator {
-    right:-2px;
-}
-
-.progressbar-bar-percentage-complete-text{
-	text-align: right;
-	color:#FFF;
-	display: none;
-	float: right;
-}
-
-.progressbar-bar-percentage-text {
-    font-size: 10pt;
     position: relative;
-    height: 100%;
-    line-height: 19px;
-}
-.progressbar-bar-duration-text {
-    font-size: 9pt;
-    width: 100%;
-    text-align: center;
-    direction: rtl;
-}
-.progressbar-time-wrapper {
-    font-size: 8pt;
-    height: 50%;
-    width: 100%;
-}
-.progressbar-time-start-text {
-    float: left;
     width: 50%;
-}
-.progressbar-time-end-text{
-	float: right;
-    width: 50%;
-   	text-align: right;
 }
