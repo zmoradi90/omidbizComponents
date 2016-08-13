@@ -36,7 +36,10 @@ text-align: right;
 word-wrap: break-word;
 direction: rtl;
 max-width: 230px;
-text-justify: inherit;
+text-justify: inter-word;
+line-height: 16px;
+font-family: B Koodak;
+text-align: justify;
 }
 
 	.qtip-titlebar{
