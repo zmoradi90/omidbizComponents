@@ -28,19 +28,15 @@
 	padding: 0;
 }
 
-.qtip-content {
-position: relative;
-padding: 5px 9px;
-overflow: hidden;
-text-align: right;
-word-wrap: break-word;
-direction: rtl;
-max-width: 230px;
-text-justify: inter-word;
-line-height: 16px;
-font-family: B Koodak;
-text-align: justify;
-}
+	.qtip-content{
+		position: relative;
+		padding: 5px 9px;
+		overflow: hidden;
+
+		text-align: right;
+		word-wrap: break-word;
+		direction: rtl;
+	}
 
 	.qtip-titlebar{
 		position: relative;
@@ -232,3 +228,4 @@ text-align: justify;
 	.qtip-blue .qtip-close .qtip-icon{
 		background-position: -2px 0;
 	}
+
