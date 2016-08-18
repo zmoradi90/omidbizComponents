@@ -52,7 +52,6 @@ public class InputTooltipRenderBase extends HeaderResourcesRendererBase
 		    }
 			StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){");
 			String openMode = (String)component.getAttributes().get("openMode");
-			String styleClass = (String)component.getAttributes().get("styleClass");
             String direction = (String)component.getAttributes().get("direction");
             Boolean escape = (Boolean)component.getAttributes().get("escape");
             String ultraRight ="right";
@@ -65,16 +64,16 @@ public class InputTooltipRenderBase extends HeaderResourcesRendererBase
 			if(openMode != null && openMode.equals("mouseenter"))
 			{
 			    if(escape !=null && escape)
-			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)}, style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)}, style: { classes: 'qtip-youtube qtip-shadow custome-qtip-style' },show:{event:'"+openMode+"',delay:1000},position:{viewport:jQuery(window),my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			    else
-			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue}, style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"',delay:1000},position:{my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue}, style: { classes: 'qtip-youtube qtip-shadow custome-qtip-style' },show:{event:'"+openMode+"',delay:1000},position:{viewport:jQuery(window),my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			}
 			if(openMode != null && openMode.equals("click"))
 			{
 			    if(escape !=null && escape)
-			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)},style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: escapeHtml(titleValue)},style: { classes: 'qtip-youtube qtip-shadow   custome-qtip-style' },show:{event:'"+openMode+"'},position:{viewport:jQuery(window),my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			    else
-			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue},style: { classes: '"+styleClass+"' },show:{event:'"+openMode+"'},position:{my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
+			        sb.append("("+jQueryId+".attr('title')!=''&&"+jQueryId+".attr('original-title')!=''&&"+jQueryId+".attr('oldtitle')!='')&&("+jQueryId+".qtip({content:{text: titleValue},style: { classes: 'qtip-youtube qtip-shadow  custome-qtip-style' },show:{event:'"+openMode+"'},position:{viewport:jQuery(window),my:'top "+ultraRight+"',at: 'bottom "+direction+"',target:"+jQueryId+" }}))");
 			}
 			
 			sb.append("});");
