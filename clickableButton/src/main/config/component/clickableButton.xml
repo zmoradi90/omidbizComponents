@@ -70,6 +70,16 @@
 		</property>
 		
 		
+		<property>
+			<name>onclick</name>
+			<classname>java.lang.String</classname>
+			<description>
+				
+			</description>
+			
+		</property>
+		
+		
         
 	</component>
 </components>
