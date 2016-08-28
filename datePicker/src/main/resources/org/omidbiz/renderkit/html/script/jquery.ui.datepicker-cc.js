@@ -660,13 +660,12 @@ jQuery.extend(Datepicker.prototype, {
 		inst.dpDiv.css({position: (jQuery.datepicker._inDialog && jQuery.blockUI ?
 			'static' : (isFixed ? 'fixed' : 'absolute')), display: 'none',
 			left: offset.left + 'px', top: offset.top + 'px'});
-		console.log(offset.top);
-		console.log(inst.dpDiv.height());
 //shk customize positioning 
-		var elementOffset = inst.dpDiv.height()+offset.top;
+		var elementOffset = offset.top + Number(inst.dpDiv.height());
+		var elementNewPos = offset.top - Number(inst.dpDiv.height()+inst.input.outerHeight());
 		if(elementOffset >jQuery(window).height())
 		{
-			inst.dpDiv.css("top",Number(offset.top)+(jQuery(window).height() - elementOffset +40)+"px");
+			inst.dpDiv.css("top",elementNewPos+"px");
 		}
 		if (!inst.inline) {
 			var showAnim = jQuery.datepicker._get(inst, 'showAnim');
