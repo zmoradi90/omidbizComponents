@@ -666,8 +666,7 @@ jQuery.extend(Datepicker.prototype, {
 		var elementOffset = inst.dpDiv.height()+offset.top;
 		if(elementOffset >jQuery(window).height())
 		{
-			inst.dpDiv.css("top",Number(offset.top)
-					+(jQuery(window).height() - elementOffset +40))+"px");
+			inst.dpDiv.css("top",Number(offset.top)+(jQuery(window).height() - elementOffset +40))+"px");
 		}
 		if (!inst.inline) {
 			var showAnim = jQuery.datepicker._get(inst, 'showAnim');
