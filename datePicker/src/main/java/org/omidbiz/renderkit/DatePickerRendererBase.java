@@ -19,17 +19,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 import javax.faces.convert.DateTimeConverter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
-import org.ajax4jsf.renderkit.RendererUtils;
 import org.ajax4jsf.util.InputUtils;
 import org.omidbiz.component.UIDatePicker;
-import org.omidbiz.util.JSFUtil;
 
 /**
  * 
@@ -37,7 +39,7 @@ import org.omidbiz.util.JSFUtil;
  * @version $Revision: 1.0
  * 
  */
-public class DatePickerRendererBase extends HeaderResourcesRendererBase
+public abstract class DatePickerRendererBase extends HeaderResourcesRendererBase
 {
 
     final PersianDateConverter pc = PersianDateConverter.getInstance();
@@ -46,6 +48,9 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
     private String[] formats = { "yyyy/MM/dd", "yyyy/MM/dd HH:mm", "yyyy/MM/dd HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy",
             "yyyy-MM-dd HH:mm:ss", "EEE, d MMM yyyy HH:mm:ss", "EEE MMM d HH:mm:ss z yyyy", "yyyy-MM-dd HH:mm", "yyyy-MM-dd" };
 
+    /**
+     * @see UIInput#validate(FacesContext)
+     */
     public void decode(FacesContext context, UIComponent component)
     {
         ExternalContext external = context.getExternalContext();
@@ -62,44 +67,12 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
             clientId = inputDate.getClientId(context) + "_date";
         }
         String submittedValue = (String) requestParams.get(clientId);
-        boolean required = (Boolean) inputDate.getAttributes().get("required");
-        if (submittedValue != null && submittedValue.trim().length() > 0)
+        Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
+        if (convertedDate != null)
         {
-            Object convertedDate = getConvertedDateValue(submittedValue, context, inputDate);
-            if (convertedDate != null && convertedDate.toString().trim().length() > 0)
-            {
-                inputDate.setSubmittedValue(convertedDate);
-            }
+            inputDate.setSubmittedValue(convertedDate);
+
         }
-        else
-        {
-            UIComponent result = JSFUtil.getEnclosingForm(inputDate);
-            if (result != null)
-            {
-                if(inputDate.isRequired())
-                    inputDate.setSubmittedValue("");
-            }
-        }
-        // Object convertedDate = InputUtils.getConvertedValue(context,
-        // inputDate, submittedValue);
-        // Object convertedDate = getConvertedDateValue(submittedValue, context,
-        // inputDate);
-        // if (required && convertedDate == null)
-        // {
-        // inputDate.setSubmittedValue("");
-        // }
-        // if (!required && convertedDate == null)
-        // {
-        // // Null Object doesn't cause update component
-        // inputDate.resetValue();
-        // inputDate.setSubmittedValue(null);
-        // inputDate.setValue(null);
-        //
-        // }
-        // if (convertedDate != null && convertedDate.toString().length() > 1)
-        // {
-        // inputDate.setSubmittedValue(convertedDate);
-        // }
     }
 
     public String getClientScriptIdName(FacesContext context, UIDatePicker component)
@@ -118,7 +91,7 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
         return "'#" + jQueryClientId + "_date'";
     }
 
-    public String getConvertedStringValue(FacesContext context, UIDatePicker component)
+    protected String getValueAsString(FacesContext context, UIComponent component) 
     {
         UIDatePicker inputDate = (UIDatePicker) component;
 
@@ -147,29 +120,47 @@ public class DatePickerRendererBase extends HeaderResourcesRendererBase
 
     }
 
-    protected Class<? extends UIComponent> getComponentClass()
-    {
-        return UIDatePicker.class;
-    }
+    
 
-    // TODO:Null Object doesn't cause update component
     protected Object getConvertedDateValue(String gregorianDate, FacesContext context, UIDatePicker component)
     {
-        if (gregorianDate == null)
-        {
-            return null;
-        }
-        if (gregorianDate.length() > 0)
+        if (gregorianDate != null && gregorianDate.trim().length() > 0)
         {
             return pc.SolarToGregorianAsDate(gregorianDate);
         }
-        else
+        if (gregorianDate != null && gregorianDate.trim().length() == 0)
+            return "";
+        return null;
+    }
+
+    @Override
+    public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException
+    {
+        UIDatePicker inputDate = (UIDatePicker) component;
+        Converter converter = inputDate.getConverter();
+        if(converter != null)
+        {
+            return converter.getAsObject(context, component, String.valueOf(submittedValue));
+        }
+        if(submittedValue != null && String.valueOf(submittedValue).trim().isEmpty())
+            return null;
+        return submittedValue;
+    }
+
+    private Converter getConverter(FacesContext context, UIDatePicker dt)
+    {
+        Converter converter = dt.getConverter();
+        if (converter == null)
         {
             DateTimeConverter datetime = new DateTimeConverter();
-            datetime.setPattern("m/y");
-            Date newCurrentDate = (Date) datetime.getAsObject(context, component, gregorianDate);
-            return newCurrentDate;
+            datetime.setLocale(context.getViewRoot().getLocale());
+            datetime.setTimeZone(TimeZone.getDefault());
+            datetime.setType("date");
+            datetime.setDateStyle("medium");
+            datetime.setPattern("yyyy/MM/dd");
+            converter = datetime;
         }
+        return converter;
     }
 
     private ReturnValue parseValue(Object val)
