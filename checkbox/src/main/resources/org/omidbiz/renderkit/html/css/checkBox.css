@@ -78,6 +78,7 @@ pre {
     display: none;
     font-size: 14pt;
     position: absolute;
+    font-family: tahoma;
 }
 .mode.active {
     display: block;
