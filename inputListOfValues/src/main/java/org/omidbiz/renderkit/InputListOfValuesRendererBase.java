@@ -59,7 +59,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
-        inputLov.setSubmittedValue(submittedValue);
+        if(submittedValue != null)
+            inputLov.setSubmittedValue(submittedValue);
 
         if (JSFUtil.isNotEmpty(submittedValue))
         {
