@@ -23,8 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.ajax4jsf.renderkit.ComponentVariables;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
@@ -85,7 +85,15 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     @Override
     public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException
     {
-        return super.getConvertedValue(context, component, submittedValue);
+        UIInputListOfValues inputDate = (UIInputListOfValues) component;
+        Converter converter = inputDate.getConverter();
+        if(converter != null)
+        {
+            return converter.getAsObject(context, component, String.valueOf(submittedValue));
+        }
+        if(submittedValue != null && String.valueOf(submittedValue).trim().isEmpty())
+            return null;
+        return submittedValue;
     }
 
     public Object getSelectedTextConvertedValue(FacesContext context, UIComponent component)
