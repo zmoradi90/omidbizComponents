@@ -171,7 +171,7 @@
 	
 		<div id="schk_#{forceId}" class="switch-single" data-mode="#{fsv}">
 			<div class="mode">
-				&#8801;
+				=
 			</div>
 			<div class="mode">
 				&#8800;
