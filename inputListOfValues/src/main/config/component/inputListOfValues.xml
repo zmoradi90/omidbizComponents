@@ -116,6 +116,13 @@
 			</description>			
 		</property>
 		<property>
+			<name>inputTextStyle</name>
+			<classname>java.lang.String</classname>
+			<description>
+				it is used to assign a style to input text 
+			</description>			
+		</property>		
+		<property>
 			<name>pValueText</name>
 			<classname>java.lang.String</classname>
 			<description>

@@ -151,6 +151,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     {
         String type = (String) component.getAttributes().get("type");
         String styleClass = (String) component.getAttributes().get("styleClass");
+        String inputTextStyle = (String) component.getAttributes().get("inputTextStyle");
         Object objectNameAttr = component.getObjectName();
         Object autocompleteUrl = component.getAttributes().get("autocompleteUrl");
         Object onchange = component.getAttributes().get("onchange");
@@ -183,6 +184,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             if (title != null)
                 getUtils().writeAttribute(writer, "title", title);
             getUtils().writeAttribute(writer, "type", "text");
+            getUtils().writeAttribute(writer, "style", inputTextStyle);
             getUtils().writeAttribute(writer, "name", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "id", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "value", getValueName(context, component));
