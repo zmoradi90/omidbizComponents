@@ -17,8 +17,6 @@
 	<h:scripts>/org/omidbiz/renderkit/html/script/qtip.js</h:scripts>
 	<h:styles>/org/omidbiz/renderkit/html/css/qtip.css</h:styles>
 	
-	
-	
 	<f:clientid var="clientId"/>
 	<f:call name="initializeMask" />
 	

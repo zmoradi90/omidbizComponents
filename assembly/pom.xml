@@ -119,6 +119,9 @@
 								</include>
 								<include>
 									${project.basedir}/jqueryui/autoNumeric.js
+								</include>	
+								<include>
+									${project.basedir}/jqueryui/qtip.js
 								</include>								
 								<include>**/*-min.js</include>
 							</includes>
