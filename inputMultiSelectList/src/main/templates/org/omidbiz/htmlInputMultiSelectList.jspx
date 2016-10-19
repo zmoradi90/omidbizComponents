@@ -101,7 +101,7 @@
 				}
 				else
 				{
-					if(maxSelectableItem=="" || maxSelectableItem > v.val().replace(new RegExp(',*', 'g'),"").length)
+					if((maxSelectableItem==="") || (parseInt(maxSelectableItem) >= v.val().replace(new RegExp(seperator+"*", 'g'),"").length))
 					{
 						v.val(v.val()+seperator+itemText);	
 						item.attr("status","selected");
