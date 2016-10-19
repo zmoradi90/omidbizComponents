@@ -37,50 +37,63 @@ import org.omidbiz.component.UIInputMultiSelectList;
 public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
 {
     private Object id = new Object();
+
     public void initializeMask(FacesContext context, UIInputMultiSelectList component) throws IOException
     {
         Object componentId = new Object();
-        if(component.getAttributes().get("forceId")!=null)
-            componentId  = (Object) component.getAttributes().get("forceId");
+        if (component.getAttributes().get("forceId") != null)
+            componentId = (Object) component.getAttributes().get("forceId");
         else
             componentId = component.getClientId(context);
-        
+
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
-            getUtils().writeAttribute(writer, "id", componentId+"wrapper");
-            getUtils().writeAttribute(writer, "style",component.getAttributes().get("style").toString());
-            getUtils().writeAttribute(writer, "class", "input-mutli-select-list row");
-            writer.startElement("div", null);
-               getUtils().writeAttribute(writer, "class", "col s9");
-               writer.startElement("input", null);
-                   getUtils().writeAttribute(writer, "id", componentId);
-                   getUtils().writeAttribute(writer, "name", componentId);
-                   getUtils().writeAttribute(writer, "class", "entry-select-text");
-                   getUtils().writeAttribute(writer, "type", "text");
-                   getUtils().writeAttribute(writer, "value", component.getAttributes().get("value"));
-               writer.endElement("input");
-            writer.endElement("div");
-            writer.startElement("div", null);
-            getUtils().writeAttribute(writer, "class", "col s3");
-            writer.startElement("a", null);
-                getUtils().writeAttribute(writer, "id", componentId+"Button");
-                getUtils().writeAttribute(writer, "class", "toggle-button");
-            writer.endElement("a");
-         writer.endElement("div");            
+        getUtils().writeAttribute(writer, "id", componentId + "wrapper");
+        getUtils().writeAttribute(writer, "style", component.getAttributes().get("style").toString());
+        getUtils().writeAttribute(writer, "class", "input-mutli-select-list row");
+        writer.startElement("div", null);
+        getUtils().writeAttribute(writer, "class", "col s9");
+        writer.startElement("input", null);
+        getUtils().writeAttribute(writer, "id", componentId);
+        getUtils().writeAttribute(writer, "name", componentId);
+        getUtils().writeAttribute(writer, "class", "entry-select-text");
+        getUtils().writeAttribute(writer, "type", "text");
+        getUtils().writeAttribute(writer, "value", component.getAttributes().get("value"));
+        writer.endElement("input");
+        writer.endElement("div");
+        writer.startElement("div", null);
+        getUtils().writeAttribute(writer, "class", "col s3");
+        writer.startElement("a", null);
+        getUtils().writeAttribute(writer, "id", componentId + "Button");
+        getUtils().writeAttribute(writer, "class", "toggle-button");
+        writer.endElement("a");
+        writer.endElement("div");
         writer.endElement("div");
 
-
-        
     }
+
     @Override
     protected Class<? extends UIComponent> getComponentClass()
     {
         return UIInputMultiSelectList.class;
     }
+
     @Override
     protected void doEncodeEnd(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
-        
+
+    }
+
+    @Override
+    public boolean getRendersChildren()
+    {
+        return true;
+    }
+
+    @Override
+    protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
+    {
+        renderChildren(context, component);
     }
 
     @Override
@@ -98,15 +111,18 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
         {
             inputMultiSelectList.setSubmittedValue(submittedValue);
         }
-    }   
+    }
+
     public String getJQueryId(FacesContext context, UIInputMultiSelectList component)
     {
 
         return getId(context, component).replace(":", "\\\\:");
     }
+
     @SuppressWarnings("unchecked")
-    public String getTableListStr(FacesContext context, UIInputMultiSelectList component){
-        if(component.getAttributes().get("inputSelectMap")==null)
+    public String getTableListStr(FacesContext context, UIInputMultiSelectList component)
+    {
+        if (component.getAttributes().get("inputSelectMap") == null)
             try
             {
                 throw new Exception("Fanpardaz component (inputMutiSelectList)-> inputSelectMap attribute must not be null");
@@ -118,10 +134,12 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
             }
         StringBuffer htmlTableStr = new StringBuffer();
         Map<String, String> inputMap = (Map<String, String>) component.getAttributes().get("inputSelectMap");
-        if(inputMap != null)
+        if (inputMap != null)
         {
-            htmlTableStr.append("<div id='"+getId(context, component)+"Scrolling' class='table-wrapper-scrolling'  style='height:"+(37*Integer.parseInt(component.getAttributes().get("scrollLimit").toString()))+"px'" 
-                    + "><table cellpadding='0' cellspacing='0' width='100%' id='"+getId(context,component)+"Table' class='inputMSLTable'>");
+            htmlTableStr.append("<div id='" + getId(context, component) + "Scrolling' class='table-wrapper-scrolling'  style='height:"
+                    + (37 * Integer.parseInt(component.getAttributes().get("scrollLimit").toString())) + "px'"
+                    + "><table cellpadding='0' cellspacing='0' width='100%' id='" + getId(context, component)
+                    + "Table' class='inputMSLTable'>");
             Set<String> inputMapKeySet = inputMap.keySet();
             for (String mapKey : inputMapKeySet)
             {
@@ -138,8 +156,8 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
 
     public String getId(FacesContext context, UIInputMultiSelectList component)
     {
-        if(component.getAttributes().get("forceId")!=null)
-            id  = (Object) component.getAttributes().get("forceId");
+        if (component.getAttributes().get("forceId") != null)
+            id = (Object) component.getAttributes().get("forceId");
         else
             id = component.getClientId(context);
         return id.toString();
