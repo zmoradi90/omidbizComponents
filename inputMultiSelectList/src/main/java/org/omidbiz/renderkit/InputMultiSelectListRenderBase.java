@@ -120,7 +120,7 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
         Map<String, String> inputMap = (Map<String, String>) component.getAttributes().get("inputSelectMap");
         if(inputMap != null)
         {
-            htmlTableStr.append("<div id='"+getId(context, component)+"Scrolling' class='table-wrapper-scrolling'  style='height:"+(37*Integer.parseInt(component.getAttributes().get("listItemLimitation").toString()))+"px'" 
+            htmlTableStr.append("<div id='"+getId(context, component)+"Scrolling' class='table-wrapper-scrolling'  style='height:"+(37*Integer.parseInt(component.getAttributes().get("scrollLimit").toString()))+"px'" 
                     + "><table cellpadding='0' cellspacing='0' width='100%' id='"+getId(context,component)+"Table' class='inputMSLTable'>");
             Set<String> inputMapKeySet = inputMap.keySet();
             for (String mapKey : inputMapKeySet)
