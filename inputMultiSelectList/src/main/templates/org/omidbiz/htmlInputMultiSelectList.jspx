@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.InputMultiSelectListRenderer"
+	baseclass="org.omidbiz.renderkit.InputMultiSelectListRenderBase"
+	component="org.omidbiz.component.UIInputMultiSelectList" 
+	>
+	
+	<f:clientid var="clientId"/>
+	<script>
+	//<![CDATA[
+	jQuery(window).load(function(){
+		var selectedListItem = [];
+		var seperator = "#{component.attributes['seperator']}";
+		var id = "#"+"#{this:getJQueryId(context, component)}";
+		jQuery(id).qtip({prerender: true,show:{target:jQuery(id+"Button"),event:"click"},hide:{event:"unfocus"},
+		position:{my:"top center",at:"bottom center",target:jQuery(id)},content:{text:"#{this:getTableListStr(context, component)}"} ,style:{classes: 'qtip qtip-light qtip-shadow input-mutlti-select-list-menu'}});
+
+		var v = jQuery(id);
+// fix pattern of text box on blur
+		v.on("blur",function(){
+			var items = jQuery(id+"Table tr");
+			if(v.val()!="")
+			{
+				v.val(v.val().replace(seperator+seperator,seperator));
+				if(!v.val().contains(seperator))
+					selectedListItem=v.val();
+				else
+					selectedListItem=v.val().split(seperator);
+				items.attr("status","notSelected");
+				for(var i=0;i < selectedListItem.length;i++)
+				{
+					items.each(function(){
+								if(jQuery(this).children("td").first().text() == selectedListItem[i])
+								{
+									jQuery(this).attr("status","selected");
+								}
+						});
+				}			
+			}
+			else
+			{
+				items.attr("status","notSelected");
+			}
+		});
+//////////////////////////////////////////////////////////////
+// initional phase //////////////////////////////////////////
+			if(v.val()!="")
+			{
+				if(!v.val().contains(seperator))
+					selectedListItem=v.val();
+				else
+					selectedListItem=v.val().split(seperator);
+					
+				var items = jQuery(id+"Table tr");
+				for(var i=0;i < selectedListItem.length;i++)
+				{
+					items.each(function(){
+								if(jQuery(this).children("td").first().text() == selectedListItem[i])
+								{
+									jQuery(this).attr("status","selected");
+								}
+						});
+				}
+			}
+// add or remove items on click on selection menu 
+			jQuery(id+"Table tr").on("click",function(){
+				var item = jQuery(this);
+				var itemText = item.children("td").first().text();
+
+				if(item.attr("status")=="selected" && v.val()!="" && v.val()!=seperator)
+				{
+						var tempArray = [];
+						if(!v.val().contains(seperator))
+							selectedListItem=v.val();
+						else
+							selectedListItem=v.val().split(seperator);
+													
+		    			for(var i=0;i<selectedListItem.length;i++)
+		    			{
+		    					if(itemText != selectedListItem[i])
+		    					{
+		    						tempArray.push(selectedListItem[i]);
+		    					}
+		    			}
+		    			if(selectedListItem.length-1<=1)
+	    					v.val(tempArray);
+		    			else 
+		    				v.val(tempArray.join(seperator));
+						item.attr("status","notSelected");
+				}
+				else if (v.val()==""){
+					v.val(itemText);
+					item.attr("status","selected");	
+				}
+				else
+				{
+					v.val(v.val()+seperator+itemText);	
+					item.attr("status","selected");
+				}
+			});
+	});
+//	]]>
+
+	</script>
+	<f:call name="initializeMask">
+	
+		<vcp:body></vcp:body>
+	
+	</f:call>
+	
+</f:root>
