@@ -27,5 +27,6 @@ public abstract class UIInputMultiSelectList extends UIInput
 	public static final String COMPONENT_TYPE = "org.omidbiz.InputMultiSelectList";
 
 	public static final String COMPONENT_FAMILY = "org.omidbiz.InputMultiSelectList";
+	
 
 }
