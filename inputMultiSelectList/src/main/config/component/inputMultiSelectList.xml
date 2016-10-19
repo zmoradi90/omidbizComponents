@@ -64,7 +64,7 @@
 			<defaultvalue>","</defaultvalue>
 		</property>
 		<property>
-			<name>listItemLimitation</name>
+			<name>scrollLimit</name>
 			<classname>java.lang.String</classname>
 			<description>
 				number of list item visible without scroll
