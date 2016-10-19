@@ -54,7 +54,13 @@
 			</description>
 			<required>true</required>
 		</property>
-		
+		<property>
+			<name>maxSelectableItem</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the max number of list items which can be selected
+			</description>
+		</property>		
 		<property>
 			<name>seperator</name>
 			<classname>java.lang.String</classname>
