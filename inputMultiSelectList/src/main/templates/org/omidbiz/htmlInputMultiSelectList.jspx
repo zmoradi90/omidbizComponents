@@ -101,7 +101,7 @@
 				}
 				else
 				{
-					if((maxSelectableItem==="") || (parseInt(maxSelectableItem) >= v.val().replace(new RegExp(seperator+"*", 'g'),"").length))
+					if((maxSelectableItem==="") || (parseInt(maxSelectableItem) - 1 > parseInt(countChar(v.val(), seperator))))
 					{
 						v.val(v.val()+seperator+itemText);	
 						item.attr("status","selected");
@@ -109,6 +109,16 @@
 				}
 			});
 	});
+	function countChar(str, seperator)
+	{
+		counter = 0;
+		for (var i = 0, len = str.length; i < len; i++)
+			{
+			if(str[i]==seperator)
+				counter = counter + 1;
+			}
+		return counter;
+	}
 //	]]>
 
 	</script>
