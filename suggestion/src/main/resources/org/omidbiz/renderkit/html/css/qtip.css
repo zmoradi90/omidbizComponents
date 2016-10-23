@@ -595,9 +595,11 @@
 .qtip-content{
 	text-align: right!important;
 	direction: rtl!important;
+	font-family: 'Yekan';
 }
 .qtip-titlebar{
 	direction: rtl!important;
+	font-family: 'Yekan';
 }
 .qtip-close{
 	border:0px!important;	
