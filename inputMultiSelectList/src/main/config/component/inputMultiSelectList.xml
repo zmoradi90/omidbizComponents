@@ -35,7 +35,6 @@
 			<description>
 				can be set if you need to use a style for component
 			</description>
-			<defaultvalue>"width:202px"</defaultvalue>			
 		</property>				
 		<property>
 			<name>value</name>

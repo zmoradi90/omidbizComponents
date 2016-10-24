@@ -49,7 +49,8 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "id", componentId + "wrapper");
-        getUtils().writeAttribute(writer, "style", component.getAttributes().get("style").toString());
+        if(component.getAttributes().get("style")!=null)
+            getUtils().writeAttribute(writer, "style", component.getAttributes().get("style").toString());
         getUtils().writeAttribute(writer, "class", "input-mutli-select-list row");
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "class", "col s9");
@@ -62,7 +63,7 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
         writer.endElement("input");
         writer.endElement("div");
         writer.startElement("div", null);
-        getUtils().writeAttribute(writer, "class", "col s3");
+        getUtils().writeAttribute(writer, "class", "col s3 push-s3");
         writer.startElement("a", null);
         getUtils().writeAttribute(writer, "id", componentId + "Button");
         getUtils().writeAttribute(writer, "class", "toggle-button");

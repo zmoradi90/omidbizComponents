@@ -1,5 +1,4 @@
 .input-mutli-select-list {
-	width: 202px;
 }
 
 .input-mutlti-select-list-menu {
@@ -10,7 +9,7 @@
 }
 .input-mutli-select-list .toggle-button {
 	background-color: #ddd;
-	height: 23px;
+	height: 26px;
 	width: 40px;
 	background-position: center center;
 	background-repeat: no-repeat;
