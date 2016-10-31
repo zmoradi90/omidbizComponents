@@ -63,7 +63,7 @@ public class InputMultiSelectListRenderBase extends HeaderResourcesRendererBase
         writer.endElement("input");
         writer.endElement("div");
         writer.startElement("div", null);
-        getUtils().writeAttribute(writer, "class", "col s3 push-s3");
+        getUtils().writeAttribute(writer, "class", "col s2 push-s1");
         writer.startElement("a", null);
         getUtils().writeAttribute(writer, "id", componentId + "Button");
         getUtils().writeAttribute(writer, "class", "toggle-button");
