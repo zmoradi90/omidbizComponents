@@ -73,12 +73,45 @@ public abstract class UITabPanel extends UIComponentBase
 
     public boolean isDisabled()
     {
-        return disabled;
+        ValueExpression ve = getValueExpression("disabled");
+        if (ve != null)
+        {
+            Boolean value = null;
+            try
+            {
+                value = (Boolean) ve.getValue(getFacesContext().getELContext());
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+            return value;
+        }
+        else
+        {
+            return disabled;
+        }
     }
 
     public void setDisabled(boolean disabled)
     {
-        this.disabled = disabled;
+        ELContext context = getFacesContext().getELContext();
+        ValueExpression ve = getValueExpression("disabled");
+        if (ve != null && !ve.isReadOnly(context))
+        {
+            try
+            {
+                ve.setValue(context, disabled);
+            }
+            catch (ELException e)
+            {
+                throw new FacesException(e);
+            }
+        }
+        else
+        {
+            this.disabled = disabled;
+        }
     }
 
     public Object getLink()
