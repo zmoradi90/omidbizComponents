@@ -127,6 +127,7 @@
     <module>liveValidation</module>
     <module>suggestion</module>
     <module>progressbar</module>
+    <module>inputMultiSelectList</module>
     
   </modules>
   <build>

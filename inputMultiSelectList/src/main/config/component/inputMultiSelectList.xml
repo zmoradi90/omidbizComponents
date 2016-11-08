@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputMultiSelectList</name>
+		<family>org.omidbiz.InputMultiSelectList</family>
+		<classname>org.omidbiz.component.html.HtmlInputMultiSelectList</classname>
+		<superclass>org.omidbiz.component.UIInputMultiSelectList</superclass>
+		<description>
+			<![CDATA[
+    		]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputMultiSelectListRenderer</name>
+			<template>org/omidbiz/htmlInputMultiSelectList.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputMultiSelectList</name>
+			<classname>org.omidbiz.taglib.InputMultiSelectListTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be set if you need to use a specific id
+			</description>
+		</property>
+		<property>
+			<name>style</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be set if you need to use a style for component
+			</description>
+		</property>				
+		<property>
+			<name>value</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be bind to backend field
+			</description>
+			<required>true</required>
+		</property>
+		
+		<property>
+			<name>inputSelectMap</name>
+			<classname>java.util.Map</classname>
+			<description>
+				must be set by a list for selecting items
+			</description>
+			<required>true</required>
+		</property>
+		<property>
+			<name>maxSelectableItem</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the max number of list items which can be selected
+			</description>
+		</property>		
+		<property>
+			<name>seperator</name>
+			<classname>java.lang.String</classname>
+			<description>
+				if u want to use a custom seperator for textbox values use this property
+			</description>
+			<defaultvalue>","</defaultvalue>
+		</property>
+		<property>
+			<name>scrollLimit</name>
+			<classname>java.lang.String</classname>
+			<description>
+				number of list item visible without scroll
+			</description>
+			<defaultvalue>"5"</defaultvalue>
+		</property>
+	</component>
+</components>

@@ -23,8 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.ajax4jsf.renderkit.ComponentVariables;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
@@ -59,7 +59,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
-        inputLov.setSubmittedValue(submittedValue);
+        if(submittedValue != null)
+            inputLov.setSubmittedValue(submittedValue);
 
         if (JSFUtil.isNotEmpty(submittedValue))
         {
@@ -84,7 +85,15 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     @Override
     public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException
     {
-        return super.getConvertedValue(context, component, submittedValue);
+        UIInputListOfValues inputDate = (UIInputListOfValues) component;
+        Converter converter = inputDate.getConverter();
+        if(converter != null)
+        {
+            return converter.getAsObject(context, component, String.valueOf(submittedValue));
+        }
+        if(submittedValue != null && String.valueOf(submittedValue).trim().isEmpty())
+            return null;
+        return submittedValue;
     }
 
     public Object getSelectedTextConvertedValue(FacesContext context, UIComponent component)
@@ -151,6 +160,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     {
         String type = (String) component.getAttributes().get("type");
         String styleClass = (String) component.getAttributes().get("styleClass");
+        String inputTextStyle = (String) component.getAttributes().get("inputTextStyle");
         Object objectNameAttr = component.getObjectName();
         Object autocompleteUrl = component.getAttributes().get("autocompleteUrl");
         Object onchange = component.getAttributes().get("onchange");
@@ -183,6 +193,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             if (title != null)
                 getUtils().writeAttribute(writer, "title", title);
             getUtils().writeAttribute(writer, "type", "text");
+            getUtils().writeAttribute(writer, "style", inputTextStyle);
             getUtils().writeAttribute(writer, "name", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "id", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "value", getValueName(context, component));
