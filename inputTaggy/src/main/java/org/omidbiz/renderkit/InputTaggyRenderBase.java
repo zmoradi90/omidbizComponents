@@ -63,6 +63,10 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         writer.endElement("input");
         StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
         sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
+        if(component.getAttributes().get("seperator") != null)
+            sb.append("seperator:'"+component.getAttributes().get("seperator").toString()+"',");
+        else
+            sb.append("seperator:'"+","+"',");
         sb.append("data:["+value+"]});});");
         getUtils().writeScript(context, component, sb.toString());
 
@@ -123,7 +127,11 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
             {
                 value= "";
                 String str = component.getAttributes().get("value").toString();
-                String[] resultList = str.split(",");
+                String[] resultList = null;
+                if(component.getAttributes().get("seperator")!=null)
+                    resultList = str.split(component.getAttributes().get("seperator").toString());
+                else
+                    resultList = str.split(",");
                 for (int i = 0; i < resultList.length; i++)
                 {
                         value += "{ tag:'"+resultList[i]+"',},";

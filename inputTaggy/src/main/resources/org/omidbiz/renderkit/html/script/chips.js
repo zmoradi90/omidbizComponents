@@ -4,7 +4,8 @@
     data: [],
     placeholder: '',
     secondaryPlaceholder: '',
-    inputHiddenId: 'chipsInputHidden'
+    inputHiddenId: 'chipsInputHidden',
+    seperator: ','
   };
 
   $(document).ready(function() {
@@ -212,7 +213,7 @@
     	var SELS = self.SELS;
     	var $chipsAddedText = "";
 		jQuery(SELS.CHIPS+" "+SELS.CHIP).each(function(){
-			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + "," + jQuery(this).text();
+			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + curr_options.seperator + jQuery(this).text();
 		});
     	$("#"+curr_options.inputHiddenId).val($chipsAddedText);
     }
