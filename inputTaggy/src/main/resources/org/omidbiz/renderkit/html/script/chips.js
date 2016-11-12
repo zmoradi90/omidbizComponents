@@ -222,9 +222,7 @@
         html += self.renderChip(elem);
       });
       html += '<input id="' + chipId +'" class="input" placeholder="">';
-      var inputHiddenHtml= '<input id="' + curr_options.inputHiddenId +'" type="hidden" />';
       $chips.html(html);
-      $(inputHiddenHtml).insertAfter($chips);
       self.setPlaceholder($chips);
 
       // Set for attribute for label

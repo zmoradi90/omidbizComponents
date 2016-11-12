@@ -55,9 +55,14 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         else
             getUtils().writeAttribute(writer, "class","chips-initial");
         writer.endElement("div");
-        
+        writer.startElement("input", null);
+            getUtils().writeAttribute(writer, "id",getId(context, component));
+            getUtils().writeAttribute(writer, "name",getId(context, component));
+            getUtils().writeAttribute(writer, "type","hidden");
+            getUtils().writeAttribute(writer, "value",value);
+        writer.endElement("input");
         StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
-        sb.append("inputHiddenId:'"+componentId+"',");
+        sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
         sb.append("data:["+value+"]});});");
         getUtils().writeScript(context, component, sb.toString());
 
