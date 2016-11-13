@@ -40,10 +40,16 @@
 			<name>value</name>
 			<classname>java.lang.String</classname>
 			<description>
-				can be bind to backend field
+				send backend value seperated you can seperate this value by custom seperator or use defautl seperator ','
 			</description>
 			<required>true</required>
 		</property>
-		
+		<property>
+			<name>seperator</name>
+			<classname>java.lang.String</classname>
+			<description>
+				use for seperating data which is send from backend 
+			</description>
+		</property>
 	</component>
 </components>

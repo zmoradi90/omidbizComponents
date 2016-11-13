@@ -4,7 +4,8 @@
     data: [],
     placeholder: '',
     secondaryPlaceholder: '',
-    inputHiddenId: 'chipsInputHidden'
+    inputHiddenId: 'chipsInputHidden',
+    seperator: ','
   };
 
   $(document).ready(function() {
@@ -212,7 +213,7 @@
     	var SELS = self.SELS;
     	var $chipsAddedText = "";
 		jQuery(SELS.CHIPS+" "+SELS.CHIP).each(function(){
-			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + "," + jQuery(this).text();
+			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + curr_options.seperator + jQuery(this).text();
 		});
     	$("#"+curr_options.inputHiddenId).val($chipsAddedText);
     }
@@ -222,9 +223,7 @@
         html += self.renderChip(elem);
       });
       html += '<input id="' + chipId +'" class="input" placeholder="">';
-      var inputHiddenHtml= '<input id="' + curr_options.inputHiddenId +'" type="hidden" />';
       $chips.html(html);
-      $(inputHiddenHtml).insertAfter($chips);
       self.setPlaceholder($chips);
 
       // Set for attribute for label
