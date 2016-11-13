@@ -41,19 +41,13 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
 
     public void initializeMask(FacesContext context, UIInputTaggy component) throws IOException
     {
-        Object componentId = new Object();
+        String seperator = component.getAttributes().get("seperator") != null ?
+                String.valueOf(component.getAttributes().get("seperator")): ",";
         String value = getInputValue(context,component);
-        if (component.getAttributes().get("forceId") != null)
-            componentId = (Object) component.getAttributes().get("forceId");
-        else
-            componentId = component.getClientId(context);
-
+        String styleClass = component.getAttributes().get("styleClass")!=null ? String.valueOf(component.getAttributes().get("styleClass")): "";
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
-        if(component.getAttributes().get("styleClass")!=null)
-            getUtils().writeAttribute(writer, "class","chips-initial"+component.getAttributes().get("styleClass").toString());
-        else
-            getUtils().writeAttribute(writer, "class","chips-initial");
+            getUtils().writeAttribute(writer, "class","chips-initial"+styleClass);
         writer.endElement("div");
         writer.startElement("input", null);
             getUtils().writeAttribute(writer, "id",getId(context, component));
@@ -63,10 +57,7 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         writer.endElement("input");
         StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
         sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
-        if(component.getAttributes().get("seperator") != null)
-            sb.append("seperator:'"+component.getAttributes().get("seperator").toString()+"',");
-        else
-            sb.append("seperator:'"+","+"',");
+        sb.append("seperator:'"+seperator+"',");
         sb.append("data:["+value+"]});});");
         getUtils().writeScript(context, component, sb.toString());
 
@@ -120,29 +111,20 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
     }
     public String getInputValue(FacesContext context, UIInputTaggy component)
     {
-        String value="";
-        if(component.getAttributes().get("value").toString() != null)
+        String value = component.getAttributes().get("value") != null ? 
+                            String.valueOf(component.getAttributes().get("value")) : "";
+        String seperator = component.getAttributes().get("seperator") != null ?
+                            String.valueOf(component.getAttributes().get("seperator")): ",";
+        String formatedString = "";
+        if(value.isEmpty() == false)
         {
-            if(!component.getAttributes().get("value").toString().isEmpty())
-            {
-                value= "";
-                String str = component.getAttributes().get("value").toString();
-                String[] resultList = null;
-                if(component.getAttributes().get("seperator")!=null)
-                    resultList = str.split(component.getAttributes().get("seperator").toString());
-                else
-                    resultList = str.split(",");
-                for (int i = 0; i < resultList.length; i++)
-                {
-                        value += "{ tag:'"+resultList[i]+"',},";
-                }
-            }
-            else
-            {
-                value = component.getAttributes().get("value").toString();
-            }
+            String[] seperatedValueArray = value.split(seperator);
+            for (String seperatedValue : seperatedValueArray)
+                formatedString += "{ tag:'"+seperatedValue+"',},";
+            return formatedString;
         }
-        return value;
+        else
+            return formatedString;
     }
     public String getId(FacesContext context, UIInputTaggy component)
     {
