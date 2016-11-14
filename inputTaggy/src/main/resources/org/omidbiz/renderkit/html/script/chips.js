@@ -146,20 +146,24 @@
         if (!$currChips.data('chips').length) {
           $currChips.siblings('label').removeClass('active');
         }
-        $currChips.siblings('.prefix').removeClass('active');
+        $currChips.siblings('.prefix').removeClass('active');        
       });
+      
+      // customize by shk add double click event to copy  
+      self.$document.off('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+    	  	var $target = $(e.target);
+    	  	var $chips = $target.closest(SELS.CHIPS);
+    	  	$target.val(self.getInputHidden());
+    	  	self.deleteAllChips($chips);
+        });
       // customization by shk add tags on change text box
-      self.$document.off('keydown.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('change.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+      self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
           var $chips = $target.closest(SELS.CHIPS);
-
-          var splitedText = [];
-          splitedText = $target.val().split(" ");
-          for(var i = 0 ; i < splitedText.length ; i++)
-          {
-          	self.addChip({tag: splitedText[i]}, $chips);
-          }
+          self.splitText($target.val(),$chips);
+          console.log($target.closest(SELS.CHIPS));
           $target.val('');
+
       });
       self.$document.off('keydown.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('keydown.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
         var $target = $(e.target);
@@ -169,20 +173,7 @@
         // enter and space
         if (13 === e.which || 32 === e.which) {
           e.preventDefault();
-          // customization by shk add tags just with space
-          var splitedText = [];
-          splitedText = $target.val().split(" ");
-          if(splitedText.length > 1)
-          {
-        	  for(var i = 0 ; i < splitedText.length ; i++)
-        	  {
-        		  self.addChip({tag: splitedText[i]}, $chips);
-        	  }
-          }
-          else
-          {
-        	  self.addChip({tag: $target.val()}, $chips);
-          }
+          self.splitText($target.val(),$chips);
           $target.val('');
           return;
         }
@@ -207,7 +198,18 @@
         $chips.find('input').focus();
       });
     };
-    
+    //customize by shk split text function
+    this.splitText = function(str,chips){
+        // customization by shk add tags just with space
+        var splitedText = [];
+        console.log("splitText->str" + str);
+        splitedText = str.split(curr_options.seperator);
+  	  for(var i = 0 ; i < splitedText.length ; i++)
+  	  {
+  		  self.addChip({tag: splitedText[i]}, chips);
+  		  console.log("split text in loop: "+ splitedText[i]);
+  	  }
+    }
     //set input hidden function
     this.setInputHidden = function(){
     	var SELS = self.SELS;
@@ -216,6 +218,11 @@
 			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + curr_options.seperator + jQuery(this).text();
 		});
     	$("#"+curr_options.inputHiddenId).val($chipsAddedText);
+    }
+    this.getInputHidden = function(){
+    	var targetVal = $("#"+curr_options.inputHiddenId).val();
+    	$("#"+curr_options.inputHiddenId).val("");
+    	return targetVal;
     }
     this.chips = function($chips, chipId) {
       var html = '';
@@ -272,13 +279,17 @@
 
     this.addChip = function(elem, $chips) {
       if (!self.isValid($chips, elem)) {
+    	console.log("addChip=");
+    	console.log(elem);
+    	console.log("");
         return;
       }
       var chipHtml = self.renderChip(elem);
       var newData = [];
       var oldData = $chips.data('chips');
       for (var i = 0; i < oldData.length; i++) {
-        newData.push(oldData[i]);
+    	  console.log("oldData[i]:"+ oldData[i]);
+    	  newData.push(oldData[i]);
       }
       newData.push(elem);
 
@@ -309,6 +320,11 @@
       self.setInputHidden();
     };
 
+    //customize by shk delete all chips 
+    this.deleteAllChips = function($chips) {
+    	$chips.find('.chip').remove();
+    	$chips.data('chips','');
+    };
     this.selectChip = function(chipIndex, $chips) {
       var $chip = $chips.find('.chip').eq(chipIndex);
       if ($chip && false === $chip.hasClass('selected')) {
