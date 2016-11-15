@@ -128,6 +128,7 @@
     <module>suggestion</module>
     <module>progressbar</module>
     <module>inputMultiSelectList</module>
+    <module>inputTaggy</module>
     
   </modules>
   <build>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.InputTaggyRenderer"
+	baseclass="org.omidbiz.renderkit.InputTaggyRenderBase"
+	component="org.omidbiz.component.UIInputTaggy" 
+	>
+	
+	<f:clientid var="clientId"/>
+	<h:styles>css/inputTaggy.css</h:styles>
+	<h:scripts>/org/omidbiz/renderkit/html/script/chips.js,/org/omidbiz/renderkit/html/script/global.js</h:scripts>
+	
+	<f:call name="initializeMask">
+	
+		<vcp:body></vcp:body>
+	
+	</f:call>
+	
+</f:root>
