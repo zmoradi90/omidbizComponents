@@ -51,5 +51,19 @@
 				use for seperating data which is send from backend 
 			</description>
 		</property>
+		<property>
+			<name>onStartLoadFunc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				use for setting start loading function
+			</description>
+		</property>
+		<property>
+			<name>onStopLoadFunc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				use for setting stop loading function
+			</description>
+		</property>		
 	</component>
 </components>
