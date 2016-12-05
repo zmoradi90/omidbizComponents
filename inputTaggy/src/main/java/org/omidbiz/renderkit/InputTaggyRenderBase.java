@@ -44,6 +44,11 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         String onStartLoadFunc = component.getAttributes().get("onStartLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStartLoadFunc")):"";
         String onStopLoadFunc = component.getAttributes().get("onStopLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStopLoadFunc")):"";
 
+        String onAddChips = component.getAttributes().get("onAddChips") != null ? String.valueOf(component.getAttributes().get("onAddChips")):"";
+        String onCloseChips = component.getAttributes().get("onCloseChips") != null ? String.valueOf(component.getAttributes().get("onCloseChips")):"";
+        String onSelectChips = component.getAttributes().get("onSelectChips") != null ? String.valueOf(component.getAttributes().get("onSelectChips")):"";
+
+        
         String seperator = component.getAttributes().get("seperator") != null ?
                 String.valueOf(component.getAttributes().get("seperator")): ",";
         String value = getInputValue(context,component);
@@ -72,7 +77,29 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         sb.append("data:["+value+"],");
         sb.append("onStartLoadFunc:"+onStartLoadFunc+",");
         sb.append("onStopLoadFunc:"+onStopLoadFunc+",");
-        sb.append("});});");
+        sb.append("});");
+            if(onAddChips.isEmpty()!=true)
+            {
+                sb.append("jQuery('.chips').on('chip.add', function(e, chip){");
+                sb.append(onAddChips+"(e,chip);");
+                // you have the added chip here
+                sb.append("});");
+            }
+            if(onCloseChips.isEmpty()!=true)
+            {
+                sb.append("jQuery('.chips').on('chip.delete', function(e, chip){");
+                sb.append(onCloseChips+"(e,chip);");
+                // you have the deleted chip here     
+                sb.append("});");
+            }
+            if(onSelectChips.isEmpty()!=true)
+            {
+                sb.append("jQuery('.chips').on('chip.select', function(e, chip){");
+                sb.append(onSelectChips+"(e,chip);");
+                // you have the selected chip here
+                sb.append("});");
+            }
+        sb.append("});");
         getUtils().writeScript(context, component, sb.toString());
 
     }
