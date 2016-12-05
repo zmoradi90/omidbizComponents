@@ -41,24 +41,38 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
 
     public void initializeMask(FacesContext context, UIInputTaggy component) throws IOException
     {
+        String onStartLoadFunc = component.getAttributes().get("onStartLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStartLoadFunc")):"";
+        String onStopLoadFunc = component.getAttributes().get("onStopLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStopLoadFunc")):"";
+
         String seperator = component.getAttributes().get("seperator") != null ?
                 String.valueOf(component.getAttributes().get("seperator")): ",";
         String value = getInputValue(context,component);
         String styleClass = component.getAttributes().get("styleClass")!=null ? String.valueOf(component.getAttributes().get("styleClass")): "";
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
-            getUtils().writeAttribute(writer, "class","chips-initial"+styleClass);
+            getUtils().writeAttribute(writer, "class","chips-wrapper");
+            writer.startElement("div", null);
+                getUtils().writeAttribute(writer, "class","chips-initial"+styleClass);
+            writer.endElement("div");
+            writer.startElement("input", null);
+                getUtils().writeAttribute(writer, "id",getId(context, component));
+                getUtils().writeAttribute(writer, "name",getId(context, component));
+                getUtils().writeAttribute(writer, "type","hidden");
+                getUtils().writeAttribute(writer, "value",value);
+            writer.endElement("input");
+            
+            writer.startElement("div", null);
+                getUtils().writeAttribute(writer, "class","chips-removeAll");
+                writer.writeText("حذف همه", null);
+            writer.endElement("div");
         writer.endElement("div");
-        writer.startElement("input", null);
-            getUtils().writeAttribute(writer, "id",getId(context, component));
-            getUtils().writeAttribute(writer, "name",getId(context, component));
-            getUtils().writeAttribute(writer, "type","hidden");
-            getUtils().writeAttribute(writer, "value",value);
-        writer.endElement("input");
         StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
         sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
         sb.append("seperator:'"+seperator+"',");
-        sb.append("data:["+value+"]});});");
+        sb.append("data:["+value+"],");
+        sb.append("onStartLoadFunc:"+onStartLoadFunc+",");
+        sb.append("onStopLoadFunc:"+onStopLoadFunc+",");
+        sb.append("});});");
         getUtils().writeScript(context, component, sb.toString());
 
     }

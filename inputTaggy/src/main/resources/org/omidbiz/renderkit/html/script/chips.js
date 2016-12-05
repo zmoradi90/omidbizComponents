@@ -5,7 +5,9 @@
     placeholder: '',
     secondaryPlaceholder: '',
     inputHiddenId: 'chipsInputHidden',
-    seperator: ','
+    seperator: ',',
+    onStartLoadFunc:function(){},
+    onStopLoadFunc:function(){}
   };
 
   $(document).ready(function() {
@@ -28,6 +30,7 @@
       CHIP: '.chip',
       INPUT: 'input',
       DELETE: '.material-icons',
+      REMOVE_ALL :'.chips-removeAll',
       SELECTED_CHIP: '.selected',
     };
 
@@ -156,12 +159,19 @@
     	  	$target.val(self.getInputHidden());
     	  	self.deleteAllChips($chips);
         });
+      // customize by shk remove all by click on remove all button
+      self.$document.off('click.chips-removeAll',SELS.REMOVE_ALL).on('click.chips-removeAll', SELS.REMOVE_ALL, function(e){
+    	  var $target = $(e.target);
+    	  var $chips = $target.siblings(SELS.CHIPS);
+    	  console.log($target.siblings(SELS.CHIPS));
+    	  self.deleteAllChips($chips);
+        });
       // customization by shk add tags on change text box
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
           var $chips = $target.closest(SELS.CHIPS);
           self.splitText($target.val(),$chips);
-          console.log($target.closest(SELS.CHIPS));
+          //console.log($target.closest(SELS.CHIPS));
           $target.val('');
 
       });
@@ -188,6 +198,7 @@
         }
          
       });
+      
       // Click on delete icon in chip.
       self.$document.off('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE).on('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
         var $target = $(e.target);
@@ -202,13 +213,39 @@
     this.splitText = function(str,chips){
         // customization by shk add tags just with space
         var splitedText = [];
-        console.log("splitText->str" + str);
+        //console.log("splitText->str" + str);
         splitedText = str.split(curr_options.seperator);
-  	  for(var i = 0 ; i < splitedText.length ; i++)
-  	  {
-  		  self.addChip({tag: splitedText[i]}, chips);
-  		  console.log("split text in loop: "+ splitedText[i]);
-  	  }
+        //customize shk for performance considerations 
+        if(splitedText.length<500)
+        {
+        	curr_options.onStartLoadFunc();
+        	for(var i = 0 ; i < splitedText.length ; i++)
+        	{
+        		self.addChip({tag: splitedText[i]}, chips);
+        		//console.log("split text in loop: "+ splitedText[i]);
+        	}
+        	curr_options.onStopLoadFunc();
+        }
+        else 
+        {
+        	curr_options.onStartLoadFunc();
+        	function test(){
+        		if(i>splitedText.length/150)
+        		{
+        			curr_options.onStopLoadFunc();
+        			clearInterval(interval);
+        		}
+        		for(var j = i*150 ; j <i*150+150  ; j++)
+        		{
+            		self.addChip({tag: splitedText[j]}, chips);
+        		}
+        		i++;
+        	}
+			var i=0;
+			var interval = setInterval(test,0.000001);			
+			//console.log("split text in loop: "+ splitedText[i]);
+				
+        }
     }
     //set input hidden function
     this.setInputHidden = function(){
@@ -279,16 +316,16 @@
 
     this.addChip = function(elem, $chips) {
       if (!self.isValid($chips, elem)) {
-    	console.log("addChip=");
-    	console.log(elem);
-    	console.log("");
+        //console.log("addChip=");
+    	//console.log(elem);
+    	//console.log("");
         return;
       }
       var chipHtml = self.renderChip(elem);
       var newData = [];
       var oldData = $chips.data('chips');
       for (var i = 0; i < oldData.length; i++) {
-    	  console.log("oldData[i]:"+ oldData[i]);
+    	 // console.log("oldData[i]:"+ oldData[i]);
     	  newData.push(oldData[i]);
       }
       newData.push(elem);
