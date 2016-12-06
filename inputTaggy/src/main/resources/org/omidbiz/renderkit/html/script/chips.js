@@ -163,8 +163,9 @@
       self.$document.off('click.chips-removeAll',SELS.REMOVE_ALL).on('click.chips-removeAll', SELS.REMOVE_ALL, function(e){
     	  var $target = $(e.target);
     	  var $chips = $target.siblings(SELS.CHIPS);
-    	  console.log($target.siblings(SELS.CHIPS));
+    	 // console.log($target.siblings(SELS.CHIPS));
     	  self.deleteAllChips($chips);
+    	  self.getInputHidden();
         });
       // customization by shk add tags on change text box
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){

@@ -62,8 +62,29 @@
 			<name>onStopLoadFunc</name>
 			<classname>java.lang.String</classname>
 			<description>
-				use for setting stop loading function
+				use for setting stop loading function 
 			</description>
-		</property>		
+		</property>	
+		<property>
+			<name>onAddChips</name>
+			<classname>java.lang.String</classname>
+			<description>
+				call back function for adding chips u can access added chip by chip 
+			</description>
+		</property>	
+		<property>
+			<name>onCloseChips</name>
+			<classname>java.lang.String</classname>
+			<description>
+				call back function for closing chips u can access cloeded chip by chip 
+			</description>
+		</property>	
+		<property>
+			<name>onSelectChips</name>
+			<classname>java.lang.String</classname>
+			<description>
+				call back function for selecting chips u can access selected chip by chip 
+			</description>
+		</property>								
 	</component>
 </components>
