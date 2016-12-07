@@ -41,6 +41,7 @@ public class ProgressbarRenderBase extends HeaderResourcesRendererBase
     {
 
         String clientId = component.getClientId(context);
+        String loadingMode = component.getAttributes().get("loadingMode") == null ? "determinate" : "indeterminate";
         ResponseWriter writer = context.getResponseWriter();
         Object precisionAttr = (Object)component.getAttributes().get("precision");
         Integer precisionInt = null;
@@ -78,40 +79,47 @@ public class ProgressbarRenderBase extends HeaderResourcesRendererBase
         if(precisionAttr == null)
             throw new IOException("precision attribute could not be null / empty in progressbar component.");
         BigDecimal value = valueBig.divide(BigDecimal.ONE, precisionInt, RoundingMode.HALF_UP);
-        BigDecimal remainPercentage = new BigDecimal(100).subtract(value);
         writer.startElement("div", null);
             getUtils().writeAttribute(writer, "id", clientId);
-            getUtils().writeAttribute(writer, "class", "progress-bar-box");
-            getUtils().writeAttribute(writer, "style", "height:"+component.getAttributes().get("height")+
-                    "px; width:"+component.getAttributes().get("width")+"px;");
-            writer.startElement("div", null);
-            getUtils().writeAttribute(writer, "class", "progress-bar-percent");
-            getUtils().writeAttribute(writer, "style", "width:"+value+"%;");
-                writer.startElement("div", null);
-                getUtils().writeAttribute(writer, "class", "progress-bar-percent-caption");
-                if(value.compareTo(new BigDecimal(70)) > 0)
-                {
-                    writer.writeText("%"+value, null);
-                }
-                writer.endElement("div");
-            writer.endElement("div");
-            
-            
-            writer.startElement("div", null);
-            getUtils().writeAttribute(writer, "class", "progress-bar-percent-remaind");
-            getUtils().writeAttribute(writer, "style", "width:"+remainPercentage+"%;");
-                writer.startElement("div", null);
-                getUtils().writeAttribute(writer, "class", "progress-bar-percent-remaind-caption");
-                if(value.compareTo(new BigDecimal(70)) < 0)
-                {
-                    writer.writeText("%"+value, null);
-                }
-                writer.endElement("div");
-            writer.endElement("div");
+            getUtils().writeAttribute(writer, "class", "row");
+            getUtils().writeAttribute(writer, "style", "float:none");
 
+            writer.startElement("div", null);
+                getUtils().writeAttribute(writer, "class"," col s"+component.getAttributes().get("width"));
+                    writer.startElement("div", null);
+                    getUtils().writeAttribute(writer, "class", "progress");
+
+                        writer.startElement("div", null);
+                            getUtils().writeAttribute(writer, "class", "percentage");
+                            if(new BigDecimal(60).compareTo(value) > 0)
+                                getUtils().writeAttribute(writer, "style", "left:"+value+"%");
+                            else
+                                getUtils().writeAttribute(writer, "style", "right:"+(new BigDecimal(100)).subtract(value)+"%");
+                            writer.writeText("%"+value, null);
+                        writer.endElement("div");
+                        writer.startElement("div", null);
+                            getUtils().writeAttribute(writer, "class", loadingMode);
+                            if(String.valueOf(component.getAttributes().get("isSematicValue")).equals("true"))
+                                getUtils().writeAttribute(writer, "style", "width:"+value+"%;background-color:"+isSemanticvalue(value));
+                            else 
+                                getUtils().writeAttribute(writer, "style", "width:"+value+"%");
+                        writer.endElement("div");
+                        
+                    writer.endElement("div");
+
+                writer.endElement("div");
         writer.endElement("div");
     }
 
+    public String isSemanticvalue(BigDecimal value){
+        
+        if(value.compareTo(new BigDecimal(70)) > 0)
+            return "#22B573";
+        else if (value.compareTo(new BigDecimal(40)) > 0)
+            return "#FABB72";
+        else 
+            return "#ED1C24";
+    }
     @Override
     protected void doEncodeEnd(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
     {
