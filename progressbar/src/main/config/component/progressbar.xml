@@ -39,19 +39,26 @@
 			</description>
 		</property>		
 		<property>
-			<name>height</name>
-			<classname>java.lang.Object</classname>
-			<defaultvalue>20</defaultvalue>
+			<name>loadingMode</name>
+			<classname>java.lang.String</classname>
 			<description>
-				progress bar height
+				can be determinate or indeterminate
 			</description>
 		</property>
-        		<property>
+		<property>
+			<name>isSematicValue</name>
+			<classname>java.lang.Object</classname>
+			<defaultvalue>false</defaultvalue>
+			<description>
+				can be true or false this paremeter change progress bar color by increasing / decreasing values
+			</description>
+		</property>
+        <property>
 			<name>width</name>
 			<classname>java.lang.Object</classname>
-			<defaultvalue>200</defaultvalue>
+			<defaultvalue>4</defaultvalue>
 			<description>
-				progress bar width
+				progress bar width can be 1-12 min size is 1 and max size is 12
 			</description>
 		</property>
 	</component>

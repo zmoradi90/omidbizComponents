@@ -144,5 +144,13 @@
 			<description>
 			</description>
 		</property>
+		<property>
+			<name>putDefaultZero</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+				this property put a zero in text input when it's data is null
+			</description>
+			<defaultvalue>true</defaultvalue>
+		</property>		
 	</component>
 </components>
