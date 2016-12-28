@@ -40,13 +40,13 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
 
     public void initializeMask(FacesContext context, UIChart component) throws IOException
     { 
-    	String type = String.valueOf(component.getAttributes().get("type"));
-    	String renderOption = String.valueOf(component.getAttributes().get("renderOption")).isEmpty()?"":","+String.valueOf(component.getAttributes().get("renderOption"));
+        String type = String.valueOf(component.getAttributes().get("type"));
+        String renderOption = String.valueOf(component.getAttributes().get("renderOption")).isEmpty()?"":","+String.valueOf(component.getAttributes().get("renderOption"));
         Double tickAngle = Double.parseDouble((String) component.getAttributes().get("tickAngle"));
         String xAxisLabel = String.valueOf(component.getAttributes().get("xAxisLable"));
         String yAxisLabel = String.valueOf(component.getAttributes().get("yAxisLable"));
 
-    	String title = String.valueOf(component.getAttributes().get("title"));
+        String title = String.valueOf(component.getAttributes().get("title"));
         String dataSets = String.valueOf(component.getAttributes().get("value"));
         ArrayList<String> ticks = (ArrayList<String>) component.getAttributes().get("ticks");
         ArrayList<String> series =  (ArrayList<String>) component.getAttributes().get("series");
@@ -137,7 +137,7 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
     }
     public Object getJQueryId(FacesContext context, UIChart component)
     {
-    	return (Object) getFinalId(context,component).replace(":", "\\\\:");
+        return (Object) getFinalId(context,component).replace(":", "\\\\:");
     }
 
     private static String capitalize (String str){
