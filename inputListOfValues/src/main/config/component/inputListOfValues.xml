@@ -207,6 +207,24 @@
 		</property>
 		
 		<property>
+			<name>onCloseLink</name>
+			<classname>java.lang.String</classname>
+			<description>
+					javascript function to call after user select to close lov
+			</description>
+			
+		</property>
+		
+		<property>
+			<name>data</name>
+			<classname>java.lang.String</classname>
+			<description>
+					argument (mostly) json to pass oncloseLink function use alongside with oncloselink func
+			</description>
+			
+		</property>
+		
+		<property>
 			<name>width</name>
 			<classname>java.lang.String</classname>
 			<description>

@@ -50,6 +50,16 @@ public class ClickableButtonRenderer extends HeaderResourcesRendererBase
                 // result.setRendered(false);
                 String jQueryClientId = "#" + clientId.replace(":", "\\\\:");
                 StringBuilder sb = new StringBuilder("function ").append(functionName).append("{");
+                //
+                String onclick = (String) component.getAttributes().get("onclick");
+                if(onclick != null)
+                {
+                    if(onclick.endsWith(";"))
+                        sb.append(onclick);
+                    else
+                        sb.append(onclick).append(";");
+                }
+                //
                 sb.append("jQuery('").append(jQueryClientId).append("').").append("trigger('click')");
                 sb.append("}");
                 getUtils().writeScript(context, component, sb.toString());
