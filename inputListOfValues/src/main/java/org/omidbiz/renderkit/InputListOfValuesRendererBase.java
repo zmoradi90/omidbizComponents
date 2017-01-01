@@ -23,8 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.ajax4jsf.renderkit.ComponentVariables;
 import org.ajax4jsf.renderkit.ComponentsVariableResolver;
@@ -59,7 +59,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
 
         String submittedValue = (String) requestParams.get(clientId);
         String nameValue = (String) requestParams.get(nameId);
-        inputLov.setSubmittedValue(submittedValue);
+        if(submittedValue != null)
+            inputLov.setSubmittedValue(submittedValue);
 
         if (JSFUtil.isNotEmpty(submittedValue))
         {
@@ -84,7 +85,15 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
     @Override
     public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException
     {
-        return super.getConvertedValue(context, component, submittedValue);
+        UIInputListOfValues inputDate = (UIInputListOfValues) component;
+        Converter converter = inputDate.getConverter();
+        if(converter != null)
+        {
+            return converter.getAsObject(context, component, String.valueOf(submittedValue));
+        }
+        if(submittedValue != null && String.valueOf(submittedValue).trim().isEmpty())
+            return null;
+        return submittedValue;
     }
 
     public Object getSelectedTextConvertedValue(FacesContext context, UIComponent component)
@@ -230,6 +239,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
         Object objectNameAttr = component.getObjectName();
         Object extraInfo = component.getAttributes().get("extraInfo");
         Boolean autoNumeric = (Boolean) component.getAttributes().get("autoNumeric");
+        Object data = component.getAttributes().get("data");
+        Object onCloseLink = component.getAttributes().get("onCloseLink");
         extraInfo = extraInfo == null ? "" : extraInfo;
         if (type != null && "link".equalsIgnoreCase(type))
         {
@@ -261,6 +272,10 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
                 if (autoNumeric)
                     onclick += String.format("Richfaces.colorboxControl.applyAutoNumeric('%s');", objectNameAttr);
                 onclick += "Richfaces.colorboxControl.extendedCloseBox();";
+                if(data != null && onCloseLink != null)
+                    onclick += onCloseLink+"('"+objectName+"','"+data+"');";
+                else if(onCloseLink != null)
+                    onclick += onCloseLink+"('"+objectName+"');";
                 getUtils().writeAttribute(writer, "onclick", onclick);
                 getUtils().writeAttribute(writer, "style", "cursor:pointer;");
                 if (JSFUtil.isNotEmpty(styleClass))

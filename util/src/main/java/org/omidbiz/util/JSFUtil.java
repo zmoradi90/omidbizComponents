@@ -9,6 +9,7 @@ import java.util.List;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIForm;
 import javax.faces.context.FacesContext;
 
 /**
@@ -144,6 +145,20 @@ public class JSFUtil
         if (String.class == clazz)
             return String.valueOf(value);
         return value;
+    }
+
+    public static UIForm getEnclosingForm(UIComponent component)
+    {
+        UIComponent result = component;
+        while (result != null)
+        {
+            if (result instanceof UIForm)
+            {
+                return (UIForm) result;
+            }
+            result = result.getParent();
+        }
+        return null;
     }
 
 }
