@@ -36,7 +36,7 @@
 			<classname>java.lang.String</classname>
 			<defaultvalue>"normal"</defaultvalue>
 			<description>
-				can be normal or reverse
+				can be normal colorAmount or colorAmountReverse or hasDependency
 			</description>
 		</property>
 		
@@ -63,5 +63,14 @@
 				using for tipsy 
 			</description>
 		</property>
+        <property>
+			<name>dependencyValue</name>
+			<classname>java.lang.String</classname>
+			<defaultvalue>"NAN"</defaultvalue>
+			<description>
+				this property value is used for donught color and if the minus between value and dependencyValue between 0-9 color is green if 
+				the minus between value and dependencyValue between 9-10 color is yellow and if it be more than 11 color is red 
+			</description>
+		</property>		
 	</component>
 </components>
