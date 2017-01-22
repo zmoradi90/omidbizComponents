@@ -156,6 +156,14 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "class", suggestion.getStyleClass());
         writer.endElement("input");
         //
+        writer.startElement("input", null);
+        getUtils().writeAttribute(writer, "type", "hidden");
+        getUtils().writeAttribute(writer, "id", componentId + HIDDEN_COMP);
+        Object valueId = suggestion.getValueId();
+        if (valueId != null)
+            getUtils().writeAttribute(writer, "value", valueId);
+        getUtils().writeAttribute(writer, "name", componentId + HIDDEN_COMP);
+        writer.endElement("input");
     }
 
     @Override
