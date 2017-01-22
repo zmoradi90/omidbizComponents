@@ -41,6 +41,15 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         Object valueId = sbutton.getValueId();
         if (valueId != null)
             onclick.append(valueId).append(",");
+        else
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.append("jQuery(document).ready(function(){");
+            sb.append(String
+                    .format("jQuery('#%s', window.parent.document).remove();", forceId + SuggestionRendererBase.HIDDEN_COMP));
+            sb.append("});");
+            getUtils().writeScript(context, component, sb.toString());
+        }
         Object valueName = sbutton.getValueName();
         if (valueName instanceof String)
             onclick.append("'").append(valueName).append("'");
