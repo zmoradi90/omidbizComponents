@@ -45,7 +45,9 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
         Double tickAngle = Double.parseDouble((String) component.getAttributes().get("tickAngle"));
         String xAxisLabel = String.valueOf(component.getAttributes().get("xAxisLable"));
         String yAxisLabel = String.valueOf(component.getAttributes().get("yAxisLable"));
+        String isHorizon = String.valueOf(component.getAttributes().get("isHorizon"));
 
+        String colorSeries =(String) component.getAttributes().get("colorSeries");
     	String title = String.valueOf(component.getAttributes().get("title"));
         String dataSets = String.valueOf(component.getAttributes().get("value"));
         ArrayList<String> ticks = (ArrayList<String>) component.getAttributes().get("ticks");
@@ -55,24 +57,37 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
         sb.append("var dataSets ="+dataSets+"; ");
         sb.append("var ticks =[");
         int ticksCounter = 0;
-        for (String tick : ticks)
-        {
-            ticksCounter ++;
-            if(ticksCounter == ticks.size())
-                sb.append("'"+tick+"'");
-            else
-                sb.append("'"+tick+"',");
+        if(ticks!=null)
+        {        
+            for (String tick : ticks)
+            {
+                ticksCounter ++;
+                if(ticksCounter == ticks.size())
+                    sb.append("'"+tick+"'");
+                else
+                    sb.append("'"+tick+"',");
+            }
         }
         sb.append("];");
         sb.append("var series =[");
         int seriesCounter = 0;
-        for (String serie : series)
+        if(series!=null)
+        {        
+            for (String serie : series)
+            {
+                seriesCounter ++;
+                if(seriesCounter == series.size())
+                    sb.append("{label:'"+serie+"'}");
+                else
+                    sb.append("{label:'"+serie+"'},");
+            }
+        }
+        sb.append("];");
+        sb.append("var colorSeries =[");
+      
+        if(colorSeries!=null)
         {
-            seriesCounter ++;
-            if(seriesCounter == series.size())
-                sb.append("{label:'"+serie+"'}");
-            else
-                sb.append("{label:'"+serie+"'},");
+            sb.append(colorSeries);
         }
         sb.append("];"); 
         sb.append("var opt ={title: '"+title+"',"
@@ -80,11 +95,33 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                 +"rendererOptions: { padding: 8, showDataLabels: true"+renderOption+" },"
                 + "seriesDefaults:{");
                 if(type.equals("bar"))
-                    sb.append("renderer:jQuery.jqplot.BarRenderer,");
+                {
+                    sb.append("renderer:jQuery.jqplot.BarRenderer,"
+                            + "shadow: true,shadowAlpha: 0.05},"
+                            + "highlighter: {show: true,showLabel: true,tooltipAxes: 'y'},"
+                            + "legend: {show: true,location: 'e',placement: 'outside'},cursor:{show: true,zoom: true},"
+                            + "axes: {xaxis:{renderer: jQuery.jqplot.CategoryAxisRenderer,"
+                            + "label: '"+xAxisLabel+"',");
+                            if(isHorizon == "true")
+                                sb.append("rendererOptions: {  barDirection: 'horizontal'},");
+                            sb.append("labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,"
+                            + "tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,"
+                            + "ticks: ticks,"
+                            + "tickOptions: {angle:"+tickAngle+"}},"
+                            + "yaxis: {"
+                            + "autoscale:true,"
+                            + "label: '"+yAxisLabel+"',"
+                            + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,"
+                            + "tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,"
+                            + "tickOptions: {}}}");                    
+                }
                 else if(type.equals("pie"))
-                    sb.append("renderer:jQuery.jqplot.PieRenderer,");
-                if(type.equals("bubble"))
-                    sb.append("renderer: jQuery.jqplot.BubbleRenderer,"
+                    sb.append("renderer:jQuery.jqplot.PieRenderer,"
+                    + "shadow: true,shadowAlpha: 0.05,rendererOptions: { padding: 8, showDataLabels: true ,dataLabels: 'value'},"
+                    + "seriesColors:colorSeries}, legend:{show:true,rendererOptions:{numberRows: 1},location: 's'},"
+                    + "grid:{drawBorder:false,shadow:false}");
+                else if(type.equals("bubble"))
+                {       sb.append("renderer: jQuery.jqplot.BubbleRenderer,"
                         +"shadow: true,shadowAlpha: 0.05},"
                         + "highlighter: {show: true,showLabel: true,tooltipAxes: 'y'},"
                         + "cursor:{show: true,zoom: true},"
@@ -94,26 +131,9 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                         + "yaxis: {"
                         + "autoscale:true,"
                         + "label: '"+yAxisLabel+"',"
-                        + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer}");
-                else
-                {
-                    sb.append("shadow: true,shadowAlpha: 0.05},"
-                            + "highlighter: {show: true,showLabel: true,tooltipAxes: 'y'},"
-                            + "legend: {show: true,location: 'e',placement: 'outside'},cursor:{show: true,zoom: true},"
-                            + "axes: {xaxis:{renderer: jQuery.jqplot.CategoryAxisRenderer,"
-                            + "label: '"+xAxisLabel+"',"
-                            + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,"
-                            + "tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,"
-                            + "ticks: ticks,"
-                            + "tickOptions: {angle:"+tickAngle+"}},"
-                            + "yaxis: {"
-                            + "autoscale:true,"
-                            + "label: '"+yAxisLabel+"',"
-                            + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,"
-                            + "tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,"
-                            + "tickOptions: {}}");
+                        + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer");
                 }
-                    sb.append("}}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
+                    sb.append("}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
         getUtils().writeScript(context, component, sb.toString());
 
     }

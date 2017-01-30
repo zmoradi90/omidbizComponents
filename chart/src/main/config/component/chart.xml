@@ -69,6 +69,13 @@
 			</description>
 			<defaultvalue>""</defaultvalue>
 		</property>
+       <property>
+			<name>colorSeries</name>
+			<classname>java.lang.String</classname>
+			<description>
+				a Json array to set color for chart series eg '#FFFFFF','#FF0000'
+			</description>
+		</property>		
         <property>
 			<name>tickAngle</name>
 			<classname>java.lang.String</classname>
@@ -123,7 +130,29 @@
 			<description>
 				title of chart it can be bar, line, pie 
 			</description>
-			<defaultvalue>"sample chart"</defaultvalue>
-		</property>		
+			<defaultvalue>""</defaultvalue>
+		</property>	
+        <property>
+			<name>isHorizon</name>
+			<classname>java.lang.String</classname>
+			<description>
+				it can be true or false
+			</description>
+			<defaultvalue>"false"</defaultvalue>
+		</property>	
+        <property>
+			<name>chartRerenderId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the chart id must be rerendered
+			</description>
+		</property>
+        <property>
+			<name>chartTicksString</name>
+			<classname>java.lang.String</classname>
+			<description>
+				the chart id must be rerendered
+			</description>
+		</property>							
 	</component>
 </components>
