@@ -117,9 +117,9 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                 }
                 else if(type.equals("pie"))
                     sb.append("renderer:jQuery.jqplot.PieRenderer,"
-                    + "shadow: true,shadowAlpha: 0.05,rendererOptions: { padding: 8, showDataLabels: true ,dataLabels: 'value'},"
+                    + "shadow: true,shadowAngle:10,shadowOffset:0,shadowDepth:2,shadowAlpha:1,rendererOptions: { shadowAngle:-40,shadowOffset:-1,shadowDepth:10,shadowAlpha:0.01,padding: 8, showDataLabels: true ,dataLabels: 'value'},"
                     + "seriesColors:colorSeries}, legend:{show:true,rendererOptions:{numberRows: 1},location: 's'},"
-                    + "grid:{drawBorder:false,shadow:false}");
+                    + "grid:{drawBorder:false,shadow:false,background:'rgba(255,255,255,0)'}");
                 else if(type.equals("bubble"))
                 {       sb.append("renderer: jQuery.jqplot.BubbleRenderer,"
                         +"shadow: true,shadowAlpha: 0.05},"
