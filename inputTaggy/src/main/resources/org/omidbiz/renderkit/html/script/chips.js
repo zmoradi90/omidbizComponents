@@ -6,6 +6,8 @@
     secondaryPlaceholder: '',
     inputHiddenId: 'chipsInputHidden',
     seperator: ',',
+	useOwnInputText:true,
+    useIdFromSiblingsInputHidden:false,
     onStartLoadFunc:function(){},
     onStopLoadFunc:function(){}
   };
@@ -28,7 +30,7 @@
     this.SELS = {
       CHIPS: '.chips',
       CHIP: '.chip',
-      INPUT: 'input',
+      INPUT: "input[type='text']",
       DELETE: '.material-icons',
       REMOVE_ALL :'.chips-removeAll',
       SELECTED_CHIP: '.selected',
@@ -112,7 +114,7 @@
           if (null !== selectIndex) {
             self.selectChip(selectIndex, $chips);
           }
-          if (!length) $chips.find('input').focus();
+          if (!length) $chips.find("input[type='text']").focus();
 
         // left
         } else if (e.which === 37) {
@@ -128,7 +130,7 @@
           index = $chip.index() + 1;
           $(SELS.CHIP).removeClass('selected');
           if (index > length) {
-            $chips.find('input').focus();
+            $chips.find("input[type='text']").focus();
             return;
           }
           self.selectChip(index, $chips);
@@ -171,7 +173,15 @@
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
           var $chips = $target.closest(SELS.CHIPS);
-          self.splitText($target.val(),$chips);
+		  if(curr_options.useIdFromSiblingsInputHidden)
+          {
+        	  self.splitText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
+        	  $target.siblings("input[type='hidden']").val("");
+          }
+          else
+          {
+        	  self.splitText($target.val(),$chips);
+          }
           //console.log($target.closest(SELS.CHIPS));
           $target.val('');
 
@@ -184,7 +194,15 @@
         // enter and space
         if (13 === e.which || 32 === e.which) {
           e.preventDefault();
-          self.splitText($target.val(),$chips);
+          if(curr_options.useIdFromSiblingsInputHidden)
+          {
+        	  self.splitText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
+        	  $target.siblings("input[type='hidden']").val("")
+          }
+          else
+          {
+        	  self.splitText($target.val(),$chips);
+          }
           $target.val('');
           return;
         }
@@ -207,7 +225,7 @@
         var $chip = $target.closest(SELS.CHIP);
         e.stopPropagation();
         self.deleteChip($chip.index(), $chips);
-        $chips.find('input').focus();
+        $chips.find("input[type='text']").focus();
       });
     };
     //customize by shk split text function
@@ -248,13 +266,65 @@
 				
         }
     }
+        //customize by shk split text function when we have to use id and label together
+    this.splitText = function(str,chips,strGuestHidden){
+        // customization by shk add tags just with space
+        var splitedText = [];
+        var splitedHiddenId = [];
+        //console.log("splitText->str" + str);
+        splitedText = str.split(curr_options.seperator);
+        splitedHiddenId = strGuestHidden.split(curr_options.seperator); 
+        //customize shk for performance considerations 
+        if(splitedText.length<500)
+        {
+        	curr_options.onStartLoadFunc();
+        	for(var i = 0 ; i < splitedText.length &&  i < splitedHiddenId.length ; i++)
+        	{
+        		self.addChip({tag: splitedText[i],id:splitedHiddenId[i]}, chips);
+        		//console.log("split text in loop: "+ splitedText[i]);
+        	}
+        	curr_options.onStopLoadFunc();
+        }
+        else 
+        {
+        	curr_options.onStartLoadFunc();
+        	function test(){
+        		if(i>splitedText.length/150)
+        		{
+        			curr_options.onStopLoadFunc();
+        			clearInterval(interval);
+        		}
+        		for(var j = i*150 ; j <i*150+150  ; j++)
+        		{
+        			self.addChip({tag: splitedText[i],id:splitedHiddenId[i]}, chips);
+        		}
+        		i++;
+        	}
+			var i=0;
+			var interval = setInterval(test,0.000001);			
+			//console.log("split text in loop: "+ splitedText[i]);
+				
+        }
+    }
+
     //set input hidden function
     this.setInputHidden = function(){
     	var SELS = self.SELS;
     	var $chipsAddedText = "";
-		jQuery(SELS.CHIPS+" "+SELS.CHIP).each(function(){
-			$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + curr_options.seperator + jQuery(this).text();
-		});
+
+		if(curr_options.useIdFromSiblingsInputHidden)
+    	{
+        	for(var i = 0 ; i < jQuery(SELS.CHIPS).data('chips').size() ; i++)
+        	{
+    			$chipsAddedText = $chipsAddedText ==""?jQuery(SELS.CHIPS).data('chips')[i].id:$chipsAddedText + curr_options.seperator + jQuery(SELS.CHIPS).data('chips')[i].id;
+        	}   
+    	}
+    	else
+    	{
+			jQuery(SELS.CHIPS+" "+SELS.CHIP).each(function(){
+				$chipsAddedText = $chipsAddedText ==""?jQuery(this).text():$chipsAddedText + curr_options.seperator + jQuery(this).text();
+			});	
+    	}
     	$("#"+curr_options.inputHiddenId).val($chipsAddedText);
     }
     this.getInputHidden = function(){
@@ -267,8 +337,15 @@
       $chips.data('chips').forEach(function(elem){
         html += self.renderChip(elem);
       });
-      html += '<input id="' + chipId +'" class="input" placeholder="">';
-      $chips.html(html);
+      if(curr_options.useOwnInputText)
+      {
+    	  html += '<input id="' + chipId +'" class="input" type="text" placeholder="">';
+    	  $chips.html(html);
+      }
+      else
+      {
+    	  $chips.find("input[type='text']").addClass("input");
+      }
       self.setPlaceholder($chips);
 
       // Set for attribute for label
@@ -296,10 +373,10 @@
 
     this.setPlaceholder = function($chips) {
       if ($chips.data('chips').length && curr_options.placeholder) {
-        $chips.find('input').prop('placeholder', curr_options.placeholder);
+        $chips.find('input[type="text"]').prop('placeholder', curr_options.placeholder);
 
       } else if (!$chips.data('chips').length && curr_options.secondaryPlaceholder) {
-        $chips.find('input').prop('placeholder', curr_options.secondaryPlaceholder);
+        $chips.find('input[type="text"]').prop('placeholder', curr_options.secondaryPlaceholder);
       }
     };
 
@@ -332,7 +409,7 @@
       newData.push(elem);
 
       $chips.data('chips', newData);
-      $(chipHtml).insertBefore($chips.find('input'));
+      $(chipHtml).insertBefore($chips.find('input[type="text"]'));
       $chips.trigger('chip.add', elem);
       self.setPlaceholder($chips);
       //set input hidden
