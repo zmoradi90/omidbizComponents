@@ -171,6 +171,15 @@
 		</property>
 		
 		<property>
+			<name>onSelectCallback</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				call back function on select items
+			</description>			
+			<defaultvalue>""</defaultvalue>
+		</property>		
+		
+		<property>
 			<name>styleClass</name>
 			<classname>java.lang.String</classname>			
 			<description>

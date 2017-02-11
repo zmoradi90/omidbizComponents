@@ -41,6 +41,8 @@ public abstract class UISuggestionButton extends UIOutput
     private Object valueName;
 
     private Object valueId;
+    
+    private Object onSelectCallback;
 
     private Object textMessage;
 
@@ -240,6 +242,43 @@ public abstract class UISuggestionButton extends UIOutput
         valueName = (Object) state[i++];
         textMessage = (Object) state[i++];
         closeOnSelect = (Boolean) state[i++];
+    }
+
+    public Object getOnSelectCallback()
+    {
+        if (this.onSelectCallback != null)
+        {
+            return this.onSelectCallback;
+        }
+        ValueExpression ve = getValueExpression("onSelectCallback");
+        if (ve != null)
+        {
+            Object value = null;
+            try
+            {
+                ELContext context = getFacesContext().getELContext();
+                Class<?> type = ve.getType(context);
+                value = JSFUtil.castTo(type, ve.getValue(context));
+            }
+            catch (ELException e)
+            {
+                // TODO : DO nothing //FIXME: throw new FacesException(e);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return value;
+        }
+
+        return null;
+
+    }
+
+    public void setOnSelectCallback(Object onSelectCallback)
+    {
+        this.onSelectCallback = onSelectCallback;
     }
 
 }

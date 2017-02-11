@@ -11,7 +11,7 @@ var sm = {
 							at: 'bottom right',
 							my: 'top right'
 						},
-						show: 'click',
+						show: 'focus',
 						hide: 'unfocus',
 						style: {width: w, height: h, classes: 'qtip-light', def: false}
 						

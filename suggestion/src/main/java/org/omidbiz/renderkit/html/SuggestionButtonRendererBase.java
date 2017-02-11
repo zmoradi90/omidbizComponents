@@ -55,6 +55,9 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
             onclick.append("'").append(valueName).append("'");
         else
             onclick.append(valueName);
+        Object onSelectCallback = sbutton.getOnSelectCallback();
+        if(onSelectCallback instanceof String)
+            onclick.append(",").append(onSelectCallback);
         onclick.append(")");
         String spanId = component.getClientId(context);
         writer.startElement("span", null);
@@ -74,7 +77,10 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
         script.append("function ").append(jsFuncName).append("(");
         if (valueId != null)
             script.append("valueId").append(",");
-        script.append("valueName").append(")");
+        script.append("valueName");
+        if(onSelectCallback !=null)
+            script.append(",").append("onSelectCallback");
+        script.append(")");
         script.append("{").append(
                 String.format("jQuery('#%s', window.parent.document).val(valueName);", forceId + SuggestionRendererBase.HIDDEN_NAME_COMP));
         if (valueId != null)
@@ -86,6 +92,7 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
             script.append("var qtipNum = jQuery('#" + forceId.replace(":", "\\\\:") + SuggestionRendererBase.HIDDEN_NAME_COMP
                     + "',window.parent.document).data('hasqtip'); jQuery('#qtip-'+qtipNum,window.parent.document).hide();");
         }
+        script.append("if(typeof onSelectCallback == 'function'){onSelectCallback(this)}");
         script.append("};");
         //
 

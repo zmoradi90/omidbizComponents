@@ -6,7 +6,10 @@
     secondaryPlaceholder: '',
     inputHiddenId: 'chipsInputHidden',
     seperator: ',',
+    enableDoubleClick:true,
 	useOwnInputText:true,
+	inputDataInvaildError:'invalid data!',
+	inputDataCopyError:'doublicate data!',
     useIdFromSiblingsInputHidden:false,
     onStartLoadFunc:function(){},
     onStopLoadFunc:function(){}
@@ -34,6 +37,7 @@
       DELETE: '.material-icons',
       REMOVE_ALL :'.chips-removeAll',
       SELECTED_CHIP: '.selected',
+      Error_Place:'.chips-error'
     };
 
     if ('data' === options) {
@@ -155,12 +159,15 @@
       });
       
       // customize by shk add double click event to copy  
-      self.$document.off('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
-    	  	var $target = $(e.target);
-    	  	var $chips = $target.closest(SELS.CHIPS);
-    	  	$target.val(self.getInputHidden());
-    	  	self.deleteAllChips($chips);
-        });
+      if(curr_options.enableDoubleClick)
+      {
+          self.$document.off('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+      	  	var $target = $(e.target);
+      	  	var $chips = $target.closest(SELS.CHIPS);
+      	  	$target.val(self.getInputHidden());
+      	  	self.deleteAllChips($chips);
+          });    	  
+      }
       // customize by shk remove all by click on remove all button
       self.$document.off('click.chips-removeAll',SELS.REMOVE_ALL).on('click.chips-removeAll', SELS.REMOVE_ALL, function(e){
     	  var $target = $(e.target);
@@ -170,17 +177,26 @@
     	  self.getInputHidden();
         });
       // customization by shk add tags on change text box
+      var lastResultHiddenLenght = self.getInputHidden().lenght;
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
           var $chips = $target.closest(SELS.CHIPS);
 		  if(curr_options.useIdFromSiblingsInputHidden)
           {
-        	  self.splitText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
-        	  $target.siblings("input[type='hidden']").val("");
+			  if($target.siblings("input[type='hidden']").val()!="")
+	          {
+	        	  self.splitHiddenText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
+	        	  $target.siblings("input[type='hidden']").val("");
+	        	  $target.attr("placeholder","");
+	          }
+			  else if($target.val()!="")
+			  {
+				  $chips.find(".chips-error").html(curr_options.inputDataInvaildError).show();
+			  }
           }
           else
           {
-        	  self.splitText($target.val(),$chips);
+        	  self.splitInputText($target.val(),$chips);
           }
           //console.log($target.closest(SELS.CHIPS));
           $target.val('');
@@ -191,17 +207,26 @@
         var $chips = $target.closest(SELS.CHIPS);
         var chipsLength = $chips.children(SELS.CHIP).length;
         
-        // enter and space
-        if (13 === e.which || 32 === e.which) {
+        // enter or seperator charatcter
+        if (curr_options.seperator.charCodeAt(0) === e.which || 13 === e.which) {
           e.preventDefault();
           if(curr_options.useIdFromSiblingsInputHidden)
           {
-        	  self.splitText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
-        	  $target.siblings("input[type='hidden']").val("")
+        	  if($target.siblings("input[type='hidden']").val()!="")
+        	  {
+            	  self.splitHiddenText($target.val(),$chips,$target.siblings("input[type='hidden']").val());
+            	  $target.siblings("input[type='hidden']").val(""); 
+            	  $target.attr("placeholder","");
+        	  }
+			  else if($target.val()!="")
+			  {
+				  $chips.find(".chips-error").html(curr_options.inputDataInvaildError).show();
+			  }
+
           }
           else
           {
-        	  self.splitText($target.val(),$chips);
+        	  self.splitInputText($target.val(),$chips);
           }
           $target.val('');
           return;
@@ -229,10 +254,13 @@
       });
     };
     //customize by shk split text function
-    this.splitText = function(str,chips){
+    this.splitInputText = function(str,chips){
         // customization by shk add tags just with space
+    	if(str == "")
+    		return ;
         var splitedText = [];
         //console.log("splitText->str" + str);
+        console.log("test value" + str);
         splitedText = str.split(curr_options.seperator);
         //customize shk for performance considerations 
         if(splitedText.length<500)
@@ -267,7 +295,7 @@
         }
     }
         //customize by shk split text function when we have to use id and label together
-    this.splitText = function(str,chips,strGuestHidden){
+    this.splitHiddenText = function(str,chips,strGuestHidden){
         // customization by shk add tags just with space
         var splitedText = [];
         var splitedHiddenId = [];
@@ -394,11 +422,13 @@
 
     this.addChip = function(elem, $chips) {
       if (!self.isValid($chips, elem)) {
-        //console.log("addChip=");
-    	//console.log(elem);
+    	  $chips.find(".chips-error").html(curr_options.inputDataCopyError).show();
+    	 //console.log("addChip=");
+    	//console.log(elem.tag);
     	//console.log("");
         return;
       }
+	  $chips.find(".chips-error").hide();
       var chipHtml = self.renderChip(elem);
       var newData = [];
       var oldData = $chips.data('chips');
