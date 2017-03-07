@@ -1,0 +1,54 @@
+		.auto-save-textArea {
+		    direction: rtl;
+		    position: relative;
+		   float: right;
+		}
+.timer-Button {
+    background-color: #000;
+    border-radius: 3px;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    margin: 0 4px;
+    opacity: 0.8;
+    padding: 3px;
+    width: 18px;
+    box-shadow: 0 0 2px 2px #aaa;
+}
+.auto-save-textArea  .dirty-textarea{
+	border: 1px solid #FF3030;
+}
+.auto-save-textArea  .persisted-textarea{
+	border: 1px solid #00C63B;
+}
+.timer-Button[status='on']{
+	display: inline;
+}
+
+.timer-Button[disabled="disabled"] {
+    opacity: 0.3;
+    cursor: auto;
+}
+.timer-Button[status='off']{
+	display: inline;
+}
+.timer-display {
+    height: 100%;
+    width: 25px;
+}
+.auto-save-textArea .control-panel {
+    bottom: 4px;
+    height: 17px;
+    left: 10px;
+    position: absolute;
+    width: 52px;
+   	opacity:0;
+   	transition-duration: 0.5s;
+    transition-property: opacity;
+}
+
+.timer-Button > img {
+    bottom: 7px;
+    position: relative;
+    right: 0;
+}

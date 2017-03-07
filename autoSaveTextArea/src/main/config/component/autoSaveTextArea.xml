@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.AutoSaveTextArea</name>
+		<family>org.omidbiz.AutoSaveTextArea</family>
+		<classname>org.omidbiz.component.html.HtmlAutoSaveTextArea</classname>
+		<superclass>org.omidbiz.component.UIAutoSaveTextArea</superclass>
+		<description>
+			<![CDATA[
+    		]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.AutoSaveTextAreaRenderer</name>
+			<template>org/omidbiz/htmlAutoSaveTextArea.jspx</template>
+		</renderer>
+		<tag>
+			<name>autoSaveTextArea</name>
+			<classname>org.omidbiz.taglib.AutoSaveTextAreaTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>callBack</name>
+			<classname>java.lang.String</classname>
+			<description>
+				call back function will run after save 
+			</description>
+		</property>
+		<property>
+			<name>saveOnCookeis</name>
+			<classname>java.lang.String</classname>
+			<description>
+				user can unset this property when do not prefer use cookies default value is true
+			</description>
+			<defaultvalue>"true"</defaultvalue>
+		</property>
+		<property>
+			<name>width</name>
+			<classname>java.lang.String</classname>
+			<description>
+				width textarea wrapper
+			</description>
+		</property>	
+		<property>
+			<name>height</name>
+			<classname>java.lang.String</classname>
+			<description>
+				height textarea wrapper
+			</description>
+		</property>	
+		<property>
+			<name>cookieKey</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this is a special keyValue for form entities like projectId 
+			</description>
+		</property>	
+		<property>
+			<name>intervalTimer</name>
+			<classname>java.lang.Integer</classname>
+			<description>
+				set Timer interval default is 5 sec
+			</description>
+			<defaultvalue>5</defaultvalue>
+		</property>								
+	</component>
+</components>

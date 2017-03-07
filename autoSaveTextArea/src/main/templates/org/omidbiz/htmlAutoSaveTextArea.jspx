@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
+	xmlns:c=" http://java.sun.com/jsf/core"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.AutoSaveTextAreaRenderer"
+	baseclass="org.omidbiz.renderkit.AutoSaveTextAreaRenderBase"
+	component="org.omidbiz.component.UIAutoSaveTextArea">
+
+	<f:clientid var="clientId" />
+	<c:set var="width" value="#{component.attributes['width']}" />
+	<c:set var="height" value="#{component.attributes['height']}" />
+	<c:set var="callBack" value="#{component.attributes['callBack']}" />
+	<c:set var="saveOnCookeis"
+		value="#{component.attributes['saveOnCookeis']}" />
+	<c:set var="cookieKey" value="#{component.attributes['cookieKey']}" />
+	<c:set var="intervalTimer"
+		value="#{component.attributes['intervalTimer']}" />
+	<h:styles>css/autoSaveTextArea.css</h:styles>
+	<h:scripts>/org/omidbiz/renderkit/html/script/autoSaveTextArea.js</h:scripts>
+
+	<f:call name="initializeMask">
+
+		<vcp:body>
+			<script>
+				jQuery(document)
+						.ready(
+								function() {
+									jQuery("#"+ "#{this:getId(context, component)}").autoSaveTextArea(
+													{
+														interval : "#{intervalTimer}",
+														cookieKeyParameter : "#{cookieKey}",
+														saveOnCookie : "#{saveOnCookeis}",
+														callBackFunction : "#{callBackFunction}",
+														width : "#{width}",
+														height : "#{height}"
+													});
+								});
+			</script>
+		</vcp:body>
+
+	</f:call>
+
+</f:root>
