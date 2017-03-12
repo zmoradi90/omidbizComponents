@@ -36,7 +36,7 @@
       INPUT: "input[type='text']",
       DELETE: '.material-icons',
       REMOVE_ALL :'.chips-removeAll',
-      COPY_ALL : '.chips-copyALl',
+      COPY_ALL : '.chips-copyAll',
       SELECTED_CHIP: '.selected',
       Error_Place:'.chips-error'
     };
@@ -167,6 +167,15 @@
     	  self.deleteAllChips($chips);
     	  self.removeInputHidden();
         });
+      self.$document.off('click.chips-copyAll',SELS.COPY_ALL).on('click.chips-copyAll', SELS.COPY_ALL, function(e){
+    	  $(SELS.CHIP).addClass('selected');
+    	  var $target = $(e.target);
+    	  var $chips = $target.siblings(SELS.CHIPS);
+	    	  console.log( $chips);
+	          self.selectionTextBeforeCopy($chips.find('.chip.selected'));
+	          $chips.find(SELS.INPUT).blur();
+	          document.execCommand('Copy');
+        });
       // customization by shk add tags on change text box
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
@@ -244,6 +253,7 @@
 		        $target.blur();
     	  }
       });
+
       
       // Click on delete icon in chip.
       self.$document.off('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE).on('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
