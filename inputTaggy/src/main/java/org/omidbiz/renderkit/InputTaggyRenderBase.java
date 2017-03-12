@@ -41,8 +41,8 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
 
     public void initializeMask(FacesContext context, UIInputTaggy component) throws IOException
     {
-        String onStartLoadFunc = component.getAttributes().get("onStartLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStartLoadFunc")):"";
-        String onStopLoadFunc = component.getAttributes().get("onStopLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStopLoadFunc")):"";
+        String onStartLoadFunc = component.getAttributes().get("onStartLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStartLoadFunc")):null;
+        String onStopLoadFunc = component.getAttributes().get("onStopLoadFunc") != null ? String.valueOf(component.getAttributes().get("onStopLoadFunc")):null;
 
         String onAddChips = component.getAttributes().get("onAddChips") != null ? String.valueOf(component.getAttributes().get("onAddChips")):"";
         String onCloseChips = component.getAttributes().get("onCloseChips") != null ? String.valueOf(component.getAttributes().get("onCloseChips")):"";
@@ -52,6 +52,7 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         String seperator = component.getAttributes().get("seperator") != null ?
                 String.valueOf(component.getAttributes().get("seperator")): ",";
         String value = getInputValue(context,component);
+        String jsonValue = getInputJsonValue(context, component);
         String styleClass = component.getAttributes().get("styleClass")!=null ? String.valueOf(component.getAttributes().get("styleClass")): "";
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
@@ -67,16 +68,25 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
             writer.endElement("input");
             
             writer.startElement("div", null);
-                getUtils().writeAttribute(writer, "class","chips-removeAll");
-                writer.writeText("حذف همه", null);
+                getUtils().writeAttribute(writer, "class","chips-toolbar chips-removeAll");
+                getUtils().writeAttribute(writer, "title","حذف همه");
             writer.endElement("div");
+            
+            writer.startElement("div", null);
+                getUtils().writeAttribute(writer, "class","chips-toolbar chips-copyAll");
+                getUtils().writeAttribute(writer, "title","کپی");
+                getUtils().writeAttribute(writer, "onclick","document.execCommand('Copy')");
+            writer.endElement("div");
+        
         writer.endElement("div");
         StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
         sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
         sb.append("seperator:'"+seperator+"',");
-        sb.append("data:["+value+"],");
-        sb.append("onStartLoadFunc:"+onStartLoadFunc+",");
-        sb.append("onStopLoadFunc:"+onStopLoadFunc+",");
+        sb.append("data:["+jsonValue+"],");
+        if(onStartLoadFunc != null)
+            sb.append("onStartLoadFunc:"+onStartLoadFunc+",");
+        if(onStopLoadFunc != null)
+            sb.append("onStopLoadFunc:"+onStopLoadFunc+",");
         sb.append("});");
             if(onAddChips.isEmpty()!=true)
             {
@@ -151,6 +161,23 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         return getId(context, component).replace(":", "\\\\:");
     }
     public String getInputValue(FacesContext context, UIInputTaggy component)
+    {
+        String value = component.getAttributes().get("value") != null ? 
+                String.valueOf(component.getAttributes().get("value")) : "";
+        String seperator = component.getAttributes().get("seperator") != null ?
+                        String.valueOf(component.getAttributes().get("seperator")): ",";
+        String formatedString = "";
+        if(value.isEmpty() == false)
+        {
+        String[] seperatedValueArray = value.split(seperator);
+        for (String seperatedValue : seperatedValueArray)
+            formatedString += seperatedValue;
+        return formatedString;
+        }
+        else
+        return formatedString;
+    }
+    public String getInputJsonValue(FacesContext context, UIInputTaggy component)
     {
         String value = component.getAttributes().get("value") != null ? 
                             String.valueOf(component.getAttributes().get("value")) : "";

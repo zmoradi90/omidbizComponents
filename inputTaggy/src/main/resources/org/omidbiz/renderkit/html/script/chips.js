@@ -6,7 +6,6 @@
     secondaryPlaceholder: '',
     inputHiddenId: 'chipsInputHidden',
     seperator: ',',
-    enableDoubleClick:true,
 	useOwnInputText:true,
 	inputDataInvaildError:'invalid data!',
 	inputDataCopyError:'doublicate data!',
@@ -33,9 +32,11 @@
     this.SELS = {
       CHIPS: '.chips',
       CHIP: '.chip',
+      COPYBUTTON :'chips-copyAll',
       INPUT: "input[type='text']",
       DELETE: '.material-icons',
       REMOVE_ALL :'.chips-removeAll',
+      COPY_ALL : '.chips-copyALl',
       SELECTED_CHIP: '.selected',
       Error_Place:'.chips-error'
     };
@@ -65,10 +66,9 @@
         if (!$chips.hasClass(self.SELS.CHIPS)) {
           $chips.addClass('chips');
         }
-
-        self.chips($chips, chipId);
-        // add to inputHidden
-        self.setInputHidden();
+        
+        self.chips($chips, chipId);     
+        
         i++;
       });
     };
@@ -158,26 +158,16 @@
         $currChips.siblings('.prefix').removeClass('active');        
       });
       
-      // customize by shk add double click event to copy  
-      if(curr_options.enableDoubleClick)
-      {
-          self.$document.off('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('dblclick.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
-      	  	var $target = $(e.target);
-      	  	var $chips = $target.closest(SELS.CHIPS);
-      	  	$target.val(self.getInputHidden());
-      	  	self.deleteAllChips($chips);
-          });    	  
-      }
+      
       // customize by shk remove all by click on remove all button
       self.$document.off('click.chips-removeAll',SELS.REMOVE_ALL).on('click.chips-removeAll', SELS.REMOVE_ALL, function(e){
     	  var $target = $(e.target);
     	  var $chips = $target.siblings(SELS.CHIPS);
     	 // console.log($target.siblings(SELS.CHIPS));
     	  self.deleteAllChips($chips);
-    	  self.getInputHidden();
+    	  self.removeInputHidden();
         });
       // customization by shk add tags on change text box
-      var lastResultHiddenLenght = self.getInputHidden().lenght;
       self.$document.off('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('blur.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
           var $target = $(e.target);
           var $chips = $target.closest(SELS.CHIPS);
@@ -243,6 +233,18 @@
          
       });
       
+      // select all chips by ctrl + all
+      self.$document.off('keyup.chips-select', SELS.CHIPS + ' ' + SELS.INPUT).on('keyup.chips-select', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+    	  if((e.ctrlKey && e.which == 65) || (e.ctrlKey && e.which == 97))
+    	  {
+    		    $(SELS.CHIP).addClass('selected');
+		        var $target = $(e.target);
+		        var $chips = $target.closest(SELS.CHIPS).children(".chip.selected");
+		        self.selectionTextBeforeCopy($chips);
+		        $target.blur();
+    	  }
+      });
+      
       // Click on delete icon in chip.
       self.$document.off('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE).on('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
         var $target = $(e.target);
@@ -260,7 +262,6 @@
     		return ;
         var splitedText = [];
         //console.log("splitText->str" + str);
-        console.log("test value" + str);
         splitedText = str.split(curr_options.seperator);
         //customize shk for performance considerations 
         if(splitedText.length<500)
@@ -337,6 +338,7 @@
 
     //set input hidden function
     this.setInputHidden = function(){
+    	console.log("setInputHidden");
     	var SELS = self.SELS;
     	var $chipsAddedText = "";
 
@@ -359,6 +361,9 @@
     	var targetVal = $("#"+curr_options.inputHiddenId).val();
     	$("#"+curr_options.inputHiddenId).val("");
     	return targetVal;
+    }
+    this.removeInputHidden = function(){
+    	$("#"+curr_options.inputHiddenId).val("");
     }
     this.chips = function($chips, chipId) {
       var html = '';
@@ -477,7 +482,20 @@
         $chips.trigger('chip.select', $chips.data('chips')[chipIndex]);
       }
     };
-
+    this.selectionTextBeforeCopy = function($chips){
+    	var text = $chips;
+    	var selection = window.getSelection();
+    	selection.removeAllRanges();
+    	text.each(function(){
+    		 var range = document.createRange();        
+    		 range.selectNodeContents(this);        
+    		 selection.addRange(range);
+    	});
+    };
+    this.selectionTextAfterCopy = function(){
+    	var selection = window.getSelection();
+    	selection.removeAllRanges();
+    };
     this.getChipsElement = function(index, $chips) {
       return $chips.eq(index);
     };

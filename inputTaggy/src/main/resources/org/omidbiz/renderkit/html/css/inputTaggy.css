@@ -45,20 +45,29 @@
     width: 242px;
     position: relative;
 }
-
-
-.chips-removeAll {
-    color: red;
-    cursor: pointer;
-    direction: rtl;
-    font-size: 8pt;
-    height: 15px;
-    position: absolute;
-    right: 17px;
-    top: 0;
-    width: 20%;
+.chips-toolbar{
+   color: red;
+   cursor: pointer;
+   direction: rtl;
+   font-size: 8pt;
+   height: 15px;
+   position: absolute;
+   top: 0;
+   width: 16px;
+   background-size: contain;
 }
-
+.chips-removeAll{
+	right: 15px;
+	top: 5px;
+    background-size: contain;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAa0lEQVRYhe3QQQ6AIAxE0TkaR+tRPYI30A1sTLSU0AjJn6QLITgvlfpjki5nLPC/cLzyNumA0fv1Aab+NY+OfQGyy90NASAtv68ewHKA53n0GwAAAAAAANgfMGv2AZwJ5UcEUOqDmeXlrewGj4LyMsW0A2UAAAAASUVORK5CYII=");
+}
+.chips-copyAll{
+	right: 30px;
+	top: 5px;
+    background-size: contain;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAYUlEQVRIie3VsQ1AIQiE4X809l9CNnhuoM0rrAynkYpL6Dy+hEZIjAEfMMQJxw+WS4BcUJMOGNDQztX+XghwcfmKhICTk207BRRQQAJw9biAJx1fCsp4FDCgi8s7mw/nSSYbvKaQMK+NIgAAAABJRU5ErkJggg==");
+}
 .chips {
   border:1px solid #CCC;
   box-shadow: none;
@@ -98,6 +107,7 @@
   width: 120px !important;
   float: right;
   direction: rtl;
+  box-shadow:none!important;
 }
 
 .chips .input:focus {
