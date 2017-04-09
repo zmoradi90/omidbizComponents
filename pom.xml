@@ -131,6 +131,7 @@
     <module>inputTaggy</module>
     <module>chart</module>
     <module>autoSaveTextArea</module>
+    <module>processStepChart</module>
     
   </modules>
   <build>
