@@ -54,7 +54,7 @@
 			if(v.val()!="")
 			{
 				if(!v.val().contains(seperator))
-					selectedListItem=v.val();
+					selectedListItem.push(v.val());
 				else
 					selectedListItem=v.val().split(seperator);
 					
@@ -78,7 +78,7 @@
 				{
 						var tempArray = [];
 						if(!v.val().contains(seperator))
-							selectedListItem=v.val();
+							selectedListItem.push(v.val());
 						else
 							selectedListItem=v.val().split(seperator);
 													
@@ -94,6 +94,7 @@
 		    			else 
 		    				v.val(tempArray.join(seperator));
 						item.attr("status","notSelected");
+						selectedListItem = [];
 				}
 				else if (v.val()==""){
 					v.val(itemText);
