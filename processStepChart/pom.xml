@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>omidbizComponents</artifactId>
+    <groupId>org.omidbiz</groupId>
+    <version>2.2</version>
+  </parent>
+  <groupId>org.omidbiz</groupId>
+  <artifactId>processStepChart</artifactId>
+  <version>2.2</version>
+  <name>processStepChart</name>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.richfaces.cdk</groupId>
+        <artifactId>maven-cdk-plugin</artifactId>
+        <version>3.3.1.GA</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <library>
+            <prefix>org.omidbiz</prefix>
+            <taglib>
+              <shortName>processStepChart</shortName>
+            </taglib>
+          </library>
+        </configuration>
+      </plugin>
+<plugin>
+
+    <artifactId>maven-compiler-plugin</artifactId>
+
+    <inherited>true</inherited>
+
+    <configuration>
+
+        <source>1.5</source>
+
+        <target>1.5</target>
+
+    </configuration>
+
+</plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+				<groupId>org.richfaces.framework</groupId>
+				<artifactId>richfaces-impl</artifactId>				
+			</dependency>
+			<dependency>
+				<groupId>com.sun.facelets</groupId>
+				<artifactId>jsf-facelets</artifactId>
+				
+			</dependency>
+  </dependencies>
+</project>
