@@ -168,10 +168,10 @@
     	  self.removeInputHidden();
         });
       self.$document.off('click.chips-copyAll',SELS.COPY_ALL).on('click.chips-copyAll', SELS.COPY_ALL, function(e){
-    	  $(SELS.CHIP).addClass('selected');
+    	  $(SELS.CHIP).not('selected').addClass('selected');
     	  var $target = $(e.target);
     	  var $chips = $target.siblings(SELS.CHIPS);
-	    	  console.log( $chips);
+	    	  
 	          self.selectionTextBeforeCopy($chips.find('.chip.selected'));
 	          $chips.find(SELS.INPUT).blur();
 	          document.execCommand('Copy');
@@ -246,7 +246,7 @@
       self.$document.off('keyup.chips-select', SELS.CHIPS + ' ' + SELS.INPUT).on('keyup.chips-select', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
     	  if((e.ctrlKey && e.which == 65) || (e.ctrlKey && e.which == 97))
     	  {
-    		    $(SELS.CHIP).addClass('selected');
+    		    $(SELS.CHIP).not('selected').addClass('selected');
 		        var $target = $(e.target);
 		        var $chips = $target.closest(SELS.CHIPS).children(".chip.selected");
 		        self.selectionTextBeforeCopy($chips);
