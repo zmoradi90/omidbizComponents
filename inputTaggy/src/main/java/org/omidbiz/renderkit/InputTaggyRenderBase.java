@@ -51,7 +51,8 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         
         String seperator = component.getAttributes().get("seperator") != null ?
                 String.valueOf(component.getAttributes().get("seperator")): ",";
-        String value = getInputValue(context,component);
+        String value = component.getAttributes().get("value") != null ? 
+                String.valueOf(component.getAttributes().get("value")) : "";
         String jsonValue = getInputJsonValue(context, component);
         String styleClass = component.getAttributes().get("styleClass")!=null ? String.valueOf(component.getAttributes().get("styleClass")): "";
         ResponseWriter writer = context.getResponseWriter();
@@ -159,23 +160,6 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
     {
 
         return getId(context, component).replace(":", "\\\\:");
-    }
-    public String getInputValue(FacesContext context, UIInputTaggy component)
-    {
-        String value = component.getAttributes().get("value") != null ? 
-                String.valueOf(component.getAttributes().get("value")) : "";
-        String seperator = component.getAttributes().get("seperator") != null ?
-                        String.valueOf(component.getAttributes().get("seperator")): ",";
-        String formatedString = "";
-        if(value.isEmpty() == false)
-        {
-        String[] seperatedValueArray = value.split(seperator);
-        for (String seperatedValue : seperatedValueArray)
-            formatedString += seperatedValue;
-        return formatedString;
-        }
-        else
-        return formatedString;
     }
     public String getInputJsonValue(FacesContext context, UIInputTaggy component)
     {

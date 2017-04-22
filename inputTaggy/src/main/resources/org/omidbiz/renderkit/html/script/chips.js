@@ -348,7 +348,6 @@
 
     //set input hidden function
     this.setInputHidden = function(){
-    	console.log("setInputHidden");
     	var SELS = self.SELS;
     	var $chipsAddedText = "";
 
