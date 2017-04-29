@@ -59,6 +59,7 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         writer.startElement("div", null);
             getUtils().writeAttribute(writer, "class","chips-wrapper");
             writer.startElement("div", null);
+                getUtils().writeAttribute(writer, "id",component.getClientId(context));
                 getUtils().writeAttribute(writer, "class","chips-initial"+styleClass);
             writer.endElement("div");
             writer.startElement("input", null);
@@ -80,8 +81,7 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
             writer.endElement("div");
         
         writer.endElement("div");
-        StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('.chips-initial').material_chip({");
-        sb.append("inputHiddenId:'"+getJQueryId(context,component)+"',");
+        StringBuilder sb = new StringBuilder("jQuery(document).ready(function(){jQuery('#"+component.getClientId(context).replace(":", "\\\\:")+"').material_chip({");
         sb.append("seperator:'"+seperator+"',");
         sb.append("data:["+jsonValue+"],");
         if(onStartLoadFunc != null)
