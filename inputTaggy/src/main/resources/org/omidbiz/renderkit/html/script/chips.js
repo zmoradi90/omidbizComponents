@@ -59,7 +59,6 @@
              
               i++;
             });
-            console.log(self.SELS.INPUT);
             self.handleEvents();
           };
        
@@ -77,7 +76,7 @@
                 $(this).toggleClass('selected');
               });
 
-             self.$el.on('keydown.chips', function(e){
+             self.$document.off('keydown.chips').on('keydown.chips', function(e){
                 if ($(e.target).is('input, textarea')) {
                   return;
                 }
@@ -149,12 +148,11 @@
                  $currChips.siblings('.prefix').removeClass('active');       
                });
              // customize by shk remove all by click on remove all button
-             self.$document.off('click.chips-removeAll',SELS.REMOVE_ALL).on('click.chips-removeAll', SELS.REMOVE_ALL, function(e){
+             $(SELS.REMOVE_ALL).on('click.chips-removeAll', function(e){
                  var $target = $(e.target);
                  var $chips = $target.siblings(SELS.CHIPS);
-                // console.log($target.siblings(SELS.CHIPS));
                  self.deleteAllChips($chips);
-                 self.removeInputHidden();
+                 self.removeInputHidden($chips);
                });
              $(SELS.COPY_ALL).on('click.chips-copyAll', function(e){
                  var $target = $(e.target);
@@ -191,7 +189,6 @@
                  }
                  //console.log($target.closest(SELS.CHIPS));
                  $target.val('');
-                 console.log(self);
 
              });
             
@@ -247,9 +244,15 @@
                  }
              });
 
-
-             // SOME CODE MISSING HERE
-            
+             // Click on delete icon in chip.
+             self.$document.off('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE).on('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
+               var $target = $(e.target);
+               var $chips = $target.closest(SELS.CHIPS);
+               var $chip = $target.closest(SELS.CHIP);
+               e.stopPropagation();
+               self.deleteChip($chip.index(), $chips);
+               $chips.find("input[type='text']").focus();
+             });
             
             };
        
@@ -335,8 +338,7 @@
             }
         }       
         //set input hidden function
-        this.setInputHidden = function(){
-            var SELS = self.SELS;
+        this.setInputHidden = function($chips){
             var $chipsAddedText = "";
             if(curr_options.useIdFromSiblingsInputHidden)
             {
@@ -347,20 +349,19 @@
             }
             else
             {
-                for(var i = 0 ; i < self.$el.data('chips').size() ; i++)
-                {
-                        $chipsAddedText += self.$el.data('chips')[i].tag + curr_options.seperator;
-                }   
+                for(var i = 0 ; i < $chips.data('chips').size() ; i++)
+                { 
+                		if(i == 0)
+                			$chipsAddedText += $chips.data('chips')[i].tag ;
+                		else
+                			$chipsAddedText += curr_options.seperator + $chips.data('chips')[i].tag ;
+                }  
             }
-            $("#"+curr_options.inputHiddenId).val($chipsAddedText);
+            console.log(self);
+            $chips.siblings().val($chipsAddedText);
         }
-        this.getInputHidden = function(){
-            var targetVal = $("#"+curr_options.inputHiddenId).val();
-            $("#"+curr_options.inputHiddenId).val("");
-            return targetVal;
-        }
-        this.removeInputHidden = function(){
-            $("#"+curr_options.inputHiddenId).val("");
+        this.removeInputHidden = function(elm){
+            elm.siblings("#"+curr_options.inputHiddenId).val("");
         }       
         this.chips = function($chips, chipId) {
             var html = '';

@@ -86,6 +86,8 @@ public class InputTaggyRenderBase extends HeaderResourcesRendererBase
         sb.append("data:["+jsonValue+"],");
         if(onStartLoadFunc != null)
             sb.append("onStartLoadFunc:"+onStartLoadFunc+",");
+        if(component.getAttributes().get("forceId") != null)
+            sb.append("inputHiddenId:'"+component.getAttributes().get("forceId")+"',");
         if(onStopLoadFunc != null)
             sb.append("onStopLoadFunc:"+onStopLoadFunc+",");
         sb.append("});");
