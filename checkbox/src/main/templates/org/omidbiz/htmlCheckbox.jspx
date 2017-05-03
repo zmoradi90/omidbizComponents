@@ -275,7 +275,6 @@
 					jQuery("#wlchk_"+"#{forceId}").on("change",
 								function(e){
 										var hidden = jQuery(this).find("input[type='text']");
-										console.log(hidden)
 										if(jQuery(e.target).attr('checked') == "checked")
 											hidden.val("#{fsv}");
 										else
