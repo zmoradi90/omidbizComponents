@@ -92,6 +92,15 @@
 				true for single switch and false for double switch
 			</description>			
 			<defaultvalue>false</defaultvalue>			
-		</property>		
+		</property>	
+		<property>
+			<name>withoutLabel</name>
+			<classname>boolean</classname>
+			<description>
+				if this option become true you will lost labels and switch appereance will be changed this property is suitable when you want to use
+				it as enable disable switch
+			</description>			
+			<defaultvalue>false</defaultvalue>			
+		</property>				
 	</component>
 </components>

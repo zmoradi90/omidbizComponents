@@ -27,6 +27,7 @@
 	<c:set var="fsv" value="#{component.attributes['firstSwitchVal']}"/>
 	<c:set var="ssv" value="#{component.attributes['secondSwitchVal']}"/>
 	<c:set var="single" value="#{component.attributes['single']}"/>
+	<c:set var="withoutLabel" value="#{component.attributes['withoutLabel']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -36,9 +37,11 @@
 			Boolean checked = (Boolean) variables.getVariable("checked");
 			Boolean single = (Boolean) variables.getVariable("single");
 			Boolean disabled = (Boolean) variables.getVariable("disabled");
+			Boolean wl = (Boolean) variables.getVariable("withoutLabel");
+
 ]]>
 	</jsp:scriptlet>
-<jsp:scriptlet><![CDATA[ if (single == null || single == false) { ]]></jsp:scriptlet>
+<jsp:scriptlet><![CDATA[ if ((single == null || single == false) && (wl == null || wl == false)) { ]]></jsp:scriptlet>
 	<p class="field switch">
 		<jsp:scriptlet>
 			<![CDATA[ if (value != null && !"".equals(value.trim()) && value.equalsIgnoreCase(fsv)) { ]]>
@@ -87,7 +90,7 @@
 						<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 						
 		<jsp:scriptlet>
-			<![CDATA[ } else { ]]>
+			<![CDATA[ } else { ]]> 
 		</jsp:scriptlet>
 		
 						<jsp:scriptlet>
@@ -166,7 +169,7 @@
 			
 	</script>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
-	<jsp:scriptlet><![CDATA[ else { ]]></jsp:scriptlet>
+	<jsp:scriptlet><![CDATA[ else if( (wl == null || wl == false) && single == true ) { ]]></jsp:scriptlet>
 	
 	
 		<div id="schk_#{forceId}" class="switch-single" data-mode="#{fsv}">
@@ -238,6 +241,50 @@
 		});
 	</script>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
-	
+	<jsp:scriptlet><![CDATA[  if (wl != null && wl &&(single == null || single == false) ) { ]]></jsp:scriptlet>
+		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox"
+			checked="checked" />
+			<div class="slider round"></div>
+		<jsp:scriptlet>
+			<![CDATA[ if (value != null && !"".equals(value.trim())) { ]]>
+		</jsp:scriptlet>
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+				<input type="text" onchange="#{change}" name="#{clientId}-chk"
+					disabled="disabled"		 
+					style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
+			<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+						<input type="text" onchange="#{change}" name="#{clientId}-chk"			
+							value="#{value}" id="#{clientId}-chk" class="#{forceId}-chk"/>			
+			<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+		<jsp:scriptlet>
+			} else {
+		</jsp:scriptlet>	
+			<jsp:scriptlet><![CDATA[ if (disabled != null && disabled ) { ]]></jsp:scriptlet>
+					<input type="text" onchange="#{change}" name="#{clientId}-chk"
+						disabled="disabled"		 
+						style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
+				<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
+							<input type="text" onchange="#{change}" name="#{clientId}-chk"			
+								value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>			
+				<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
+		<jsp:scriptlet>
+			}
+		</jsp:scriptlet>
+			<script type="text/javascript">
+				jQuery(document).ready( function(){
+					jQuery("#wlchk_"+"#{forceId}").on("change",
+								function(e){
+										var hidden = jQuery(this).find("input[type='text']");
+										console.log(hidden)
+										if(jQuery(e.target).attr('checked') == "checked")
+											hidden.val("#{fsv}");
+										else
+											hidden.val("#{ssv}");
+									}
+								);
+				});
+			</script>
+		</label>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	
 </f:root>
