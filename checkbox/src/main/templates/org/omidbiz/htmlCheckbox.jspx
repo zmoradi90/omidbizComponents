@@ -243,7 +243,7 @@
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[  if (wl != null && wl &&(single == null || single == false) ) { ]]></jsp:scriptlet>
 		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox"
-			checked="checked" />
+			/>
 			<div class="slider round"></div>
 		<jsp:scriptlet>
 			<![CDATA[ if (value != null && !"".equals(value.trim())) { ]]>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputDurationPicker</name>
+		<family>org.omidbiz.InputDurationPicker</family>
+		<classname>org.omidbiz.component.html.HtmlInputDurationPicker</classname>
+		<superclass>org.omidbiz.component.UIInputDurationPicker</superclass>
+		<description>
+			<![CDATA[
+    		]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputDurationPickerRenderer</name>
+			<template>org/omidbiz/htmlInputDurationPicker.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputDurationPicker</name>
+			<classname>org.omidbiz.taglib.InputDurationPickerTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>forceId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				can be set if you need to use a specific id
+			</description>
+		</property>
+		<property>
+			<name>width</name>
+			<classname>java.lang.Integer</classname>
+			<description>
+				component width include text box , icons ect
+			</description>
+			<defaultvalue>130</defaultvalue>
+		</property>
+		<property>
+			<name>mode</name>
+			<classname>java.lang.Integer</classname>
+			<description>
+				with this component you can input duration as time, date or both. mode parameter can help you to switch between these modes
+			</description>
+		</property>		
+
+		<property>
+			<name>minuteSummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set minute indicator in result textbox
+			</description>
+			<defaultvalue>"m"</defaultvalue>
+		</property>
+		<property>
+			<name>minuteCaption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set minute lable in popup textbox
+			</description>
+		</property>		
+		<property>
+			<name>hourSummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set hour indicator in result textbox
+			</description>
+			<defaultvalue>"h"</defaultvalue>
+		</property>
+		<property>
+			<name>hourCaption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set hour lable in popup textbox
+			</description>
+		</property>
+		<property>
+			<name>hourPerDay</name>
+			<classname>java.lang.String</classname>
+			<description>
+				set hour per day the default value is 9
+			</description>
+			<defaultvalue>"9"</defaultvalue>
+		</property>			
+		<property>
+			<name>daySummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set day indicator in result textbox
+			</description>
+			<defaultvalue>"d"</defaultvalue>
+		</property>
+		<property>
+			<name>dayCaption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set day lable in popup textbox
+			</description>
+		</property>
+		<property>
+			<name>dayPerMonth</name>
+			<classname>java.lang.String</classname>
+			<description>
+				set day per month the default value is 30
+			</description>
+			<defaultvalue>"30"</defaultvalue>
+		</property>				
+		<property>
+			<name>monthSummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set month indicator in result textbox
+			</description>
+			<defaultvalue>"M"</defaultvalue>
+		</property>
+		<property>
+			<name>monthCaption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set month lable in popup textbox
+			</description>
+		</property>	
+		<property>
+			<name>monthPerYear</name>
+			<classname>java.lang.String</classname>
+			<description>
+				set month per year the default value is 12
+			</description>
+			<defaultvalue>"12"</defaultvalue>
+		</property>			
+		<property>
+			<name>yearSummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set year indicator in result textbox
+			</description>
+			<defaultvalue>"y"</defaultvalue>
+		</property>
+		<property>
+			<name>yearCaption</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set year lable in popup textbox
+			</description>
+		</property>	
+		<property>
+			<name>outPutHiddenId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set input hidden id which is binded to the backend 
+			</description>
+			<required>true</required>
+		</property>	
+		<property>
+			<name>duplicateErrorMessage</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this property set error message when user write two value for year/month/ ... 
+			</description>
+		</property>	
+		<property>
+			<name>inputFeildErrorClass</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can set error class style for related inputs
+			</description>
+		</property>	
+		<property>
+			<name>durationInputKeyPressCallBackFunc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can set error class style for related inputs
+			</description>
+		</property>	
+		<property>
+			<name>durationInputKeyPressCallBackFunc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can set error class style for related inputs
+			</description>
+		</property>	
+
+		
+	</component>
+</components>

@@ -131,7 +131,7 @@
     <module>inputTaggy</module>
     <module>chart</module>
     <module>autoSaveTextArea</module>
-
+    <module>inputDurationPicker</module>
 
   </modules>
   <build>

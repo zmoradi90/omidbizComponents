@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
+	xmlns:c=" http://java.sun.com/jsf/core"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.InputDurationPickerRenderer"
+	baseclass="org.omidbiz.renderkit.InputDurationPickerRenderBase"
+	component="org.omidbiz.component.UIInputDurationPicker">
+
+	<f:clientid var="clientId" />
+	<h:styles>css/inputDurationPicker.css</h:styles>
+	<h:scripts>script/inputDurationPicker.js</h:scripts>
+	<c:set var="mode" value="#{component.attributes['mode']}"/>
+	<c:set var="minuteSummary" value="#{component.attributes['minuteSummary']}"/>
+	<c:set var="minuteCaption" value="#{component.attributes['minuteCaption']}"/>
+	<c:set var="hourSummary" value="#{component.attributes['hourSummary']}"/>
+	<c:set var="hourCaption" value="#{component.attributes['hourCaption']}"/>
+	<c:set var="daySummary" value="#{component.attributes['daySummary']}"/>
+	<c:set var="dayCaption" value="#{component.attributes['dayCaption']}"/>
+	<c:set var="monthSummary" value="#{component.attributes['monthSummary']}"/>
+	<c:set var="monthCaption" value="#{component.attributes['monthCaption']}"/>
+	<c:set var="yearSummary" value="#{component.attributes['yearSummary']}"/>
+	<c:set var="yearCaption" value="#{component.attributes['yearCaption']}"/>
+	<c:set var="outPutInputId" value="#{component.attributes['outPutInputId']}"/>
+	<c:set var="duplicateErrorMessage" value="#{component.attributes['duplicateErrorMessage']}"/>
+	<c:set var="inputFeildErrorClass" value="#{component.attributes['inputFeildErrorClass']}"/>
+	<c:set var="durationInputKeyPressCallBackFunc" value="#{component.attributes['durationInputKeyPressCallBackFunc']}"/>
+	<c:set var="showPopupCallBackFunc" value="#{component.attributes['showPopupCallBackFunc']}"/>
+
+	
+	<script type="text/javascript">
+		jQuery(document).ready(
+						function() {
+							function qutipImp(id, insidePopup) {
+								jQuery(id)
+										.qtip(
+												{
+													prerender : true,
+													show : {
+														target : jQuery(id),
+														event : "click"
+													},
+													hide : {
+														event : "unfocus"
+													},
+													position : {
+														viewport : jQuery(window),
+														my : "top center",
+														at : "bottom center",
+														target : jQuery(id)
+													},
+													content : {
+														text : insidePopup
+													},
+													style : {
+														classes : 'qtip qtip-light qtip-shadow input-mutlti-select-list-menu'
+													}
+												});
+							}
+							jQuery('#'+'#{this:getJQueryId(context, component)}').durationPicker({
+				                id:'#'+'#{this:getJQueryId(context, component)}',
+				                mode:'#{mode}',
+				                minuteSummary:'#{minuteSummary}',
+				                minuteCaption:'#{minuteCaption}',
+				                hourSummary:'#{hourSummary}',
+				                hourCaption:'#{hourCaption}',
+				                daySummary:'#{daySummary}',
+				                dayCaption:'#{dayCaption}',
+				                monthSummary:'#{monthSummary}',
+				                monthCaption:'#{monthCaption}',
+				                yearCaption:'#{yearCaption}',
+				                yearSummary:'#{yearSummary}',
+				                outPutInputId:'#{outPutInputId}',
+				                doplicateErrorMessage:'#{duplicateErrorMessage}',
+				                inputFeildErrorClass:'#{inputFeildErrorClass}',
+				                durationInputKeyPressCallBackFunc:'#{durationInputKeyPressCallBackFunc}',
+				                showPopupCallBackFunc:'qutipImp'
+							});
+			});
+	</script>
+	<f:call name="initializeMask">
+
+		<vcp:body>
+
+		</vcp:body>
+
+	</f:call>
+
+</f:root>

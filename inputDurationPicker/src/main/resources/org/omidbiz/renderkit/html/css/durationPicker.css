@@ -1,0 +1,55 @@
+.duration-picker-popup {
+    height: 150px;
+    width: 300px;
+    padding: 10px;
+    box-sizing:border-box;
+}
+.duration-picker-popup .label{
+	text-align: center;
+}
+
+
+.duration-picker-popup input {
+    font-family: BKoodakBold;
+    font-size: 12pt !important;
+    height: 38px;
+    text-align: center;
+    width: 100%;
+}
+.duration-picker-popup .input-error{
+	box-shadow:0px 0px 0px 3px red;	
+}
+.duration-picker {
+	position: relative;
+	clear: both;
+	border: 1px solid #CCC;
+}
+.duration-picker .type-indicator {
+	background-color: #FFF;
+	height: 23px;
+	position: absolute;
+	top: 0px;
+	width: 26px;
+	right: 0px;
+}
+.duration-picker .duration-icon{
+    margin-left: 4px;
+    margin-top: 4px;
+    width: 15px;
+}
+.duration-picker input[type="text"] {
+    border: 0 none;
+    direction: rtl;
+    margin-right: 26px;
+    padding-left: 1em;
+}
+.duration-picker input[type="text"]:FOCUS {
+	outline-width: 0px;
+	box-shadow: none !important;
+}
+
+.duration-picker .measure {
+    color: #ccc;
+    position: absolute;
+    top: 0;
+}

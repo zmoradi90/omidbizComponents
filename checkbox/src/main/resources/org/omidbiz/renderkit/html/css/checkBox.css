@@ -84,13 +84,15 @@ pre {
     display: block;
 }
 
+
 .wl-switch {
     display: inline-block;
-    height: 22px;
+    float: right;
+    height: 15px;
     position: relative;
-    width: 39px;
+    width: 34px;
+    margin: 9px;
 }
-
 .wl-switch input {display:none;}
 
 .slider {
@@ -106,15 +108,14 @@ pre {
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 15px;
-  width: 15px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+   background-color: white;
+   bottom: 4px;
+   content: "";
+   height: 8px;
+   left: 4px;
+   position: absolute;
+   transition: all 0.4s ease 0s;
+   width: 11px;
 }
 
 input:checked + .slider {
