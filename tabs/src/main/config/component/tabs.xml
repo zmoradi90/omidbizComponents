@@ -48,6 +48,14 @@
             </description>
             <defaultvalue>"100%"</defaultvalue>
         </property>
+         <property>
+            <name>verticalTabs</name>
+            <classname>java.lang.Boolean</classname>
+            <description>
+                
+            </description>
+            <defaultvalue>false</defaultvalue>
+        </property>
         
         
        
@@ -155,6 +163,12 @@
             </description>
             <defaultvalue>false</defaultvalue>
         </property>
-        
+         <property>
+            <name>tabIconClass</name>
+            <classname>java.lang.String</classname>
+            <description>
+                assign icon class to each tab
+            </description>
+        </property>
     </component>
 </components>

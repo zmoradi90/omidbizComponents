@@ -51,7 +51,12 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         StringBuilder js = new StringBuilder("jQuery(document).ready(function(){");
         UITabs tab = ((UITabs) component);
 
+        Boolean verticalTabs = (Boolean) component.getAttributes().get("verticalTabs");
         String jQueryClientId = clientId.replace(":", "\\\\:");
+        if(verticalTabs != false)
+        {
+            js.append("jQuery( '#"+jQueryClientId+"' ).tabs().addClass( 'ui-tabs-vertical ui-helper-clearfix');jQuery( '#"+jQueryClientId+" li' ).removeClass( 'ui-corner-top' ).addClass( 'ui-corner-left' );");
+        }        
         js.append("jQuery('#").append(jQueryClientId).append("').tabs({");
         String tabCookieName = "selected-tab_" + jQueryClientId;
         if (tab.isKeepState())
@@ -69,15 +74,18 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
         writer.startElement("div", null);
         String scrollWidth = (String) tab.getAttributes().get("scrollWidth");
         getUtils().writeAttribute(writer, "style", String.format("width:%s;", scrollWidth));
-        getUtils().writeAttribute(writer, "class", "tab-nav-window");
-
-        writer.startElement("div", null);
-        getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-next-btn");
-        writer.endElement("div");
-
-        writer.startElement("div", null);
-        getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-prev-btn");
-        writer.endElement("div");
+        if(verticalTabs == false)
+        {
+            getUtils().writeAttribute(writer, "class", "tab-nav-window");
+            
+            writer.startElement("div", null);
+            getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-next-btn");
+            writer.endElement("div");
+            
+            writer.startElement("div", null);
+            getUtils().writeAttribute(writer, "class", "tab-nav-btn tab-nav-prev-btn");
+            writer.endElement("div");
+        }
         //
         Iterator childIterator = component.getChildren().iterator();
         writer.startElement("ul", component);
@@ -94,6 +102,15 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                 if (tp.isRendered())
                 {
                     writer.startElement("li", null);
+                    String tabIconClass = null;
+                    if(tp.getAttributes().get("tabIconClass") !=null)
+                    {
+                        tabIconClass =  (String) tp.getAttributes().get("tabIconClass");
+                        writer.startElement("i", null);
+                        getUtils().writeAttribute(writer, "class", tp.getAttributes().get("tabIconClass"));
+                        writer.endElement("i");
+                        
+                    }
                     if (labelClass != null)
                     {
                         getUtils().writeAttribute(writer, "class", labelClass);
