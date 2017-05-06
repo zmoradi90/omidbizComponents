@@ -30,7 +30,7 @@
             };
             var notEmptyOption={};
             $.each(option,function(i,val){
-            	if(val!=null){
+            	if(val!=null && val!=""){
             		notEmptyOption[i]=val;
             	}
             });

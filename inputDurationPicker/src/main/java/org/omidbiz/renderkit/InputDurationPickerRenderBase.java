@@ -45,11 +45,12 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
 
     public void initializeMask(FacesContext context, UIInputDurationPicker component) throws IOException
     {
-        Object componentId = new Object();
+        
+        Object id = new Object();
         if (component.getAttributes().get("forceId") != null)
-            componentId = (Object) component.getAttributes().get("forceId");
+            id = (Object) component.getAttributes().get("forceId");
         else
-            componentId = component.getClientId(context);
+            id = component.getClientId(context);
 
         
         
@@ -57,12 +58,13 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         
         Integer wrapperWidth = (Integer) component.getAttributes().get("width");
         Integer inputWidth = ((Integer) component.getAttributes().get("width")) - 30;
-        String hiddenId = (String) component.getAttributes().get("outPutHiddenId");
 
         
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
-        getUtils().writeAttribute(writer, "id", componentId);
+        getUtils().writeAttribute(writer, "id",id+"Dp");
+        getUtils().writeAttribute(writer, "class","duration-picker");
+
         getUtils().writeAttribute(writer, "style","width:"+wrapperWidth+";");
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "class","type-indicator");
@@ -78,6 +80,9 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         writer.endElement("div");
             writer.startElement("input", null);
             getUtils().writeAttribute(writer, "type","text");
+            getUtils().writeAttribute(writer, "id",id);
+            getUtils().writeAttribute(writer, "name",id);
+
             getUtils().writeAttribute(writer, "style","width:"+inputWidth+";");
             writer.endElement("input");
             
@@ -168,10 +173,8 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
     }
     public String getJQueryId(FacesContext context, UIInputDurationPicker component)
     {
-
-        return getId(context, component).replace(":", "\\\\:");
+        return ((String) component.getAttributes().get("forceId")).replace(":", "\\\\:");
     }
-
 
     public String getId(FacesContext context, UIInputDurationPicker component)
     {

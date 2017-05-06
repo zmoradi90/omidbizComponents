@@ -145,14 +145,6 @@
 			</description>
 		</property>	
 		<property>
-			<name>outPutHiddenId</name>
-			<classname>java.lang.String</classname>
-			<description>
-				this property set input hidden id which is binded to the backend 
-			</description>
-			<required>true</required>
-		</property>	
-		<property>
 			<name>duplicateErrorMessage</name>
 			<classname>java.lang.String</classname>
 			<description>
