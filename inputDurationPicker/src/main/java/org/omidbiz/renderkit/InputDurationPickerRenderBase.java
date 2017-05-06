@@ -125,10 +125,11 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         ExternalContext external = context.getExternalContext();
         Map requestParams = external.getRequestParameterMap();
         UIInputDurationPicker inputDurationPicker = (UIInputDurationPicker) component;
-        String forceId = (String) inputDurationPicker.getAttributes().get("forceId");
-        String clientId = inputDurationPicker.getClientId(context);
-        if (forceId != null && forceId.length() > 0)
-            clientId = forceId;
+        String clientId;
+        if (component.getAttributes().get("forceId") != null)
+            clientId = (String) component.getAttributes().get("forceId");
+        else
+            clientId = component.getClientId(context);
         String submittedValue = (String) requestParams.get(clientId);
         if (submittedValue != null)
         {
@@ -173,7 +174,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
     }
     public String getJQueryId(FacesContext context, UIInputDurationPicker component)
     {
-        return ((String) component.getAttributes().get("forceId")).replace(":", "\\\\:");
+        return getId(context, component).replace(":", "\\\\:");
     }
 
     public String getId(FacesContext context, UIInputDurationPicker component)
