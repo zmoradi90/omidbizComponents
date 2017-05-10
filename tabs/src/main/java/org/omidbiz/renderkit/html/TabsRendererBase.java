@@ -103,14 +103,6 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                 {
                     writer.startElement("li", null);
                     String tabIconClass = null;
-                    if(tp.getAttributes().get("tabIconClass") !=null)
-                    {
-                        tabIconClass =  (String) tp.getAttributes().get("tabIconClass");
-                        writer.startElement("i", null);
-                        getUtils().writeAttribute(writer, "class", tp.getAttributes().get("tabIconClass"));
-                        writer.endElement("i");
-                        
-                    }
                     if (labelClass != null)
                     {
                         getUtils().writeAttribute(writer, "class", labelClass);
@@ -179,6 +171,14 @@ public class TabsRendererBase extends HeaderResourcesRendererBase
                         writer.endElement("img");
                     }
                     writer.endElement("a");
+                    if(tp.getAttributes().get("tabIconClass") !=null)
+                    {
+                        tabIconClass =  (String) tp.getAttributes().get("tabIconClass");
+                        writer.startElement("span", null);
+                        getUtils().writeAttribute(writer, "class", tp.getAttributes().get("tabIconClass"));
+                        writer.endElement("span");
+                        
+                    }                    
                     writer.endElement("li");
                 }
             }

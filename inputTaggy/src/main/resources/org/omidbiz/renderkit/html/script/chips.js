@@ -182,13 +182,15 @@
                      {
                          $chips.find(".chips-error").html(curr_options.inputDataInvaildError).show();
                      }
+                     $target.val('');
                  }
                  else
                  {
-                     self.splitInputText($target.val(),$chips);
+                     var status = self.splitInputText($target.val(),$chips);
+                     if(status != -1)
+                    	 $target.val('');
                  }
                  //console.log($target.closest(SELS.CHIPS));
-                 $target.val('');
 
              });
             
@@ -211,13 +213,15 @@
                        {
                            $chips.find(".chips-error").html(curr_options.inputDataInvaildError).show();
                        }
+                	   $target.val('');
 
                    }
                    else
                    {
-                       self.splitInputText($target.val(),$chips);
+                       var status = self.splitInputText($target.val(),$chips);
+                       if(status != -1)
+                    	   $target.val('');
                    }
-                   $target.val('');
                    return;
                  }
                 
@@ -276,7 +280,7 @@
                 }
                 curr_options.onStopLoadFunc();
             }
-            else
+            else  if(splitedText.length>500 && splitedText.length<800)
             {
                 curr_options.onStartLoadFunc();
                 function test(){
@@ -295,6 +299,9 @@
                 var interval = setInterval(test,0.000001);           
                 //console.log("split text in loop: "+ splitedText[i]);
                    
+            }
+            else{
+            	return -1;
             }
         };
         //customize by shk split text function when we have to use id and label together
@@ -316,7 +323,7 @@
                 }
                 curr_options.onStopLoadFunc();
             }
-            else
+            else if(splitedText.length>500 && splitedText.length<800)
             {
                 curr_options.onStartLoadFunc();
                 function test(){
