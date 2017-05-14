@@ -60,15 +60,15 @@
 	    	    d.setTime(d.getTime() + (30*24*60*60*1000));
 	    	    var expires = "expires=" + d.toGMTString();
 	    	    if(options.cookieKeyParameter != "")
-	    	    	document.cookie = "autoSaveTextArea_"+$CurrentId+"_"+options.cookieKeyParameter+"="+textAreaVal+"; "+expires;
+	    	    	document.cookie = "autoSaveTextArea"+"_"+options.cookieKeyParameter+"="+textAreaVal+"; "+expires;
 	    	    else
-	    	    	document.cookie = "autoSaveTextArea_"+$CurrentId+"="+textAreaVal+"; "+expires;
+	    	    	document.cookie = "autoSaveTextArea"+"="+textAreaVal+"; "+expires;
 	    	}
 	    	function readCookies(){
 	    	    if(options.cookieKeyParameter != "")
-	    	    	var name = "autoSaveTextArea_"+$CurrentId+"_"+options.cookieKeyParameter + "=";
+	    	    	var name = "autoSaveTextArea"+"_"+options.cookieKeyParameter + "=";
 	    	    else
-	    	    	var name = "autoSaveTextArea_"+$CurrentId+ "=";
+	    	    	var name = "autoSaveTextArea=";
 	    	    var ca = document.cookie.split(';');
 	    	    for(var i=0; i<ca.length; i++) {
 	    	        var c = ca[i];
@@ -114,16 +114,13 @@
 	    		{
 	    			var splitEnterInputTextArea = textAreaVal.split("\n");
 	    			var resultString = "";
-	    			console.log("splitEnterInputTextArea: "+splitEnterInputTextArea);
 	    			for(var i = 0; i < splitEnterInputTextArea.length ; i++)
 	    			{
 	    				if(i != textAreaVal.length-1)
 	    					resultString += splitEnterInputTextArea[i]+encodeURIComponent("\n");
 	    				else
 	    					resultString += splitEnterInputTextArea[i];
-	    				console.log("resultString1: "+resultString);
 	    			}
-	    			console.log("resultString2: "+resultString);
 	    			return resultString;
 	    		}
 	    		else 

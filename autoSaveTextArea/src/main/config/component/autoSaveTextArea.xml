@@ -55,7 +55,7 @@
 			<name>cookieKey</name>
 			<classname>java.lang.String</classname>
 			<description>
-				this is a special keyValue for form entities like projectId 
+				this is a special keyValue for form entities like projectId important note: this attribute must be unique in one page
 			</description>
 		</property>	
 		<property>
