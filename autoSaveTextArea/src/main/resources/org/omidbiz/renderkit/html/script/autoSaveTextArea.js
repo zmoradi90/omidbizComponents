@@ -59,16 +59,10 @@
 	    	    var d = new Date();
 	    	    d.setTime(d.getTime() + (30*24*60*60*1000));
 	    	    var expires = "expires=" + d.toGMTString();
-	    	    if(options.cookieKeyParameter != "")
-	    	    	document.cookie = "autoSaveTextArea"+"_"+options.cookieKeyParameter+"="+textAreaVal+"; "+expires;
-	    	    else
-	    	    	document.cookie = "autoSaveTextArea"+"="+textAreaVal+"; "+expires;
+    	    	document.cookie = "autoSaveTextArea"+"_"+options.cookieKeyParameter+"="+textAreaVal+"; "+expires;
 	    	}
 	    	function readCookies(){
-	    	    if(options.cookieKeyParameter != "")
-	    	    	var name = "autoSaveTextArea"+"_"+options.cookieKeyParameter + "=";
-	    	    else
-	    	    	var name = "autoSaveTextArea=";
+    	    	var name = "autoSaveTextArea"+"_"+options.cookieKeyParameter + "=";
 	    	    var ca = document.cookie.split(';');
 	    	    for(var i=0; i<ca.length; i++) {
 	    	        var c = ca[i];

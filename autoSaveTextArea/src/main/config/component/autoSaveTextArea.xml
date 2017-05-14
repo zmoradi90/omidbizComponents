@@ -57,6 +57,7 @@
 			<description>
 				this is a special keyValue for form entities like projectId important note: this attribute must be unique in one page
 			</description>
+			<required>true</required>
 		</property>	
 		<property>
 			<name>intervalTimer</name>
