@@ -59,10 +59,10 @@
 	    	    var d = new Date();
 	    	    d.setTime(d.getTime() + (30*24*60*60*1000));
 	    	    var expires = "expires=" + d.toGMTString();
-    	    	document.cookie = "autoSaveTextArea"+"_"+options.cookieKeyParameter+"="+textAreaVal+"; "+expires;
+    	    	document.cookie = "autoSaveTextArea"+"_"+options.cookieKeyParameter+":="+textAreaVal+"; "+expires;
 	    	}
 	    	function readCookies(){
-    	    	var name = "autoSaveTextArea"+"_"+options.cookieKeyParameter + "=";
+    	    	var name = "autoSaveTextArea"+"_"+options.cookieKeyParameter + ":=";
 	    	    var ca = document.cookie.split(';');
 	    	    for(var i=0; i<ca.length; i++) {
 	    	        var c = ca[i];
