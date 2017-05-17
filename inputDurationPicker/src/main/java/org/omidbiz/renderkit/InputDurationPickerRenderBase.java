@@ -56,9 +56,9 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         
 
         
-        Integer wrapperWidth = (Integer) component.getAttributes().get("width");
-        Integer inputWidth = ((Integer) component.getAttributes().get("width")) - 30;
-
+        Integer wrapperWidth = Integer.parseInt((String) component.getAttributes().get("width"));
+        Integer inputWidth = (Integer.parseInt((String) component.getAttributes().get("width"))) - 30;
+        Integer inputHeight = Integer.parseInt((String) component.getAttributes().get("height"));
         
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
@@ -82,8 +82,9 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "type","text");
             getUtils().writeAttribute(writer, "id",id);
             getUtils().writeAttribute(writer, "name",id);
+            getUtils().writeAttribute(writer, "class","duration-picker-input");
+            getUtils().writeAttribute(writer, "style","width:"+inputWidth+"px;height:"+inputHeight+"px;");
 
-            getUtils().writeAttribute(writer, "style","width:"+inputWidth+";");
             writer.endElement("input");
             
             

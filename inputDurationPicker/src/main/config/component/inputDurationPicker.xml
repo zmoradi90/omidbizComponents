@@ -31,12 +31,20 @@
 		</property>
 		<property>
 			<name>width</name>
-			<classname>java.lang.Integer</classname>
+			<classname>java.lang.String</classname>
 			<description>
-				component width include text box , icons ect
+				component width include text box , icons etc . you must not set it's measure (px , em, ... ) here defaul measure is px
 			</description>
-			<defaultvalue>130</defaultvalue>
+			<defaultvalue>"130"</defaultvalue>
 		</property>
+		<property>
+			<name>height</name>
+			<classname>java.lang.String</classname>
+			<description>
+				component height include textbox only you must not set it's measure (px , em, ... ) here defaul measure is px
+			</description>
+			<defaultvalue>"23"</defaultvalue>
+		</property>		
 		<property>
 			<name>mode</name>
 			<classname>java.lang.Integer</classname>
