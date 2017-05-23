@@ -508,7 +508,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
  *
  * http://docs.jquery.com/UI/Datepicker#theming
  */
-.ui-datepicker { width: 17em;display: none; z-index: 9999999 !important;box-shadow: 0 0 15px #aaa;}
+.ui-datepicker { width: 17em;display: none; z-index: 9999999 !important;box-shadow: 0 0 15px #aaa; background-color:#FFF;}
 .ui-datepicker .ui-datepicker-header { position:relative; padding:.4em 0; background-color: #2988c9;}
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position:absolute; top: 2px; width: 1.8em; height: 1.8em; }
 .ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 1px; }
