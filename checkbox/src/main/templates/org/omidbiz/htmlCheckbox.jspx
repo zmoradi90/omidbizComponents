@@ -28,6 +28,7 @@
 	<c:set var="ssv" value="#{component.attributes['secondSwitchVal']}"/>
 	<c:set var="single" value="#{component.attributes['single']}"/>
 	<c:set var="withoutLabel" value="#{component.attributes['withoutLabel']}"/>
+	<c:set var="onclickcheckbox" value="#{component.attributes['onclickcheckbox']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -242,7 +243,7 @@
 	</script>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[  if (wl != null && wl &&(single == null || single == false) ) { ]]></jsp:scriptlet>
-		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox"
+		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox" onclick="#{onclickcheckbox}"
 			/>
 			<div class="slider round"></div>
 		<jsp:scriptlet>

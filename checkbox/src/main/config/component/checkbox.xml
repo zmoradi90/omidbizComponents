@@ -79,7 +79,11 @@
 			<name>firstSwitchVal</name>
 			<classname>java.lang.String</classname>
 			<defaultvalue>"Y"</defaultvalue>			
-		</property>		
+		</property>	
+		<property>
+			<name>onclickcheckbox</name>
+			<classname>java.lang.String</classname>
+		</property>				
 		<property>
 			<name>secondSwitchVal</name>
 			<classname>java.lang.String</classname>
