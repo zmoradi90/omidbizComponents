@@ -29,6 +29,7 @@
 	<c:set var="single" value="#{component.attributes['single']}"/>
 	<c:set var="withoutLabel" value="#{component.attributes['withoutLabel']}"/>
 	<c:set var="onclickcheckbox" value="#{component.attributes['onclickcheckbox']}"/>
+	<c:set var="checked" value="#{component.attributes['checked']}"/>
 	
 	<jsp:scriptlet>
 <![CDATA[ 
@@ -243,7 +244,7 @@
 	</script>
 	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[  if (wl != null && wl &&(single == null || single == false) ) { ]]></jsp:scriptlet>
-		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox" onclick="#{onclickcheckbox}"
+		<label id="wlchk_#{forceId}" class="wl-switch"> <input type="checkbox" checked="#{checked}" onclick="#{onclickcheckbox}"
 			/>
 			<div class="slider round"></div>
 		<jsp:scriptlet>
