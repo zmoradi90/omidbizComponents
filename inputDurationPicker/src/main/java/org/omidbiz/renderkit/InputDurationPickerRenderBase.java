@@ -47,6 +47,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
     {
         
         Object id = new Object();
+        BigDecimal value =   (BigDecimal) component.getAttributes().get("value");
         if (component.getAttributes().get("forceId") != null)
             id = (Object) component.getAttributes().get("forceId");
         else
@@ -81,6 +82,8 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             writer.startElement("input", null);
             getUtils().writeAttribute(writer, "type","text");
             getUtils().writeAttribute(writer, "id",id);
+            if(value != null)
+                getUtils().writeAttribute(writer, "value",value+"h");
             getUtils().writeAttribute(writer, "name",id);
             getUtils().writeAttribute(writer, "class","duration-picker-input");
             getUtils().writeAttribute(writer, "style","width:"+inputWidth+"px;height:"+inputHeight+"px;");
@@ -94,6 +97,12 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
 
         writer.endElement("div");
 
+    }
+
+    private Map<String, Object> getAttributes()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -141,7 +150,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
 
     public BigDecimal decodeTime(FacesContext context, UIInputDurationPicker component,String enCodeTime){
         
-        BigDecimal resultTime = new BigDecimal(1);
+        BigDecimal resultTime = BigDecimal.ZERO;
         BigDecimal hourPerDay = new BigDecimal((String) component.getAttributes().get("hourPerDay"));
         BigDecimal dayPerMonth = new BigDecimal((String)component.getAttributes().get("dayPerMonth"));
         BigDecimal monthPerYear = new BigDecimal((String) component.getAttributes().get("monthPerYear"));
@@ -167,6 +176,10 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             if(matcher.group(3).equals(d))
             {
                 resultTime =  resultTime.add((new BigDecimal(matcher.group(1)).multiply(hourPerDay)));
+            }
+            if(matcher.group(3).equals(h))
+            {
+                resultTime =  resultTime.add((new BigDecimal(matcher.group(1))));
             }
             
         }   

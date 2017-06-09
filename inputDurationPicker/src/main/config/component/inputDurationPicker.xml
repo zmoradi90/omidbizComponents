@@ -30,6 +30,14 @@
 			</description>
 		</property>
 		<property>
+			<name>value</name>
+			<classname>java.math.BigDecimal</classname>
+			<description>
+				binding value bigdecimal
+			</description>
+			<required>true</required>
+		</property>		
+		<property>
 			<name>width</name>
 			<classname>java.lang.String</classname>
 			<description>
@@ -87,9 +95,9 @@
 			<name>hourPerDay</name>
 			<classname>java.lang.String</classname>
 			<description>
-				set hour per day the default value is 9
+				set hour per day the default value is 8
 			</description>
-			<defaultvalue>"9"</defaultvalue>
+			<defaultvalue>"8"</defaultvalue>
 		</property>			
 		<property>
 			<name>daySummary</name>
