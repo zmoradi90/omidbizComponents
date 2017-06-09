@@ -134,7 +134,7 @@
     		var hour = $("#"+self.popup).find("[type='hour'] input[type='text']");
     		var minute = $("#"+self.popup).find("[type='minute'] input[type='text']");
     		var values = [];
-    		var regex = "(([1-9]+("+options.yearSummary+"|"+options.monthSummary+"|"+options.daySummary+"|"+options.hourSummary+"|"+options.minuteSummary+"){1})){1}";
+    		var regex = "(([0-9]+("+options.yearSummary+"|"+options.monthSummary+"|"+options.daySummary+"|"+options.hourSummary+"|"+options.minuteSummary+"){1})){1}";
     		var str = $(options.outPutInputId).val();
     		var patt = new RegExp(regex,"g");
 
