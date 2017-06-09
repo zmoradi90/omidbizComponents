@@ -150,7 +150,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         String d = (String) component.getAttributes().get("daySummary");
         String M = (String) component.getAttributes().get("monthSummary");
         String y = (String) component.getAttributes().get("yearSummary");
-        Pattern p = Pattern.compile("(([1-9])+)(["+y+"|"+M+
+        Pattern p = Pattern.compile("(([0-9])+)(["+y+"|"+M+
                 "|"+d+"|"+h+"|"+m+
                 "])+", Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(enCodeTime);
