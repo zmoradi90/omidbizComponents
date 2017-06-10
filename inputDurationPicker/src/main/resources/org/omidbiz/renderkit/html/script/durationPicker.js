@@ -51,7 +51,9 @@
         	if(typeof options.showPopupCallBackFunc == "function")
         	{
         		options.showPopupCallBackFunc(options.id,renderForm);
+        		self.setInitalHourValue();
         		self.eventHandler();
+        		$("#"+self.popup).find("[type='day'] input[type='text']").focus();
         	}
         	else
         	{
@@ -105,7 +107,12 @@
     			self.bindDuration();
     		});
     	};
-    	this.bindDuration = function(){
+    	this.setInitalHourValue = function(){
+    		if($(options.outPutInputId).val() != "")
+    			$("#"+self.popup).find("[type='hour'] input[type='text']").val($(options.outPutInputId).val().split('h')[0]);
+    		console.log($("#"+self.popup).find("[type='hour'] input[type='text']"));
+    	};
+    	this.bindDuration = function(){ // set value dialog textboxes  to form textbox 
     		self.removeFieldError($("#"+self.popup).find("input[type='text']"));
     		var year = $("#"+self.popup).find("[type='year'] input[type='text']");
     		var month = $("#"+self.popup).find("[type='month'] input[type='text']");
@@ -126,7 +133,7 @@
 			$(options.outPutInputId).val(result);
 
     	};
-    	this.retriveDuration = function(){
+    	this.retriveDuration = function(){// set value from form textbox to dialog textboxes
     		self.removeFieldError($("#"+self.popup).find("input[type='text']"));
     		var year = $("#"+self.popup).find("[type='year'] input[type='text']");
     		var month = $("#"+self.popup).find("[type='month'] input[type='text']");

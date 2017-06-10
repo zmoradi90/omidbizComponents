@@ -36,6 +36,14 @@
 				binding value bigdecimal
 			</description>
 			<required>true</required>
+		</property>	
+		<property>
+			<name>valueDouble</name>
+			<classname>java.lang.Double</classname>
+			<description>
+				binding value double
+			</description>
+			<required>true</required>
 		</property>		
 		<property>
 			<name>width</name>

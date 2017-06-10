@@ -25,12 +25,12 @@
 	border: 1px solid #CCC;
 }
 .duration-picker .type-indicator {
-	background-color: #FFF;
-	height: 23px;
-	position: absolute;
-	top: 0px;
-	width: 26px;
-	right: 0px;
+    background-color: #fff;
+    height: 23px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 26px
 }
 .duration-picker .duration-icon{
     margin-left: 4px;
@@ -40,8 +40,8 @@
 .duration-picker input[type="text"] {
     border: 0 none;
     direction: rtl;
-    margin-right: 26px;
-    padding-left: 1em;
+    margin-left: 26px;
+    padding-right: 1em;
 }
 .duration-picker input[type="text"]:FOCUS {
 	outline-width: 0px;
