@@ -266,7 +266,7 @@
 						disabled="disabled"		 
 						style="display: none;" value="#{fsv}" id="#{clientId}-chk" class="schk-hidden"/>
 				<jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-							<input type="text" onchange="#{change}" name="#{clientId}-chk"			
+							<input type="text" onchange="#{change}" name="#{clientId}-chk" style="display: none;"			
 								value="#{fsv}" id="#{clientId}-chk" class="#{forceId}-chk"/>			
 				<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>	
 		<jsp:scriptlet>
