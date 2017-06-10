@@ -496,9 +496,11 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-tabs-vertical .ui-tabs-nav li {float:right; border-color: #CCC; clear: left; width: 100%; border-bottom-width: 1px !important; border-left-width: 0 !important; margin: 0 -1px .2em 0;    background-color: #FFF; }
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel{ width: 88%;}
 @media only screen and (min-width: 1280px) {.ui-tabs-vertical .ui-tabs-panel{ width: 90%;}}
-@media only screen and (min-width: 1100px) {.ui-tabs-vertical .ui-tabs-panel{ width: 87%;}}
-@media only screen and (max-width: 993px) {.ui-tabs-vertical .ui-tabs-panel{ width: 85%;}}
+@media only screen and (min-width: 1100px) {.ui-tabs-vertical .ui-tabs-panel{ width: 88%;}}
+@media only screen and (min-width: 1030px) {.ui-tabs-vertical .ui-tabs-panel{ width: 87%;}}
+@media only screen and (max-width: 1029px) {.ui-tabs-vertical .ui-tabs-panel{ width: 85%;}}
 .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right;border:1px solid #CCC;}
 .ui-tabs-vertical .ui-state-active {width:105% !important;position: relative;}
 .ui-tabs-vertical .ui-widget-header{border-bottom:none!important; }
