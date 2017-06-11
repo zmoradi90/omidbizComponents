@@ -110,7 +110,6 @@
     	this.setInitalHourValue = function(){
     		if($(options.outPutInputId).val() != "")
     			$("#"+self.popup).find("[type='hour'] input[type='text']").val($(options.outPutInputId).val().split('h')[0]);
-    		console.log($("#"+self.popup).find("[type='hour'] input[type='text']"));
     	};
     	this.bindDuration = function(){ // set value dialog textboxes  to form textbox 
     		self.removeFieldError($("#"+self.popup).find("input[type='text']"));

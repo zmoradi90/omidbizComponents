@@ -31,19 +31,17 @@
 		</property>
 		<property>
 			<name>value</name>
-			<classname>java.math.BigDecimal</classname>
+			<classname>java.lang.Object</classname>
 			<description>
-				binding value bigdecimal
+				binding value can be BigDecimal or Double
 			</description>
-			<required>true</required>
 		</property>	
 		<property>
-			<name>valueDouble</name>
-			<classname>java.lang.Double</classname>
+			<name>valueType</name>
+			<classname>java.lang.String</classname>
 			<description>
-				binding value double
+				type of binding value can be BigDecimal or Double must be sync with value type
 			</description>
-			<required>true</required>
 		</property>		
 		<property>
 			<name>width</name>
