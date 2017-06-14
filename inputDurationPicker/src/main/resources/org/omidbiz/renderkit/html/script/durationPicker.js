@@ -1,17 +1,16 @@
 (function ($) {
-    $.fn.durationPicker = function(option) {
-    	this.modeEnum = {
+    $.durationPicker = function(option) {
+    	var modeEnum = {
     			both : "both",
     			date : "date",
     			time : "time"
     	}
-    	var self = this;
-    	var $el = $(this);
+
 
         var defaults = {
                 id:'#dp',
                 applayButtonCaption:'apply',
-                mode:self.modeEnum.both,
+                mode:modeEnum.both,
                 hourSummary:'h',
                 hourCaption:'hour',
                 minuteSummary:'m',
@@ -35,48 +34,42 @@
             	}
             });
 	        var options = $.extend({},defaults, notEmptyOption);
-	    	this.resutl=0;
-	    	this.importantName = {
+	    	var resutl=0;
+	    	var importantName = {
 	    			popupPostNameId : "Popup"
 	    	}
-	    	this.popup = options.id.split("#").last()+this.importantName.popupPostNameId;
-	    	this.timeConverter = {
-                	year : 12,
-                	month : 30,	    			
-                	day : 24,
-                	hour :60
-            }
-        this.init = function(){
-        	var renderForm = self.renderInsidePopup();
+	    	var popup = options.id.split("#").last()+importantName.popupPostNameId;
+        var init = function(){
+        	var renderForm = renderInsidePopup();
         	if(typeof options.showPopupCallBackFunc == "function")
         	{
         		options.showPopupCallBackFunc(options.id,renderForm);
-        		self.setInitalHourValue();
-        		self.eventHandler();
-        		$("#"+self.popup).find("[type='day'] input[type='text']").focus();
+        		setInitalValue();
+        		eventHandler();
+        		$("#"+popup).find("[type='day'] input[type='text']").focus();
         	}
         	else
         	{
         		console.error("Duration Picker: use a well formed popup for this plugin!")
         	}
         };
-    	this.renderInsidePopup = function(){
-    		var windowPicker = jQuery(self.renderWrapperPopup());
-    		if(self.modeEnum[options.mode]!= "undefined")
+    	var renderInsidePopup = function(){
+    		var windowPicker = jQuery(renderWrapperPopup());
+    		if(modeEnum[options.mode]!= "undefined")
     			{
-	    			if(options.mode == self.modeEnum.date)
+	    			if(options.mode == modeEnum.date)
 	    			{
-	    				windowPicker.append(self.renderDateDuration());
+	    				windowPicker.append(renderDateDuration());
 	    			}
-	    			else if (options.mode == self.modeEnum.time)
+	    			else if (options.mode == modeEnum.time)
 	    			{
-	    				windowPicker.append(self.renderTimeDuration());
+	    				windowPicker.append(renderTimeDuration());
 	    			}
 	    			else 
 	    			{
-	    				windowPicker.append(self.renderDateDuration());
-	    				windowPicker.append(self.renderTimeDuration());
-	    				windowPicker.append(self.renderLegend());
+	    				windowPicker.append(renderDateDuration());
+	    				windowPicker.append(renderTimeDuration());
+	    				windowPicker.append(renderLegend());
 	    			}
     			}
     		else
@@ -88,36 +81,36 @@
     	};
     	
  //=============================== Event Handler ===========================///
-    	this.eventHandler = function(){
-    		var allInputs = $("#"+self.popup).find("input[type='text']");
+    	var eventHandler = function(){
+    		var allInputs = $("#"+popup).find("input[type='text']");
     		allInputs.on("keyup",function(e){
-    			if(self.inputDurationNumberOnly(e),"")
+    			if(inputDurationNumberOnly(e),"")
     				return;
-    			if(typeof self.durationInputKeyPressCallBackFunc == "function")
-    				 self.durationInputKeyPressCallBackFunc(e);
-    			self.bindDuration();
+    			if(typeof durationInputKeyPressCallBackFunc == "function")
+    				 durationInputKeyPressCallBackFunc(e);
+    			bindDuration();
     		}); 
     		allInputs.on("keydown",function(e){
-    			self.inputDurationNumberOnly(e,"keydown");
+    			inputDurationNumberOnly(e,"keydown");
     		}); 
     		$(options.outPutInputId).on("keyup",function(){
-    			self.retriveDuration();
+    			retriveDuration();
     		});
     		$(options.outPutInputId).on("blur",function(){
-    			self.bindDuration();
+    			bindDuration();
     		});
     	};
-    	this.setInitalHourValue = function(){
+    	var setInitalValue = function(){
     		if($(options.outPutInputId).val() != "")
-    			$("#"+self.popup).find("[type='hour'] input[type='text']").val($(options.outPutInputId).val().split('h')[0]);
+    			retriveDuration();
     	};
-    	this.bindDuration = function(){ // set value dialog textboxes  to form textbox 
-    		self.removeFieldError($("#"+self.popup).find("input[type='text']"));
-    		var year = $("#"+self.popup).find("[type='year'] input[type='text']");
-    		var month = $("#"+self.popup).find("[type='month'] input[type='text']");
-    		var day = $("#"+self.popup).find("[type='day'] input[type='text']");
-    		var hour = $("#"+self.popup).find("[type='hour'] input[type='text']");
-    		var minute = $("#"+self.popup).find("[type='minute'] input[type='text']");
+    	var bindDuration = function(){ // set value dialog textboxes  to form textbox 
+    		removeFieldError($("#"+popup).find("input[type='text']"));
+    		var year = $("#"+popup).find("[type='year'] input[type='text']");
+    		var month = $("#"+popup).find("[type='month'] input[type='text']");
+    		var day = $("#"+popup).find("[type='day'] input[type='text']");
+    		var hour = $("#"+popup).find("[type='hour'] input[type='text']");
+    		var minute = $("#"+popup).find("[type='minute'] input[type='text']");
     		var result="";
 			if(year.val()!="" && year.val()!=undefined)
 				result=year.val()+options.yearSummary;
@@ -132,13 +125,13 @@
 			$(options.outPutInputId).val(result);
 
     	};
-    	this.retriveDuration = function(){// set value from form textbox to dialog textboxes
-    		self.removeFieldError($("#"+self.popup).find("input[type='text']"));
-    		var year = $("#"+self.popup).find("[type='year'] input[type='text']");
-    		var month = $("#"+self.popup).find("[type='month'] input[type='text']");
-    		var day = $("#"+self.popup).find("[type='day'] input[type='text']");
-    		var hour = $("#"+self.popup).find("[type='hour'] input[type='text']");
-    		var minute = $("#"+self.popup).find("[type='minute'] input[type='text']");
+    	var retriveDuration = function(){// set value from form textbox to dialog textboxes
+    		removeFieldError($("#"+popup).find("input[type='text']"));
+    		var year = $("#"+popup).find("[type='year'] input[type='text']");
+    		var month = $("#"+popup).find("[type='month'] input[type='text']");
+    		var day = $("#"+popup).find("[type='day'] input[type='text']");
+    		var hour = $("#"+popup).find("[type='hour'] input[type='text']");
+    		var minute = $("#"+popup).find("[type='minute'] input[type='text']");
     		var values = [];
     		var regex = "(([0-9]+("+options.yearSummary+"|"+options.monthSummary+"|"+options.daySummary+"|"+options.hourSummary+"|"+options.minuteSummary+"){1})){1}";
     		var str = $(options.outPutInputId).val();
@@ -146,7 +139,7 @@
 
 			values =  str.match(patt);
 			
-			var result = self.resutlMapCreator(values);
+			var result = resutlMapCreator(values);
 			if(result !=undefined)
 			{
 				
@@ -161,7 +154,7 @@
 				else if (result[options.yearSummary]=="DouplicateError")
 				{
 					alert(options.yearCaption+" "+options.doplicateErrorMessage);
-					self.addFieldError(year);
+					addFieldError(year);
 				}
 				if(result[options.monthSummary]!=undefined && result[options.monthSummary]!="DouplicateError")
 				{
@@ -174,7 +167,7 @@
 				else if (result[options.monthSummary]=="DouplicateError")
 				{
 					alert(options.monthCaption+" "+options.doplicateErrorMessage);
-					self.addFieldError(month);
+					addFieldError(month);
 				}
 				if(result[options.daySummary]!=undefined && result[options.daySummary]!="DouplicateError")
 				{
@@ -187,7 +180,7 @@
 				else if (result[options.daySummary]=="DouplicateError")
 				{
 					alert(options.dayCaption+" "+options.doplicateErrorMessage);
-					self.addFieldError(day);
+					addFieldError(day);
 				}
 				if(result[options.hourSummary]!=undefined && result[options.hourSummary]!="DouplicateError")
 				{
@@ -200,7 +193,7 @@
 				else if (result[options.hourSummary]=="DouplicateError")
 				{
 					alert(options.hourCaption+" "+options.doplicateErrorMessage);
-					self.addFieldError(hour);
+					addFieldError(hour);
 				}
 				if(result[options.minuteSummary]!=undefined && result[options.minuteSummary]!="DouplicateError")
 				{
@@ -213,7 +206,7 @@
 				else if (result[options.minuteSummary]=="DouplicateError")
 				{
 					alert(options.minuteCaption+" "+options.doplicateErrorMessage);
-					self.addFieldError(minute);
+					addFieldError(minute);
 				}
 			}
 			else
@@ -224,7 +217,7 @@
     	};
     	
 //================================================= util function ============================================////    	
-    	this.resutlMapCreator = function(strArray)
+    	var resutlMapCreator = function(strArray)
     	{
     		if(strArray==undefined)
     			return undefined;
@@ -270,7 +263,7 @@
     		return resultMap;
     		
     	};
-    	this.inputDurationNumberOnly =  function(e,mode){
+    	var inputDurationNumberOnly =  function(e,mode){
     		if(mode == "keydown")
     		{
                 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -295,27 +288,27 @@
     		}
     	};
 // ================================================ render function ==========================================////
-    	 this.renderButtonPopup = function(){
+    	 var renderButtonPopup = function(){
     		return applyBtn =  "<div class='row'><div class='col s4 pull-s8 btn-small btn-blue' style='height:20px;cursor:pointer;line-height: 20px;text-align: center;'>apply</div></div>"
     	};
-    	this.renderWrapperPopup = function(){
-    		return wrapper = "<div id='"+self.popup+"' class='duration-picker-popup'></div>";
+    	var renderWrapperPopup = function(){
+    		return wrapper = "<div id='"+popup+"' class='duration-picker-popup'></div>";
     	};
-    	this.renderTimeDuration = function(hourCaption,minuteCapation){
+    	var renderTimeDuration = function(hourCaption,minuteCapation){
     		return timeDuration="<div class='row'><div class='col s4' type='minute'><div class='label'>"+options.minuteCaption+"</div><input type='text' /></div><div class='col s4' type='hour'><div class='label'>"+options.hourCaption+"</div><input type='text' /></div></div>";
     	};
-    	this.renderDateDuration = function(yearCaption,monthCaption,dayCaption){
+    	var renderDateDuration = function(yearCaption,monthCaption,dayCaption){
     		return dateDuration="<div class='row'><div class='col s4' type='day'><div class='label'>"+options.dayCaption+"</div><input type='text' /></div><div class='col s4' type='month'><div class='label'>"+options.monthCaption+"</div><input type='text' /></div><div class='col s4' type='year'><div class='label'>"+options.yearCaption+"</div><input type='text' /></div></div>";
     	};
-    	this.renderLegend = function(){
+    	var renderLegend = function(){
     		return legend="<div class='col s4' type='legend'></div>";
     	};
-    	this.addFieldError = function(feild){
+    	var addFieldError = function(feild){
     		feild.addClass(options.inputFeildErrorClass);
     	};
-    	this.removeFieldError = function(feild){
+    	var removeFieldError = function(feild){
     		feild.removeClass(options.inputFeildErrorClass);
     	};
-        this.init();
+        init();
     }
-}( jQuery ));
+}( jQuery ))

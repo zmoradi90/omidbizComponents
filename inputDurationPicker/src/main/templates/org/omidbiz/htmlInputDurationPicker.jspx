@@ -30,59 +30,71 @@
 
 	
 	<script type="text/javascript">
-	//<![CDATA[
-		jQuery(document).ready(
-						function() {
-							var clientId = "#{this:getJQueryId(context, component)}";
-							var componentId = clientId+"Dp";
-
+    var mode="#{mode}";
+	var minuteSummary="#{minuteSummary}";
+    var minuteCaption="#{minuteCaption}";
+    var hourSummary="#{hourSummary}";
+    var hourCaption="#{hourCaption}";
+    var daySummary="#{daySummary}";
+    var dayCaption="#{dayCaption}";
+    var monthSummary="#{monthSummary}";
+    var monthCaption="#{monthCaption}";
+    var yearCaption="#{yearCaption}";
+    var yearSummary="#{yearSummary}";
+    var doplicateErrorMessage="#{duplicateErrorMessage}";
+    var inputFeildErrorClass="#{inputFeildErrorClass}";
+    var durationInputKeyPressCallBackFunc="#{durationInputKeyPressCallBackFunc}";
+			function durationInit(event,elm){
+						
 							function qutipImp(id,insidePopup)
 							{
-								jQuery(id).qtip(
-													{
-														prerender : true,
-														show : {
-															target : jQuery(id),
-															event : "click"
-														},
-														hide : {
-															event : "unfocus"
-														},
-														position : {
-															viewport : jQuery(window),
-															my : "top center",
-															at : "bottom center",
-															target : jQuery(id)
-														},
-														content : {
-															text : insidePopup
-														},
-														style : {
-															classes : "qtip qtip-light qtip-shadow input-mutlti-select-list-menu"
-														}
-													});
+								
+								var tooltips = jQuery(id).qtip(
+										{
+											show : false,
+											hide : {
+												event : "unfocus"
+											}, 
+											position : {
+												viewport : jQuery(window),
+												my : "top center",
+												at : "bottom center",
+												target : jQuery(id)
+											},
+											content : {
+												text : insidePopup
+											},
+											style : {
+												classes : "qtip qtip-light qtip-shadow input-mutlti-select-list-menu"
+											}
+										});
+								var api = tooltips.qtip('api');
+								api.show(event);
+								
 							}
-							jQuery("#"+componentId).durationPicker({
-								id:"#"+componentId,
-				                mode:"#{mode}",
-				                minuteSummary:"#{minuteSummary}",
-				                minuteCaption:"#{minuteCaption}",
-				                hourSummary:"#{hourSummary}",
-				                hourCaption:"#{hourCaption}",
-				                daySummary:"#{daySummary}",
-				                dayCaption:"#{dayCaption}",
-				                monthSummary:"#{monthSummary}",
-				                monthCaption:"#{monthCaption}",
-				                yearCaption:"#{yearCaption}",
-				                yearSummary:"#{yearSummary}",
-				                outPutInputId:"#"+clientId,
-				                doplicateErrorMessage:"#{duplicateErrorMessage}",
-				                inputFeildErrorClass:"#{inputFeildErrorClass}",
-				                durationInputKeyPressCallBackFunc:"#{durationInputKeyPressCallBackFunc}",
+							var clientId = jQuery(elm).attr("id");
+							var splitedId = clientId.split("Dp")[0];
+							jQuery.durationPicker({
+								id:"#"+clientId,
+				                mode:mode,
+				                minuteSummary:minuteSummary,
+				                minuteCaption:minuteCaption,
+				                hourSummary:hourSummary,
+				                hourCaption:hourCaption,
+				                daySummary:daySummary,
+				                dayCaption:dayCaption,
+				                monthSummary:monthSummary,
+				                monthCaption:monthCaption,
+				                yearCaption:yearCaption,
+				                yearSummary:yearSummary,
+				                outPutInputId:"#"+splitedId,
+				                doplicateErrorMessage:doplicateErrorMessage,
+				                inputFeildErrorClass:inputFeildErrorClass,
+				                durationInputKeyPressCallBackFunc:durationInputKeyPressCallBackFunc,
 				                showPopupCallBackFunc:qutipImp
 							});
-			});
-		//]]>
+
+			}
 	</script>
 	<f:call name="initializeMask">
 
