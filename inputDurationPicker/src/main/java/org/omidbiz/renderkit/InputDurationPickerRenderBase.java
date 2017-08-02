@@ -49,13 +49,19 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         Object id = new Object();
         Object value = null;
         String valueType = (String) component.getAttributes().get("valueType");
-        if("Double".equals(valueType))
+        if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
         {
-            value =   (Double) component.getAttributes().get("value");
+        	Double doubleValue = (Double) component.getAttributes().get("value");
+            value = Math.round(doubleValue);
+        }
+        else if(component.getAttributes().get("value")!=null)
+        {
+            BigDecimal bigDecimalValue = (BigDecimal)component.getAttributes().get("value");
+            value = Math.round(bigDecimalValue.intValue());
         }
         else
         {
-            value = (BigDecimal)component.getAttributes().get("value");
+        	value = 0;
         }
         if (component.getAttributes().get("forceId") != null)
             id = (Object) component.getAttributes().get("forceId");
