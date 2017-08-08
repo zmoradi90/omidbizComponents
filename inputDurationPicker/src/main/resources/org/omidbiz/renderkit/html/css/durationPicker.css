@@ -1,55 +1,94 @@
 .duration-picker-popup {
-    height: 150px;
-    width: 300px;
-    padding: 10px;
-    box-sizing:border-box;
+	height: 150px;
+	width: 300px;
+	padding: 10px;
+	box-sizing: border-box;
 }
-.duration-picker-popup .label{
+
+.duration-picker-popup .label {
 	text-align: center;
 }
 
-
 .duration-picker-popup input {
-    font-family: BKoodakBold;
-    font-size: 12pt !important;
-    height: 38px;
-    text-align: center;
-    width: 100%;
+	font-family: BKoodakBold;
+	font-size: 12pt !important;
+	height: 38px;
+	text-align: center;
+	width: 100%;
 }
-.duration-picker-popup .input-error{
-	box-shadow:0px 0px 0px 3px red;	
+
+.duration-picker-popup .input-error {
+	box-shadow: 0px 0px 0px 3px red;
 }
+
 .duration-picker {
 	position: relative;
 	clear: both;
 	border: 1px solid #CCC;
 }
+
 .duration-picker .type-indicator {
-    background-color: #fff;
-    height: 23px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 26px
+	background-color: #fff;
+	height: 23px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 26px
 }
-.duration-picker .duration-icon{
-    margin-left: 4px;
-    margin-top: 4px;
-    width: 15px;
+
+.duration-picker .duration-icon {
+	margin-left: 4px;
+	margin-top: 4px;
+	width: 15px;
 }
+
 .duration-picker input[type="text"] {
-    border: 0 none;
-    direction: rtl;
-    margin-left: 26px;
-    padding-right: 1em;
+	border: 0 none;
+	direction: rtl;
+	margin-left: 26px;
+	padding-right: 17px;
 }
+
 .duration-picker input[type="text"]:FOCUS {
 	outline-width: 0px;
 	box-shadow: none !important;
 }
 
 .duration-picker .measure {
-    color: #ccc;
-    position: absolute;
-    top: 0;
+	color: #ccc;
+	position: absolute;
+	top: 0;
+}
+
+.negative-toggle-button {
+	background-color: #ddd;
+	border: medium none;
+	box-shadow: 0 6px #aaa;
+	color: #666;
+	cursor: pointer;
+	display: inline-block;
+	font-family: tahoma;
+	font-size: 24px;
+	font-weight: 800;
+	margin: 13px 19px;
+	outline: medium none;
+	padding: 9px 14px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.negative-toggle-button:hover {
+	background-color: #AEF3FC
+}
+
+.negative-toggle-button:active:not ([active='true'] ) {
+	background-color: #AEF3FC;
+	box-shadow: 0 1px #AAA;
+	transform: translateY(4px);
+}
+
+.negative-toggle-button[active='true'] {
+	box-shadow: 0 1px #AAA;
+	margin-top: 16px;
+	background-color: #AEF3FC;
 }

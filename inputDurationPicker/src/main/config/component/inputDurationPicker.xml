@@ -66,7 +66,22 @@
 				with this component you can input duration as time, date or both. mode parameter can help you to switch between these modes
 			</description>
 		</property>		
-
+		<property>
+			<name>negativeSummary</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this attribute indicate negative button Summary the default value is n
+			</description>
+			<defaultvalue>"n"</defaultvalue>
+		</property>	
+		<property>
+			<name>negativeToggleButtonId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				if you want to use negative duration set value for this attribute
+			</description>
+			<defaultvalue>""</defaultvalue>
+		</property>	
 		<property>
 			<name>minuteSummary</name>
 			<classname>java.lang.String</classname>

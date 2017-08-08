@@ -49,6 +49,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         Object id = new Object();
         Object value = null;
         String valueType = (String) component.getAttributes().get("valueType");
+        String negativeSummary = (String) component.getAttributes().get("negativeSummary"); 
         if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
         {
         	Double doubleValue = (Double) component.getAttributes().get("value");
@@ -98,7 +99,12 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "type","text");
             getUtils().writeAttribute(writer, "id",id);
             if(value != null)
-                getUtils().writeAttribute(writer, "value",value+"h");
+            {
+            	if((Integer) value < 0)
+            		getUtils().writeAttribute(writer, "value","n"+Math.abs((Integer) value)+"h");
+            	else
+            		getUtils().writeAttribute(writer, "value",Math.abs((Integer) value)+"h");
+            }
             getUtils().writeAttribute(writer, "name",id);
             getUtils().writeAttribute(writer, "class","duration-picker-input");
             getUtils().writeAttribute(writer, "style","width:"+inputWidth+"px;height:"+inputHeight+"px;");
@@ -169,7 +175,6 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             }
         }
     }
-
     public BigDecimal decodeTime(FacesContext context, UIInputDurationPicker component,String enCodeTime){
         
         BigDecimal resultTime = BigDecimal.ZERO;
@@ -181,7 +186,9 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         String d = (String) component.getAttributes().get("daySummary");
         String M = (String) component.getAttributes().get("monthSummary");
         String y = (String) component.getAttributes().get("yearSummary");
-        Pattern p = Pattern.compile("(([0-9])+)(["+y+"|"+M+
+        String n = (String) component.getAttributes().get("negativeSummary");
+        Boolean negativeSignFlag = false;
+        Pattern p = Pattern.compile("(["+n+"])?([0-9]*)(["+y+"|"+M+
                 "|"+d+"|"+h+"|"+m+
                 "])+", Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(enCodeTime);
@@ -189,23 +196,27 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         {
             if(matcher.group(3).equals(y))
             {
-                resultTime =  resultTime.add(new BigDecimal(matcher.group(1)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay));
+                resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay));
             }
             if(matcher.group(3).equals(M))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(1)).multiply(dayPerMonth.multiply(hourPerDay))));
+                resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(dayPerMonth.multiply(hourPerDay))));
             }
             if(matcher.group(3).equals(d))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(1)).multiply(hourPerDay)));
+                resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(hourPerDay)));
             }
             if(matcher.group(3).equals(h))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(1))));
+                resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+            }
+            if(matcher.group(1)!=null && matcher.group(1).equals(n))
+            {
+            	negativeSignFlag = true;
             }
             
         }   
-        return resultTime;
+        return negativeSignFlag? resultTime.multiply(new BigDecimal(-1)) : resultTime;
         
     }
     public String getJQueryId(FacesContext context, UIInputDurationPicker component)

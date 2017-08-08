@@ -27,6 +27,8 @@
 	<c:set var="inputFeildErrorClass" value="#{component.attributes['inputFeildErrorClass']}"/>
 	<c:set var="durationInputKeyPressCallBackFunc" value="#{component.attributes['durationInputKeyPressCallBackFunc']}"/>
 	<c:set var="showPopupCallBackFunc" value="#{component.attributes['showPopupCallBackFunc']}"/>
+	<c:set var="negativeToggleButtonId" value="#{component.attributes['negativeToggleButtonId']}"/>
+	<c:set var="negativeSummary" value="#{component.attributes['negativeSummary']}"/>
 
 	
 	<script type="text/javascript">
@@ -44,6 +46,8 @@
     var doplicateErrorMessage="#{duplicateErrorMessage}";
     var inputFeildErrorClass="#{inputFeildErrorClass}";
     var durationInputKeyPressCallBackFunc="#{durationInputKeyPressCallBackFunc}";
+    var negativeToggleButtonId = "#{negativeToggleButtonId}";
+    var negativeSummary = "#{negativeSummary}";
 			function durationInit(event,elm){
 						
 							function qutipImp(id,insidePopup)
@@ -77,6 +81,8 @@
 							jQuery.durationPicker({
 								id:"#"+clientId,
 				                mode:mode,
+				                negativeToggleButtonId:negativeToggleButtonId,
+				                negativeSummary:negativeSummary,
 				                minuteSummary:minuteSummary,
 				                minuteCaption:minuteCaption,
 				                hourSummary:hourSummary,
