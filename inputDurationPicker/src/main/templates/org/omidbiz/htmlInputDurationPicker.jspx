@@ -66,7 +66,8 @@
 												target : jQuery(id)
 											},
 											content : {
-												text : insidePopup
+												text : insidePopup,
+												button:true
 											},
 											style : {
 												classes : "qtip qtip-light qtip-shadow input-mutlti-select-list-menu"

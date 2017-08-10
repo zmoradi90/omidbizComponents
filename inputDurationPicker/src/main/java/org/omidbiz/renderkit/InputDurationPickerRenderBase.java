@@ -47,7 +47,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
     {
         
         Object id = new Object();
-        Object value = null;
+        Number value = null;
         String valueType = (String) component.getAttributes().get("valueType");
         String negativeSummary = (String) component.getAttributes().get("negativeSummary"); 
         if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
@@ -100,10 +100,10 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "id",id);
             if(value != null)
             {
-            	if((Integer) value < 0)
-            		getUtils().writeAttribute(writer, "value","n"+Math.abs((Integer) value)+"h");
+            	if( value.intValue() < 0)
+            		getUtils().writeAttribute(writer, "value","n"+Math.abs(value.intValue())+"h");
             	else
-            		getUtils().writeAttribute(writer, "value",Math.abs((Integer) value)+"h");
+            		getUtils().writeAttribute(writer, "value",Math.abs(value.intValue())+"h");
             }
             getUtils().writeAttribute(writer, "name",id);
             getUtils().writeAttribute(writer, "class","duration-picker-input");
