@@ -29,27 +29,27 @@
 	<c:set var="showPopupCallBackFunc" value="#{component.attributes['showPopupCallBackFunc']}"/>
 	<c:set var="negativeToggleButtonId" value="#{component.attributes['negativeToggleButtonId']}"/>
 	<c:set var="negativeSummary" value="#{component.attributes['negativeSummary']}"/>
-
+	<c:set var="forceId" value="#{component.attributes['forceId']}"/>
 	
 	<script type="text/javascript">
-    var mode="#{mode}";
-	var minuteSummary="#{minuteSummary}";
-    var minuteCaption="#{minuteCaption}";
-    var hourSummary="#{hourSummary}";
-    var hourCaption="#{hourCaption}";
-    var daySummary="#{daySummary}";
-    var dayCaption="#{dayCaption}";
-    var monthSummary="#{monthSummary}";
-    var monthCaption="#{monthCaption}";
-    var yearCaption="#{yearCaption}";
-    var yearSummary="#{yearSummary}";
-    var doplicateErrorMessage="#{duplicateErrorMessage}";
-    var inputFeildErrorClass="#{inputFeildErrorClass}";
-    var durationInputKeyPressCallBackFunc="#{durationInputKeyPressCallBackFunc}";
-    var negativeToggleButtonId = "#{negativeToggleButtonId}";
-    var negativeSummary = "#{negativeSummary}";
-			function durationInit(event,elm){
+			function durationInit#{negativeToggleButtonId}(event,elm){
 						
+						    var mode="#{mode}";
+							var minuteSummary="#{minuteSummary}";
+						    var minuteCaption="#{minuteCaption}";
+						    var hourSummary="#{hourSummary}";
+						    var hourCaption="#{hourCaption}";
+						    var daySummary="#{daySummary}";
+						    var dayCaption="#{dayCaption}";
+						    var monthSummary="#{monthSummary}";
+						    var monthCaption="#{monthCaption}";
+						    var yearCaption="#{yearCaption}";
+						    var yearSummary="#{yearSummary}";
+						    var doplicateErrorMessage="#{duplicateErrorMessage}";
+						    var inputFeildErrorClass="#{inputFeildErrorClass}";
+						    var durationInputKeyPressCallBackFunc="#{durationInputKeyPressCallBackFunc}";
+						    var negativeToggleButtonId = "#{negativeToggleButtonId}";
+						    var negativeSummary = "#{negativeSummary}";
 							function qutipImp(id,insidePopup)
 							{
 								

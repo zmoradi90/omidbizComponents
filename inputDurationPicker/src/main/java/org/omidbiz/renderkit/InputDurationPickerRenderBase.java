@@ -49,7 +49,8 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         Object id = new Object();
         Number value = null;
         String valueType = (String) component.getAttributes().get("valueType");
-        String negativeSummary = (String) component.getAttributes().get("negativeSummary"); 
+        String negativeSummary = (String) component.getAttributes().get("negativeSummary");
+        String negativeToggleButtonId = (String) component.getAttributes().get("negativeToggleButtonId");
         if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
         {
         	Double doubleValue = (Double) component.getAttributes().get("value");
@@ -83,7 +84,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         getUtils().writeAttribute(writer, "style","width:"+wrapperWidth+";");
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "id",id+"Dp");
-        getUtils().writeAttribute(writer, "onclick","durationInit(event,this)");
+        getUtils().writeAttribute(writer, "onclick","durationInit"+negativeToggleButtonId+"(event,this)");
         getUtils().writeAttribute(writer, "class","type-indicator");
             writer.startElement("div", null);
             getUtils().writeAttribute(writer, "class","duration-icon");
