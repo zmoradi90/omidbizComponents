@@ -103,10 +103,10 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             return selectValue;
         if (selectValue instanceof String)
         {
-            selectValue = ((String) selectValue).replaceAll("<", "&lt;");
-            selectValue = ((String) selectValue).replaceAll(">", "&gt;");
-            selectValue = ((String) selectValue).replaceAll("\"", "&quot;");
-            selectValue = ((String) selectValue).replaceAll("&", "&amp;");
+            selectValue = ((String) selectValue).replaceAll("<", " &lt; ");
+            selectValue = ((String) selectValue).replaceAll(">", " &gt; ");
+            selectValue = ((String) selectValue).replaceAll("\"", " &quot;");
+            selectValue = ((String) selectValue).replaceAll("&", " &amp; ");
         }
         return InputUtils.getConvertedStringValue(context, component, String.valueOf(selectValue));
     }
