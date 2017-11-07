@@ -118,7 +118,7 @@
 			<description>
 				set hour per day the default value is 8
 			</description>
-			<defaultvalue>"8"</defaultvalue>
+			<defaultvalue>"9"</defaultvalue>
 		</property>			
 		<property>
 			<name>daySummary</name>
