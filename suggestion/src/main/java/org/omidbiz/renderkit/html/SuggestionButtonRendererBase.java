@@ -69,7 +69,16 @@ public class SuggestionButtonRendererBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "class", styleClass);
         String txt = (String) sbutton.getTextMessage();
         if (JSFUtil.isNotEmpty(txt))
+        {
+            if (txt instanceof String)
+            {
+                txt = ((String) txt).replaceAll("<", " &lt; ");
+                txt = ((String) txt).replaceAll(">", " &gt; ");
+                txt = ((String) txt).replaceAll("\"", " &quot;");
+                txt = ((String) txt).replaceAll("&", " &amp; ");
+            }            
             writer.write(txt);
+        }
         else
             writer.write("select");
         writer.endElement("span");
