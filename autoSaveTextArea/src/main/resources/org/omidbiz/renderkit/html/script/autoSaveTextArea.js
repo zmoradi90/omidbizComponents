@@ -104,7 +104,7 @@
 	    	}
 	    	function replaceEnterChar(){
 	    		var textAreaVal = $this.val();
-	    		if(textAreaVal.contains("\n"))
+	    		if(textAreaVal.search("\n") > 0)
 	    		{
 	    			var splitEnterInputTextArea = textAreaVal.split("\n");
 	    			var resultString = "";
