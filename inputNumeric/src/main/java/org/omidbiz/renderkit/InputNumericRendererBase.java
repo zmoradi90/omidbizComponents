@@ -43,11 +43,12 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         Map requestParams = external.getRequestParameterMap();
         UIInputNumeric inputDate = (UIInputNumeric) component;
         String forceId = (String) inputDate.getAttributes().get("forceId");
+        String typeOfValue = (String) inputDate.getAttributes().get("typeOfValue");
         String clientId = inputDate.getClientId(context);
         if (forceId != null && forceId.length() > 0)
             clientId = forceId;
         String submittedValue = (String) requestParams.get(clientId);
-
+        String formatedString = null;
         if (submittedValue != null)
         {
             Converter converter = inputDate.getConverter();
@@ -57,12 +58,22 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
             {
                 if (submittedValue.indexOf(",") > 0)
                 {
-                    inputDate.setSubmittedValue(submittedValue.replaceAll(",", ""));
+                    formatedString = submittedValue.replaceAll(",", "");
                 }
                 else
                 {
-                    inputDate.setSubmittedValue(submittedValue);
+                    formatedString = submittedValue;
                 }
+                if(("double").equalsIgnoreCase(typeOfValue))
+                {
+                    inputDate.setSubmittedValue(Double.valueOf(formatedString));
+                }
+                else if(("integer").equalsIgnoreCase(typeOfValue))
+                {
+                    inputDate.setSubmittedValue(Integer.valueOf(formatedString));
+                }
+                else
+                    inputDate.setSubmittedValue(new BigDecimal(formatedString));
             }
         }
     }

@@ -38,6 +38,13 @@
 				The value of the component
 			</description>
 		</property>
+  		<property>
+			<name>typeOfValue</name>
+			<classname>java.lang.String</classname>
+			<description>
+				typeOfValue can be double, big decimal or integer
+			</description>
+		</property>
 		<property>
 			<name>separator</name>
 			<classname>java.lang.String</classname>
