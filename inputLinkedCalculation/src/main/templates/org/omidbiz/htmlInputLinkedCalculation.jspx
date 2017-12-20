@@ -12,6 +12,7 @@
 	<f:clientid var="clientId" />
 	<c:set var="targetIds" value="#{component.attributes['targetIds']}" />
 	<c:set var="outputIds" value="#{component.attributes['outputIds']}" />
+	<c:set var="dateId" value="#{component.attributes['dateId']}" />
 	<c:set var="calculationFormula" value="#{component.attributes['calculationFormula']}" />
 	<h:scripts>/org/omidbiz/renderkit/html/script/inputLinkedCalculation.js</h:scripts>
 
@@ -23,6 +24,7 @@
 					jQuery("#"+ "#{this:getId(context, component)}").inputLinkedCalculation(
 						{
 							targetIds : '#{targetIds}',
+							dateId : '#{dateId}',
 							outputIds : '#{outputIds}',
 							calculationPattern: '#{calculationFormula}'
 						});

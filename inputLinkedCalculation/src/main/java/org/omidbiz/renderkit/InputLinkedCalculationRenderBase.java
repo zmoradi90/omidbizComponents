@@ -28,6 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.ajax4jsf.renderkit.RendererUtils;
 import org.omidbiz.component.UIInputLinkedCalculation;
 
 /**
@@ -73,16 +74,58 @@ public class InputLinkedCalculationRenderBase extends HeaderResourcesRendererBas
     @Override
     protected void doDecode(FacesContext context, UIComponent component)
     {
-
-    }
+        
+        
+    } 
     public String getId(FacesContext context, UIInputLinkedCalculation component)
     {
         UIComponent parentComponent = component.getParent();
 
         if (parentComponent != null)
         {
-            String clientId = parentComponent.getClientId(context).replace(":", "\\\\:");;
+            String clientId = parentComponent.getClientId(context).replace(":", "\\\\:");
             return clientId;
+        }
+        return "";
+    }
+    public String getTargetIds(FacesContext context, UIInputLinkedCalculation component)
+    {
+        String targetIds = (String) component.getAttributes().get("targetIds");
+        String result = null;
+        if (targetIds != null)
+        {            
+            String[] targetIdsList = targetIds.split(",");
+            for (String str : targetIdsList)
+            {
+                result += "#"+RendererUtils.getInstance().findComponentFor(component, (String) targetIds).getClientId(context).replace(":", "\\\\:")+",";
+            }
+            return result;
+        }
+        return "";
+    }
+    public String getOutputIds(FacesContext context, UIInputLinkedCalculation component)
+    {
+        String outputIds = (String) component.getAttributes().get("outputIds");
+        String result = null;
+        if (outputIds != null)
+        {            
+            String[] targetIdsList = outputIds.split(",");
+            for (String str : targetIdsList)
+            {
+                result += "#"+RendererUtils.getInstance().findComponentFor(component, (String) outputIds).getClientId(context).replace(":", "\\\\:")+",";
+            }
+            return result;
+        }
+        return "";
+    }
+    public String getDateId(FacesContext context, UIInputLinkedCalculation component)
+    {
+        String dateId = (String) component.getAttributes().get("dateId");
+        String result = null;
+        if (dateId != null)
+        {            
+            result += "#"+RendererUtils.getInstance().findComponentFor(component, (String) dateId).getClientId(context).replace(":", "\\\\:");
+            return result;
         }
         return "";
     }

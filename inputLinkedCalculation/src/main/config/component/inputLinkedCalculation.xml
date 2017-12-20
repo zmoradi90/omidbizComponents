@@ -46,5 +46,12 @@
 				#s1+#t1 note: max variable you can use in your formula is THREE
 			</description>
 		</property>	
+		<property>
+			<name>dateId</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can use date id too indicates which id must considred as Date eg: #d1
+			</description>
+		</property>	
 	</component>
 </components>
