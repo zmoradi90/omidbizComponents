@@ -53,5 +53,12 @@
 				you can use date id too indicates which id must considred as Date eg: #d1
 			</description>
 		</property>	
+		<property>
+			<name>convertDateCallbackFunc</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can convert gergorian date to every calendar you want just create function with argument format callback(year,month,day)
+			</description>
+		</property>	
 	</component>
 </components>

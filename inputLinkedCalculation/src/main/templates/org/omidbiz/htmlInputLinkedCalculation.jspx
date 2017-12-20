@@ -14,6 +14,7 @@
 	<c:set var="outputIds" value="#{component.attributes['outputIds']}" />
 	<c:set var="dateId" value="#{component.attributes['dateId']}" />
 	<c:set var="calculationFormula" value="#{component.attributes['calculationFormula']}" />
+	<c:set var="convertDateCallbackFunc" value="#{component.attributes['convertDateCallbackFunc']}" />
 	<h:scripts>/org/omidbiz/renderkit/html/script/inputLinkedCalculation.js</h:scripts>
 
 	<f:call name="initializeMask">
@@ -26,7 +27,8 @@
 							targetIds : '#{targetIds}',
 							dateId : '#{dateId}',
 							outputIds : '#{outputIds}',
-							calculationPattern: '#{calculationFormula}'
+							calculationPattern: '#{calculationFormula}',
+							convertDateCallbackFunc: '#{convertDateCallbackFunc}'
 						});
 				});
 			</script>

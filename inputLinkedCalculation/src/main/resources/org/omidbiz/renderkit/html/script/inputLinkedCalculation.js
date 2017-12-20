@@ -11,7 +11,7 @@
 			dateId : '',
 			outputIds : '#o1',
 			calculationPattern:'#s1+#t1*$100',
-			solarDate:'true'
+			convertDateCallbackFunc:''
 		};
 		var sourceId =  $(this).attr("id") != undefined? "#"+$(this).attr("id") : console.error("inputLinkCalculation error : input id must not be null"); 
 		var notEmptyOption = {};
@@ -103,13 +103,19 @@
 		};
 		var output = function(){
 			var outputIdsList = options.outputIds.split(",");
-			console.log(newFormula);
 			if(newFormula != undefined)
 			{
 				var result = convertStringToFunction(newFormula);
 				if(hasDate)
 				{
+					if(typeof options.convertDateCallbackFunc == "function")
+					{
+						result = convertDateCallbackFunc(result.getFullYear(), parseInt(result.getMonth()+1), result.getDate());
+					}
+					else
+					{
 						result = result.getFullYear()+"-"+parseInt(result.getMonth()+1)+"-"+result.getDate();
+					}
 				}
 				for(var i = 0 ; i < outputIdsList.length ; i++)
 				{ 
