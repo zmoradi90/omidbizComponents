@@ -132,7 +132,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         script.append("par[\"").append(componentId + HIDDEN_NAME_COMP).append("\"]").append("=").append("jQuery(this).val();");
         script.append("par[\"").append(SUGGESTION_NAME_PARAM).append("\"]").append("=\"").append(componentId).append("\"; ");        
         script.append(String.format("timer = setTimeout(sm.searchAndReload, 600, '%s', '%s', par);", componentId, baseUrl + "?"));
-        script.append("jQuery('#"+hiddenComponentId+") != undefined? jQuery('#"+hiddenComponentId+").val(undefined): undefined;");
+        script.append("jQuery('#"+hiddenComponentId+"') != undefined? jQuery('#"+hiddenComponentId+"').val(undefined): undefined;");
         script.append("});});");
         getUtils().writeScript(context, component, script);
     }

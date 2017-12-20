@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
+	xmlns:c=" http://java.sun.com/jsf/core"
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.InputLinkedCalculationRenderer"
+	baseclass="org.omidbiz.renderkit.InputLinkedCalculationRenderBase"
+	component="org.omidbiz.component.UIInputLinkedCalculation">
+
+	<f:clientid var="clientId" />
+	<c:set var="targetIds" value="#{component.attributes['targetIds']}" />
+	<c:set var="outputIds" value="#{component.attributes['outputIds']}" />
+	<c:set var="calculationFormula" value="#{component.attributes['calculationFormula']}" />
+	<h:scripts>/org/omidbiz/renderkit/html/script/inputLinkedCalculation.js</h:scripts>
+
+	<f:call name="initializeMask">
+
+		<vcp:body>
+			<script>
+				jQuery(document).ready(	function() {
+					jQuery("#"+ "#{this:getId(context, component)}").inputLinkedCalculation(
+						{
+							targetIds : '#{targetIds}',
+							outputIds : '#{outputIds}',
+							calculationPattern: '#{calculationFormula}'
+						});
+				});
+			</script>
+		</vcp:body>
+
+	</f:call>
+
+</f:root>

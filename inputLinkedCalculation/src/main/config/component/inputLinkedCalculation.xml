@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.InputLinkedCalculation</name>
+		<family>org.omidbiz.InputLinkedCalculation</family>
+		<classname>org.omidbiz.component.html.HtmlInputLinkedCalculation</classname>
+		<superclass>org.omidbiz.component.UIInputLinkedCalculation</superclass>
+		<description>
+			<![CDATA[
+    		]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.InputLinkedCalculationRenderer</name>
+			<template>org/omidbiz/htmlInputLinkedCalculation.jspx</template>
+		</renderer>
+		<tag>
+			<name>inputLinkedCalculation</name>
+			<classname>org.omidbiz.taglib.InputLinkedCalculationTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>targetIds</name>
+			<classname>java.lang.String</classname>
+			<description>
+				target ids for searching which you want to use in your calculation formula if you 
+				want to use more than one target join target ids with coma eg: #t1,#t2
+			</description>
+		</property>
+		<property>
+			<name>outputIds</name>
+			<classname>java.lang.String</classname>
+			<description>
+				outputIds are coma sperator ids for showing results of calculation eg: #o1, #o2
+			</description>
+			<defaultvalue>"true"</defaultvalue>
+		</property>
+		<property>
+			<name>calculationFormula</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can use element id (eg #s1) or target ids in your formula for your calculation eg:
+				#s1+#t1 note: max variable you can use in your formula is THREE
+			</description>
+		</property>	
+	</component>
+</components>
