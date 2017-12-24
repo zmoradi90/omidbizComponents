@@ -11,8 +11,11 @@
 			dateId : '',
 			outputIds : '#o1',
 			calculationPattern:'#s1+#t1*$100',
-			convertDateCallbackFunc:''
+			seperator:"/",
+			convertDateCallbackFuncInput:'',
+			convertDateCallbackFuncOutput:''
 		};
+		var elm = $(this);
 		var sourceId =  $(this).attr("id") != undefined? "#"+$(this).attr("id") : console.error("inputLinkCalculation error : input id must not be null"); 
 		var notEmptyOption = {};
 		$.each(option, function(i, val) {
@@ -25,6 +28,8 @@
 		var newFormula = "";
 		var hasDate = false;
 		var formuleBuilder = function(){
+			if(elm.val() == undefined || elm.val() == "")
+				return;
 			hasDate = options.dateId.length <= 0? false : true;
 			var patt = new RegExp(regEx);
 			var targetIdsList = options.targetIds.split(",");
@@ -99,28 +104,40 @@
 				
 			}
 			if(hasDate)
-				newFormula = "new Date (new Date('"+date+"').setDate(new Date('"+date+"').getDate()"+duration+"))"
-		};
-		var output = function(){
-			var outputIdsList = options.outputIds.split(",");
-			if(newFormula != undefined)
 			{
-				var result = convertStringToFunction(newFormula);
-				if(hasDate)
+				if(dateValidation(date)) // when user date type is completed
 				{
-					if(typeof options.convertDateCallbackFunc == "function")
+					if(typeof options.convertDateCallbackFuncInput == "function")
 					{
-						result = convertDateCallbackFunc(result.getFullYear(), parseInt(result.getMonth()+1), result.getDate());
+						date = date.split(options.seperator);
+						newFormula = "new Date (new Date('"+options.convertDateCallbackFuncInput(date[0],date[1],date[2])+"').setDate(new Date('"+options.convertDateCallbackFuncInput(date[0],date[1],date[2])+"').getDate()"+duration+"))"
 					}
 					else
 					{
-						result = result.getFullYear()+"-"+parseInt(result.getMonth()+1)+"-"+result.getDate();
+						newFormula = "new Date (new Date('"+date+"').setDate(new Date('"+date+"').getDate()"+duration+"))"
 					}
 				}
-				for(var i = 0 ; i < outputIdsList.length ; i++)
-				{ 
-					$(colonIgonore(outputIdsList[i])).is("input")?$(colonIgonore(outputIdsList[i])).val(result):$(colonIgonore(outputIdsList[i])).html(result); 
+			}
+		};
+		var output = function(){
+			if(elm.val() == undefined || elm.val() == "" || newFormula == "" || newFormula == undefined)
+				return;
+			var outputIdsList = options.outputIds.split(",");
+			var result = convertStringToFunction(newFormula);
+			if(hasDate)
+			{
+				if(typeof options.convertDateCallbackFuncOutput == "function")
+				{
+					result = options.convertDateCallbackFuncOutput(result.getFullYear(), parseInt(result.getMonth()+1), result.getDate(), options.seperator);
 				}
+				else
+				{
+					result = result.getFullYear()+"-"+parseInt(result.getMonth()+1)+"-"+result.getDate();
+				}
+			}
+			for(var i = 0 ; i < outputIdsList.length ; i++)
+			{ 
+				$(colonIgonore(outputIdsList[i])).is("input")?$(colonIgonore(outputIdsList[i])).val(result):$(colonIgonore(outputIdsList[i])).html(result); 
 			}
 		};
 		var convertStringToFunction = function (strFn){
@@ -128,6 +145,15 @@
 		};
 		var colonIgonore = function(str){
 			return str.replace(/\:/g,"\\:");
+		};
+		var dateValidation = function(str){
+			var regEx = "[1-9]{4}[\/|-]{1}([1-9]|[1][1-2])[\/|-]{1}([0-9]|[0-1-2][0-9]|[3][0-1])$";
+			var pattern = new RegExp(regEx);
+			var res = pattern.exec(str);
+			if(res != null)
+				return true;
+			else 
+				return false;
 		};
 		formuleBuilder();
 		output();

@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.convert.Converter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
@@ -89,7 +90,13 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
     {
         return true;
     }
+    
+    protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
+    {
+        renderChildren(context, component);
+    }
 
+    
     protected String getValueAsString(FacesContext context, UIComponent component) throws IOException
     {
 

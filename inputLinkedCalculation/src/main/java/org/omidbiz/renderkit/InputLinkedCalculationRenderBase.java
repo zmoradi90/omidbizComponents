@@ -62,13 +62,7 @@ public class InputLinkedCalculationRenderBase extends HeaderResourcesRendererBas
     @Override
     public boolean getRendersChildren()
     {
-        return true;
-    }
-
-    @Override
-    protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
-    {
-        renderChildren(context, component);
+        return false;
     }
 
     @Override
@@ -80,8 +74,12 @@ public class InputLinkedCalculationRenderBase extends HeaderResourcesRendererBas
     public String getId(FacesContext context, UIInputLinkedCalculation component)
     {
         UIComponent parentComponent = component.getParent();
-
-        if (parentComponent != null)
+        if(component.getAttributes().get("forceId") != null)
+        {
+            String clientId = (String) component.getAttributes().get("forceId");
+            return clientId;
+        }
+        else if(parentComponent != null)
         {
             String clientId = parentComponent.getClientId(context).replace(":", "\\\\:");
             return clientId;

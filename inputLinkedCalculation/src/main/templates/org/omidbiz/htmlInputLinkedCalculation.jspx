@@ -14,8 +14,8 @@
 	<c:set var="outputIds" value="#{component.attributes['outputIds']}" />
 	<c:set var="dateId" value="#{component.attributes['dateId']}" />
 	<c:set var="calculationFormula" value="#{component.attributes['calculationFormula']}" />
-	<c:set var="convertDateCallbackFunc" value="#{component.attributes['convertDateCallbackFunc']}" />
-	<h:scripts>/org/omidbiz/renderkit/html/script/inputLinkedCalculation.js</h:scripts>
+	<c:set var="convertDateCallbackFuncOutput" value="#{component.attributes['convertDateCallbackFuncOutput']}" />
+	<c:set var="convertDateCallbackFuncInput" value="#{component.attributes['convertDateCallbackFuncInput']}" />
 
 	<f:call name="initializeMask">
 
@@ -28,9 +28,23 @@
 							dateId : '#{dateId}',
 							outputIds : '#{outputIds}',
 							calculationPattern: '#{calculationFormula}',
-							convertDateCallbackFunc: '#{convertDateCallbackFunc}'
-						});
+							seperator:"/",
+							convertDateCallbackFuncInput:'#{convertDateCallbackFuncInput}',
+							convertDateCallbackFuncOutput:'#{convertDateCallbackFuncOutput}'
+						}).init();
 				});
+				function updateInputLinkedCalculation(){
+					jQuery("#"+ "#{this:getId(context, component)}").inputLinkedCalculation(
+						{
+							targetIds : '#{targetIds}',
+							dateId : '#{dateId}',
+							outputIds : '#{outputIds}',
+							calculationPattern: '#{calculationFormula}',
+							seperator:"/",
+							convertDateCallbackFuncInput:'#{convertDateCallbackFuncInput}',
+							convertDateCallbackFuncOutput:'#{convertDateCallbackFuncOutput}'
+						}).customEvent();
+				}
 			</script>
 		</vcp:body>
 
