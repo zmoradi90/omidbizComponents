@@ -103,10 +103,12 @@
 				}
 				
 			}
+			newFormula = newFormula.replace(/,/g, "");
 			if(hasDate)
 			{
 				if(dateValidation(date)) // when user date type is completed
 				{
+					duration = duration.replace(/,/g, '');
 					if(typeof options.convertDateCallbackFuncInput == "function")
 					{
 						date = date.split(options.seperator);
@@ -147,26 +149,34 @@
 			return str.replace(/\:/g,"\\:");
 		};
 		var dateValidation = function(str){
-			var regEx = "[1-9]{4}[\/|-]{1}([1-9]|[1][1-2])[\/|-]{1}([0-9]|[0-1-2][0-9]|[3][0-1])$";
+			var regEx = "[0-9]{4}[\/|-]{1}([0-9]|[1][0-2]|[0][1-9])[\/|-]{1}([0-9]|[0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])$";
 			var pattern = new RegExp(regEx);
 			var res = pattern.exec(str);
 			if(res != null)
 				return true;
-			else 
+			else
 				return false;
 		};
-		formuleBuilder();
-		output();
-		
-		$(this).blur(function(){
-			newFormula = "";
-			formuleBuilder();
-			output();
-		}); 
-		$(this).keyup(function(){
-			newFormula = "";
-			formuleBuilder();
-			output();
-		});
+		// public methods //
+	    return{
+	    	customEvent: function(){
+				formuleBuilder();
+				output();
+	    	},
+			init : function(){
+				formuleBuilder();
+				output();
+				elm.change(function(){
+					newFormula = "";
+					formuleBuilder();
+					output();
+				});
+				elm.keyup(function(){
+					newFormula = "";
+					formuleBuilder();
+					output();
+				});
+			}
+	    };
 	}
 }(jQuery));
