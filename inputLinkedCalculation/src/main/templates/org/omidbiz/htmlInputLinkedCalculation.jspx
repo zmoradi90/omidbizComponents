@@ -33,18 +33,6 @@
 							convertDateCallbackFuncOutput:'#{convertDateCallbackFuncOutput}'
 						}).init();
 				});
-				function updateInputLinkedCalculation(){
-					jQuery("#"+ "#{this:getId(context, component)}").inputLinkedCalculation(
-						{
-							targetIds : '#{targetIds}',
-							dateId : '#{dateId}',
-							outputIds : '#{outputIds}',
-							calculationPattern: '#{calculationFormula}',
-							seperator:"/",
-							convertDateCallbackFuncInput:'#{convertDateCallbackFuncInput}',
-							convertDateCallbackFuncOutput:'#{convertDateCallbackFuncOutput}'
-						}).customEvent();
-				}
 			</script>
 		</vcp:body>
 
