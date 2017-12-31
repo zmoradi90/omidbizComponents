@@ -113,7 +113,7 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                             + "label: '"+yAxisLabel+"',"
                             + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,"
                             + "tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,"
-                            + "tickOptions: {}}}");                    
+                            + "tickOptions: {}}");                    
                 }
                 else if(type.equals("pie"))
                     sb.append("renderer:jQuery.jqplot.PieRenderer,"
@@ -131,9 +131,9 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                         + "yaxis: {"
                         + "autoscale:true,"
                         + "label: '"+yAxisLabel+"',"
-                        + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer");
+                        + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer}");
                 }
-                    sb.append("}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
+                    sb.append("}}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
         getUtils().writeScript(context, component, sb.toString());
 
     }
