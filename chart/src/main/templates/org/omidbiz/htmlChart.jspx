@@ -19,7 +19,7 @@
 	<c:set var="style" value="#{component.attributes['styleFrame']}"/>
 	
 		<div id="#{this:getFinalId(context, component)}" style="width:#{width}px; height:#{height}px; #{style}"></div>
-		<div id="customJqplotTooltipDiv" style="display: none;"></div>
+		<div id="#{this:getFinalId(context, component)}_customJqplotTooltipDiv" class="custom-jqplot-tooltip"></div>
 	
 	<f:call name="initializeMask">
 	

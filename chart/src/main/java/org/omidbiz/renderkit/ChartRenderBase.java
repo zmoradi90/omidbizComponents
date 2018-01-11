@@ -46,7 +46,7 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
         String xAxisLabel = String.valueOf(component.getAttributes().get("xAxisLable"));
         String yAxisLabel = String.valueOf(component.getAttributes().get("yAxisLable"));
         String isHorizon = String.valueOf(component.getAttributes().get("isHorizon"));
-        Boolean pieChartTootip = Boolean.valueOf((String) component.getAttributes().get("pieChartTootip"));
+        Boolean pieChartTootip = (Boolean) component.getAttributes().get("pieChartTootip");
 
         String colorSeries =(String) component.getAttributes().get("colorSeries");
     	String title = String.valueOf(component.getAttributes().get("title"));
@@ -138,9 +138,9 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                 if(pieChartTootip != null && pieChartTootip)
                 {
                     sb.append("jQuery('#"+getJQueryId(context, component)+"').bind('jqplotDataHighlight',function(ev, seriesIndex, pointIndex, data) {var content = data[2];"
-                            + "var elem = jQuery('#customJqplotTooltipDiv'); elem.html(content);var h = elem.outerHeight(); var w = elem.outerWidth();var left = ev.pageX - w - 10;"
+                            + "var elem = jQuery('#"+getJQueryId(context, component)+"_customJqplotTooltipDiv'); elem.html(content);var h = elem.outerHeight(); var w = elem.outerWidth();var left = ev.pageX - w - 10;"
                             + "var top = ev.pageY - h - 10;elem.stop(true, true).css({left : left, top : top}).fadeIn(100);});"
-                            + "jQuery('#"+getJQueryId(context, component)+"').bind('jqplotDataUnhighlight', function(ev) {jQuery('#customJqplotTooltipDiv').fadeOut(300);});");
+                            + "jQuery('#"+getJQueryId(context, component)+"').bind('jqplotDataUnhighlight', function(ev) {jQuery('#"+getJQueryId(context, component)+"_customJqplotTooltipDiv').fadeOut(300);});");
                 }
         getUtils().writeScript(context, component, sb.toString());
 

@@ -260,3 +260,13 @@ div.jqplot-noData-container {
 	text-align: center;
 	background-color: rgba(96%, 96%, 96%, 0.3);
 }
+
+.custom-jqplot-tooltip{
+    background-color: rgba(160, 160, 160, 0.2);
+    border: 1px solid #666666;
+    color: #333333;
+    display: none;
+    font-size: 0.8em;
+    padding: 2px;
+    position: absolute;
+}
