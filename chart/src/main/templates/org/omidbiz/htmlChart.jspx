@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:root xmlns:f="http://ajax4jsf.org/cdk/template"
-	xmlns:c=" http://java.sun.com/jsf/core"
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
 	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
 	xmlns:u=" http://ajax4jsf.org/cdk/u"
 	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
 	xmlns:x=" http://ajax4jsf.org/cdk/x"
 	class="org.omidbiz.renderkit.html.ChartRenderer"
 	baseclass="org.omidbiz.renderkit.ChartRenderBase"
-	component="org.omidbiz.component.UIChart">
-	<f:clientid var="clientId" />
+	component="org.omidbiz.component.UIChart" 
+	>
+	<f:clientid var="clientId"/>
 	<h:styles>
 		css/chart.css
 	</h:styles>
-	<c:set var="width" value="#{component.attributes['width']}" />
-	<c:set var="height" value="#{component.attributes['height']}" />
-	<c:set var="style" value="#{component.attributes['styleFrame']}" />
-	<c:set var="pieChartTootip"
-		value="#{component.attributes['pieChartTootip']}" />
-	<jsp:scriptlet><![CDATA[Boolean pieChartTootip = (Boolean) variables
-						.getVariable("pieChartTootip");]]></jsp:scriptlet>
-
-	<div id="#{this:getFinalId(context, component)}"
-		style="width:#{width}px; height:#{height}px; #{style}"></div>
-
-
-	<jsp:scriptlet><![CDATA[if (pieChartTootip != null && pieChartTootip) {]]></jsp:scriptlet>
-		<div id="customJQplotTooltipDiv" style="display: none;"></div>
-	<jsp:scriptlet><![CDATA[}]]></jsp:scriptlet>
-
+	<c:set var="width" value="#{component.attributes['width']}"/>
+	<c:set var="height" value="#{component.attributes['height']}"/>
+	<c:set var="style" value="#{component.attributes['styleFrame']}"/>
+	<c:set var="pieChartTootip" value="#{component.attributes['pieChartTootip']}"/>
+	
+	<jsp:scriptlet>
+	<![CDATA[ 
+			Boolean pieChartTootip = (Boolean) variables.getVariable("pieChartTootip");
+	]]>
+	</jsp:scriptlet>
+	
+	
+		<div id="#{this:getFinalId(context, component)}" style="width:#{width}px; height:#{height}px; #{style}"></div>
+	<jsp:scriptlet>
+		<![CDATA[ if (pieChartTootip != null && pieChartTootip) { ]]>
+	</jsp:scriptlet>
+		<div id="customJqplotTooltipDiv" style="display: none;"></div>
+		<script type="text/javascript">
+		jQuery(document).ready( function(){ 
+			var id = "#{this:getJQueryId(context, component)}";
+		    // capture the highlighters highlight event and show a custom tooltip.
+		    jQuery('#'+id).bind('jqplotDataHighlight', 
+		        function (ev, seriesIndex, pointIndex, data) {
+		           	var content = data[2];
+		            var elem = jQuery('#customJqplotTooltipDiv');
+		            elem.html(content);
+		            var h = elem.outerHeight();
+		            var w = elem.outerWidth();
+		            var left = ev.pageX - w - 10;
+		            var top = ev.pageY - h - 10;
+		            elem.stop(true, true).css({left:left, top:top}).fadeIn(200);
+		        }
+		    );
+		     
+		    // Hide the tooltip when unhighliting.
+		    jQuery('#'+id).bind('jqplotDataUnhighlight', 
+		        function (ev) {
+		            jQuery('#customJqplotTooltipDiv').fadeOut(300);
+		        }
+		    );
+		});
+		</script>
+		<jsp:scriptlet>
+			<![CDATA[ } ]]>
+		</jsp:scriptlet>
 </f:root>
