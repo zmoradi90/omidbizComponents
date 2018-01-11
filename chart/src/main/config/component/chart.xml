@@ -153,7 +153,7 @@
 			<description>
 				the chart id must be rerendered
 			</description>
-		</property>							
+		</property>
         <property>
 			<name>pieChartTootip</name>
 			<classname>java.lang.Boolean</classname>
@@ -161,6 +161,6 @@
 				if this option enable you can use third input attibute for 
 				tooltip text attention: use this attribute only in pie charts eg: ['lable',123,'tooltip title and value']
 			</description>
-		</property>							
+		</property>	
 	</component>
 </components>

@@ -46,6 +46,7 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
         String xAxisLabel = String.valueOf(component.getAttributes().get("xAxisLable"));
         String yAxisLabel = String.valueOf(component.getAttributes().get("yAxisLable"));
         String isHorizon = String.valueOf(component.getAttributes().get("isHorizon"));
+        Boolean pieChartTootip = Boolean.valueOf((String) component.getAttributes().get("pieChartTootip"));
 
         String colorSeries =(String) component.getAttributes().get("colorSeries");
     	String title = String.valueOf(component.getAttributes().get("title"));
@@ -119,7 +120,7 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                     sb.append("renderer:jQuery.jqplot.PieRenderer,"
                     + "shadow: true,shadowAngle:10,shadowOffset:0,shadowDepth:2,shadowAlpha:1,rendererOptions: { shadowAngle:-40,shadowOffset:-1,shadowDepth:10,shadowAlpha:0.01,padding: 8, showDataLabels: true ,dataLabels: 'value'},"
                     + "seriesColors:colorSeries}, legend:{show:true,rendererOptions:{numberRows: 1},location: 's'},"
-                    + "grid:{drawBorder:false,shadow:false,background:'rgba(255,255,255,0)'}");
+                    + "grid:{drawBorder:false,shadow:false,background:'rgba(255,255,255,0)'");
                 else if(type.equals("bubble"))
                 {       sb.append("renderer: jQuery.jqplot.BubbleRenderer,"
                         +"shadow: true,shadowAlpha: 0.05},"
@@ -133,7 +134,14 @@ public class ChartRenderBase extends HeaderResourcesRendererBase
                         + "label: '"+yAxisLabel+"',"
                         + "labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer}");
                 }
-                    sb.append("}}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
+                sb.append("}}; plot1b = jQuery.jqplot(id,dataSets,opt);});");
+                if(pieChartTootip != null && pieChartTootip)
+                {
+                    sb.append("jQuery('#"+getJQueryId(context, component)+"').bind('jqplotDataHighlight',function(ev, seriesIndex, pointIndex, data) {var content = data[2];"
+                            + "var elem = jQuery('#customJqplotTooltipDiv'); elem.html(content);var h = elem.outerHeight(); var w = elem.outerWidth();var left = ev.pageX - w - 10;"
+                            + "var top = ev.pageY - h - 10;elem.stop(true, true).css({left : left, top : top}).fadeIn(100);});"
+                            + "jQuery('#"+getJQueryId(context, component)+"').bind('jqplotDataUnhighlight', function(ev) {jQuery('#customJqplotTooltipDiv').fadeOut(300);});");
+                }
         getUtils().writeScript(context, component, sb.toString());
 
     }
