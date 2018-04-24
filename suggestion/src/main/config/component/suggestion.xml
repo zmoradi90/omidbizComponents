@@ -33,6 +33,15 @@
 			<required>true</required>
 		</property>
 		
+        <property>
+			<name>clientParametForceId</name>
+			<classname>java.lang.String</classname>			
+			<description>
+				this parameter used when user want add some parameter to suggestion IFrame as client-side
+			</description>			
+			<required>true</required>
+		</property>
+		
 		<property>
 			<name>forceId</name>
 			<classname>java.lang.String</classname>			

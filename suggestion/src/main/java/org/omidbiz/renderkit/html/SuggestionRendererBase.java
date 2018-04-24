@@ -46,11 +46,13 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         ExternalContext external = context.getExternalContext();
         Map requestParams = external.getRequestParameterMap();
         UISuggestion sugesstion = (UISuggestion) component;
+        sugesstion.setClientParametForceId((String) requestParams.get("clientParametForceId"));
         String componentId = (String) sugesstion.getForceId();
         String hiddenComponentId = componentId + HIDDEN_COMP;
         String valueName = (String) requestParams.get(componentId + HIDDEN_NAME_COMP);
         String valueId = (String) requestParams.get(hiddenComponentId);
         sugesstion.setSubmittedValue(valueName);
+        
         if (sugesstion.isRequired() && JSFUtil.isEmpty(valueId))
         {
             sugesstion.setValueName(null);
@@ -106,10 +108,15 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         script.append(" jQuery(document).ready(function(){");
         script.append("var timer =0;");
         UISuggestion sugesstion = (UISuggestion) component;
-        String url = baseUrl + generateQueryStrings(component, componentId);
+        if(sugesstion.getClientParametForceId() != null)
+            script.append("var inputClientParameterId = '#"+sugesstion.getClientParametForceId()+"'; var clientParameterId ='"+sugesstion.getClientParametForceId()+"='+jQuery(inputClientParameterId).val();");
+        String url = baseUrl + generateQueryStrings(component, componentId)+"&";
         int width = sugesstion.getWidth() == 0 ? 550 : sugesstion.getWidth();
         int height = sugesstion.getHeight() == 0 ? 250 : sugesstion.getHeight();
-        script.append(String.format("sm.createQtip('%s', '%s', %s, %s);", componentId, url, width, height));
+        if(sugesstion.getClientParametForceId() != null)
+            script.append(String.format("sm.createQtip('%s', '%s' + clientParameterId, %s, %s);", componentId, url, width, height));
+        else
+            script.append(String.format("sm.createQtip('%s', '%s', %s, %s);", componentId, url, width, height));
         script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId + HIDDEN_NAME_COMP));
         script.append("if (timer) {clearTimeout(timer);}");
         script.append("var par = {};");

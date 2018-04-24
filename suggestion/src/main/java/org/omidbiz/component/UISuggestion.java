@@ -48,6 +48,8 @@ public abstract class UISuggestion extends UIInput
 
     private Object styleClass;
 
+    private String clientParametForceId;
+
     private String style;
 
     private int width;
@@ -302,6 +304,16 @@ public abstract class UISuggestion extends UIInput
         forceId = (String) state[i++];
         valueId = (Object) state[i++];
         valueName = (Object) state[i++];
+    }
+
+    public String getClientParametForceId()
+    {
+        return clientParametForceId;
+    }
+
+    public void setClientParametForceId(String clientParametForceId)
+    {
+        this.clientParametForceId = clientParametForceId;
     }
 
 }
