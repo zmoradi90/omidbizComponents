@@ -1,5 +1,5 @@
 var sm = {		
-		createQtip : function(compId, url, w, h) {
+		createQtip : function(compId, url, w, h, func) {
 			var tooltip = jQuery('#'+compId+'Name').qtip({
 			    content: {
 			        text: '<iframe src="%URL%" frameborder="0" id="%UUID%" style="height: %HEIGHT%px; width:%WIDTH%px;"></iframe>'.replace(new RegExp('%HEIGHT%','g'), h).replace(new RegExp('%WIDTH%','g'), w).replace(new RegExp('%URL%', 'g'), url).replace(new RegExp('%UUID%', 'g'), compId+"_iframe"),
@@ -7,6 +7,13 @@ var sm = {
 								text: '  ',
 								button: true
 							}
+			    },events: {
+			        show: function(event, api) {
+			        	if(typeof func == "function" && func() != 'undefined')
+			        	{
+			        		api.tooltip.contents().children("iframe").attr("src",url+func());
+			        	}
+			        }
 			    },position: {
 							at: 'bottom right',
 							my: 'top right'

@@ -105,16 +105,16 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
     {
         String hiddenComponentId = componentId + HIDDEN_COMP;
         StringBuffer script = new StringBuffer();
-        script.append(" jQuery(document).ready(function(){");
-        script.append("var timer =0;");
         UISuggestion sugesstion = (UISuggestion) component;
         if(sugesstion.getClientParametForceId() != null)
-            script.append("var inputClientParameterId = '#"+sugesstion.getClientParametForceId()+"'; var clientParameterId ='"+sugesstion.getClientParametForceId()+"='+jQuery(inputClientParameterId).val();");
+            script.append("function setInputClientParameterId_"+componentId+" (){ var inputClientParameterId = '#"+sugesstion.getClientParametForceId()+"'; return '"+sugesstion.getClientParametForceId()+"='+jQuery(inputClientParameterId).val();};");
+        script.append(" jQuery(document).ready(function(){");
+        script.append("var timer =0;");
         String url = baseUrl + generateQueryStrings(component, componentId)+"&";
         int width = sugesstion.getWidth() == 0 ? 550 : sugesstion.getWidth();
         int height = sugesstion.getHeight() == 0 ? 250 : sugesstion.getHeight();
         if(sugesstion.getClientParametForceId() != null)
-            script.append(String.format("sm.createQtip('%s', '%s' + clientParameterId, %s, %s);", componentId, url, width, height));
+            script.append(String.format("sm.createQtip('%s', '%s', %s, %s, setInputClientParameterId_"+componentId+");", componentId, url, width, height));
         else
             script.append(String.format("sm.createQtip('%s', '%s', %s, %s);", componentId, url, width, height));
         script.append(String.format("jQuery(\"#%s\").keyup(function(){", componentId + HIDDEN_NAME_COMP));
