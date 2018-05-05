@@ -46,7 +46,7 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         ExternalContext external = context.getExternalContext();
         Map requestParams = external.getRequestParameterMap();
         UISuggestion sugesstion = (UISuggestion) component;
-        sugesstion.setClientParametForceId((String) requestParams.get("clientParametForceId"));
+        sugesstion.setClientParametForceId((String) component.getAttributes().get("clientParametForceId"));
         String componentId = (String) sugesstion.getForceId();
         String hiddenComponentId = componentId + HIDDEN_COMP;
         String valueName = (String) requestParams.get(componentId + HIDDEN_NAME_COMP);
@@ -106,9 +106,9 @@ public class SuggestionRendererBase extends HeaderResourcesRendererBase
         String hiddenComponentId = componentId + HIDDEN_COMP;
         StringBuffer script = new StringBuffer();
         UISuggestion sugesstion = (UISuggestion) component;
+        script.append(" jQuery(document).ready(function(){");
         if(sugesstion.getClientParametForceId() != null)
             script.append("function setInputClientParameterId_"+componentId+" (){ var inputClientParameterId = '#"+sugesstion.getClientParametForceId()+"'; return '"+sugesstion.getClientParametForceId()+"='+jQuery(inputClientParameterId).val();};");
-        script.append(" jQuery(document).ready(function(){");
         script.append("var timer =0;");
         String url = baseUrl + generateQueryStrings(component, componentId)+"&";
         int width = sugesstion.getWidth() == 0 ? 550 : sugesstion.getWidth();

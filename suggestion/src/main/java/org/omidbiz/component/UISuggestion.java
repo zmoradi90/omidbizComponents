@@ -4,8 +4,6 @@
 
 package org.omidbiz.component;
 
-import java.util.Map;
-
 import javax.el.ELContext;
 import javax.el.ELException;
 import javax.el.ValueExpression;
@@ -291,7 +289,7 @@ public abstract class UISuggestion extends UIInput
     public Object saveState(FacesContext context)
     {
         Object superState = super.saveState(context);
-        return new Object[] { superState, view, forceId, valueId, valueName };
+        return new Object[] { superState, view, forceId, valueId, valueName, clientParametForceId};
     }
 
     @Override
@@ -304,6 +302,7 @@ public abstract class UISuggestion extends UIInput
         forceId = (String) state[i++];
         valueId = (Object) state[i++];
         valueName = (Object) state[i++];
+        clientParametForceId = (String) state[i++];
     }
 
     public String getClientParametForceId()
