@@ -17,6 +17,7 @@ package org.omidbiz.renderkit;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,18 +49,24 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         
         Object id = new Object();
         Number value = null;
+        String unit = (String) component.getAttributes().get("unit");
         String valueType = (String) component.getAttributes().get("valueType");
         String negativeSummary = (String) component.getAttributes().get("negativeSummary");
         String negativeToggleButtonId = (String) component.getAttributes().get("negativeToggleButtonId");
+        String m = (String) component.getAttributes().get("minuteSummary");
+        String h = (String) component.getAttributes().get("hourSummary");
+        String d = (String) component.getAttributes().get("daySummary");
+        String M = (String) component.getAttributes().get("monthSummary");
+        String y = (String) component.getAttributes().get("yearSummary");
+        String n = (String) component.getAttributes().get("negativeSummary");
+        
         if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
         {
-        	Double doubleValue = (Double) component.getAttributes().get("value");
-            value = Math.round(doubleValue);
+            value = (Double) component.getAttributes().get("value");
         }
         else if(component.getAttributes().get("value")!=null)
         {
-            BigDecimal bigDecimalValue = (BigDecimal)component.getAttributes().get("value");
-            value = Math.round(bigDecimalValue.intValue());
+            value = (BigDecimal)component.getAttributes().get("value");
         }
         else
         {
@@ -101,10 +108,22 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "id",id);
             if(value != null)
             {
-            	if( value.intValue() < 0)
-            		getUtils().writeAttribute(writer, "value","n"+Math.abs(value.intValue())+"h");
-            	else
-            		getUtils().writeAttribute(writer, "value",Math.abs(value.intValue())+"h");
+                String resultValue = "";
+                if( value.doubleValue() < 0)
+                    resultValue = "n";
+                resultValue = String.valueOf(Math.abs(value.doubleValue()));
+                if(m.equals(unit))
+                    resultValue += m;
+                else if(d.equals(unit))
+                    resultValue += d;
+                else if(M.equals(unit))
+                    resultValue += M;
+                else if(y.equals(unit))
+                    resultValue += y;
+                else 
+                    resultValue += h;
+                
+            		getUtils().writeAttribute(writer, "value",resultValue);
             }
             getUtils().writeAttribute(writer, "name",id);
             getUtils().writeAttribute(writer, "class","duration-picker-input");
@@ -178,10 +197,25 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
     }
     public BigDecimal decodeTime(FacesContext context, UIInputDurationPicker component,String enCodeTime){
         
+        String unit = (String) component.getAttributes().get("unit");
         BigDecimal resultTime = BigDecimal.ZERO;
         BigDecimal hourPerDay = new BigDecimal((String) component.getAttributes().get("hourPerDay"));
         BigDecimal dayPerMonth = new BigDecimal((String)component.getAttributes().get("dayPerMonth"));
         BigDecimal monthPerYear = new BigDecimal((String) component.getAttributes().get("monthPerYear"));
+        if(((String) component.getAttributes().get("hourPerDay")).equals("0") ||
+                ((String) component.getAttributes().get("dayPerMonth")).equals("0") || 
+                ((String) component.getAttributes().get("monthPerYear")).equals("0"))
+        {
+            try
+            {
+                throw new Exception("input duration picker: convert unit like hour per day x per y must not be zero");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return new BigDecimal(0);
+        }
         String m = (String) component.getAttributes().get("minuteSummary");
         String h = (String) component.getAttributes().get("hourSummary");
         String d = (String) component.getAttributes().get("daySummary");
@@ -189,27 +223,122 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         String y = (String) component.getAttributes().get("yearSummary");
         String n = (String) component.getAttributes().get("negativeSummary");
         Boolean negativeSignFlag = false;
-        Pattern p = Pattern.compile("(["+n+"])?([0-9]*)(["+y+"|"+M+
+        Pattern p = Pattern.compile("(["+n+"])?([0-9|.|0-9]+)(["+y+"|"+M+
                 "|"+d+"|"+h+"|"+m+
                 "])+", Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(enCodeTime);
         while (matcher.find())
         {
-            if(matcher.group(3).equals(y))
+            if(m.equals(unit))
             {
-                resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay));
+                if(matcher.group(3).equals(y))
+                {
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay).multiply(new BigDecimal(60)));
+                }
+                if(matcher.group(3).equals(M))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(dayPerMonth.multiply(hourPerDay).multiply(new BigDecimal(60)))));
+                }
+                if(matcher.group(3).equals(d))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(hourPerDay).multiply(new BigDecimal(60))));
+                }
+                if(matcher.group(3).equals(h))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                }
             }
-            if(matcher.group(3).equals(M))
+            else if(h.equals(unit))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(dayPerMonth.multiply(hourPerDay))));
+                if(matcher.group(3).equals(y))
+                {
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay));
+                }
+                if(matcher.group(3).equals(M))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(dayPerMonth.multiply(hourPerDay))));
+                }
+                if(matcher.group(3).equals(d))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(hourPerDay)));
+                }
+                if(matcher.group(3).equals(h))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                }
+                if(matcher.group(3).equals(m))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
+                }
             }
-            if(matcher.group(3).equals(d))
+            else if(d.equals(unit))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(hourPerDay)));
+                if(matcher.group(3).equals(y))
+                {
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth));
+                }
+                if(matcher.group(3).equals(M))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).multiply(dayPerMonth)));
+                }
+                if(matcher.group(3).equals(d))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                }
+                if(matcher.group(3).equals(h))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(hourPerDay,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(m))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(hourPerDay,2, RoundingMode.HALF_UP).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
+                }
             }
-            if(matcher.group(3).equals(h))
+            else if(M.equals(unit))
             {
-                resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                if(matcher.group(3).equals(y))
+                {
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear));
+                }
+                if(matcher.group(3).equals(M))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                }
+                if(matcher.group(3).equals(d))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerMonth,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(h))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(m))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
+                }
+            }
+            else if(y.equals(unit))
+            {
+                if(matcher.group(3).equals(y))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2))));
+                }
+                if(matcher.group(3).equals(M))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(d))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(h))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP)));
+                }
+                if(matcher.group(3).equals(m))
+                {
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
+                }
             }
             if(matcher.group(1)!=null && matcher.group(1).equals(n))
             {

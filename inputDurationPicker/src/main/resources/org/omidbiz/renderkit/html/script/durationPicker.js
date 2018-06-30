@@ -1,15 +1,8 @@
 (function($) {
 	$.durationPicker = function(option) {
-		var modeEnum = {
-			both : "both",
-			date : "date",
-			time : "time"
-		}
-
 		var defaults = {
 			id : '#dp',
 			applayButtonCaption : 'apply',
-			mode : modeEnum.both,
 			negativeToggleButtonId : '',
 			negativeSummary : 'n',
 			negativeToggleButtonCaption:'-',
@@ -25,10 +18,11 @@
 			yearSummary : 'y',
 			outPutInputId : '#dpText',
 			closeMessage : 'close',
-			doplicateErrorMessage : 'doplicate',
+			duplicateErrorMessage : 'doplicate',
 			inputFeildErrorClass : 'input-error',
 			durationInputKeyPressCallBackFunc : undefined,
-			showPopupCallBackFunc : undefined
+			showPopupCallBackFunc : undefined,
+			dateInputFormPattern :undefined
 		};
 		var notEmptyOption = {};
 		$.each(option, function(i, val) {
@@ -37,6 +31,8 @@
 			}
 		});
 		var options = $.extend({}, defaults, notEmptyOption);
+		if(options.dateInputFormPattern == undefined)
+			options.dateInputFormPattern = options.yearSummary+","+options.monthSummary+","+options.daySummary+","+options.hourSummary+","+options.minuteSummary;
 		var resutl = 0;
 		var importantName = {
 			popupPostNameId : "Popup"
@@ -51,30 +47,53 @@
 				eventHandler();
 				$("#" + popup).find("[type='day'] input[type='text']").focus();
 			} else {
-				console
-						.error("Duration Picker: use a well formed popup for this plugin!")
+				console.error("Duration Picker: use a well formed popup for this plugin!")
 			}
 		};
 		var renderInsidePopup = function() {
-			var windowPicker = jQuery(renderWrapperPopup());
-			if (modeEnum[options.mode] != "undefined") {
-				if (options.mode == modeEnum.date) {
-					windowPicker.append(renderDateDuration());
-				} else if (options.mode == modeEnum.time) {
-					windowPicker.append(renderTimeDuration());
-				} else {
-					windowPicker.append(renderDateDuration());
-					windowPicker.append(renderTimeDuration());
-					windowPicker.append(renderLegend());
-				}
-			} else {
-				console
-						.error("Duration Picker: you can use only both date or time");
+			var windowPicker = renderWrapperPopup();
+			if(options.dateInputFormPattern == undefined)
+			{
+				console.error("Duration Picker: you can use only both date or time");
+				return;
 			}
-			// windowPicker.append(self.renderButtonPopup());
-			return windowPicker;
+			return jQuery(formDesinger(windowPicker));
 		};
-
+		
+		var formDesinger = function(windowPicker)
+		{
+			var resultForm = "";
+			var dateInputFormArray = options.dateInputFormPattern.split(",");
+			if(dateInputFormArray.length < 0)
+			{
+				console.error("durationPicker: invalid pattern form!");
+				return;
+			}
+			for(var i= 0 ; i < dateInputFormArray.length ; i++)
+			{
+				switch(dateInputFormArray[i])
+				{
+					case options.yearSummary:
+						resultForm += renderYear();
+					break;
+					case options.monthSummary:
+						resultForm += renderMonth();
+						break;
+					case options.daySummary:
+						resultForm += renderDay();
+						break;
+					case options.hourSummary:
+						resultForm += renderHour();
+						break;
+					case options.minuteSummary:
+						resultForm += renderMinute();
+						break;
+				}
+			}
+			windowPicker = windowPicker.replace(":durationFormPlace",resultForm);
+			return windowPicker;
+		}
+		
 		// =============================== Event Handler
 		// ===========================///
 		var eventHandler = function() {
@@ -161,10 +180,10 @@
 			var negativeBtn = options.negativeToggleButtonId!=''? $("#" + popup).find(
 					"#" + options.negativeToggleButtonId):'';
 			var values = [];
-			var regex = "((" + options.negativeSummary + "?[0-9]+("
+			var regex = "(((" + options.negativeSummary + "?([0-9|.|0-9]+)("
 					+ options.yearSummary + "|" + options.monthSummary + "|"
 					+ options.daySummary + "|" + options.hourSummary + "|"
-					+ options.minuteSummary + "){1})){1}";
+					+ options.minuteSummary + "){1})))";
 			var str = $(options.outPutInputId).val();
 			var patt = new RegExp(regex, "g");
 
@@ -181,7 +200,7 @@
 						negativeBtn.removeAttr("active", "true");
 					} else if (result[options.yearSummary] == "DouplicateError") {
 						alert(options.yearCaption + " "
-								+ options.doplicateErrorMessage);
+								+ options.duplicateErrorMessage);
 					}
 				}
 
@@ -192,7 +211,7 @@
 					year.val("");
 				} else if (result[options.yearSummary] == "DouplicateError") {
 					alert(options.yearCaption + " "
-							+ options.doplicateErrorMessage);
+							+ options.duplicateErrorMessage);
 					addFieldError(year);
 				}
 				if (result[options.monthSummary] != undefined
@@ -202,7 +221,7 @@
 					month.val("");
 				} else if (result[options.monthSummary] == "DouplicateError") {
 					alert(options.monthCaption + " "
-							+ options.doplicateErrorMessage);
+							+ options.duplicateErrorMessage);
 					addFieldError(month);
 				}
 				if (result[options.daySummary] != undefined
@@ -212,7 +231,7 @@
 					day.val("");
 				} else if (result[options.daySummary] == "DouplicateError") {
 					alert(options.dayCaption + " "
-							+ options.doplicateErrorMessage);
+							+ options.duplicateErrorMessage);
 					addFieldError(day);
 				}
 				if (result[options.hourSummary] != undefined
@@ -222,7 +241,7 @@
 					hour.val("");
 				} else if (result[options.hourSummary] == "DouplicateError") {
 					alert(options.hourCaption + " "
-							+ options.doplicateErrorMessage);
+							+ options.duplicateErrorMessage);
 					addFieldError(hour);
 				}
 				if (result[options.minuteSummary] != undefined
@@ -232,7 +251,7 @@
 					minute.val("");
 				} else if (result[options.minuteSummary] == "DouplicateError") {
 					alert(options.minuteCaption + " "
-							+ options.doplicateErrorMessage);
+							+ options.duplicateErrorMessage);
 					addFieldError(minute);
 				}
 			} else {
@@ -249,56 +268,49 @@
 		// ============================================////
 		var resutlMapCreator = function(strArray) {
 			if (strArray == undefined)
-				return undefined;
+			{
+				console.error("durationPicker->mapCreator: strArray is undefined ");
+				return;
+			}
 			var resultMap = new Object();
-			for (var i = 0; i < strArray.length; i++) {
-				if ((new RegExp("^" + options.negativeSummary))
-						.test(strArray[i])) {
-					if (resultMap[options.negativeSummary] == undefined)
+			for(var i=0 ; i<strArray.length; i++)
+			{
+					if (strArray[i].search(options.negativeSummary) != -1)
+					{
 						resultMap[options.negativeSummary] = options.negativeSummary;
-					else
+					}
+					else if(strArray[i].search(options.negativeSummary) >= 2)
 						resultMap[options.negativeSummary] = "DouplicateError";
-				}
-				if ((new RegExp("" + options.yearSummary + "(?!(.)+)", "g"))
-						.test(strArray[i])) {
-					if (resultMap[options.yearSummary] == undefined)
-						resultMap[options.yearSummary] = (strArray[i]
-								.match(/[0-9]+/g));
-					else
+					if(strArray[i].search(options.yearSummary) != -1)
+					{
+						resultMap[options.yearSummary] = (strArray[i].match(/[0-9]*(\.)*[0-9]/g));
+					}
+					else if(strArray[i].search(options.yearSummary) >= 2)
 						resultMap[options.yearSummary] = "DouplicateError";
-				}
-				if ((new RegExp("" + options.monthSummary + "(?!(.)+)", "g"))
-						.test(strArray[i])) {
-					if (resultMap[options.monthSummary] == undefined)
-						resultMap[options.monthSummary] = (strArray[i]
-								.match(/[0-9]+/g));
-					else
+					if (strArray[i].search(options.monthSummary) != -1)
+					{
+						resultMap[options.monthSummary] = (strArray[i].match(/[0-9]*(\.)*[0-9]/g));
+					}
+					else if(strArray[i].search(options.monthSummary) >= 2)
 						resultMap[options.monthSummary] = "DouplicateError";
-				}
-				if ((new RegExp("" + options.daySummary + "(?!(.)+)", "g"))
-						.test(strArray[i])) {
-					if (resultMap[options.daySummary] == undefined)
-						resultMap[options.daySummary] = (strArray[i]
-								.match(/[0-9]+/g));
-					else
+					if (strArray[i].search(options.daySummary) != -1)
+					{
+						resultMap[options.daySummary] = (strArray[i].match(/[0-9]*(\.)*[0-9]/g));
+					}
+					else if(strArray[i].search(options.daySummary) >= 2)
 						resultMap[options.daySummary] = "DouplicateError";
-				}
-				if ((new RegExp("" + options.hourSummary + "(?!(.)+)", "g"))
-						.test(strArray[i])) {
-					if (resultMap[options.hourSummary] == undefined)
-						resultMap[options.hourSummary] = (strArray[i]
-								.match(/[0-9]+/g));
-					else
+					if (strArray[i].search(options.hourSummary) != -1)
+					{
+						resultMap[options.hourSummary] = (strArray[i].match(/[0-9]*(\.)*[0-9]/g));
+					}
+					else if(strArray[i].search(options.hourSummary) >= 2)
 						resultMap[options.hourSummary] = "DouplicateError";
-				}
-				if ((new RegExp("" + options.minuteSummary + "(?!(.)+)", "g"))
-						.test(strArray[i])) {
-					if (resultMap[options.minuteSummary] == undefined)
-						resultMap[options.minuteSummary] = (strArray[i]
-								.match(/[0-9]+/g));
-					else
+					if (strArray[i].search(options.minuteSummary) != -1)
+					{
+						resultMap[options.minuteSummary] = (strArray[i].match(/[0-9]*(\.)*[0-9]/g));
+					}
+					else if(strArray[i].search(options.minuteSummary) >= 2)
 						resultMap[options.minuteSummary] = "DouplicateError";
-				}
 			}
 			return resultMap;
 
@@ -311,7 +323,7 @@
 						(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true))
 						||
 						// Allow: home, end, left, right, down, up
-						(e.keyCode >= 35 && e.keyCode <= 40)) {
+						(e.keyCode >= 35 && e.keyCode <= 40 || e.keyCode == 110 || e.keyCode == 190 )) {
 					// let it happen, don't do anything
 					return;
 				}
@@ -320,7 +332,9 @@
 						&& (e.keyCode < 96 || e.keyCode > 105)) {
 					e.preventDefault()
 				}
-			} else {
+			} 
+			else 
+			{
 				// Ensure that it is a number and stop the keypress
 				if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57))
 						&& (e.keyCode < 96 || e.keyCode > 105)) {
@@ -335,24 +349,33 @@
 		};
 		var renderWrapperPopup = function() {
 			return wrapper = "<div id='" + popup
-					+ "' class='duration-picker-popup'></div>";
+					+ "' class='duration-picker-popup'><div class='row'>:durationFormPlace"+renderNegativeButton()+"</div></div>";
 		};
-		var renderTimeDuration = function(hourCaption, minuteCapation) {
-			return timeDuration = "<div class='row'><div class='col s4' type='minute'><div class='label'>"
+		var renderMinute = function() {
+			return timeDuration = "<div class='col s4' type='minute'><div class='label'>"
 					+ options.minuteCaption
-					+ "</div><input type='text' /></div><div class='col s4' type='hour'><div class='label'>"
-					+ options.hourCaption
-					+ "</div><input type='text' /></div><div class='col s4'>"
-					+ renderNegativeButton() + "</div></div>";
+					+ "</div>"
+					+ "<input type='text' /></div>";
 		};
-		var renderDateDuration = function(yearCaption, monthCaption, dayCaption) {
-			return dateDuration = "<div class='row'><div class='col s4' type='day'><div class='label'>"
-					+ options.dayCaption
-					+ "</div><input type='text' /></div><div class='col s4' type='month'><div class='label'>"
-					+ options.monthCaption
-					+ "</div><input type='text' /></div><div class='col s4' type='year'><div class='label'>"
+		var renderHour = function() {
+			return timeDuration = "<div class='col s4' type='hour'><div class='label'>"
+				+ options.hourCaption
+				+ "</div><input type='text' /></div>";
+		};
+		var renderDay = function() {
+			return dateDuration = "<div class='col s4' type='day'><div class='label'>"
+				+ options.dayCaption
+				+ "</div><input type='text' /></div>";
+		};
+		var renderMonth = function() {
+			return dateDuration = "<div class='col s4' type='month'><div class='label'>"
+				+ options.monthCaption
+				+ "</div><input type='text' /></div>";
+		};
+		var renderYear = function() {
+			return dateDuration = "<div class='col s4' type='year'><div class='label'>"
 					+ options.yearCaption
-					+ "</div><input type='text' /></div></div>";
+					+ "</div><input type='text' /></div>";
 		};
 		var renderLegend = function() {
 			return legend = "<div class='col s4' type='legend'></div>";

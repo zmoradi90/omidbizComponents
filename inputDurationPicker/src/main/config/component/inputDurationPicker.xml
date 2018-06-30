@@ -37,6 +37,14 @@
 			</description>
 		</property>	
 		<property>
+			<name>unit</name>
+			<classname>java.lang.Object</classname>
+			<description>
+				you can  change calculation unit by changing this value any summary can be used default value is 'h' hour   
+			</description>
+			<defaultvalue>"h"</defaultvalue>
+		</property>	
+		<property>
 			<name>valueType</name>
 			<classname>java.lang.String</classname>
 			<description>
@@ -60,10 +68,10 @@
 			<defaultvalue>"23"</defaultvalue>
 		</property>		
 		<property>
-			<name>mode</name>
-			<classname>java.lang.Integer</classname>
+			<name>dateInputFormPattern</name>
+			<classname>java.lang.String</classname>
 			<description>
-				with this component you can input duration as time, date or both. mode parameter can help you to switch between these modes
+				with this component you can control input duration picker form attention: you must you summary for indicating form items eg: with default summary y, M, d will display date and h.m will display time
 			</description>
 		</property>		
 		<property>
@@ -116,7 +124,7 @@
 			<name>hourPerDay</name>
 			<classname>java.lang.String</classname>
 			<description>
-				set hour per day the default value is 8
+				set hour per day the default value is 9
 			</description>
 			<defaultvalue>"9"</defaultvalue>
 		</property>			

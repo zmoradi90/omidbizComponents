@@ -12,7 +12,7 @@
 	<f:clientid var="clientId" />
 	<h:styles>css/inputDurationPicker.css</h:styles>
 	<h:scripts>script/inputDurationPicker.js</h:scripts>
-	<c:set var="mode" value="#{component.attributes['mode']}"/>
+	<c:set var="dateInputFormPattern" value="#{component.attributes['dateInputFormPattern']}"/>
 	<c:set var="minuteSummary" value="#{component.attributes['minuteSummary']}"/>
 	<c:set var="minuteCaption" value="#{component.attributes['minuteCaption']}"/>
 	<c:set var="hourSummary" value="#{component.attributes['hourSummary']}"/>
@@ -34,7 +34,7 @@
 	<script type="text/javascript">
 			function durationInit#{negativeToggleButtonId}(event,elm){
 						
-						    var mode="#{mode}";
+						    var dateInputFormPattern="#{dateInputFormPattern}";
 							var minuteSummary="#{minuteSummary}";
 						    var minuteCaption="#{minuteCaption}";
 						    var hourSummary="#{hourSummary}";
@@ -81,7 +81,7 @@
 							var splitedId = clientId.split("Dp")[0];
 							jQuery.durationPicker({
 								id:"#"+clientId,
-				                mode:mode,
+								dateInputFormPattern:dateInputFormPattern,
 				                negativeToggleButtonId:negativeToggleButtonId,
 				                negativeSummary:negativeSummary,
 				                minuteSummary:minuteSummary,
