@@ -1,0 +1,13 @@
+.date-picker {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 0 1px 1px rgba(153, 153, 153, 0.3);
+	min-height: 25px;
+	width: auto;
+	background: #fff none repeat scroll 0 0;
+	width: calc(100% - 5%);
+}
+.calendar-icon ,.date-remove-icon {
+	text-align: center !important;
+	width:22px !important;
+}

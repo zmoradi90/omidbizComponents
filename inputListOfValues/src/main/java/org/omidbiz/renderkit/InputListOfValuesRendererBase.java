@@ -191,12 +191,30 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
              * name="#{objectName}Name" id="#{objectName}Name"
              * value="#{this:getValueName(context, component)}"/>
              */
+            writer.startElement("div", null);
+            getUtils().writeAttribute(writer, "class", "lov-component row");
+            /*
+             * <img style="border: 0;vertical-align: middle;cursor: pointer;"
+             * alt="clear" src="#{removeIcon}"
+             * onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"
+             * />
+             */
+            writer.startElement("div", null);
+            getUtils().writeAttribute(writer, "class", "remove-icon col");
+            writer.startElement("img", null);
+            getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;cursor: pointer;");
+            getUtils().writeAttribute(writer, "alt", "clear");
+            getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon"));
+            getUtils().writeAttribute(writer, "onclick", String.format("Richfaces.colorboxControl.removeValue('%s');", objectNameAttr));
+            writer.endElement("img");
+            writer.endElement("div");
+            
             writer.startElement("input", null);
             if (autocompleteUrl == null)
                 getUtils().writeAttribute(writer, "readonly", "readonly");
             if (onchange != null)
                 getUtils().writeAttribute(writer, "onchange", onchange);
-            getUtils().writeAttribute(writer, "class", objectNameAttr + "Name");
+            getUtils().writeAttribute(writer, "class", objectNameAttr + "Name" );
             if (title != null)
                 getUtils().writeAttribute(writer, "title", title);
             getUtils().writeAttribute(writer, "type", "text");
@@ -209,6 +227,8 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             
             // <a rel="rel#{objectName}" class="#{objectName}lovClass"
             // href='#{this:getViewObjectName(context, component)}'>
+            writer.startElement("div", null);
+            getUtils().writeAttribute(writer, "class", "lov-icon col");
             writer.startElement("a", null);
             getUtils().writeAttribute(writer, "rel", "rel" + objectNameAttr);
             getUtils().writeAttribute(writer, "class", objectNameAttr + "lovClass");
@@ -221,18 +241,9 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;cursor: pointer;");
             writer.endElement("img");
             writer.endElement("a");
-            /*
-             * <img style="border: 0;vertical-align: middle;cursor: pointer;"
-             * alt="clear" src="#{removeIcon}"
-             * onclick="Richfaces.colorboxControl.removeValue('#{objectName}');"
-             * />
-             */
-            writer.startElement("img", null);
-            getUtils().writeAttribute(writer, "style", "border: 0;vertical-align: middle;cursor: pointer;");
-            getUtils().writeAttribute(writer, "alt", "clear");
-            getUtils().writeAttribute(writer, "src", variables.getVariable("removeIcon"));
-            getUtils().writeAttribute(writer, "onclick", String.format("Richfaces.colorboxControl.removeValue('%s');", objectNameAttr));
-            writer.endElement("img");
+            writer.endElement("div");
+            writer.endElement("div");
+           
         }
     }
 
