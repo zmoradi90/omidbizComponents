@@ -10,7 +10,8 @@
 	baseclass="org.omidbiz.renderkit.InputNumericRendererBase"
 	component="org.omidbiz.component.UIInputNumeric">
 	<h:styles>
-		css/inputNumeric.css
+		css/inputNumeric.css,
+		css/inputnumericstyles.css
 	</h:styles>
 	<f:clientid var="clientId" />
 
@@ -32,16 +33,31 @@
 			String forceId = (String) variables.getVariable("forceId");
 			Boolean calculator = (Boolean) variables.getVariable("calculator");
 			Boolean putDefaultZero = (Boolean) variables.getVariable("putDefaultZero");
+			String unitLabel = (String) variables.getVariable("unitLabel");
 			
 ]]>
 </jsp:scriptlet>
 
 <jsp:scriptlet><![CDATA[ if ( forceId != null && forceId.length() > 0 ) { ]]></jsp:scriptlet>
+	<jsp:scriptlet><![CDATA[ if(unitLabel != null) { ]]></jsp:scriptlet>
+	<span style="position:relative">
+		<input id="#{forceId}" name="#{forceId}" type="text"
+			value="#{this:getValueAsString(context, component)}"
+			class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+			<div class="input-label col">
+				<div class="rial-unit-label">#{unitLabel}</div>
+			</div>
+	</span>
+	<jsp:scriptlet><![CDATA[ }else { ]]></jsp:scriptlet>
+			
+				<input id="#{clientId}" name="#{clientId}" type="text"
+				value="#{this:getValueAsString(context, component)}"
+				class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+				<div class="input-label col">
+				<div class="rial-unit-label">#{unitLabel}</div>
+				</div>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 	
-	<input id="#{forceId}" name="#{forceId}" type="text"
-		value="#{this:getValueAsString(context, component)}"
-		class="myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
-		<div class="rial-unit-label">#{unitLabel}</div>
 	<jsp:scriptlet><![CDATA[ if ( putDefaultZero != null && putDefaultZero) { ]]></jsp:scriptlet>
 		<script>
 			jQuery(document).ready(function(){
@@ -66,11 +82,24 @@
 		</script>
 		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-
-<input id="#{clientId}" name="#{clientId}" type="text"
-		value="#{this:getValueAsString(context, component)}"
-		class="myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
-		<div class="rial-unit-label">#{unitLabel}</div>
+	<jsp:scriptlet><![CDATA[ if(unitLabel != null) { ]]></jsp:scriptlet>
+	<span style="position:relative">
+		<input id="#{clientId}" name="#{clientId}" type="text"
+			value="#{this:getValueAsString(context, component)}"
+			class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+			<div class="input-label col">
+			<div class="rial-unit-label">#{unitLabel}</div>
+			</div>
+	</span>
+	<jsp:scriptlet><![CDATA[ }else { ]]></jsp:scriptlet>
+			
+				<input id="#{clientId}" name="#{clientId}" type="text"
+				value="#{this:getValueAsString(context, component)}"
+				class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+				<div class="input-label col">
+				<div class="rial-unit-label">#{unitLabel}</div>
+				</div>
+	<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 		<jsp:scriptlet><![CDATA[ if ( putDefaultZero != null && putDefaultZero) { ]]></jsp:scriptlet>
 			<script>
 				jQuery(document).ready(function(){

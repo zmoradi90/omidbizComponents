@@ -1,0 +1,15 @@
+.input-numeric{
+	width:100%;
+}
+.input-label{
+	text-align: center !important;
+	left: 13px;
+    position: absolute;
+    padding: 4.5px 0 !important;
+    white-space: nowrap;
+    max-width: 95px !important; 
+	width: auto;
+}
+.rial-unit-label {
+    margin-top: 5px;
+}
