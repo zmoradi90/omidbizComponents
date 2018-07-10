@@ -40,14 +40,14 @@
 
 <jsp:scriptlet><![CDATA[ if ( forceId != null && forceId.length() > 0 ) { ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[ if(unitLabel != null) { ]]></jsp:scriptlet>
-	<span style="position:relative">
+	<div style="position: relative;">
 		<input id="#{forceId}" name="#{forceId}" type="text"
 			value="#{this:getValueAsString(context, component)}"
 			class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
 			<div class="input-label col">
 				<div class="rial-unit-label">#{unitLabel}</div>
 			</div>
-	</span>
+	</div>
 	<jsp:scriptlet><![CDATA[ }else { ]]></jsp:scriptlet>
 			
 				<input id="#{clientId}" name="#{clientId}" type="text"
@@ -83,14 +83,14 @@
 		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
 	<jsp:scriptlet><![CDATA[ if(unitLabel != null) { ]]></jsp:scriptlet>
-	<span style="position:relative">
+	<div style="position: relative;">
 		<input id="#{clientId}" name="#{clientId}" type="text"
 			value="#{this:getValueAsString(context, component)}"
 			class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
 			<div class="input-label col">
 			<div class="rial-unit-label">#{unitLabel}</div>
 			</div>
-	</span>
+	</div>
 	<jsp:scriptlet><![CDATA[ }else { ]]></jsp:scriptlet>
 			
 				<input id="#{clientId}" name="#{clientId}" type="text"
