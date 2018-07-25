@@ -51,7 +51,6 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         Number value = null;
         String unit = (String) component.getAttributes().get("unit");
         String valueType = (String) component.getAttributes().get("valueType");
-        String negativeSummary = (String) component.getAttributes().get("negativeSummary");
         String negativeToggleButtonId = (String) component.getAttributes().get("negativeToggleButtonId");
         String m = (String) component.getAttributes().get("minuteSummary");
         String h = (String) component.getAttributes().get("hourSummary");
@@ -60,6 +59,10 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         String y = (String) component.getAttributes().get("yearSummary");
         String n = (String) component.getAttributes().get("negativeSummary");
         
+        if("Integer".equals(valueType) && component.getAttributes().get("value")!=null)
+        {
+            value = Integer.valueOf((String)component.getAttributes().get("value"));
+        }
         if("Double".equals(valueType) && component.getAttributes().get("value")!=null)
         {
             value = (Double) component.getAttributes().get("value");
@@ -185,6 +188,10 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         if (submittedValue != null)
         {
             String valueType = (String) component.getAttributes().get("valueType");
+            if(("Integer").equals(valueType))
+            {
+                inputDurationPicker.setSubmittedValue(decodeTime(context,inputDurationPicker,submittedValue).intValue());
+            }
             if(("Double").equals(valueType))
             {
                 inputDurationPicker.setSubmittedValue(decodeTime(context,inputDurationPicker,submittedValue).doubleValue());
@@ -202,6 +209,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         BigDecimal hourPerDay = new BigDecimal((String) component.getAttributes().get("hourPerDay"));
         BigDecimal dayPerMonth = new BigDecimal((String)component.getAttributes().get("dayPerMonth"));
         BigDecimal monthPerYear = new BigDecimal((String) component.getAttributes().get("monthPerYear"));
+        BigDecimal dayPerYear = new BigDecimal((String)component.getAttributes().get("dayPerYear"));
         if(((String) component.getAttributes().get("hourPerDay")).equals("0") ||
                 ((String) component.getAttributes().get("dayPerMonth")).equals("0") || 
                 ((String) component.getAttributes().get("monthPerYear")).equals("0"))
@@ -233,7 +241,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             {
                 if(matcher.group(3).equals(y))
                 {
-                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay).multiply(new BigDecimal(60)));
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(dayPerYear).multiply(hourPerDay).multiply(new BigDecimal(60)));
                 }
                 if(matcher.group(3).equals(M))
                 {
@@ -252,7 +260,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             {
                 if(matcher.group(3).equals(y))
                 {
-                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth).multiply(hourPerDay));
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(dayPerYear).multiply(hourPerDay));
                 }
                 if(matcher.group(3).equals(M))
                 {
@@ -275,7 +283,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
             {
                 if(matcher.group(3).equals(y))
                 {
-                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(monthPerYear).multiply(dayPerMonth));
+                    resultTime =  resultTime.add(new BigDecimal(matcher.group(2)).multiply(dayPerYear));
                 }
                 if(matcher.group(3).equals(M))
                 {
@@ -329,15 +337,15 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
                 }
                 if(matcher.group(3).equals(d))
                 {
-                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP)));
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerYear,2, RoundingMode.HALF_UP)));
                 }
                 if(matcher.group(3).equals(h))
                 {
-                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP)));
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerYear,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP)));
                 }
                 if(matcher.group(3).equals(m))
                 {
-                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(monthPerYear,2, RoundingMode.HALF_UP).divide(dayPerMonth,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
+                    resultTime =  resultTime.add((new BigDecimal(matcher.group(2)).divide(dayPerYear,2, RoundingMode.HALF_UP).divide(hourPerDay,2, RoundingMode.HALF_UP).divide(new BigDecimal(60),2, RoundingMode.HALF_UP)));
                 }
             }
             if(matcher.group(1)!=null && matcher.group(1).equals(n))

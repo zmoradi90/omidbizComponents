@@ -1,8 +1,9 @@
 .duration-picker-popup {
-	height: 150px;
-	width: 300px;
-	padding: 10px;
-	box-sizing: border-box;
+    box-sizing: border-box;
+    float: right;
+    padding-bottom: 11px;
+    padding-top: 10px;
+    width: 300px;
 }
 
 .duration-picker-popup .label {
