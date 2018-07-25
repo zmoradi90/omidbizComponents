@@ -28,6 +28,7 @@
 			<description>
 				can be set if you need to use a specific id
 			</description>
+			<required>true</required>
 		</property>
 		<property>
 			<name>value</name>
@@ -173,7 +174,15 @@
 				set month per year the default value is 12
 			</description>
 			<defaultvalue>"12"</defaultvalue>
-		</property>			
+		</property>
+		<property>
+			<name>dayPerYear</name>
+			<classname>java.lang.String</classname>
+			<description>
+				set hour per day the default value is 365
+			</description>
+			<defaultvalue>"365"</defaultvalue>
+		</property>					
 		<property>
 			<name>yearSummary</name>
 			<classname>java.lang.String</classname>
