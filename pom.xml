@@ -133,6 +133,7 @@
     <module>autoSaveTextArea</module>
     <module>inputDurationPicker</module>
     <module>inputLinkedCalculation</module>
+    <module>rangePicker</module>
 
   </modules>
   <build>

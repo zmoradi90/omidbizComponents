@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:jsp=" http://ajax4jsf.org/cdk/jsp"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.omidbiz.renderkit.html.RangePickerRenderer"
+	baseclass="org.omidbiz.renderkit.RangePickerRenderBase"
+	component="org.omidbiz.component.UIRangePicker" 
+	>
+	<h:scripts>
+		script/rangePicker.js
+	</h:scripts>
+	<h:styles>
+		css/rangePicker.css
+	</h:styles>
+	<f:clientid var="clientId"/>
+	<c:set var="min" value="#{component.attributes['min']}"/>
+	<c:set var="max" value="#{component.attributes['max']}"/>
+	<c:set var="startValue" value="#{component.attributes['startValue']}"/>
+	<c:set var="endValue" value="#{component.attributes['endValue']}"/>
+	<c:set var="connect" value="#{component.attributes['connect']}"/>
+	<c:set var="step" value="#{component.attributes['step']}"/>
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+	var slider = document.getElementById('test-slider');
+	  noUiSlider.create(slider, {
+	   start: [#{startValue},#{endValue}],
+	   connect:#{connect},
+	   step: #{step},
+	   orientation: 'horizontal', // 'horizontal' or 'vertical'
+	   range: {
+	     'min':#{min},
+	     'max':#{max}
+	   },
+	   format: wNumb({
+	     decimals: 100
+	   })
+	  });
+	});
+	</script>
+	<f:call name="initializeMask">
+	
+		<vcp:body></vcp:body>
+	
+	</f:call>
+	
+</f:root>

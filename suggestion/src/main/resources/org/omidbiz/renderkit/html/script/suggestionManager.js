@@ -15,8 +15,7 @@ var sm = {
 			        	}
 			        }
 			    },position: {
-							at: 'bottom right',
-							my: 'top right'
+							viewport: jQuery(window)
 						},
 						show: 'focus',
 						hide: 'unfocus',

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//AJAX4JSF//CDK Generator config/EN"  "http://labs.jboss.com/jbossrichfaces/component-config.dtd">
+
+<components>
+	<component>
+		<name>org.omidbiz.RangePicker</name>
+		<family>org.omidbiz.RangePicker</family>
+		<classname>org.omidbiz.component.html.HtmlRangePicker</classname>
+		<superclass>org.omidbiz.component.UIRangePicker</superclass>
+		<description>
+			<![CDATA[
+    ]]>
+		</description>
+		<renderer generate="true" override="true">
+			<name>org.omidbiz.RangePickerRenderer</name>
+			<template>org/omidbiz/htmlRangePicker.jspx</template>
+		</renderer>
+		<tag>
+			<name>rangePicker</name>
+			<classname>org.omidbiz.taglib.RangePickerTag</classname>
+			<superclass>
+				org.ajax4jsf.webapp.taglib.HtmlComponentTagBase
+			</superclass>
+		</tag>
+		<property>
+			<name>min</name>
+			<classname>double</classname>
+			<defaultvalue>0</defaultvalue>
+			<description>
+				The minimum value that this range could be
+			</description>
+		</property>
+		
+		<property>
+			<name>max</name>
+			<classname>double</classname>
+			<defaultvalue>100</defaultvalue>
+			<description>
+				The maximum value that this period could be
+			</description>
+		</property>
+		
+		<property>
+			<name>startValue</name>
+			<classname>double</classname>
+			<defaultvalue>20</defaultvalue>
+			<description>
+				Default start value
+			</description>
+		</property>
+		
+		<property>
+			<name>endValue</name>
+			<classname>double</classname>
+			<defaultvalue>80</defaultvalue>
+			<description>
+				Default end value
+			</description>
+		</property>
+		
+		<property>
+			<name>connect</name>
+			<classname>boolean</classname>
+			<defaultvalue>true</defaultvalue>
+			<description>
+				can be true or false 
+			</description>
+		</property>
+		
+		<property>
+			<name>step</name>
+			<classname>int</classname>
+			<defaultvalue>1</defaultvalue>
+			<description>
+			</description>
+		</property>
+		
+	</component>
+</components>

@@ -30,18 +30,15 @@
 
 	.qtip-content{
 		position: relative;
-		padding: 5px 9px;
 		overflow: hidden;
-
 		text-align: left;
 		word-wrap: break-word;
 	}
 
 	.qtip-titlebar{
 		position: relative;
-		padding: 5px 35px 5px 10px;
+		padding: 10px 35px 10px 10px;
 		overflow: hidden;
-
 		border-width: 0 0 1px;
 		font-weight: bold;
 	}
@@ -62,7 +59,7 @@
 
 		.qtip-titlebar .qtip-close{
 			right: 4px; top: 50%;
-			margin-top: -9px;
+			margin-top: -7px;
 		}
 
 		* html .qtip-titlebar .qtip-close{ top: 16px; } /* IE fix */
@@ -84,11 +81,10 @@
 			.qtip-icon .ui-icon{
 				width: 18px;
 				height: 14px;
-
 				line-height: 14px;
 				text-align: center;
 				text-indent: 0;
-				font: normal bold 10px/13px Tahoma,sans-serif;
+				font: normal bold 14px/17px Tahoma,sans-serif;
 
 				color: inherit;
 				background: transparent none no-repeat -100em -100em;
