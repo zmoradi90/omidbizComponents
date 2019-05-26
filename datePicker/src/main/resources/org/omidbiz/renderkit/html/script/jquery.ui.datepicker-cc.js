@@ -319,9 +319,9 @@ jQuery.extend(Datepicker.prototype, {
 			this._pos = // should use actual width/height below
 				[(browserWidth / 2) - 100 + scrollX, (browserHeight / 2) - 150 + scrollY];
 		}
-
+		
 		// move input on screen for focus, but hidden behind dialog
-		this._dialogInput.css('left', (this._pos[0] + 20) + 'px').css('top', this._pos[1] + 'px');
+		this._dialogInput.css('left', (this._pos[0] + 20) + 'px').css('top', this._pos[1]+ 'px');
 		inst.settings.onSelect = onSelect;
 		this._inDialog = true;
 		this.dpDiv.addClass(this._dialogClass);
@@ -660,13 +660,6 @@ jQuery.extend(Datepicker.prototype, {
 		inst.dpDiv.css({position: (jQuery.datepicker._inDialog && jQuery.blockUI ?
 			'static' : (isFixed ? 'fixed' : 'absolute')), display: 'none',
 			left: offset.left + 'px', top: offset.top + 'px'});
-//shk customize positioning 
-		var elementOffset = offset.top + Number(inst.dpDiv.height());
-		var elementNewPos = offset.top - Number(inst.dpDiv.height()+inst.input.outerHeight());
-		if(elementOffset >jQuery(window).height())
-		{
-			inst.dpDiv.css("top",elementNewPos+"px");
-		}
 		if (!inst.inline) {
 			var showAnim = jQuery.datepicker._get(inst, 'showAnim');
 			var duration = jQuery.datepicker._get(inst, 'duration');

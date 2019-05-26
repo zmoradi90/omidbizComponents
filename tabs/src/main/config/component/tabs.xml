@@ -27,6 +27,7 @@
             <name>active</name>
             <classname>int</classname>
             <description>
+             You can say which tab is the default or active tab.To go to the first tab by default, the param must be -1
                 
             </description>
         </property>

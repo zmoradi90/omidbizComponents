@@ -4,7 +4,7 @@
 .input-label{
 	text-align: center !important;
 	left: 13px;
-    position: absolute;
+    position: relative;
     padding: 4.5px 0 !important;
     white-space: nowrap;
     max-width: 95px !important; 
@@ -12,6 +12,7 @@
 }
 .rial-unit-label {
 	margin-top: -5px !important;
-    position: relative;
-    top: 5px;
+    position: absolute;
+    top: 9px;
+	left: -8px;
 }

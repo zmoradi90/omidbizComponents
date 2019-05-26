@@ -79,7 +79,6 @@
 			<description>
 				Defines a title of the component
 			</description>
-			<defaultvalue>&quot;inputDate&quot;</defaultvalue>
 		</property>
 		<property>
 			<name>styleClass</name>
@@ -158,6 +157,24 @@
 				this property put a zero in text input when it's data is null
 			</description>
 			<defaultvalue>true</defaultvalue>
-		</property>		
+		</property>
+		<property>
+			<name>switchInput</name>
+			<classname>java.lang.Boolean</classname>
+			<description>
+				true or false; If there are two related inputs,then this attribute must be true,
+				Default is : false
+			</description>
+			<defaultvalue>false</defaultvalue>
+		</property>	
+		<property>
+			<name>autocomplete</name>
+			<classname>java.lang.String</classname>
+			<description>
+				off or on; To display or hide suggestion in inputNumeric,
+				Default is : on
+			</description>
+			<defaultvalue>"on"</defaultvalue>
+		</property>
 	</component>
 </components>

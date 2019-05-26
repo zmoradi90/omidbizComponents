@@ -91,7 +91,7 @@ public class InputDurationPickerRenderBase extends HeaderResourcesRendererBase
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "class","duration-picker");
-        getUtils().writeAttribute(writer, "style","width:"+wrapperWidth+";");
+        getUtils().writeAttribute(writer, "style","width:"+wrapperWidth+"px;");
         writer.startElement("div", null);
         getUtils().writeAttribute(writer, "id",id+"Dp");
         getUtils().writeAttribute(writer, "onclick","durationInit"+negativeToggleButtonId+"(event,this)");

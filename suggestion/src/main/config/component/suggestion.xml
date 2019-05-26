@@ -89,7 +89,6 @@
 			<name>width</name>
 			<classname>int</classname>			
 			<description>
-				
 			</description>		
 			<defaultvalue>550</defaultvalue>	
 		</property>

@@ -226,7 +226,27 @@
 				you can set error class style for related inputs
 			</description>
 		</property>	
-
+		<property>
+			<name>onEndEditing</name>
+			<classname>java.lang.String</classname>
+			<description>
+				this is a call back function that you can use when onBlur input text
+			</description>
+		</property>	
+		<property>
+			<name>onEditing</name>
+			<classname>java.lang.String</classname>
+			<description>
+				when your are editing duration dialog inputs you can access inputOutput object 
+			</description>
+		</property>	
+		<property>
+			<name>hintMsg</name>
+			<classname>java.lang.String</classname>
+			<description>
+				you can write something in duration picker dialog
+			</description>
+		</property>	
 		
 	</component>
 </components>

@@ -22,7 +22,10 @@
 			inputFeildErrorClass : 'input-error',
 			durationInputKeyPressCallBackFunc : undefined,
 			showPopupCallBackFunc : undefined,
-			dateInputFormPattern :undefined
+			onEndEditing : undefined,
+			onEditing : undefined,
+			dateInputFormPattern :undefined,
+			hintMsg:""
 		};
 		var notEmptyOption = {};
 		$.each(option, function(i, val) {
@@ -90,6 +93,8 @@
 						break;
 				}
 			}
+			if(options.hintMsg != "")
+				resultForm += renderHintMsg();
 			windowPicker = windowPicker.replace(":durationFormPlace",resultForm);
 			return windowPicker;
 		}
@@ -104,6 +109,8 @@
 				if (typeof durationInputKeyPressCallBackFunc == "function")
 					durationInputKeyPressCallBackFunc(e);
 				bindDuration();
+				if(typeof options.onEditing == "function")
+					options.onEditing($(options.outPutInputId));
 			});
 			allInputs.on("keydown", function(e) {
 				inputDurationNumberOnly(e, "keydown");
@@ -113,6 +120,8 @@
 			});
 			$(options.outPutInputId).on("blur", function() {
 				bindDuration();
+				if(typeof options.onEndEditing == "function")
+					options.onEndEditing($(this));
 			});
 			if(options.negativeToggleButtonId != '')
 			{
@@ -379,6 +388,9 @@
 		};
 		var renderLegend = function() {
 			return legend = "<div class='col s4' type='legend'></div>";
+		};
+		var renderHintMsg = function(){
+			return "<div class='col s12'><div class='col s2'><div class='round-question-mark'>?</div></div><div class='col s10' style='padding-top: 12px; height: 50px; overflow: auto;'>"+options.hintMsg+"</div></div>";
 		};
 		var renderNegativeButton = function() {
 			return options.negativeToggleButtonId != '' ? "<div id="

@@ -222,6 +222,7 @@ public class InputListOfValuesRendererBase extends HeaderResourcesRendererBase
             getUtils().writeAttribute(writer, "name", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "id", objectNameAttr + "Name");
             getUtils().writeAttribute(writer, "value", getValueName(context, component));
+            getUtils().writeAttribute(writer, "class", styleClass);
             writer.endElement("input");
             //
             

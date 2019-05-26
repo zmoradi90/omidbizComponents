@@ -24,8 +24,13 @@
 	<c:set var="calculator" value="#{component.attributes['calculator']}"/>
 	<c:set var="onCloseCal" value="#{component.attributes['onCloseCal']}"/>
 	<c:set var="putDefaultZero" value="#{component.attributes['putDefaultZero']}"/>
-
+	<c:set var="onkeypress" value="#{component.attributes['onkeypress']}"/>
+	<c:set var="onkeydown" value="#{component.attributes['onkeydown']}"/>
+	<c:set var="onkeyup" value="#{component.attributes['onkeyup']}"/>
+	<c:set var="title" value="#{component.attributes['title']}"/>
 	<c:set var="inputClass" value="#{component.attributes['inputClass']}"/>
+	<c:set var="switchInput" value="#{component.attributes['switchInput']}"/>
+	<c:set var="autocomplete" value="#{component.attributes['autocomplete']}"/>
 	<f:resource name="org/omidbiz/images/calculator.svg" var="btnImage" />
 	
 	<jsp:scriptlet>
@@ -34,19 +39,47 @@
 			Boolean calculator = (Boolean) variables.getVariable("calculator");
 			Boolean putDefaultZero = (Boolean) variables.getVariable("putDefaultZero");
 			String unitLabel = (String) variables.getVariable("unitLabel");
+			Boolean switchInput = (Boolean) variables.getVariable("switchInput");
+			String autocomplete = (String) variables.getVariable("autocomplete");
 			
 ]]>
 </jsp:scriptlet>
-
-<jsp:scriptlet><![CDATA[ if ( forceId != null && forceId.length() > 0 ) { ]]></jsp:scriptlet>
-	<div style="position: relative;">
-		<input id="#{forceId}" name="#{forceId}" type="text"
-			value="#{this:getValueAsString(context, component)}"
-			class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
-			<div class="input-label col">
+<jsp:scriptlet><![CDATA[ if ( forceId != null && forceId.length() > 0 && switchInput == true) { ]]></jsp:scriptlet>
+		<input id="#{forceId}" name="#{forceId}" type="text" onkeypress="#{onkeypress}" onkeydown="#{onkeydown}" onkeyup="#{onkeyup}"
+			value="#{this:getValueAsString(context, component)}" title="#{title}" autocomplete="#{autocomplete}"
+			class="myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
 				<div class="rial-unit-label">#{unitLabel}</div>
-			</div>
-	</div>
+	<jsp:scriptlet><![CDATA[ if ( putDefaultZero != null && putDefaultZero) { ]]></jsp:scriptlet>
+		<script>
+			jQuery(document).ready(function(){
+				var forceId = '#{this:getInputId(context, component)}';
+				if(jQuery(forceId).val()=="")
+				{
+					jQuery(forceId).val(0);
+				}
+				jQuery(forceId).on("blur",function(){
+					if(jQuery(forceId).val()=="")
+					{
+						jQuery(forceId).val(0);
+					}
+				});
+				jQuery(forceId).on("focus",function(){
+					if(jQuery(forceId).val()=="0")
+					{
+						jQuery(forceId).val("");
+					}
+				});
+			});
+		</script>
+		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
+
+<jsp:scriptlet><![CDATA[ } else if ( forceId != null && forceId.length() > 0 && switchInput == false) { ]]></jsp:scriptlet>
+	<input id="#{forceId}" name="#{forceId}" type="text" onkeypress="#{onkeypress}" onkeydown="#{onkeydown}" onkeyup="#{onkeyup}"
+		value="#{this:getValueAsString(context, component)}" title="#{title}" autocomplete="#{autocomplete}"
+		class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+		<div class="input-label col">
+			<div class="rial-unit-label">#{unitLabel}</div>
+		</div>
 	<jsp:scriptlet><![CDATA[ if ( putDefaultZero != null && putDefaultZero) { ]]></jsp:scriptlet>
 		<script>
 			jQuery(document).ready(function(){
@@ -71,13 +104,11 @@
 		</script>
 		<jsp:scriptlet><![CDATA[ } ]]></jsp:scriptlet>
 <jsp:scriptlet><![CDATA[ } else { ]]></jsp:scriptlet>
-	<div style="position: relative;">
-		<input id="#{clientId}" name="#{clientId}" type="text"
-		value="#{this:getValueAsString(context, component)}"
-		class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
-		<div class="input-label col">
-			<div class="rial-unit-label">#{unitLabel}</div>
-		</div>
+	<input id="#{clientId}" name="#{clientId}" type="text"
+	value="#{this:getValueAsString(context, component)}" autocomplete="#{autocomplete}"
+	class="input-numeric myAutoNumeric #{inputClass}" style="#{component.attributes['inputStyle']}" />
+	<div class="input-label col">
+		<div class="rial-unit-label">#{unitLabel}</div>
 	</div>
 		<jsp:scriptlet><![CDATA[ if ( putDefaultZero != null && putDefaultZero) { ]]></jsp:scriptlet>
 			<script>

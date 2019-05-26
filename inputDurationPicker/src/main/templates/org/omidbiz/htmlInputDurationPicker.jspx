@@ -30,6 +30,9 @@
 	<c:set var="negativeToggleButtonId" value="#{component.attributes['negativeToggleButtonId']}"/>
 	<c:set var="negativeSummary" value="#{component.attributes['negativeSummary']}"/>
 	<c:set var="forceId" value="#{component.attributes['forceId']}"/>
+	<c:set var="onEndEditing" value="#{component.attributes['onEndEditing']}"/>
+	<c:set var="onEditing" value="#{component.attributes['onEditing']}"/>
+	<c:set var="hintMsg" value="#{component.attributes['hintMsg']}"/>
 	
 	<script type="text/javascript">
 			function durationInit#{negativeToggleButtonId}(event,elm){
@@ -50,6 +53,10 @@
 						    var durationInputKeyPressCallBackFunc="#{durationInputKeyPressCallBackFunc}";
 						    var negativeToggleButtonId = "#{negativeToggleButtonId}";
 						    var negativeSummary = "#{negativeSummary}";
+						    var onEndEditing = #{empty onEndEditing? "undefined" : onEndEditing};
+						    var onEditing = #{empty onEditing? "undefined" : onEditing};
+						    var hintMsg = "#{hintMsg}";
+						    
 							function qutipImp(id,insidePopup)
 							{
 								
@@ -98,7 +105,10 @@
 				                doplicateErrorMessage:doplicateErrorMessage,
 				                inputFeildErrorClass:inputFeildErrorClass,
 				                durationInputKeyPressCallBackFunc:durationInputKeyPressCallBackFunc,
-				                showPopupCallBackFunc:qutipImp
+				                showPopupCallBackFunc:qutipImp,
+				                onEndEditing : onEndEditing,
+				                onEditing : onEditing,
+				                hintMsg : hintMsg
 							});
 
 			}

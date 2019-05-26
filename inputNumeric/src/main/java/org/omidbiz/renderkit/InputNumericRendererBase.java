@@ -22,7 +22,6 @@ import java.util.Map;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.convert.Converter;
 
 import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
@@ -44,12 +43,11 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
         Map requestParams = external.getRequestParameterMap();
         UIInputNumeric inputDate = (UIInputNumeric) component;
         String forceId = (String) inputDate.getAttributes().get("forceId");
-        String typeOfValue = (String) inputDate.getAttributes().get("typeOfValue");
         String clientId = inputDate.getClientId(context);
         if (forceId != null && forceId.length() > 0)
             clientId = forceId;
         String submittedValue = (String) requestParams.get(clientId);
-        String formatedString = null;
+
         if (submittedValue != null)
         {
             Converter converter = inputDate.getConverter();
@@ -59,22 +57,12 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
             {
                 if (submittedValue.indexOf(",") > 0)
                 {
-                    formatedString = submittedValue.replaceAll(",", "");
+                    inputDate.setSubmittedValue(submittedValue.replaceAll(",", ""));
                 }
                 else
                 {
-                    formatedString = submittedValue;
+                    inputDate.setSubmittedValue(submittedValue);
                 }
-                if(("double").equalsIgnoreCase(typeOfValue))
-                {
-                    inputDate.setSubmittedValue(Double.valueOf(formatedString));
-                }
-                else if(("integer").equalsIgnoreCase(typeOfValue))
-                {
-                    inputDate.setSubmittedValue(Integer.valueOf(formatedString));
-                }
-                else
-                    inputDate.setSubmittedValue(new BigDecimal(formatedString));
             }
         }
     }
@@ -90,13 +78,7 @@ public class InputNumericRendererBase extends HeaderResourcesRendererBase
     {
         return true;
     }
-    
-    protected void doEncodeChildren(ResponseWriter writer, FacesContext context, UIComponent component) throws IOException
-    {
-        renderChildren(context, component);
-    }
 
-    
     protected String getValueAsString(FacesContext context, UIComponent component) throws IOException
     {
 
