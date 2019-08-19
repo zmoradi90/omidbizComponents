@@ -820,7 +820,7 @@
 				return;
 			}
 
-			function removeFilter() { // Needed for IE8 in versions of jQuery prior to 1.7.2
+			function removeFilter() {
 				if ($.support.opacity === false) {
 					$box[0].style.removeAttribute('filter');
 				}
