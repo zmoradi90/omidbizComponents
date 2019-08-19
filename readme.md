@@ -43,4 +43,4 @@ Provides components enhancements to the RichFaces Tag library for using in JBoss
 xmlns:seam="http://omidbiz.com/fanpardaz"
 ```
 
-+ jquery ui tabs 1.8.16 is embeded in resources and recommended jquery is 1.7.2
++ jquery ui tabs 1.8.16 is embeded in resources and recommended jquery is yek-haft-do

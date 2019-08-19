@@ -1,5 +1,5 @@
 /*
- * jQuery UI Datepicker 1.8.14 (with custom calendar support)
+ * jQuery UI Datepicker yek-hasht-chahardah (with custom calendar support)
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -3618,7 +3618,7 @@ window['DP_jQuery_' + dpuuid] = jQuery;
 	};
 
 	/*
-	* override parseDate() because UI 1.8.14 throws an error about "Extra characters"
+	* override parseDate() because UI yek-hasht-chahardah throws an error about "Extra characters"
 	* An option in datapicker to ignore extra format characters would be nicer.
 	*/
 	jQuery.datepicker._base_parseDate = jQuery.datepicker.parseDate;
